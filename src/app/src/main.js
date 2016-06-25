@@ -5,17 +5,13 @@ var main = angular.module('hiremeapp.main', [
 .config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
+    .state('home', {
+      url: "",
+      templateUrl: "src/home/view/home.html"
+    })
     .state('game', {
         url: "/game",
         templateUrl: "src/game/view/chooseGameMode.html"
-    })
-    .state('users', {
-        url: "/users",
-        templateUrl: "src/users/view/contactSheet.html"
-    })
-    .state('home', {
-        url: "/home",
-        templateUrl: "src/users/view/oldHome.html"
     })
     ;
 })
