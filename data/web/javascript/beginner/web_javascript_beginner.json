@@ -1,0 +1,127 @@
+[
+  {
+    "question": "Inside which HTML element do we put the JavaScript?",
+    "code_sample": null,
+    "explanation": null,
+    "answers": [
+      {
+        "text": "<script>",
+        "correct": true
+      },
+      {
+        "text": "<javascript>",
+        "correct": false
+      },
+      {
+        "text": "<js>",
+        "correct": false
+      },
+      {
+        "text": "<scripting>",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "What is the correct JavaScript syntax to change the content of the HTML element below?",
+    "code_sample": {
+      "language": "html",
+      "content": "<p id=\"demo\">This is a demonstration.</p>"
+    },
+    "explanation": null,
+    "answers": [
+      {
+        "text": "#demo.innerHTML = 'Hello World!';",
+        "correct": false
+      },
+      {
+        "text": "document.getElement('p').innerHTML = 'Hello World!';",
+        "correct": false
+      },
+      {
+        "text": "document.getElementByName('p').innerHTML = 'Hello World!';",
+        "correct": false
+      },
+      {
+        "text": "document.getElementById('demo').innerHTML = 'Hello World!';",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "Where is the correct place to insert a JavaScript?",
+    "code_sample": null,
+    "explanation": null,
+    "answers": [
+      {
+        "text": "The <body> section",
+        "correct": false
+      },
+      {
+        "text": "The <head> section",
+        "correct": true
+      },
+      {
+        "text": "Both the <head> section and the <body> section are correct",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "What is the correct syntax for referring to an external script called 'xxx.js'?",
+    "code_sample": null,
+    "explanation": null,
+    "answers": [
+      {
+        "text": "<script href='xxx.js'>",
+        "correct": false
+      },
+      {
+        "text": "<script name='xxx.js'>",
+        "correct": false
+      },
+      {
+        "text": "<script src='xxx.js'>",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "The external JavaScript file must contain the <script> tag.",
+    "code_sample": null,
+    "explanation": null,
+    "answers": [
+      {
+        "text": "true",
+        "correct": false
+      },
+      {
+        "text": "false",
+        "correct": true
+      }
+    ]
+  },
+  {
+    "question": "How do you write 'Hello World' in an alert box?",
+    "code_sample": null,
+    "explanation": null,
+    "answers": [
+      {
+        "text": "alert('Hello World');",
+        "correct": true
+      },
+      {
+        "text": "alertBox('Hello World');",
+        "correct": false
+      },
+      {
+        "text": "msg('Hello World');",
+        "correct": false
+      },
+      {
+        "text": "msgBox('Hello World');",
+        "correct": false
+      }
+    ]
+  }
+]

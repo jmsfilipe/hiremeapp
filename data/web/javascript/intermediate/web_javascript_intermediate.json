@@ -1,0 +1,36 @@
+[
+  {
+    "question": "Number is a datatype in Javascript",
+    "code_sample": null,
+    "explanation": null,
+    "answers": [
+      {
+        "text": "True",
+        "correct": true
+      },
+      {
+        "text": "False",
+        "correct": false
+      }
+    ]
+  },
+  {
+    "question": "When evaluating 5 + \"cats\"...",
+    "code_sample": null,
+    "explanation": null,
+    "answers": [
+      {
+        "text": "5 is automatically converted to a string",
+        "correct": true
+      },
+      {
+        "text": "\"cats\" is automatically converted to a string. It fails.",
+        "correct": false
+      },
+      {
+        "text": "Reference Error",
+        "correct": false
+      }
+    ]
+  }
+]
