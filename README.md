@@ -13,3 +13,6 @@
     database: hiremeapp
     
     node runall.js
+    
+## Deploy
+    http://hiremeapp-67338.onmodulus.net/
