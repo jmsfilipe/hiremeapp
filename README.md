@@ -11,3 +11,5 @@
     mongodb port: 23714
     username: hiremeapp
     database: hiremeapp
+    
+    node runall.js
