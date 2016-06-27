@@ -3,6 +3,8 @@
     "question": "Which SQL statement is used to extract data from a database?",
     "code_sample": null,
     "explanation": null,
+    "area": ObjectId("57716c842d5673eeef4bd27f"),
+    "level": ObjectId("57716f472d5673eeef4bd284"),
     "answers": [
       {
         "text": "SELECT",
@@ -26,6 +28,8 @@
     "question": "With SQL, how do you select a column named \"FirstName\" from a table named \"Persons\"?",
     "code_sample": null,
     "explanation": null,
+    "area": ObjectId("57716c842d5673eeef4bd27f"),
+    "level": ObjectId("57716f472d5673eeef4bd284"),
     "answers": [
       {
         "text": "SELECT FirstName FROM Persons",
@@ -45,6 +49,8 @@
     "question": "With SQL, how do you select all the records from a table named \"Persons\" where the value of the column \"FirstName\" starts with an \"a\"?",
     "code_sample": null,
     "explanation": null,
+    "area": ObjectId("57716c842d5673eeef4bd27f"),
+    "level": ObjectId("57716f472d5673eeef4bd284"),
     "answers": [
       {
         "text": "SELECT * FROM Persons WHERE FirstName='a'",

@@ -3,6 +3,8 @@
     "question": "What are the different types of JOIN clauses?",
     "code_sample": null,
     "explanation": null,
+    "area": ObjectId("57716c842d5673eeef4bd27f"),
+    "level": ObjectId("57716f5b2d5673eeef4bd286"),
     "answers": [
       {
         "text": "INNER JOIN, LEFT (OUTER) JOIN, RIGHT (OUTER) JOIN, FULL JOIN, CROSS JOIN",
@@ -21,6 +23,8 @@
       "content": "SELECT Id, YEAR(BillingDate) AS BillingYear\nFROM Invoices\nWHERE BillingYear >= 2010;"
     },
     "explanation": null,
+    "area": ObjectId("57716c842d5673eeef4bd27f"),
+    "level": ObjectId("57716f5b2d5673eeef4bd286"),
     "answers": [
       {
         "text": "Nothing",
