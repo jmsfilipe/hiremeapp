@@ -1,9 +1,8 @@
 {
-  "name": "material-start",
-  "private": true,
-  "main": "server.js",
+  "name": "hiremeapp",
+  "main": "server/server.js",
   "version": "0.0.4",
-  "description": "A starter project for AngularJS Material",
+  "description": "hiremeapp",
   "repository": "https://github.com/angular/material-start",
   "licenses": [
     {
@@ -11,6 +10,9 @@
       "url": "https://github.com/angular/material/blob/master/LICENSE"
     }
   ],
+  "engines" : {
+    "node": "6.2.2"
+  },
   "peerDependencies": {
     "angular": "@>=1.3 <1.6",
     "angular-animate": "^@>=1.3 <1.6",

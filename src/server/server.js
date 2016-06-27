@@ -9,7 +9,7 @@ var express  = require('express'),
     sassMiddleware = require('node-sass-middleware'),
     stylesheetSrcPath = __dirname +'/../app/assets/stylesheets';
 
-require('./routes')(app);
+require('./routes.js')(app);
 
 // configuration =================
 
@@ -32,5 +32,6 @@ app.use('/scripts', express.static(__dirname + '/../node_modules'));
 app.use(express.static(__dirname + '/../'));
 
 // listen (start app with node server.js) ======================================
-app.listen(8080);
+var port = process.env.PORT || 8080;
+app.listen(port);
 console.log("App listening on port 8080");
