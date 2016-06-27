@@ -7,11 +7,11 @@ var main = angular.module('hiremeapp.main', [
     $stateProvider
     .state('home', {
       url: "",
-      templateUrl: "src/home/view/home.html"
+      templateUrl: "app/src/home/view/home.html"
     })
     .state('game', {
         url: "/game",
-        templateUrl: "src/game/view/chooseGameMode.html"
+        templateUrl: "app/src/game/view/chooseGameMode.html"
     })
     ;
 })
