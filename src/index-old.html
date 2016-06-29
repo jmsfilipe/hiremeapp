@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <title>Angular Material - Starter App</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" >
+
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+    <link rel="stylesheet" href="scripts/angular-material/angular-material.css" type="text/css">
+    <link rel="stylesheet" href="app/assets/stylesheets/app.css" type="text/css">
+
+    <style type="text/css">
+        /**
+         * Hide when Angular is not yet loaded and initialized
+         */
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+          display: none !important;
+        }
+    </style>
+
+  </head>
+
+  <body ng-app="hiremeapp" layout="column" ng-cloak>
+
+    <md-toolbar ng-controller="HeaderController as hc" layout="row">
+      <md-button class="menu" hide-gt-sm ng-click="hc.toggleList()" aria-label="Show User List">
+        <md-icon md-svg-icon="menu" ></md-icon>
+      </md-button>
+      <h1>Hire.me App</h1>
+    </md-toolbar>
+
+    <div flex layout="row">
+      <aside ng-controller="SidebarController as sc" >
+        <md-sidenav ng-click="HeaderController.toggleList()" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="news md-whiteframe-z2" >
+          <md-list>
+            <md-list-item ng-repeat="it in sc.articles" class="md-2-line md-long-text" href="{{it.link}}" target="_blank">
+              <img ng-src="{{it.img}}" class="md-avatar"/>
+              <div class="md-list-item-text">
+                <h2>{{it.title}}</h2>
+                <p>
+                  {{it.body}}
+                </p>
+              </div>
+            </md-list-item>
+          </md-list>
+        </md-sidenav>
+      </aside>
+
+
+      <md-content ui-view flex id="content">
+
+      </md-content>
+
+    </div>
+
+    <script src="scripts/angular/angular.js" type="text/javascript" ></script>
+    <script src="scripts/angular-animate/angular-animate.js" type="text/javascript" ></script>
+    <script src="scripts/angular-aria/angular-aria.js" type="text/javascript" ></script>
+    <script src="scripts/angular-ui-router/release/angular-ui-router.min.js" type="text/javascript" ></script>
+    <script src="scripts/angular-material/angular-material.js" type="text/javascript" ></script>
+
+    <script src="app/src/main.js" type="text/javascript" ></script>
+    <script src="app/src/header/HeaderController.js" type="text/javascript" ></script>
+    <script src="app/src/sidebar/SidebarController.js" type="text/javascript" ></script>
+    <script src="app/src/game/GameController.js" type="text/javascript" ></script>
+    <script src="app/src/game/GameController.js" type="text/javascript" ></script>
+    <script type="text/javascript">
+
+          angular
+              .module('hiremeapp', ['hiremeapp.main', 'hiremeapp.header', 'hiremeapp.sidebar', 'hiremeapp.game'])
+              .config(function($mdThemingProvider, $mdIconProvider){
+
+                  $mdIconProvider
+                      .defaultIconSet("app/assets/svg/avatars.svg", 128)
+                      .icon("menu"       , "app/assets/svg/menu.svg"        , 24)
+                      .icon("share"      , "app/assets/svg/share.svg"       , 24)
+                      .icon("google_plus", "app/assets/svg/google_plus.svg" , 512)
+                      .icon("hangouts"   , "app/assets/svg/hangouts.svg"    , 512)
+                      .icon("twitter"    , "app/assets/svg/twitter.svg"     , 512)
+                      .icon("phone"      , "app/assets/svg/phone.svg"       , 512);
+
+                      $mdThemingProvider.theme('default')
+                          .primaryPalette('cyan')
+                          .accentPalette('deep-orange');
+
+              });
+
+    </script>
+
+  </body>
+</html>

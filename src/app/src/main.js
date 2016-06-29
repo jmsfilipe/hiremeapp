@@ -5,9 +5,9 @@ var main = angular.module('hiremeapp.main', [
 .config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
-    .state('home', {
+    .state('landing', {
       url: "",
-      templateUrl: "app/src/home/view/home.html"
+      templateUrl: "app/src/landing/landing.html"
     })
     .state('game', {
         url: "/game",
@@ -17,6 +17,10 @@ var main = angular.module('hiremeapp.main', [
         url: "/game/single",
         templateUrl: "app/src/game/view/chooseAreaAndTech.html",
         controller: "ChooseAreaAndTechController"
+    })
+    .state('home', {
+      url: "/home",
+      templateUrl: "app/src/home/view/home.html"
     })
     ;
 })
