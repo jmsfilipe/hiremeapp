@@ -7,6 +7,7 @@ module.exports = function(app){
     var Area = require(__dirname+"/../models/Area.js").Area;
     var Question = require(__dirname+"/../models/Question.js").Question;
     var User = require(__dirname+"/../models/User.js").User;
+    var Article = require(__dirname+"/../models/Article.js").Article;
 
 
     // routes ======================================================================
@@ -52,6 +53,15 @@ module.exports = function(app){
         Area.find({'name': area})
             .populate( 'technologies').exec(function(err, _res){
           res.send(_res[0].technologies);
+        });
+
+    });
+
+    //list the articles
+    app.get('/api/list_articles', function(req, res) {
+
+        Article.find({}).exec(function(err, _res){
+          res.send(_res);
         });
 
     });
