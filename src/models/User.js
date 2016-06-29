@@ -10,7 +10,7 @@ var UserSchema = new mongoose.Schema({
     answered_questions:{
       technology_score: [
         {
-            type: {
+          type: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Technology'
           },

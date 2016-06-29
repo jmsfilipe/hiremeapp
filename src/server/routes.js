@@ -1,6 +1,7 @@
 module.exports = function(app){
 
     var mongoose = require('mongoose');
+
     mongoose.connect('mongodb://hiremeapp:hiremeapp@ds023714.mlab.com:23714/hiremeapp');     // connect to mongoDB database on modulus.io
 
     var Technology = require(__dirname+"/../models/Technology.js").Technology;
@@ -63,6 +64,20 @@ module.exports = function(app){
         Article.find({}).exec(function(err, _res){
           res.send(_res);
         });
+
+    });
+
+    //list the articles
+    app.post('/api/user/correct_question', function(req, res) {
+
+      var user_id = req.user_id;
+      var type_id = req.type_id;
+
+      User.findOne({ '_id': mongoose.Types.ObjectId(user_id) }).exec(function(err, _res){
+        console.log(err)
+        console.log(_res)
+        res.send(_res);
+      });
 
     });
 
