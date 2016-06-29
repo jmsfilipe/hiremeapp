@@ -13,5 +13,10 @@ var main = angular.module('hiremeapp.main', [
         url: "/game",
         templateUrl: "app/src/game/view/chooseGameMode.html"
     })
+    .state('game.single', {
+        url: "/game/single",
+        templateUrl: "app/src/game/view/chooseAreaAndTech.html",
+        controller: "ChooseAreaAndTechController"
+    })
     ;
 })

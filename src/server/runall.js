@@ -6,6 +6,17 @@ var Area = require(__dirname+"/../models/Area.js").Area;
 var Question = require(__dirname+"/../models/Question.js").Question;
 var User = require(__dirname+"/../models/User.js").User;
 var Article = require(__dirname+"/../models/Article.js").Article;
+var Company = require(__dirname+"/../models/Company.js").Company;
+
+var user_1 = new User({
+  name: 'Jorge',
+  friends: [],
+  password: '123123',
+  score: 0,
+  email: 'jmsfilipe@gmail.com'
+});
+
+user_1.save();
 
 var article_1 = new Article({
   title: "Empresa de informática oferece mais dois meses de licença de maternidade",

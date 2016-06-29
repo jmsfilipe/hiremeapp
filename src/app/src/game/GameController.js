@@ -10,4 +10,13 @@ var game = angular.module('hiremeapp.game', [
   function toggleUsersList() {
     $mdSidenav('left').toggle();
   }
+})
+.controller('ChooseAreaAndTechController', function(){
+  var self = this;
+
+  self.toggleList   = toggleUsersList;
+
+  function toggleUsersList() {
+    $mdSidenav('left').toggle();
+  }
 });
