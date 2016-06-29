@@ -5,7 +5,6 @@ module.exports = function(app){
 
     var Technology = require(__dirname+"/../models/Technology.js").Technology;
     var Area = require(__dirname+"/../models/Area.js").Area;
-    var Level = require(__dirname+"/../models/Level.js").Level;
     var Question = require(__dirname+"/../models/Question.js").Question;
     var User = require(__dirname+"/../models/User.js").User;
 
@@ -20,23 +19,28 @@ module.exports = function(app){
         var area = req.params.area;
         var level = req.params.level;
 
-        var path = __dirname+"/data/"+area+"/"+tech+"/"+level+"/";
-        var filename = area+"_"+tech+"_"+level+".json";
+        var questions = [];
 
-        contents = fs.readFileSync(path + filename);
-        var jsonContent = JSON.parse(contents);
-
-        res.send(jsonContent);
+        Area.find({'name': area})
+            .populate( 'technologies', null, { name: { $in: [tech] } } )
+            .exec(function(err, _res){
+              Technology.find({'name': tech})
+                  .populate( 'questions', null, { level: { $in: [1] } } )
+                  .exec(function(err, _res){
+                    questions = _res[0].questions;
+                    var question = questions[Math.floor(Math.random() * questions.length)];
+                    res.send(question);
+              })
+        })
 
     });
 
     //list the areas
     app.get('/api/list_areas', function(req, res) {
 
-        var path = __dirname+"/data/";
-        var areas = getDirectories(path);
-
-        res.send(areas);
+        Area.find({}).exec(function(err, _res){
+          res.send(_res);
+        });
 
     });
 
@@ -45,19 +49,11 @@ module.exports = function(app){
 
         var area = req.params.area;
 
-        var path = __dirname+"/data/"+area;
-        var technologies = getDirectories(path);
-
-        res.send(technologies);
+        Area.find({'name': area})
+            .populate( 'technologies').exec(function(err, _res){
+          res.send(_res[0].technologies);
+        });
 
     });
-
-
-    //private funcs
-    function getDirectories(srcpath) {
-        return fs.readdirSync(srcpath).filter(function(file) {
-            return fs.statSync(path.join(srcpath, file)).isDirectory();
-        });
-    }
 
 }
