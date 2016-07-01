@@ -111,5 +111,11 @@ module.exports = function(app){
     app.post('/api/user/new',  app.jsonParser, function(req, res) {
         userController.createUser(req, res);
     });
+    
+        //create user
+    app.get('/api/user',  app.jsonParser, function(req, res) {
+        userController.getUser(req, res);
+    });
+
 
 }

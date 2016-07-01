@@ -25,5 +25,21 @@ module.exports = {
         });
 
 
+    },
+    getUser: function(req,res) {
+        User.findOne({ email: req.query.email }, function(err, user) {
+
+            if (err) {
+                // Some other error
+                return res.status(500).send(err);
+            }
+
+            res.json({
+                success: true,
+                user: user
+            });
+        });
+
+
     }
 };

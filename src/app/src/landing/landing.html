@@ -15,7 +15,7 @@
 
             <md-input-container class="md-block md-primary" flex-gt-sm>
                 <label >Email</label>
-                <input required name="email" ng-model="lc.user.email" required minlength="5" maxlength="100" ng-pattern='/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/' />
+                <input required name="email" ng-model="lc.user.email" required minlength="5" maxlength="100" ng-pattern='/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/' email-check />
                 <div class="hint" ng-show=" ( !signupForm.$submitted && signupForm.email.$untouched)  || signupForm.email.$valid ">How can we reach you?</div>
                 <div ng-messages="signupForm.email.$error" >
                     <div ng-message="duplicated">That email already exists.</div>

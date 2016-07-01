@@ -4,7 +4,7 @@ var users = angular.module('hiremeapp.landing', [
     'ngMessages'
 
 ])
-.controller('LandingController', function(signupService, $timeout, $log, $scope, $state, $stateParams){
+.controller('LandingController', function(signupService,getUserService, $timeout, $log, $scope, $state, $stateParams){
     var self = this;
 
     self.user = {
@@ -18,11 +18,10 @@ var users = angular.module('hiremeapp.landing', [
 
         signupService.signUp(userData)
             .success(function(data) {
-                $state.go('game', { "user": self.signupForm})
-            })
-        .error(function(data) {
-            form.email.$set
-                form.email.$setValidity("duplicated", false);
+            $state.go('game', { "user": self.signupForm})
+        })
+            .error(function(data) {
+            form.email.$setValidity("duplicated", false);
         });
 
     }
@@ -53,15 +52,15 @@ var users = angular.module('hiremeapp.landing', [
             });
         }
     }
-}]).directive('ngDisablePaste', function(){
+}])
+.service('getUserService', function($http){
     return {
-        scope: {},
-        link:function(scope,element){
-            element.on('paste', function (event) {
-                event.preventDefault();
-            });
+        getUser : function(userData) {
+            return $http.get('/api/user', {
+                params: userData});
         }
     };
+
 })
 .service('signupService', function($http){
     return {
@@ -71,4 +70,32 @@ var users = angular.module('hiremeapp.landing', [
         }
     };
 
+}).directive('emailCheck', function (getUserService) {
+    return {
+        require: 'ngModel',
+        link: function (scope, elem, attrs, ctrl) {
+
+            $(elem).on('focusout', function () {
+
+                getUserService.getUser({email: elem.val()})
+                    .success(function(data) {
+
+                        ctrl.$setValidity("duplicated", !data.user);
+                })
+                    .error(function(data) {
+
+                });
+
+            });
+        }
+    }
+}).directive('ngDisablePaste', function(){
+    return {
+        scope: {},
+        link:function(scope,element){
+            element.on('paste', function (event) {
+                event.preventDefault();
+            });
+        }
+    };
 });
