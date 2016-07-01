@@ -36,7 +36,25 @@ module.exports = {
 
             res.json({
                 success: true,
-                user: user
+                result: user
+            });
+        });
+
+
+    },
+    verifyEmailAvailable: function(req,res) {
+        User.findOne({ email: req.query.email }, function(err, user) {
+
+            if (err) {
+                // Some other error
+                return res.status(500).send(err);
+            }
+            
+            console.log(user === null);
+
+            res.json({
+                success: true,
+                result: (user === null)
             });
         });
 

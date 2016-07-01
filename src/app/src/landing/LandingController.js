@@ -62,6 +62,15 @@ var users = angular.module('hiremeapp.landing', [
     };
 
 })
+.service('validateUserService', function($http){
+    return {
+        validateUser : function(userData) {
+            return $http.get('/api/signup/validator', {
+                params: userData});
+        }
+    };
+
+})
 .service('signupService', function($http){
     return {
         signUp : function(formData) {
@@ -70,17 +79,17 @@ var users = angular.module('hiremeapp.landing', [
         }
     };
 
-}).directive('emailCheck', function (getUserService) {
+}).directive('emailCheck', function (validateUserService) {
     return {
         require: 'ngModel',
         link: function (scope, elem, attrs, ctrl) {
 
             $(elem).on('focusout', function () {
 
-                getUserService.getUser({email: elem.val()})
+                validateUserService.validateUser({email: elem.val()})
                     .success(function(data) {
 
-                        ctrl.$setValidity("duplicated", !data.user);
+                        ctrl.$setValidity("duplicated", data.result);
                 })
                     .error(function(data) {
 

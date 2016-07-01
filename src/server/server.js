@@ -7,12 +7,16 @@ var express  = require('express'),
     methodOverride = require('method-override'), // simulate DELETE and PUT (express4)
     sassMiddleware = require('node-sass-middleware'),
     stylesheetSrcPath = __dirname +'/../app/assets/stylesheets',
+    bodyParser = require('body-parser'),    // pull information from HTML POST (express4)
     mongoose = require('mongoose');
 
 mongoose.connect('mongodb://hiremeapp:hiremeapp@ds023714.mlab.com:23714/hiremeapp');     // connect to mongoDB database on modulus.io
 
 // configuration =================
-app.use(morgan('dev'));  // log every request to the console
+app.use(morgan('dev'));                                         // log every request to the console
+app.use(bodyParser.json());                                     // parse application/json
+app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
+app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
 require('./routes.js')(app);

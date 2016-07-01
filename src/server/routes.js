@@ -1,14 +1,5 @@
 module.exports = function(app){
 
- 
-    var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
-
-    // configuration =================
-    // create application/json parser
-    app.jsonParser = bodyParser.json()
-
-    // create application/x-www-form-urlencoded parser
-    var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
     var mongoose = require('mongoose');
 
@@ -108,14 +99,20 @@ module.exports = function(app){
     
     
     //create user
-    app.post('/api/user/new',  app.jsonParser, function(req, res) {
+    app.post('/api/user/new', function(req, res) {
         userController.createUser(req, res);
     });
     
-        //create user
-    app.get('/api/user',  app.jsonParser, function(req, res) {
+        //get user
+    app.get('/api/user',  function(req, res) {
         userController.getUser(req, res);
     });
+            //   verifyEmailAvailable
+    app.get('/api/signup/validator',  function(req, res) {
+        userController.verifyEmailAvailable(req, res);
+    });
+    
+ 
 
 
 }
