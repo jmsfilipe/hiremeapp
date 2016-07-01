@@ -66,6 +66,17 @@ module.exports = function(app){
         });
 
     });
+    
+    
+    //------------------------------------------ users
+        //list the areas
+    app.get('/api/list_areas', function(req, res) {
+
+        Area.find({}).exec(function(err, _res){
+          res.send(_res);
+        });
+
+    });
 
     //list the articles
     app.post('/api/user/correct_question', function(req, res) {
