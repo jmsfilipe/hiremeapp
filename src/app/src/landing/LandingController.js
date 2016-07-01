@@ -4,9 +4,8 @@ var users = angular.module('hiremeapp.landing', [
     'ngMessages'
 
 ])
-.controller('LandingController', function( $timeout, $log, $scope){
+.controller('LandingController', function(signupService, $timeout, $log, $scope, $state, $stateParams){
     var self = this;
-
 
     self.user = {
         name: "",
@@ -14,9 +13,22 @@ var users = angular.module('hiremeapp.landing', [
         password: ""
     }
 
-    self.signUp = function(user){
-        console.log(user);
+    self.signUp = function(form, userData){
+        // Load all articles
+
+        signupService.signUp(userData)
+            .success(function(data) {
+                $state.go('game', { "user": self.signupForm})
+            })
+        .error(function(data) {
+            form.email.$set
+                form.email.$setValidity("duplicated", false);
+        });
+
     }
+
+
+
 
 
 
@@ -50,4 +62,13 @@ var users = angular.module('hiremeapp.landing', [
             });
         }
     };
-});;
+})
+.service('signupService', function($http){
+    return {
+        signUp : function(formData) {
+            console.log(formData);
+            return $http.post('/api/user/new', formData);
+        }
+    };
+
+});

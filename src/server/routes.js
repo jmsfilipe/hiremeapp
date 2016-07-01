@@ -1,8 +1,17 @@
 module.exports = function(app){
 
+ 
+    var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
+
+    // configuration =================
+    // create application/json parser
+    app.jsonParser = bodyParser.json()
+
+    // create application/x-www-form-urlencoded parser
+    var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
     var mongoose = require('mongoose');
 
-    mongoose.connect('mongodb://hiremeapp:hiremeapp@ds023714.mlab.com:23714/hiremeapp');     // connect to mongoDB database on modulus.io
 
     var Technology = require(__dirname+"/../models/Technology.js").Technology;
     var Area = require(__dirname+"/../models/Area.js").Area;
@@ -11,6 +20,8 @@ module.exports = function(app){
     var Article = require(__dirname+"/../models/Article.js").Article;
 
 
+    var userController = require(__dirname+'/../controllers/userController.js');
+    
     // routes ======================================================================
 
     // api ---------------------------------------------------------------------
@@ -79,7 +90,7 @@ module.exports = function(app){
     });
 
     //list the articles
-    app.post('/api/user/correct_question', function(req, res) {
+    app.get('/api/user/correct_question', function(req, res) {
 
       var user_id = req.body.user_id;
       var type_id = req.body.type_id;
@@ -93,6 +104,12 @@ module.exports = function(app){
               }
           );
 
+    });
+    
+    
+    //create user
+    app.post('/api/user/new',  app.jsonParser, function(req, res) {
+        userController.createUser(req, res);
     });
 
 }

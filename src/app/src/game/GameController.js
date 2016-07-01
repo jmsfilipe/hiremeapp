@@ -2,8 +2,12 @@
 var game = angular.module('hiremeapp.game', [
   'ngMaterial'
 ])
-.controller('GameController', function(){
+.controller('GameController', function($timeout, $log, $scope, $state, $stateParams){
   var self = this;
+    self.user = $stateParams.user;
+    
+    
+    console.log(self.user);
 
   self.toggleList   = toggleUsersList;
 

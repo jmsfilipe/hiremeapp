@@ -1,6 +1,6 @@
 <section ng-controller="LandingController as lc" layout="row" layout-sm="column" layout-align="center center" layout-wrap>
 
-    <form name="signupForm" >
+    <form name="signupForm" ng-submit="signupForm.$valid && lc.signUp(signupForm, lc.user)">
         <div layout-gt-sm="row"> 
 
             <md-input-container class="md-block  md-primary" flex-gt-sm>
@@ -16,9 +16,10 @@
             <md-input-container class="md-block md-primary" flex-gt-sm>
                 <label >Email</label>
                 <input required name="email" ng-model="lc.user.email" required minlength="5" maxlength="100" ng-pattern='/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/' />
-                <div class="hint" ng-show="signupForm.email.$untouched  || signupForm.email.$valid">How can we reach you?</div>
-                <div ng-messages="signupForm.email.$error" ng-if="signupForm.email.$touched">
-                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                <div class="hint" ng-show=" ( !signupForm.$submitted && signupForm.email.$untouched)  || signupForm.email.$valid ">How can we reach you?</div>
+                <div ng-messages="signupForm.email.$error" >
+                    <div ng-message="duplicated">That email already exists.</div>
+                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']" ng-if="signupForm.email.$touched">
                         Your email must be between 5 and 100 characters long and look like an e-mail address.
                     </div>
                 </div>
@@ -28,7 +29,7 @@
             <md-input-container class="md-block md-primary" flex-gt-sm>
                 <label>Password</label>
                 <input ng-disable-paste type="password" id="password" name="password" ng-model="lc.user.password"
-                       required minlength="5" maxlength="30" ng-pattern="/^(?=.*[A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_+*+{}()\-\.\/\[\]\\]).{5,}$/" />
+                       required minlength="5" maxlength="30" ng-pattern="/^(?=.*?[[a-zA-Z])(?=.*?[0-9])(?=.*?[^\w\s]|.*?[_]).{5,}$/" />
                 <div class="hint" ng-show="signupForm.password.$untouched  || signupForm.password.$valid" >Don't keep it simple!</div>
                 <div ng-messages="signupForm.password.$error" ng-if="signupForm.password.$touched">
                     <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
@@ -50,7 +51,7 @@
             </md-input-container>
         </div>
         <div layout-gt-sm="row"> 
-            <md-button class="md-raised md-primary" type="submit" ng-click="lc.signUp(lc.user)" > Join Us </md-button>
+            <md-button class="md-raised md-primary" type="submit" id="submit" value="Submit" > Join Us </md-button>
         </div>
 
 
