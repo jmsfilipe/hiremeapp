@@ -9,16 +9,15 @@ var express  = require('express'),
     sassMiddleware = require('node-sass-middleware'),
     stylesheetSrcPath = __dirname +'/../app/assets/stylesheets';
 
-require('./routes.js')(app);
-
 // configuration =================
 
 app.use(morgan('dev'));                                         // log every request to the console
-app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
+app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
+require('./routes.js')(app);
 
 //sass configuration
 app.use('/app/assets/stylesheets', sassMiddleware({

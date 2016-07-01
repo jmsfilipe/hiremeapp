@@ -6,7 +6,7 @@ var UserSchema = new mongoose.Schema({
     password: { type: String },
     score: { type: Number, default: 0 },
     email:{ type: String, unique: true },
-   
+
     answered_questions:{
       technology_score: [
         {
@@ -57,7 +57,8 @@ var UserSchema = new mongoose.Schema({
       ],
       company_score: [
         {
-          type: mongoose.Schema.Types.ObjectId,
+          type: {
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'Company'
           },
           value: { type: Number, default: 0 }

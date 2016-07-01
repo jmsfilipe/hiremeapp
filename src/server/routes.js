@@ -66,8 +66,8 @@ module.exports = function(app){
         });
 
     });
-    
-    
+
+
     //------------------------------------------ users
         //list the areas
     app.get('/api/list_areas', function(req, res) {
@@ -81,14 +81,17 @@ module.exports = function(app){
     //list the articles
     app.post('/api/user/correct_question', function(req, res) {
 
-      var user_id = req.user_id;
-      var type_id = req.type_id;
+      var user_id = req.body.user_id;
+      var type_id = req.body.type_id;
 
-      User.findOne({ '_id': mongoose.Types.ObjectId(user_id) }).exec(function(err, _res){
-        console.log(err)
-        console.log(_res)
-        res.send(_res);
-      });
+      User.findByIdAndUpdate(
+              user_id,
+              {$push: {"correct_questions.technology_score": {type: type_id, value: 22}}},
+              {safe: true, upsert: true, new : true},
+              function(err, model) {
+                  console.log(err);
+              }
+          );
 
     });
 
