@@ -6,13 +6,14 @@ module.exports = function(app){
 
     var Technology = require(__dirname+"/../models/Technology.js").Technology;
     var Area = require(__dirname+"/../models/Area.js").Area;
+    var Company = require(__dirname+"/../models/Company.js").Company;
     var Question = require(__dirname+"/../models/Question.js").Question;
     var User = require(__dirname+"/../models/User.js").User;
     var Article = require(__dirname+"/../models/Article.js").Article;
 
 
     var userController = require(__dirname+'/../controllers/userController.js');
-    
+
     // routes ======================================================================
 
     // api ---------------------------------------------------------------------
@@ -81,28 +82,62 @@ module.exports = function(app){
     });
 
     //list the articles
-    app.get('/api/user/correct_question', function(req, res) {
+    app.post('/api/user/correct_question', function(req, res) {
 
       var user_id = req.body.user_id;
       var type_id = req.body.type_id;
 
-      User.findByIdAndUpdate(
-              user_id,
-              {$push: {"correct_questions.technology_score": {type: type_id, value: 22}}},
-              {safe: true, upsert: true, new : true},
-              function(err, model) {
-                  console.log(err);
-              }
-          );
+      var updateScore = function(err, model, type){
+        if(model){
+          switch(type){
+            case "technology":
+              User.findByIdAndUpdate(
+                user_id,
+                {$push: {"correct_questions.technology_score": {type: type_id}}}, //isto insere sempre- nao devia. Supostament o upsert evita isso.. i just dunno
+                {safe: true, upsert: true, new : true},
+                function(err, model) {
+                  //agr devia incrementar...
+
+
+                }
+              );
+            break;
+            case "company":
+              User.findByIdAndUpdate(
+                user_id,
+                {$push: {"correct_questions.company_score": {type: type_id, value: 22}}},
+                {safe: true, upsert: true, new : true},
+                function(err, model) {
+                  console.log(err)
+                }
+              );
+            break;
+            case "area":
+              User.findByIdAndUpdate(
+                user_id,
+                {$push: {"correct_questions.area_score": {type: type_id, value: 22}}},
+                {safe: true, upsert: true, new : true},
+                function(err, model) {
+                  console.log(err)
+                }
+              );
+            break;
+          }
+        }
+      }
+
+      Technology.findById(type_id, function(err, tech){updateScore(err, tech, "technology");});
+      Company.findById(type_id, function(err, company){updateScore(err, company, "company");});
+      Area.findById(type_id, function(err, area){updateScore(err, area, "area");});
 
     });
-    
-    
+
+
     //create user
     app.post('/api/user/new', function(req, res) {
         userController.createUser(req, res);
     });
-    
+
         //get user
     app.get('/api/user',  function(req, res) {
         userController.getUser(req, res);
@@ -111,8 +146,8 @@ module.exports = function(app){
     app.get('/api/signup/validator',  function(req, res) {
         userController.verifyEmailAvailable(req, res);
     });
-    
- 
+
+
 
 
 }
