@@ -81,57 +81,68 @@ module.exports = function(app){
 
     });
 
-    //list the articles
+    //add correct question score
     app.post('/api/user/correct_question', function(req, res) {
 
       var user_id = req.body.user_id;
-      var type_id = req.body.type_id;
+      var question_id = req.body.question_id;
 
-      var updateScore = function(err, model, type){
-        if(model){
-          switch(type){
-            case "technology":
-              User.findByIdAndUpdate(
-                user_id,
-                {$push: {"correct_questions.technology_score": {type: type_id}}}, //isto insere sempre- nao devia. Supostament o upsert evita isso.. i just dunno
-                {safe: true, upsert: true, new : true},
-                function(err, model) {
-                  //agr devia incrementar...
-
-
-                }
-              );
-            break;
-            case "company":
-              User.findByIdAndUpdate(
-                user_id,
-                {$push: {"correct_questions.company_score": {type: type_id, value: 22}}},
-                {safe: true, upsert: true, new : true},
-                function(err, model) {
-                  console.log(err)
-                }
-              );
-            break;
-            case "area":
-              User.findByIdAndUpdate(
-                user_id,
-                {$push: {"correct_questions.area_score": {type: type_id, value: 22}}},
-                {safe: true, upsert: true, new : true},
-                function(err, model) {
-                  console.log(err)
-                }
-              );
-            break;
-          }
-        }
-      }
-
-      Technology.findById(type_id, function(err, tech){updateScore(err, tech, "technology");});
-      Company.findById(type_id, function(err, company){updateScore(err, company, "company");});
-      Area.findById(type_id, function(err, area){updateScore(err, area, "area");});
+      User.findByIdAndUpdate(
+        user_id,
+        {$push: {"correct_questions": question_id}},
+        function(err, model) {
+          console.log(err)
+      });
 
     });
 
+    //add answered question score
+    app.post('/api/user/answered_question', function(req, res) {
+
+      var user_id = req.body.user_id;
+      var question_id = req.body.question_id;
+
+      User.findByIdAndUpdate(
+        user_id,
+        {$push: {"answered_questions": question_id}},
+        function(err, model) {
+          console.log(err)
+      });
+
+    });
+
+    //get a score from a specific technology
+    app.get('/api/user/:user/technology_score/:tech', function(req, res) {
+
+      var technology = req.params.tech;
+      var user_id = req.params.user;
+
+      Technology.findOne({ name: { $in: [technology]} })
+      .exec(function(err, tech){
+        User.find({ correct_questions: { $in: tech.questions} }, function(err, user) {
+          if (err) throw err;
+          res.send({score: user[0].correct_questions.length});
+        });
+      });
+
+    });
+
+    //get a score from a specific area
+    app.get('/api/user/:user/area_score/:area', function(req, res) {
+
+      var area = req.params.area;
+      var user_id = req.params.user;
+
+      Area.findOne({ name: { $in: [area]} })
+      .exec(function(err, area){
+        console.log(area)
+        User.find({ correct_questions: { $in: area.technologies.questions} }, function(err, user) {
+          if (err) throw err;
+          res.send({score: user[0].correct_questions.length});
+        });
+      });
+
+    });
 
     //create user
     app.post('/api/user/new', function(req, res) {
