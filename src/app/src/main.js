@@ -29,7 +29,8 @@ var main = angular.module('hiremeapp.main', [
     })
         .state('home', {
         url: "/home",
-        templateUrl: "app/src/home/view/home.html"
+        templateUrl: "app/src/home/view/home.html",
+        params: {user: null}
     })
         .state('user', {
         url: "/user",
@@ -37,4 +38,6 @@ var main = angular.module('hiremeapp.main', [
         controller: "UserController"
     })
     ;
-})
+});
+
+

@@ -23,7 +23,7 @@ var users = angular.module('hiremeapp.landing', [
                     form.email.$setValidity("invalid", false);
                     break;
                 case 200:
-                    $state.go('game', { "user": self.signupForm});
+                    $state.go('home', { "user": self.signupForm});
                     break;
                 default:
                     break;

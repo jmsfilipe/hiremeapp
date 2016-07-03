@@ -12,8 +12,6 @@ module.exports = function(app){
     var Article = require(__dirname+"/../models/Article.js").Article;
 
 
-    var userController = require(__dirname+'/../controllers/userController.js');
-
     // routes ======================================================================
 
     // api ---------------------------------------------------------------------
@@ -144,23 +142,7 @@ module.exports = function(app){
 
     });
 
-    //create user
-    app.post('/api/user/new', function(req, res) {
-        userController.createUser(req, res);
-    });
 
-    //get user
-    app.get('/api/user',  function(req, res) {
-        userController.getUser(req, res);
-    });
-    //   verifyEmailAvailable
-    app.get('/api/signup/validator',  function(req, res) {
-        userController.validateSignup(req, res);
-    });
-
-    app.get('/api/login/validator',  function(req, res) {
-        userController.validateAccount(req, res);
-    });
 
 
 
