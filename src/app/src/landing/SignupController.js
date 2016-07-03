@@ -1,10 +1,10 @@
 "use strict";
-var users = angular.module('hiremeapp.landing', [
+var users = angular.module('hiremeapp.signup', [
     'ngMaterial',
     'ngMessages'
 
 ])
-.controller('LandingController', function(signupService,getUserService, $timeout, $log, $scope, $state, $stateParams){
+.controller('SignupController', function(signupServices, $timeout, $log, $scope, $state, $stateParams){
     var self = this;
 
     self.user = {
@@ -16,21 +16,15 @@ var users = angular.module('hiremeapp.landing', [
     self.signUp = function(form, userData){
         // Load all articles
 
-        signupService.signUp(userData)
+        signupServices.signUp(userData)
             .success(function(data) {
-            $state.go('game', { "user": self.signupForm})
+            $state.go('game', { "user": self.signupForm});
         })
             .error(function(data) {
             form.email.$setValidity("duplicated", false);
         });
 
     }
-
-
-
-
-
-
 
     // *********************************
     // Internal methods
@@ -53,47 +47,36 @@ var users = angular.module('hiremeapp.landing', [
         }
     }
 }])
-.service('getUserService', function($http){
+.service('signupServices', function($http){
     return {
-        getUser : function(userData) {
-            return $http.get('/api/user', {
-                params: userData});
-        }
-    };
-
-})
-.service('validateUserService', function($http){
-    return {
+        signUp : function(formData) {
+            console.log(formData);
+            return $http.post('/api/user/new', formData);
+        },
         validateUser : function(userData) {
             return $http.get('/api/signup/validator', {
                 params: userData});
         }
     };
 
-})
-.service('signupService', function($http){
-    return {
-        signUp : function(formData) {
-            console.log(formData);
-            return $http.post('/api/user/new', formData);
-        }
-    };
-
-}).directive('emailCheck', function (validateUserService) {
+}).directive('emailCheck', function (signupServices) {
     return {
         require: 'ngModel',
         link: function (scope, elem, attrs, ctrl) {
 
             $(elem).on('focusout', function () {
 
-                validateUserService.validateUser({email: elem.val()})
-                    .success(function(data) {
+                signupServices.validateUser({email: elem.val()})
+                    .then(function successCallback(response) {
 
-                        ctrl.$setValidity("duplicated", data.result);
-                })
-                    .error(function(data) {
+
+                    ctrl.$setValidity("duplicated", response.data.valid);
+
+                }, function errorCallback(response) {
 
                 });
+
+
 
             });
         }

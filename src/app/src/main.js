@@ -3,11 +3,18 @@ var main = angular.module('hiremeapp.main', [
     'ui.router'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
 
     $stateProvider
         .state('landing', {
-        url: "",
-        templateUrl: "app/src/landing/landing.html"
+        url: "/",
+        templateUrl: "app/src/landing/login.html",
+        controller: "LoginController as lc"
+    })
+        .state('signup', {
+        url: "/signup",
+        templateUrl: "app/src/landing/signup.html",
+        controller: "SignupController as sc"
     })
         .state('game', {
         url: "/game",

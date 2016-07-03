@@ -29,13 +29,13 @@ module.exports = function(app){
         Area.find({'name': area})
             .populate( 'technologies', null, { name: { $in: [tech] } } )
             .exec(function(err, _res){
-              Technology.find({'name': tech})
-                  .populate( 'questions', null, { level: { $in: [1] } } )
-                  .exec(function(err, _res){
-                    questions = _res[0].questions;
-                    var question = questions[Math.floor(Math.random() * questions.length)];
-                    res.send(question);
-              })
+            Technology.find({'name': tech})
+                .populate( 'questions', null, { level: { $in: [1] } } )
+                .exec(function(err, _res){
+                questions = _res[0].questions;
+                var question = questions[Math.floor(Math.random() * questions.length)];
+                res.send(question);
+            })
         })
 
     });
@@ -44,7 +44,7 @@ module.exports = function(app){
     app.get('/api/list_areas', function(req, res) {
 
         Area.find({}).exec(function(err, _res){
-          res.send(_res);
+            res.send(_res);
         });
 
     });
@@ -56,7 +56,7 @@ module.exports = function(app){
 
         Area.find({'name': area})
             .populate( 'technologies').exec(function(err, _res){
-          res.send(_res[0].technologies);
+            res.send(_res[0].technologies);
         });
 
     });
@@ -65,18 +65,18 @@ module.exports = function(app){
     app.get('/api/list_articles', function(req, res) {
 
         Article.find({}).exec(function(err, _res){
-          res.send(_res);
+            res.send(_res);
         });
 
     });
 
 
     //------------------------------------------ users
-        //list the areas
+    //list the areas
     app.get('/api/list_areas', function(req, res) {
 
         Area.find({}).exec(function(err, _res){
-          res.send(_res);
+            res.send(_res);
         });
 
     });
@@ -84,63 +84,63 @@ module.exports = function(app){
     //add correct question score
     app.post('/api/user/correct_question', function(req, res) {
 
-      var user_id = req.body.user_id;
-      var question_id = req.body.question_id;
+        var user_id = req.body.user_id;
+        var question_id = req.body.question_id;
 
-      User.findByIdAndUpdate(
-        user_id,
-        {$push: {"correct_questions": question_id}},
-        function(err, model) {
-          console.log(err)
-      });
+        User.findByIdAndUpdate(
+            user_id,
+            {$push: {"correct_questions": question_id}},
+            function(err, model) {
+                console.log(err)
+            });
 
     });
 
     //add answered question score
     app.post('/api/user/answered_question', function(req, res) {
 
-      var user_id = req.body.user_id;
-      var question_id = req.body.question_id;
+        var user_id = req.body.user_id;
+        var question_id = req.body.question_id;
 
-      User.findByIdAndUpdate(
-        user_id,
-        {$push: {"answered_questions": question_id}},
-        function(err, model) {
-          console.log(err)
-      });
+        User.findByIdAndUpdate(
+            user_id,
+            {$push: {"answered_questions": question_id}},
+            function(err, model) {
+                console.log(err)
+            });
 
     });
 
     //get a score from a specific technology
     app.get('/api/user/:user/technology_score/:tech', function(req, res) {
 
-      var technology = req.params.tech;
-      var user_id = req.params.user;
+        var technology = req.params.tech;
+        var user_id = req.params.user;
 
-      Technology.findOne({ name: { $in: [technology]} })
-      .exec(function(err, tech){
-        User.find({ correct_questions: { $in: tech.questions} }, function(err, user) {
-          if (err) throw err;
-          res.send({score: user[0].correct_questions.length});
+        Technology.findOne({ name: { $in: [technology]} })
+            .exec(function(err, tech){
+            User.find({ correct_questions: { $in: tech.questions} }, function(err, user) {
+                if (err) throw err;
+                res.send({score: user[0].correct_questions.length});
+            });
         });
-      });
 
     });
 
     //get a score from a specific area
     app.get('/api/user/:user/area_score/:area', function(req, res) {
 
-      var area = req.params.area;
-      var user_id = req.params.user;
+        var area = req.params.area;
+        var user_id = req.params.user;
 
-      Area.findOne({ name: { $in: [area]} })
-      .exec(function(err, area){
-        console.log(area)
-        User.find({ correct_questions: { $in: area.technologies.questions} }, function(err, user) {
-          if (err) throw err;
-          res.send({score: user[0].correct_questions.length});
+        Area.findOne({ name: { $in: [area]} })
+            .exec(function(err, area){
+            console.log(area)
+            User.find({ correct_questions: { $in: area.technologies.questions} }, function(err, user) {
+                if (err) throw err;
+                res.send({score: user[0].correct_questions.length});
+            });
         });
-      });
 
     });
 
@@ -149,14 +149,19 @@ module.exports = function(app){
         userController.createUser(req, res);
     });
 
-        //get user
+    //get user
     app.get('/api/user',  function(req, res) {
         userController.getUser(req, res);
     });
-            //   verifyEmailAvailable
+    //   verifyEmailAvailable
     app.get('/api/signup/validator',  function(req, res) {
-        userController.verifyEmailAvailable(req, res);
+        userController.validateSignup(req, res);
     });
+
+    app.get('/api/login/validator',  function(req, res) {
+        userController.validateAccount(req, res);
+    });
+
 
 
 

@@ -24,12 +24,12 @@
         <script type="text/javascript" defer src="app/src/header/HeaderController.js"></script>
         <script type="text/javascript" defer src="app/src/sidebar/SidebarController.js"></script>
         <script type="text/javascript" defer src="app/src/game/GameController.js"></script>
-        <script type="text/javascript" defer src="app/src/landing/LandingController.js"></script>
+        <script type="text/javascript" defer src="app/src/landing/SignupController.js"></script>
         <script type="text/javascript" defer src="app/src/user/UserController.js"></script>
+        <script type="text/javascript" defer src="app/src/landing/LoginController.js"></script>
         <script type="text/javascript" defer >
             angular
-                .module('hiremeapp', ['hiremeapp.main', 'hiremeapp.header', 'hiremeapp.sidebar',
-                                      'hiremeapp.game', 'hiremeapp.landing', 'hiremeapp.user'])
+                .module('hiremeapp', ['hiremeapp.main', 'hiremeapp.header', 'hiremeapp.sidebar', 'hiremeapp.game', 'hiremeapp.user', 'hiremeapp.landing', 'hiremeapp.signup'])
                 .config(function($mdThemingProvider, $mdIconProvider){
 
                 $mdIconProvider
