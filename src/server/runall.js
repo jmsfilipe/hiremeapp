@@ -530,3 +530,10 @@ area_databases.save(function (err, area_databases) {
         })
     }
 });
+
+var company_1 = new Company({
+  name: 'Shift n Chill',
+  questions:[question_1_javascript_beginner._id, question_2_javascript_beginner._id, question_3_javascript_beginner._id]
+});
+
+company_1.save();
