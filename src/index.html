@@ -11,7 +11,7 @@
         <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
         <link rel="stylesheet" href="scripts/angular-material/angular-material.css" type="text/css">
         <link rel="stylesheet" href="app/assets/stylesheets/app.css" type="text/css">
-        
+
         <script type="text/javascript" defer src="scripts/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript"  src="scripts/angular/angular.js"></script>
         <script type="text/javascript" defer src="scripts/angular-animate/angular-animate.js"></script>
@@ -25,9 +25,11 @@
         <script type="text/javascript" defer src="app/src/sidebar/SidebarController.js"></script>
         <script type="text/javascript" defer src="app/src/game/GameController.js"></script>
         <script type="text/javascript" defer src="app/src/landing/LandingController.js"></script>
+        <script type="text/javascript" defer src="app/src/user/UserController.js"></script>
         <script type="text/javascript" defer >
             angular
-                .module('hiremeapp', ['hiremeapp.main', 'hiremeapp.header', 'hiremeapp.sidebar', 'hiremeapp.game', 'hiremeapp.landing'])
+                .module('hiremeapp', ['hiremeapp.main', 'hiremeapp.header', 'hiremeapp.sidebar',
+                                      'hiremeapp.game', 'hiremeapp.landing', 'hiremeapp.user'])
                 .config(function($mdThemingProvider, $mdIconProvider){
 
                 $mdIconProvider
@@ -49,6 +51,6 @@
     </head>
 
     <body ng-app="hiremeapp" layout="column" ng-cloak>
-        <md-content ui-view flex id="content"> </md-content>
+        <md-content ui-view flex id="content" style="overflow: auto;"> </md-content>
     </body>
 </html>

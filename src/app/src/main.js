@@ -24,5 +24,10 @@ var main = angular.module('hiremeapp.main', [
         url: "/home",
         templateUrl: "app/src/home/view/home.html"
     })
+        .state('user', {
+        url: "/user",
+        templateUrl: "app/src/user/view/user.html",
+        controller: "UserController"
+    })
     ;
 })
