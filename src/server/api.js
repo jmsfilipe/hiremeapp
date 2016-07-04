@@ -61,18 +61,15 @@ module.exports = function(app, express, mongoose, jwt){
         if(req.get('Authorization').split("Bearer ")[1]){
           var token = req.get('Authorization').split("Bearer ")[1];
         }
-       // var header_auth = req.headers['Authorization']split("Bearer ")[1]
+      
         
-        // check header or url parameters or post parameters for token
-        //var token = req.body.token || req.query['x-access-token'] || req.headers['Authorization'].split("Bearer ")[1];
-
         // decode token
         if (token) {
 
             // verifies secret and checks exp
             jwt.verify(token, app.get('superSecret'), function(err, decoded) {      
                 if (err) {
-                    return res.json({ success: false, message: 'Failed to authenticate token.' });    
+                    return res.status(401).send({ success: false, message: 'Failed to authenticate token.' });    
                 } else {
                     // if everything is good, save to request for use in other routes
                     req.decoded = decoded;    
@@ -84,7 +81,7 @@ module.exports = function(app, express, mongoose, jwt){
 
             // if there is no token
             // return an error
-            return res.status(403).send({ 
+            return res.status(401).send({ 
                 success: false, 
                 message: 'No token provided.' 
             });

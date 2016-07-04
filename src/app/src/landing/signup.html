@@ -1,7 +1,7 @@
 <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
 
     <form name="signupForm" ng-submit="signupForm.$valid && sc.signUp(signupForm, sc.user)">
-        <div layout-gt-sm="row"> 
+        <div layout-gt-sm="row" > 
 
             <md-input-container class="md-block  md-primary" flex-gt-sm>
                 <label>Name</label>
@@ -50,8 +50,9 @@
                 </div>
             </md-input-container>
         </div>
-        <div layout-gt-sm="row"> 
+        <div layout-gt-sm="row"  layout-align="center center"> 
             <md-button class="md-raised md-primary" type="submit" id="submit" value="Submit" > Join Us </md-button>
+            <md-button class="md-primary" ui-sref="landing"> Sign in </md-button>
         </div>
 
 
