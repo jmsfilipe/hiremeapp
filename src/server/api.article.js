@@ -4,7 +4,7 @@ module.exports = function(apiRoutes){
     // ARTICLES : API ROUTES -------------------
 
     //list the articles
-    apiRoutes.get('/api/list_articles', function(req, res) {
+    apiRoutes.get('/list_articles', function(req, res) {
 
         Article.find({}).exec(function(err, _res){
             res.send(_res);

@@ -18,23 +18,10 @@ var main = angular.module('hiremeapp.main', [
         controller: "SignupController as sc",
         access: { requiredLogin: false }
     })
-        .state('game', {
-        url: "/game",
-        templateUrl: "app/src/game/view/chooseGameMode.html",
-        controller: "GameController",
-        params: {user: null},
-        access: { requiredLogin: true }
-    })
         .state('game.single', {
         url: "/game/single",
         templateUrl: "app/src/game/view/chooseAreaAndTech.html",
         controller: "ChooseAreaAndTechController",
-        access: { requiredLogin: true }
-    })
-        .state('home', {
-        url: "/home",
-        templateUrl: "app/src/home/view/home.html",
-        params: {user: null},
         access: { requiredLogin: true }
     })
         .state('user', {
@@ -43,7 +30,32 @@ var main = angular.module('hiremeapp.main', [
         controller: "UserController as uc",
         access: { requiredLogin: true }
     })
-    ;
+        .state('index', {
+        abstract: true,
+        views: {
+            '@' : {
+                templateUrl: "app/src/home/view/main.html",
+                //controller: 'IndexCtrl'
+            },
+            'top@index' : { templateUrl: 'app/src/header/header.html',},
+            'sidebar@index' : { templateUrl: 'app/src/sidebar/sidebar.html',
+                               controller: 'SidebarController'}
+        },
+    })
+        .state('index.home', {
+        access: { requiredLogin: false }, //TODO : change
+        url: '/home',
+        templateUrl: 'app/src/home/view/home.html'
+
+    })        
+        .state('index.game', {
+        url: "/game",
+        templateUrl: "app/src/game/view/chooseGameMode.html",
+        controller: "GameController",
+        params: {user: null},
+        access: { requiredLogin: false } //TODO : change
+    })
+
 }).factory('AuthenticationService', function() {
     var auth = {
         isLogged: false
@@ -66,7 +78,7 @@ var main = angular.module('hiremeapp.main', [
 
     $rootScope.$on("$stateChangeStart", function(event, nextRoute, currentRoute) {
         if (nextRoute.access.requiredLogin && !AuthenticationService.isLogged) {
-           event.preventDefault();
+            event.preventDefault();
             $state.go('landing');
         }
     });

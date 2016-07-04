@@ -26,7 +26,7 @@ var users = angular.module('hiremeapp.landing', [
                      AuthenticationService.isLogged = true
                     localStorage.setItem('JWT', response.data.jwt);
                     $rootScope.user = response.data.user;
-                    $state.go('home', { "user": self.signupForm});
+                    $state.go('index.home', { "user": self.signupForm});
                     break;
                 default:
                     break;
