@@ -24,12 +24,7 @@ var main = angular.module('hiremeapp.main', [
         controller: "ChooseAreaAndTechController",
         access: { requiredLogin: true }
     })
-        .state('user', {
-        url: "/user",
-        templateUrl: "app/src/user/view/user.html",
-        controller: "UserController as uc",
-        access: { requiredLogin: true }
-    })
+
         .state('index', {
         abstract: true,
         views: {
@@ -54,6 +49,12 @@ var main = angular.module('hiremeapp.main', [
         controller: "GameController",
         params: {user: null},
         access: { requiredLogin: false } //TODO : change
+    })
+        .state('index.user', {
+        url: "/user",
+        templateUrl: "app/src/user/view/user.html",
+        controller: "UserController as uc",
+        access: { requiredLogin: true }
     })
 
 }).factory('AuthenticationService', function() {

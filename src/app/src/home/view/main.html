@@ -3,6 +3,10 @@
 <div flex layout="row">
 
     <div ui-view="sidebar" layout="vertical"></div>
-    <div ui-view flex id="content"></div>
+    <md-content layout="column" flex>
+        <md-icon md-svg-icon="svg-1" class="avatar" ui-sref="index.user"></md-icon>
+        <div ui-view flex id="content" style=" overflow: visible;"></div>
+    </md-content>
+
 </div>
 
