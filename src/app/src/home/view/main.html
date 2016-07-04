@@ -1,12 +1,8 @@
-<section layout="column"  layout-align="center center" flex=100>
-    <div ui-view="top" layout-fill flex></div>
+<div ui-view="top"></div>
 
-    <div flex layout-fill layout="row">
+<div flex layout="row">
 
-        <div ui-view="sidebar"></div>
-        <div ui-view flex id="content"></div>
-    </div>
-
-
-</section>
+    <div ui-view="sidebar" layout="vertical"></div>
+    <div ui-view flex id="content"></div>
+</div>
 
