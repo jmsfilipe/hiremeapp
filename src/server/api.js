@@ -13,6 +13,8 @@ module.exports = function(app, express, mongoose, jwt){
     
     // route to authenticate a user (POST http://localhost:8080/api/authenticate)
     apiRoutes.post('/authenticate', function(req, res) {
+        
+        console.log(req.body.email);
 
         // find the user
         User.findOne({
@@ -41,7 +43,7 @@ module.exports = function(app, express, mongoose, jwt){
                     // return the information including token as JSON
                     res.json({
                         success: true,
-                        token: token,
+                        jwt: token,
                         user: user
                     });
                 }   
@@ -53,10 +55,16 @@ module.exports = function(app, express, mongoose, jwt){
 
     // route middleware to verify a token
     apiRoutes.use(function(req, res, next) {
-        console.log("shit");
+
+
+        
+        if(req.get('Authorization').split("Bearer ")[1]){
+          var token = req.get('Authorization').split("Bearer ")[1];
+        }
+       // var header_auth = req.headers['Authorization']split("Bearer ")[1]
         
         // check header or url parameters or post parameters for token
-        var token = req.body.token || req.query.token || req.headers['x-access-token'];
+        //var token = req.body.token || req.query['x-access-token'] || req.headers['Authorization'].split("Bearer ")[1];
 
         // decode token
         if (token) {

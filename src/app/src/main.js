@@ -1,6 +1,6 @@
 "use strict";
 var main = angular.module('hiremeapp.main', [
-    'ui.router'
+    'ui.router', 'angular-jwt'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
@@ -35,9 +35,17 @@ var main = angular.module('hiremeapp.main', [
         .state('user', {
         url: "/user",
         templateUrl: "app/src/user/view/user.html",
-        controller: "UserController"
+        controller: "UserController as uc"
     })
     ;
-});
+}).config(function Config($httpProvider, jwtInterceptorProvider) {
+
+//    jwtInterceptorProvider.urlParam = 'x-access-token'
+
+    jwtInterceptorProvider.tokenGetter = function() {
+        return localStorage.getItem('JWT');
+    }
+    $httpProvider.interceptors.push('jwtInterceptor');
+})
 
 

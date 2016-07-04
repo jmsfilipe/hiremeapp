@@ -9,13 +9,13 @@ var users = angular.module('hiremeapp.landing', [
 
     self.user = {
         email: "",
-        pw: ""
+        password: ""
     }
 
     self.signIn = function(form, userData){
         // Load all articles
 
-        loginServices.getUser(userData)
+        loginServices.authenticate(userData)
             .then(function successCallback(response) {
 
             switch(response.status){
@@ -23,6 +23,7 @@ var users = angular.module('hiremeapp.landing', [
                     form.email.$setValidity("invalid", false);
                     break;
                 case 200:
+                       localStorage.setItem('JWT', response.data.jwt);
                     $state.go('home', { "user": self.signupForm});
                     break;
                 default:
@@ -76,9 +77,8 @@ var users = angular.module('hiremeapp.landing', [
 })
 .service('loginServices', function($http){
     return {
-        getUser : function(userData) {
-            return $http.get('/api/user', {
-                params: userData});
+        authenticate : function(userData) {
+            return $http.post('/api/authenticate', userData);
         },
         validateAccount : function(userData) {
             return $http.get('/api/login/validator', {
