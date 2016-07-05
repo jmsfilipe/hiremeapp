@@ -18,13 +18,6 @@ var main = angular.module('hiremeapp.main', [
         controller: "SignupController as sc",
         access: { requiredLogin: false }
     })
-        .state('game.single', {
-        url: "/game/single",
-        templateUrl: "app/src/game/view/chooseAreaAndTech.html",
-        controller: "ChooseAreaAndTechController",
-        access: { requiredLogin: true }
-    })
-
         .state('index', {
         abstract: true,
         views: {
@@ -46,9 +39,9 @@ var main = angular.module('hiremeapp.main', [
         .state('index.game', {
         url: "/game",
         templateUrl: "app/src/game/view/chooseGameMode.html",
-        controller: "GameController",
+        controller: "GameController as gm",
         params: {user: null},
-        access: { requiredLogin: true } 
+        access: { requiredLogin: false } //TODO
     })
         .state('index.user', {
         url: "/user",

@@ -142,3 +142,12 @@ span.name {
 button, a {
     vertical-align: top;
 }
+
+md-pagination-wrapper{
+    width: 100% !important; //FIX
+}
+
+md-dialog{
+    min-width: 50% !important;
+}
+
