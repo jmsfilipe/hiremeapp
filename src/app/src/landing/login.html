@@ -15,7 +15,7 @@
         <div layout-gt-sm="row"> 
             <md-input-container class="md-block md-primary" flex-gt-sm>
                 <label>Password</label>
-                <input type="password" id="password" name="password" ng-model="lc.user.password" required />
+                <input reset-on-change='invalid' type="password" id="password" name="password" ng-model="lc.user.password" required />
                 <div ng-messages="loginForm.password.$error" >
                     <div ng-message="required">Enter your password.</div>
                     <div ng-message="invalid">Wrong password.</div>

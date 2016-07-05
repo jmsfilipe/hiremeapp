@@ -63,34 +63,15 @@ var main = angular.module('hiremeapp.main', [
     self.auth = AuthenticationService;
 
     $scope.$on('unauthenticated', function() {
-        localStorage.setItem('JWT', undefined);
+        auth.logOut();
         $state.go('landing');
     });
 
     $scope.$on("$stateChangeStart", function(event, nextRoute, currentRoute) {
-        if (nextRoute.access.requiredLogin && !AuthenticationService.isLogged) {
+        if (nextRoute.access.requiredLogin && !self.auth.isLogged) {
             event.preventDefault();
             $state.go('landing');
         }
     });
-
-
 })
-.factory('AuthenticationService', function() {
-    var auth = {
-        isLogged: false,
-        user: []
-    }
-
-    return auth;
-}).config(function Config($httpProvider, jwtInterceptorProvider) {
-
-    jwtInterceptorProvider.tokenGetter = function() {
-        return localStorage.getItem('JWT');
-    }
-    $httpProvider.interceptors.push('jwtInterceptor');
-})
-
-
-
-
+;

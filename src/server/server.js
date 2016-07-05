@@ -43,7 +43,7 @@ app.use('/app/assets/stylesheets', sassMiddleware({
 
 
 // set the static files location /app/img will be /img for users
-app.use('/scripts', express.static(__dirname + '/../node_modules'));
+app.use('/vendor', express.static(__dirname + '/../node_modules'));
 app.use(express.static(__dirname + '/../'));
 
 // listen (start app with node server.js) ======================================

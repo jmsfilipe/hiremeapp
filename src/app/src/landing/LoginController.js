@@ -1,7 +1,8 @@
 "use strict";
 var users = angular.module('hiremeapp.landing', [
     'ngMaterial',
-    'ngMessages'
+    'ngMessages',
+    'hiremeapp.auth.directives'
 
 ])
 .controller('LoginController', function(loginServices, $timeout, $log, $scope, $state, $stateParams,  AuthenticationService){
@@ -12,6 +13,9 @@ var users = angular.module('hiremeapp.landing', [
         password: ""
     }
 
+
+
+
     self.signIn = function(form, userData){
         // Load all articles
 
@@ -19,14 +23,14 @@ var users = angular.module('hiremeapp.landing', [
             .then(function successCallback(response) {
 
             switch(response.status){
-                case 204:
-                    form.email.$setValidity("invalid", false);
-                    break;
                 case 200:
-                     AuthenticationService.isLogged = true
-                    localStorage.setItem('JWT', response.data.jwt);
-                    AuthenticationService.user = response.data.user;
-                    $state.go('index.home', { "user": self.signupForm});
+                    if(response.data.success){
+                        AuthenticationService.logIn(response.data.user, response.data.jwt) ;
+                        $state.go('index.home', { "user": self.signupForm});
+                    }
+                    else
+                        form.password.$setValidity("invalid", false);
+
                     break;
                 default:
                     break;
@@ -53,39 +57,5 @@ var users = angular.module('hiremeapp.landing', [
     // *********************************
 
 
-
-}).directive('accountCheck', function (loginServices) {
-    return {
-        require: 'ngModel',
-        link: function (scope, elem, attrs, ctrl) {
-
-            $(elem).on('focusout', function () {
-
-                loginServices.validateAccount({email: elem.val()})
-                    .then(function successCallback(response) {
-
-
-                    ctrl.$setValidity("registered", response.data.valid);
-
-                }, function errorCallback(response) {
-
-                });
-
-
-
-            });
-        }
-    }
-})
-.service('loginServices', function($http){
-    return {
-        authenticate : function(userData) {
-            return $http.post('/api/authenticate', userData);
-        },
-        validateAccount : function(userData) {
-            return $http.get('/api/login/validator', {
-                params: userData});
-        }
-    };
 
 });
