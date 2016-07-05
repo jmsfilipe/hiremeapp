@@ -9,11 +9,11 @@ module.exports = function(app, express, mongoose, jwt){
 
     // unauthenticated related routes
     require('./api.unauthenticated.js')(apiRoutes);
-    
-    
+
+
     // route to authenticate a user (POST http://localhost:8080/api/authenticate)
     apiRoutes.post('/authenticate', function(req, res) {
-        
+
         console.log(req.body.email);
 
         // find the user
@@ -57,12 +57,11 @@ module.exports = function(app, express, mongoose, jwt){
     apiRoutes.use(function(req, res, next) {
 
 
-        
-        if(req.get('Authorization').split("Bearer ")[1]){
-          var token = req.get('Authorization').split("Bearer ")[1];
+        if(req.get('Authorization') && req.get('Authorization').split("Bearer ")[1]){
+            var token = req.get('Authorization').split("Bearer ")[1];
         }
-      
-        
+
+
         // decode token
         if (token) {
 
@@ -77,7 +76,8 @@ module.exports = function(app, express, mongoose, jwt){
                 }
             });
 
-        } else {
+        }
+        else {
 
             // if there is no token
             // return an error
@@ -93,19 +93,19 @@ module.exports = function(app, express, mongoose, jwt){
     apiRoutes.get('/', function(req, res) {
         res.json({ message: 'Welcome to the coolest API on earth!' });
     });
-    
-    
+
+
     // user related routes
     require('./api.user.js')(apiRoutes);
-    
+
     // game related routes
     require('./api.game.js')(apiRoutes);
-    
-        
+
+
     // article related routes
     require('./api.article.js')(apiRoutes);
-    
-    
+
+
 
     // apply the routes to our application with the prefix /api
     app.use('/api', apiRoutes);

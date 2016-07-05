@@ -4,7 +4,7 @@ var users = angular.module('hiremeapp.landing', [
     'ngMessages'
 
 ])
-.controller('LoginController', function(loginServices, $timeout, $log, $scope, $rootScope, $state, $stateParams,  AuthenticationService){
+.controller('LoginController', function(loginServices, $timeout, $log, $scope, $state, $stateParams,  AuthenticationService){
     var self = this;
 
     self.user = {
@@ -25,7 +25,7 @@ var users = angular.module('hiremeapp.landing', [
                 case 200:
                      AuthenticationService.isLogged = true
                     localStorage.setItem('JWT', response.data.jwt);
-                    $rootScope.user = response.data.user;
+                    AuthenticationService.user = response.data.user;
                     $state.go('index.home', { "user": self.signupForm});
                     break;
                 default:

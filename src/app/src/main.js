@@ -38,7 +38,7 @@ var main = angular.module('hiremeapp.main', [
         },
     })
         .state('index.home', {
-        access: { requiredLogin: false }, //TODO : change
+        access: { requiredLogin: true }, 
         url: '/home',
         templateUrl: 'app/src/home/view/home.html'
 
@@ -48,7 +48,7 @@ var main = angular.module('hiremeapp.main', [
         templateUrl: "app/src/game/view/chooseGameMode.html",
         controller: "GameController",
         params: {user: null},
-        access: { requiredLogin: false } //TODO : change
+        access: { requiredLogin: true } 
     })
         .state('index.user', {
         url: "/user",
@@ -57,33 +57,38 @@ var main = angular.module('hiremeapp.main', [
         access: { requiredLogin: true }
     })
 
-}).factory('AuthenticationService', function() {
-    var auth = {
-        isLogged: false
-    }
+}).controller('RootController', function(AuthenticationService, $state, $scope){
+    var self = this;
 
-    return auth;
-}).config(function Config($httpProvider, jwtInterceptorProvider) {
+    self.auth = AuthenticationService;
 
-    //    jwtInterceptorProvider.urlParam = 'x-access-token'
-
-    jwtInterceptorProvider.tokenGetter = function() {
-        return localStorage.getItem('JWT');
-    }
-    $httpProvider.interceptors.push('jwtInterceptor');
-}).run(function($rootScope, $state, AuthenticationService) {
-    $rootScope.$on('unauthenticated', function() {
+    $scope.$on('unauthenticated', function() {
         localStorage.setItem('JWT', undefined);
         $state.go('landing');
     });
 
-    $rootScope.$on("$stateChangeStart", function(event, nextRoute, currentRoute) {
+    $scope.$on("$stateChangeStart", function(event, nextRoute, currentRoute) {
         if (nextRoute.access.requiredLogin && !AuthenticationService.isLogged) {
             event.preventDefault();
             $state.go('landing');
         }
     });
 
+
+})
+.factory('AuthenticationService', function() {
+    var auth = {
+        isLogged: false,
+        user: []
+    }
+
+    return auth;
+}).config(function Config($httpProvider, jwtInterceptorProvider) {
+
+    jwtInterceptorProvider.tokenGetter = function() {
+        return localStorage.getItem('JWT');
+    }
+    $httpProvider.interceptors.push('jwtInterceptor');
 })
 
 
