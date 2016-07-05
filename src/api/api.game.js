@@ -3,7 +3,8 @@ module.exports = function(apiRoutes){
     var Question = require(__dirname+"/../models/Question.js").Question;
     var Technology = require(__dirname+"/../models/Technology.js").Technology;
     var Area = require(__dirname+"/../models/Area.js").Area;
-    
+    var Company = require(__dirname+"/../models/Company.js").Company;
+
     // GAME : API ROUTES -------------------
 
 
@@ -12,6 +13,15 @@ module.exports = function(apiRoutes){
     apiRoutes.get('/list_areas', function(req, res) {
 
         Area.find({}).exec(function(err, _res){
+            res.send(_res);
+        });
+
+    });
+
+    //list the areas
+    apiRoutes.get('/list_companies', function(req, res) {
+
+        Company.find({}).exec(function(err, _res){
             res.send(_res);
         });
 
@@ -28,7 +38,7 @@ module.exports = function(apiRoutes){
         });
 
     });
-    
+
         // get a random question from the techology
     apiRoutes.get('/get_question/:area/:technology/:level', function(req, res) {
 

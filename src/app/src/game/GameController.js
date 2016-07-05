@@ -33,10 +33,17 @@ var game = angular.module('hiremeapp.game', [
         $mdSidenav('left').toggle();
     }
 })
-.controller('DialogController', function($scope, $mdDialog){
+.controller('DialogController', function($scope, $mdDialog, refineServices){
         var self = this;
-    this.companies = ['Google', 'Bimk', 'Helpr', 'LandingJobs', 'INM', 'Talkdesk', 'Uniplaces', 'Cooc', 'xixi'];
-    
+
+    refineServices.companies().then(function successCallback(response) {
+      self.companies = response.data;
+      console.log(response)
+    }, function errorCallback(response) {
+
+    });
+    console.log(this.companies)
+
     $scope.hide = function() {
         $mdDialog.hide();
     };
@@ -47,4 +54,3 @@ var game = angular.module('hiremeapp.game', [
         $mdDialog.hide(answer);
     };
 });
-
