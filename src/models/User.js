@@ -4,6 +4,7 @@ var UserSchema = new mongoose.Schema({
     name: { type: String },
     friends:[this],
     password: { type: String },
+    blocked: { type: Boolean, default: true },
     score: { type: Number, default: 0 },
     email:{ type: String, unique: true },
     answered_questions:[

@@ -19,7 +19,7 @@ var users = angular.module('hiremeapp.signup', [
 
         signupServices.signUp(userData)
             .success(function(data) {
-            $state.go('game', { "user": self.signupForm});
+            $state.go('index.home', { "user": self.signupForm});
         })
             .error(function(data) {
             form.email.$setValidity("duplicated", false);

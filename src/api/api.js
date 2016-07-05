@@ -18,7 +18,8 @@ module.exports = function(app, express, mongoose, jwt){
 
         // find the user
         User.findOne({
-            email: req.body.email
+            email: req.body.email,
+            blocked: false,
         }, function(err, user) {
 
             if (err) 
