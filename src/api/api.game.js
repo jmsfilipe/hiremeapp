@@ -39,6 +39,22 @@ module.exports = function(apiRoutes){
 
     });
 
+    //list al technologies
+    apiRoutes.get('/list_technologies', function(req, res) {
+
+      var techs = [];
+        Area.find()
+            .populate( 'technologies').exec(function(err, _res){
+              _res.forEach(function(area) {
+                area.technologies.forEach(function(tech) {
+                    techs.push(tech);
+                });
+              });
+              res.send(techs);
+        });
+
+    });
+
         // get a random question from the techology
     apiRoutes.get('/get_question/:area/:technology/:level', function(req, res) {
 

@@ -34,15 +34,30 @@ var game = angular.module('hiremeapp.game', [
     }
 })
 .controller('DialogController', function($scope, $mdDialog, refineServices){
-        var self = this;
+    var self = this;
+    self.selectedItems = [];
 
     refineServices.companies().then(function successCallback(response) {
       self.companies = response.data;
-      console.log(response)
     }, function errorCallback(response) {
 
     });
-    console.log(this.companies)
+
+    refineServices.areas().then(function successCallback(response) {
+      self.areas = response.data;
+    }, function errorCallback(response) {
+
+    });
+
+    refineServices.technologies().then(function successCallback(response) {
+      self.technologies = response.data;
+    }, function errorCallback(response) {
+
+    });
+
+    self.addToSelectedItems = function(item){
+      self.selectedItems.push(item);
+    }
 
     $scope.hide = function() {
         $mdDialog.hide();

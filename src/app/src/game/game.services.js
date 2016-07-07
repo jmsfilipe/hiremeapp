@@ -12,7 +12,12 @@ var module = angular.module('hiremeapp.game')
             return $http.get('/api/list_companies');
         },
         technologies : function(area) {
+          if(typeof area === 'undefined'){
+            return $http.get('/api/list_technologies');
+          }
+          else {
             return $http.get('/api/list_technologies/' + area);
+          }
         }
     };
 });
