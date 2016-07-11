@@ -20,4 +20,11 @@ var module = angular.module('hiremeapp.game')
           }
         }
     };
+})
+.service('questionServices', function($http){
+    return {
+        question : function(area, tech, level) {
+            return $http.get('/api/get_question/' + area + '/' + tech + '/' + level);
+        }
+    };
 });

@@ -25,6 +25,7 @@
         <script type="text/javascript" defer src="app/src/header/HeaderController.js"></script>
         <script type="text/javascript" defer src="app/src/sidebar/SidebarController.js"></script>
         <script type="text/javascript" defer src="app/src/game/GameController.js"></script>
+        <script type="text/javascript" defer src="app/src/game/QuestionController.js"></script>
         <script type="text/javascript" defer src="app/src/game/game.services.js"></script>
         <script type="text/javascript" defer src="app/src/landing/SignupController.js"></script>
         <script type="text/javascript" defer src="app/src/common/directives.js"></script>
@@ -34,7 +35,7 @@
         <script type="text/javascript" defer src="app/src/landing/authentication.directives.js"></script>
         <script type="text/javascript" defer >
             angular
-                .module('hiremeapp', ['hiremeapp.main', 'hiremeapp.header', 'hiremeapp.sidebar', 'hiremeapp.game', 'hiremeapp.user', 'hiremeapp.landing', 'hiremeapp.signup', 'hiremeapp.directives', 'hiremeapp.auth'])
+                .module('hiremeapp', ['hiremeapp.main', 'hiremeapp.header', 'hiremeapp.sidebar', 'hiremeapp.game', 'hiremeapp.question', 'hiremeapp.user', 'hiremeapp.landing', 'hiremeapp.signup', 'hiremeapp.directives', 'hiremeapp.auth'])
                 .config(function($mdThemingProvider, $mdIconProvider){
 
                 $mdIconProvider

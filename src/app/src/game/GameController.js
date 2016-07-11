@@ -2,7 +2,7 @@
 var game = angular.module('hiremeapp.game', [
     'ngMaterial'
 ])
-.controller('GameController', function($timeout, $log, $scope, $state, $stateParams, $mdDialog){
+.controller('GameController', function($timeout, $log, $scope, $state, $stateParams, $mdDialog, questionServices){
     var self = this;
     self.user = $stateParams.user;
     self.filters = [];
@@ -22,19 +22,11 @@ var game = angular.module('hiremeapp.game', [
         })
             .then(function(answer) {
             self.filters = answer;
+            $state.go('index.question', self.filters);
         }, function() {
             //canceled
         });
     };
-})
-.controller('ChooseAreaAndTechController', function(){
-    var self = this;
-
-    self.toggleList   = toggleUsersList;
-
-    function toggleUsersList() {
-        $mdSidenav('left').toggle();
-    }
 })
 .controller('DialogController', function($scope, $mdDialog, refineServices, items){
     var self = this;

@@ -31,15 +31,22 @@ var main = angular.module('hiremeapp.main', [
         },
     })
         .state('index.home', {
-        access: { requiredLogin: true }, 
+        access: { requiredLogin: true },
         url: '/home',
         templateUrl: 'app/src/home/view/home.html'
 
-    })        
+    })
         .state('index.game', {
         url: "/game",
         templateUrl: "app/src/game/view/chooseGameMode.html",
         controller: "GameController as gm",
+        params: {user: null},
+        access: { requiredLogin: false } //TODO
+    })
+        .state('index.question', {
+        url: "/game/question",
+        templateUrl: "app/src/game/view/chooseQuestion.html",
+        controller: "QuestionController as qm",
         params: {user: null},
         access: { requiredLogin: false } //TODO
     })
