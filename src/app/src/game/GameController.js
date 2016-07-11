@@ -5,7 +5,7 @@ var game = angular.module('hiremeapp.game', [
 .controller('GameController', function($timeout, $log, $scope, $state, $stateParams, $mdDialog){
     var self = this;
     self.user = $stateParams.user;
-
+    self.filters = [];
 
     console.log(self.user);
 
@@ -15,12 +15,15 @@ var game = angular.module('hiremeapp.game', [
             templateUrl: "app/src/game/refineDialog.html",
             parent: angular.element(document.body),
             targetEvent: ev,
-            clickOutsideToClose:true
+            clickOutsideToClose:true,
+            locals: {
+                items: self.filters
+            }
         })
             .then(function(answer) {
-            $scope.status = 'You said the information was "' + answer + '".';
+            self.filters = answer;
         }, function() {
-            $scope.status = 'You cancelled the dialog.';
+            //canceled
         });
     };
 })
@@ -33,39 +36,38 @@ var game = angular.module('hiremeapp.game', [
         $mdSidenav('left').toggle();
     }
 })
-.controller('DialogController', function($scope, $mdDialog, refineServices){
+.controller('DialogController', function($scope, $mdDialog, refineServices, items){
     var self = this;
-    self.selectedItems = [];
+    self.selectedItems = items.slice();
 
     refineServices.companies().then(function successCallback(response) {
-      self.companies = response.data;
+        self.companies = response.data;
     }, function errorCallback(response) {
 
     });
 
     refineServices.areas().then(function successCallback(response) {
-      self.areas = response.data;
+        self.areas = response.data;
     }, function errorCallback(response) {
 
     });
 
     refineServices.technologies().then(function successCallback(response) {
-      self.technologies = response.data;
+        self.technologies = response.data;
     }, function errorCallback(response) {
 
     });
 
     self.addToSelectedItems = function(item){
-      self.selectedItems.push(item);
+        if(self.selectedItems.indexOf(item) === -1)
+            self.selectedItems.push(item);
     }
 
-    $scope.hide = function() {
-        $mdDialog.hide();
-    };
-    $scope.cancel = function() {
+    self.cancel = function() {
         $mdDialog.cancel();
     };
-    $scope.answer = function(answer) {
-        $mdDialog.hide(answer);
+    self.save = function() {
+        $mdDialog.hide(self.selectedItems);
     };
+
 });
