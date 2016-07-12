@@ -11,6 +11,7 @@ var question = angular.module('hiremeapp.question', [
     self.explanation = null;
 
     self.showNext = false;
+    self.disabledAnswers = false;
 
     $scope.counter = 1;
     var mytimeout = 1;
@@ -32,9 +33,9 @@ var question = angular.module('hiremeapp.question', [
 
     self.showQuestion = function(filter){
       self.showNext = false;
+      self.disabledAnswers = false;
       mytimeout = $timeout(self.onTimeout,TIMER);
       $scope.$watch('counter', function(nv) {
-        console.log(nv)
           if(nv == 10){
             self.resetTimer();
             self.showNext = true;
@@ -45,18 +46,25 @@ var question = angular.module('hiremeapp.question', [
           self.question = response.data.question;
           self.answers = response.data.answers;
           self.explanation = response.data.explanation;
-          console.log(self);
       }, function errorCallback(response) {
 
       });
     };
 
     self.evaluateAnswer = function(answer, $event){
-      if(answer.correct){
-        $($event.currentTarget).addClass("active");
-        self.showSuccessDialog();
-      } else{
-        $($event.currentTarget).addClass("active");
+
+      console.log(answer)
+      if(!self.disabledAnswers){
+        if(answer.correct){
+          $($event.currentTarget).addClass("active");
+          self.showSuccessDialog();
+        } else{
+          self.resetTimer();
+          self.showNext = true;
+          $($event.currentTarget).addClass("active");
+          $('md-card.correct').addClass("active");
+          self.disabledAnswers = true;
+        }
       }
     }
 
