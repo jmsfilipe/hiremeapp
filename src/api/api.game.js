@@ -96,7 +96,15 @@ module.exports = function(apiRoutes){
           Area.find({'name': { $in: areas }})
               .populate( 'technologies' )
               .exec(function(err, _res){
-              Technology.find()
+
+              var techIds = [];
+              for(var i = 0; i < _res.length; i++){
+                for(var j = 0; j < _res[i].technologies.length; j++){
+                  techIds.push(_res[i].technologies[j]._id);
+                }
+              }
+              
+              Technology.find({_id: {$in: techIds}})
                   .populate( 'questions', null, { level: { $in: level } } )
                   .exec(function(err, _res){
                     for(var i = 0; i < _res.length; i++){
