@@ -1,12 +1,21 @@
 // Modules and Variables
 @import "partials/angular";
 
+//modules
+@import "modules/colors";
+
 //layout
+@import "partials/layout/base";
 @import "partials/layout/sidebar";
+@import "partials/layout/header";
+//@import "partials/layout/colors";
 
 //components
 @import "partials/components/input";
+@import "partials/components/img";
+@import "partials/components/scrollbar";
 
 //pages
 @import "partials/pages/login";
+@import "partials/pages/game";
 @import "partials/pages/questions";

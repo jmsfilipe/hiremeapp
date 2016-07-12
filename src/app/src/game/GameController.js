@@ -6,6 +6,7 @@ var game = angular.module('hiremeapp.game', [
     var self = this;
     self.user = $stateParams.user;
     self.filters = [];
+    self.fabIsOpen = false;
 
     console.log(self.user);
 

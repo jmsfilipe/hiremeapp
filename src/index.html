@@ -11,7 +11,9 @@
         <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
         <link rel="stylesheet" href="vendor/angular-material/angular-material.css" type="text/css">
         <link rel="stylesheet" href="app/assets/stylesheets/app.css" type="text/css">
-
+       <link href="https://fonts.googleapis.com/css?family=Bangers|Galada" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+              rel="stylesheet">
         <script type="text/javascript" defer src="vendor/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript"  src="vendor/angular/angular.js"></script>
         <script type="text/javascript" defer src="vendor/angular-animate/angular-animate.js"></script>
@@ -42,6 +44,7 @@
                 $mdIconProvider
                     .defaultIconSet("app/assets/svg/avatars.svg", 128)
                     .icon("menu"       , "app/assets/svg/menu.svg"        , 24)
+                    .icon("news"       , "app/assets/svg/ic_news_black.svg"        , 24)
                     .icon("share"      , "app/assets/svg/share.svg"       , 24)
                     .icon("google_plus", "app/assets/svg/google_plus.svg" , 512)
                     .icon("hangouts"   , "app/assets/svg/hangouts.svg"    , 512)
@@ -51,7 +54,8 @@
 
                 $mdThemingProvider.theme('default')
                     .primaryPalette('cyan')
-                    .accentPalette('deep-orange');
+                    .accentPalette('red')
+                    .warnPalette('deep-orange');
 
             });
         </script>
@@ -59,7 +63,7 @@
     </head>
 
     <body ng-app="hiremeapp" layout="column" ng-cloak >
-   <div ui-view layout="column" ng-controller="RootController as root" layout-fill></div>
+        <div ui-view layout="column" ng-controller="RootController as root" layout-fill></div>
 
     </body>
 </html>

@@ -1,6 +1,17 @@
-<section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-  <md-button class="md-raised md-primary"  ng-click="gm.showTabDialog($event)">Hiring</md-button>
-  <md-button class="md-raised md-primary" ui-sref="game.singleplayer">Single</md-button>
-  <md-button class="md-raised md-primary" ui-sref="game.multiplayer">Multiplayer</md-button>
-  <md-button class="md-raised md-primary" ui-sref="game.quick">Quick</md-button>
+<section class="page page--game" layout="column"   layout-align="start center" layout-fill ng-cloak>
+    <!--     <md-button class="md-raised md-primary"  ng-click="gm.showTabDialog($event)">Hiring</md-button>
+<md-button class="md-raised md-primary" ui-sref="game.singleplayer">Single</md-button>
+<md-button class="md-raised md-primary" ui-sref="game.multiplayer">Multiplayer</md-button>
+<md-button class="md-raised md-primary" ui-sref="game.quick">Quick</md-button> -->
+
+    <h1 class="md-primary" >New Game</h1>
+
+    <span class="flex"></span>
+
+    <md-button id="filter-btn" aria-label="menu" class="md-fab md-accent" ng-click="gm.showTabDialog($event)">
+        <!--   <md-icon md-svg-src="app/assets/svg/ic_more.svg"></md-icon> -->
+        <img class="png-icon" src="app/assets/images/filter.png" style="width: 24px; height: 24px;">
+    </md-button>
+
+
 </section>

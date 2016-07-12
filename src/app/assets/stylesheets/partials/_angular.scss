@@ -12,8 +12,15 @@ html, body {
     background-color: transparent;
     border: none;
     height: 38px;
-    margin: 16px;
     width: 36px;
+    min-width: 36px;
+
+    md-icon{
+        color: white;
+        fill: white;
+        font-size: 30px;
+        text-shadow: 1px 1px 2px gray;
+    }
 }
 
 
@@ -45,9 +52,7 @@ md-sidenav  md-list {
 }
 
 #content  {
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 5px;
+    padding: 40px;
 }
 
 #content .md-button.share {
@@ -99,8 +104,12 @@ md-button.menuBtn > md-icon {
 /* Typography support coming in 0.8.0 */
 
 md-toolbar h1 {
-    font-size: 1.250em;
+    font-size: 1.50em;
     font-weight: 400;
+    margin: 0.2em 1.5em;
+    font-family: 'Galada', cursive;
+    color: white;
+    text-shadow: 2px 2px 2px gray;
 }
 
 .avatar {
@@ -112,7 +121,7 @@ md-toolbar h1 {
     border-radius: 50%;
     display: inline-block;
     overflow: hidden;
-    margin: 100px;
+    margin: 50px 50px 0 0;
     vertical-align: middle;
     zoom:0.70;
     transform: translateZ(0);
@@ -144,8 +153,11 @@ button, a {
 }
 
 md-pagination-wrapper{
-    width: 100% !important; //FIX
+    .md-tab{
+        padding: 12px 22px;
+    }
 }
+
 
 md-dialog{
     min-width: 50% !important;

@@ -1,7 +1,8 @@
 <aside layout="row" ng-controller="SidebarController as sc">
     <md-sidenav ng-click="HeaderController.toggleList()" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="news md-whiteframe-z2" >
         <md-list>
-            <md-list-item ng-repeat="it in sc.articles" class="md-2-line md-long-text" href="{{it.link}}" target="_blank">
+
+            <md-button ng-repeat="it in sc.articles">
                 <img ng-src="{{it.img}}" class="md-avatar"/>
                 <div class="md-list-item-text">
                     <h2>{{it.title}}</h2>
@@ -9,7 +10,8 @@
                         {{it.body}}
                     </p>
                 </div>
-            </md-list-item>
+            </md-button>
+            
         </md-list>
     </md-sidenav>
 </aside>
