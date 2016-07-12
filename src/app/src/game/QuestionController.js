@@ -5,6 +5,7 @@ var question = angular.module('hiremeapp.question', [
 .controller('QuestionController', function($timeout, $log, $scope, $state, $stateParams, $mdDialog, questionServices){
     var self = this;
     console.log($stateParams)
+    if(!$stateParams.filters) $state.go('index.game');
     self.user = $stateParams.user;
     self.filters = $stateParams.filters;
     self.question = null;
