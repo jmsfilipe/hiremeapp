@@ -40,7 +40,6 @@ var question = angular.module('hiremeapp.question', [
             clickOutsideToClose:true
         })
             .then(function(answer) {
-              console.log("ANOTHER")
             self.showQuestion(self.filters);
         }, function() {
             //canceled
