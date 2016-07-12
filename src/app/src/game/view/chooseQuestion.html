@@ -4,7 +4,7 @@
       <span>{{qm.question}}</span>
     </md-card-content>
   </md-card>
-  <md-card md-theme-watch ng-repeat="answer in qm.answers">
+  <md-card md-theme-watch ng-repeat="answer in qm.answers" ng-click="qm.evaluateAnswer(answer, $event)">
     <md-card-content layout="row" layout-align="space-between">
       <span>{{answer.text}}</span>
     </md-card-content>
