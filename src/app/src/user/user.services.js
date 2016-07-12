@@ -9,7 +9,10 @@ var module = angular.module('hiremeapp.user')
             return $http.post('/api/user/total_friends', userData);
         },
         addFriend : function(userData) {
-            return $http.get('/api/user/add_friend', userData);
+            return $http.post('/api/user/add_friend', userData);
+        },
+        listFriends : function(userData) {
+            return $http.post('/api/user/list_friends', userData);
         },
         all : function() {
             return $http.get('/api/users');

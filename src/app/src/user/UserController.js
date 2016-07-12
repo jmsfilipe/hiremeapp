@@ -2,18 +2,26 @@
 var game = angular.module('hiremeapp.user', [
     'ngMaterial'
 ])
-.controller('UserController', function($mdDialog, userServices){
+.controller('UserController', function($mdDialog, userServices, AuthenticationService){
     var self = this;
 
     self.totalFriends = 0;
+    var userId = AuthenticationService.user._id;
 
-    userServices.totalFriends({user_id: '111'}).then(function successCallback(response) {
+    userServices.totalFriends({user_id: userId}).then(function successCallback(response) {
         self.totalFriends = response.data.total_friends;
     }, function errorCallback(response) {
 
     });
 
     self.showFriendsDialog = function(ev){
+
+      userServices.listFriends({user_id: userId}).then(function successCallback(response) {
+          console.log(response)
+      }, function errorCallback(response) {
+
+      });
+
       $mdDialog.show({
           controller: 'FriendsDialogController as dialog',
           templateUrl: "app/src/user/friendsDialog.html",

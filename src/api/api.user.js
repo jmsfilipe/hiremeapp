@@ -30,6 +30,18 @@ module.exports = function(apiRoutes){
 
     });
 
+    apiRoutes.post('/user/list_friends', function(req, res) {
+
+        var user_id = req.body.user_id;
+
+        User.findOne(user_id)
+            .populate( 'friends')
+            .exec(function (err, user) {
+              res.send({friends: user.friends});
+            });
+
+    });
+
     apiRoutes.post('/user/total_friends', function(req, res) {
 
         var user_id = req.body.user_id;
