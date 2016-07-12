@@ -10,7 +10,7 @@
                 </md-button>
             </div>
         </md-toolbar>
-        <md-dialog-content>
+        <md-dialog-content style="max-width:800px;max-height:810px;">
             <md-tabs md-dynamic-height md-border-bottom>
                 <md-tab label="Company">
                     <md-content class="md-padding">
@@ -48,27 +48,28 @@
                                 </md-grid-tile-footer>
                             </md-grid-tile>
                         </md-grid-list>
-                        </md-tab>
-                    <md-tab label="tech">
-                        <md-content class="md-padding">
-                            <h3>Pick one or more technologies</h3>
-                            <md-chips ng-model="dialog.selectedItems">
-                                <md-chip-template>
-                                    <span>
-                                        {{$chip.name}}
-                                    </span>
-                                </md-chip-template>
-                            </md-chips>
-                            <md-grid-list md-cols-xs="2" md-cols-sm="4" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
-                                <md-grid-tile class="green" ng-repeat="tech in dialog.technologies track by tech._id" ng-click="dialog.addToSelectedItems(tech)">
-                                    <md-grid-tile-footer>
-                                        <h3>{{tech.name}}</h3>
-                                    </md-grid-tile-footer>
-                                </md-grid-tile>
-                            </md-grid-list>
                         </md-content>
-                    </md-tab>
-                    </md-tabs>
+                </md-tab>
+                <md-tab label="tech">
+                    <md-content class="md-padding">
+                        <h3>Pick one or more technologies</h3>
+                        <md-chips ng-model="dialog.selectedItems">
+                            <md-chip-template>
+                                <span>
+                                    {{$chip.name}}
+                                </span>
+                            </md-chip-template>
+                        </md-chips>
+                        <md-grid-list md-cols-xs="2" md-cols-sm="4" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
+                            <md-grid-tile class="green" ng-repeat="tech in dialog.technologies track by tech._id" ng-click="dialog.addToSelectedItems(tech)">
+                                <md-grid-tile-footer>
+                                    <h3>{{tech.name}}</h3>
+                                </md-grid-tile-footer>
+                            </md-grid-tile>
+                        </md-grid-list>
+                    </md-content>
+                </md-tab>
+                </md-tabs>
                 </md-dialog-content>
                 <md-dialog-actions>
                     <span flex></span>

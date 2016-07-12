@@ -1,12 +1,14 @@
 <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+  {{counter}}
   <md-card md-theme-watch flex="grow">
     <md-card-content layout="row" layout-align="space-between">
       <span><b>{{qm.question}}</b></span>
     </md-card-content>
   </md-card>
-  <md-card md-theme-watch ng-repeat="answer in qm.answers" ng-click="qm.evaluateAnswer(answer, $event)" flex="grow">
+  <md-card md-theme-watch ng-repeat="answer in qm.answers" ng-click="qm.evaluateAnswer(answer, $event)" flex="grow" ng-class="answer.correct ? 'correct' : 'incorrect'">
     <md-card-content layout="row" layout-align="space-between">
       <span>{{answer.text}}</span>
     </md-card-content>
   </md-card>
+  <md-button class="md-raised md-primary" ng-show="qm.showNext" ng-click="qm.hitNext()">Next</md-button>
 </section>
