@@ -22,7 +22,7 @@ var game = angular.module('hiremeapp.game', [
         })
             .then(function(answer) {
             self.filters = answer;
-            $state.go('index.question', self.filters);
+            $state.go('index.question', {filters: self.filters});
         }, function() {
             //canceled
         });
@@ -50,9 +50,21 @@ var game = angular.module('hiremeapp.game', [
 
     });
 
-    self.addToSelectedItems = function(item){
-        if(self.selectedItems.indexOf(item) === -1)
-            self.selectedItems.push(item);
+    self.addToSelectedItems = function(type, item){
+      switch(type){
+        case 'company':
+          if(self.selectedItems.indexOf(item) === -1)
+              self.selectedItems.push({type: 'company', content: item});
+        break;
+        case 'tech':
+          if(self.selectedItems.indexOf(item) === -1)
+              self.selectedItems.push({type: 'tech', content: item});
+        break;
+        case 'area':
+          if(self.selectedItems.indexOf(item) === -1)
+              self.selectedItems.push({type: 'area', content: item});
+        break;
+      }
     }
 
     self.cancel = function() {

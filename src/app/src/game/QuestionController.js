@@ -4,8 +4,9 @@ var question = angular.module('hiremeapp.question', [
 ])
 .controller('QuestionController', function($timeout, $log, $scope, $state, $stateParams, $mdDialog, questionServices){
     var self = this;
+    console.log($stateParams)
     self.user = $stateParams.user;
-    self.filters = [];
+    self.filters = $stateParams.filters;
     self.question = null;
     self.answers = null;
     self.explanation = null;
@@ -42,7 +43,25 @@ var question = angular.module('hiremeapp.question', [
             $('md-card').addClass("active");
           }
       });
-      questionServices.question('web','javascript',1).then(function successCallback(response) {
+      var _techs = [], _areas = [], _companies = [];
+      for(var i = 0; i < filter.length; i++){
+        switch(filter[i].type){
+          case 'company':
+            _companies.push(filter[i].content.name);
+          break;
+          case 'tech':
+            _techs.push(filter[i].content.name);
+          break;
+          case 'area':
+            _areas.push(filter[i].content.name);
+          break;
+        }
+      }
+      questionServices.question({
+        technologies: _techs,
+        areas: _areas,
+        companies: _companies,
+        level: 1}).then(function successCallback(response) {
           self.question = response.data.question;
           self.answers = response.data.answers;
           self.explanation = response.data.explanation;

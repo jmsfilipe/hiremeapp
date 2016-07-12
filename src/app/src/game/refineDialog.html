@@ -18,12 +18,12 @@
                         <md-chips ng-model="dialog.selectedItems">
                             <md-chip-template>
                                 <span>
-                                    {{$chip.name}}
+                                    {{$chip.content.name}}
                                 </span>
                             </md-chip-template>
                         </md-chips>
                         <md-grid-list md-cols-xs="2" md-cols-sm="4" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
-                            <md-grid-tile class="green" ng-repeat="company in dialog.companies track by company._id" ng-click="dialog.addToSelectedItems(company)">
+                            <md-grid-tile class="green" ng-repeat="company in dialog.companies track by company._id" ng-click="dialog.addToSelectedItems('company', company)">
                                 <md-grid-tile-footer>
                                     <h3>{{company.name}}</h3>
                                 </md-grid-tile-footer>
@@ -37,12 +37,12 @@
                         <md-chips ng-model="dialog.selectedItems">
                             <md-chip-template>
                                 <span>
-                                    {{$chip.name}}
+                                    {{$chip.content.name}}
                                 </span>
                             </md-chip-template>
                         </md-chips>
                         <md-grid-list md-cols-xs="2" md-cols-sm="4" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
-                            <md-grid-tile class="green" ng-repeat="area in dialog.areas track by area._id" ng-click="dialog.addToSelectedItems(area)">
+                            <md-grid-tile class="green" ng-repeat="area in dialog.areas track by area._id" ng-click="dialog.addToSelectedItems('area', area)">
                                 <md-grid-tile-footer>
                                     <h3>{{area.name}}</h3>
                                 </md-grid-tile-footer>
@@ -56,12 +56,12 @@
                         <md-chips ng-model="dialog.selectedItems">
                             <md-chip-template>
                                 <span>
-                                    {{$chip.name}}
+                                    {{$chip.content.name}}
                                 </span>
                             </md-chip-template>
                         </md-chips>
                         <md-grid-list md-cols-xs="2" md-cols-sm="4" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
-                            <md-grid-tile class="green" ng-repeat="tech in dialog.technologies track by tech._id" ng-click="dialog.addToSelectedItems(tech)">
+                            <md-grid-tile class="green" ng-repeat="tech in dialog.technologies track by tech._id" ng-click="dialog.addToSelectedItems('tech', tech)">
                                 <md-grid-tile-footer>
                                     <h3>{{tech.name}}</h3>
                                 </md-grid-tile-footer>
