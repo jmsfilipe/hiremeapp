@@ -14,9 +14,34 @@ module.exports = function(apiRoutes){
         User.find({}, function(err, users) {
             res.json(users);
         });
-    });   
-    
-    
+    });
+
+    apiRoutes.post('/user/add_friend', function(req, res) {
+
+        var user_id = req.body.user_id;
+        var user_to_add_id = req.body.user_to_add_id;
+
+        User.findByIdAndUpdate(
+            user_id,
+            {$push: {"friends": user_to_add_id}},
+            function(err, model) {
+                console.log(err)
+            });
+
+    });
+
+    apiRoutes.post('/user/total_friends', function(req, res) {
+
+        var user_id = req.body.user_id;
+
+        User.findOne(
+            user_id,
+            function(err, model) {
+                res.send({total_friends: model.friends.length})
+            });
+
+    });
+
         //add correct question score
     apiRoutes.post('/user/correct_question', function(req, res) {
 
@@ -31,8 +56,8 @@ module.exports = function(apiRoutes){
             });
 
     });
-    
-    
+
+
     //add answered question score
     apiRoutes.post('/user/answered_question', function(req, res) {
 

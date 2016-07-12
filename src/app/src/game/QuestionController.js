@@ -74,11 +74,11 @@ var question = angular.module('hiremeapp.question', [
 
       console.log(answer)
       if(!self.disabledAnswers){
+        self.resetTimer();
         if(answer.correct){
           $($event.currentTarget).addClass("active");
           self.showSuccessDialog();
         } else{
-          self.resetTimer();
           self.showNext = true;
           $($event.currentTarget).addClass("active");
           $('md-card.correct').addClass("active");

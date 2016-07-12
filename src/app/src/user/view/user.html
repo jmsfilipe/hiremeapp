@@ -20,14 +20,14 @@
         100
       </md-card-content>
     </md-card>
-    <md-card>
+    <md-card ng-click="uc.showFriendsDialog($event)">
        <md-card-title>
        <md-card-title-text>
-         <span class="md-headline" ng-click="uc.getAll()">Friends</span>
+         <span class="md-headline">Friends</span>
        </md-card-title-text>
      </md-card-title>
      <md-card-content>
-       554
+       {{uc.totalFriends}}
      </md-card-content>
    </md-card>
 
