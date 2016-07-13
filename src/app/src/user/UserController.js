@@ -2,7 +2,7 @@
 var game = angular.module('hiremeapp.user', [
     'ngMaterial'
 ])
-.controller('UserController', function($mdDialog, userServices, AuthenticationService){
+.controller('UserController', function($mdDialog, $state, userServices, AuthenticationService){
     var self = this;
 
     self.totalFriends = 0;
@@ -37,8 +37,12 @@ var game = angular.module('hiremeapp.user', [
                 friends: self.friendsList
             }
         })
-            .then(function(answer) {
+            .then(function() {
+              userServices.listFriends({user_id: userId}).then(function successCallback(response) {
+                self.friendsList = response.data.friends;
+              }, function errorCallback(response) {
 
+              });
         }, function() {
             //canceled
         });
@@ -69,16 +73,12 @@ var game = angular.module('hiremeapp.user', [
    self.addFriend = function(friend, ev){
      userServices.addFriend({user_id: userId, user_to_add_id: friend._id}).then(function successCallback(response) {
 
-        $(ev.currentTarget).closest("md-icon").text("remove_circle_outline")
      }, function errorCallback(response) {
 
      });
    }
 
-    self.cancel = function() {
-        $mdDialog.cancel();
-    };
-    self.save = function() {
+    self.close = function() {
         $mdDialog.hide();
     };
 
