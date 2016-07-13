@@ -15,18 +15,40 @@ var user_2 = new User({
   password: '000000',
   score: 0,
   blocked: false,
-  email: 'carina@gmail.com'
+  email: 'carina@gmail.com',
+  gender: 'F'
+});
+
+var user_3 = new User({
+  name: 'Utilizador3',
+  friends: [],
+  password: '000000',
+  score: 0,
+  email: 'idk@gmail.com',
+  gender: 'M'
+});
+
+var user_4 = new User({
+  name: 'Utilizador4',
+  friends: [],
+  password: '000000',
+  score: 0,
+  email: 'idk@gmail.com',
+  gender: 'F'
 });
 
 user_2.save();
+user_3.save();
+user_4.save();
 
 var user_1 = new User({
   name: 'Jorge',
-  friends: [user_2._id],
+  friends: [user_2._id, user_3._id, user_4._id],
   password: '000000',
   score: 0,
   blocked: false,
-  email: 'jmsfilipe@gmail.com'
+  email: 'jmsfilipe@gmail.com',
+  gender: 'M'
 });
 
 user_1.save();

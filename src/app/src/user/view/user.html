@@ -88,10 +88,14 @@
    <md-content flex layout-padding>
      <div flex-xs flex-gt-xs="50" layout="row">
        <md-card ng-repeat="friend in uc.friendsList">
+
           <md-card-title>
             <md-card-title-text>
               <span class="md-headline">{{friend.name}}</span>
             </md-card-title-text>
+            <md-card-title-media>
+              <md-icon md-svg-icon="svg-{{friend.gender}}" class="md-avatar"></md-icon>
+           </md-card-title-media>
           </md-card-title>
           <md-card-content>
             {{friend.email}}

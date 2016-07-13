@@ -25,7 +25,8 @@ module.exports = function(apiRoutes){
             user_id,
             {$push: {"friends": user_to_add_id}},
             function(err, model) {
-                console.log(err)
+              if(err) throw err;
+              res.sendStatus(200);
             });
 
     });

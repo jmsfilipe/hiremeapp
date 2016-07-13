@@ -1,25 +1,21 @@
 <md-dialog aria-label="Mango (Fruit)">
     <form>
         <md-toolbar>
-            <div class="md-toolbar-tools">
-                <h2>Add friends</h2>
-                <span flex></span>
-            </div>
+          <md-input-container class="md-accent">
+             <md-icon class="material-icons">&#xE8B6;</md-icon>
+             <input ng-model="searchInput" placeholder="Search friends">
+          </md-input-container>
         </md-toolbar>
         <md-dialog-content>
-          <md-input-container md-no-float class="md-accent" flex="50">
-             <md-icon class="material-icons">&#xE8B6;</md-icon>
-             <input ng-model="searchInput" placeholder="Search here">
-          </md-input-container>
 
-          <md-card md-theme-watch flex="grow" ng-repeat="friend in dialog.friendsList">
-            <md-card-content layout="row" layout-align="space-between">
-              <span><b>{{friend.name}}</b> ({{friend.email}})</span>
-            </md-card-content>
-            <md-button class="menu" hide-gt-sm md-ink-ripple aria-label="Add friend">
-              <md-icon >add_circle_outline</md-icon>
-            </md-button>
-          </md-card>
+
+          <md-list>
+            <md-list-item ng-repeat="friend in dialog.friendsList" ng-click="dialog.addFriend(friend, $event)">
+                <md-icon md-svg-icon="svg-{{friend.gender}}" class="md-avatar"></md-icon>
+                <p> {{ friend.name }} ({{friend.email}})</p>
+                <md-icon style="color: black;">add_circle_outline</md-icon>
+              </md-list-item>
+          </md-list>
 
         </md-dialog-content>
         <md-dialog-actions>

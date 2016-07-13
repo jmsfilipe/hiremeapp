@@ -51,11 +51,12 @@ var game = angular.module('hiremeapp.user', [
     }
 
 })
-.controller('FriendsDialogController', function($scope, $mdDialog, userServices){
+.controller('FriendsDialogController', function($scope, $mdDialog, userServices, AuthenticationService){
     var self = this;
 
     $scope.searchInput = "";
     self.friendsList = [];
+    var userId = AuthenticationService.user._id;
 
     $scope.$watch('searchInput', function() {
       userServices.search({term: $scope.searchInput}).then(function successCallback(response) {
@@ -65,6 +66,14 @@ var game = angular.module('hiremeapp.user', [
       });
    });
 
+   self.addFriend = function(friend, ev){
+     userServices.addFriend({user_id: userId, user_to_add_id: friend._id}).then(function successCallback(response) {
+
+        $(ev.currentTarget).closest("md-icon").text("remove_circle_outline")
+     }, function errorCallback(response) {
+
+     });
+   }
 
     self.cancel = function() {
         $mdDialog.cancel();
