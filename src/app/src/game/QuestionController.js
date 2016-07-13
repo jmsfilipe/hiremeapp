@@ -3,10 +3,11 @@ var question = angular.module('hiremeapp.question', [
     'ngMaterial'
 ])
 .controller('QuestionController', function($timeout, $log, $scope, $state, $stateParams, $mdDialog, AuthenticationService, questionServices, userServices, $interval){
+  
     var self = this;
     var userId = AuthenticationService.user._id;
     console.log($stateParams)
-    if(!$stateParams.filters) $state.go('index.home');
+
     self.user = $stateParams.user;
     self.filters = $stateParams.filters;
     self.question = null;
@@ -64,13 +65,13 @@ var question = angular.module('hiremeapp.question', [
         for(var i = 0; i < filter.length; i++){
             switch(filter[i].type){
                 case 'company':
-                    _companies.push(filter[i].content.name);
+                    _companies.push(filter[i].name);
                     break;
                 case 'tech':
-                    _techs.push(filter[i].content.name);
+                    _techs.push(filter[i].name);
                     break;
                 case 'area':
-                    _areas.push(filter[i].content.name);
+                    _areas.push(filter[i].name);
                     break;
             }
         }
@@ -93,12 +94,12 @@ var question = angular.module('hiremeapp.question', [
         console.log(answer)
         if(!self.disabledAnswers){
             self.resetTimer();
-                  self.showNext = true;
+            self.showNext = true;
             if(answer.correct){
                 $($event.currentTarget).addClass("active");
                 userServices.updateScore({user_id: userId});
-               // self.showSuccessDialog();
-          
+                // self.showSuccessDialog();
+
                 self.correct = true;
             } else{
                 self.showNext = true;

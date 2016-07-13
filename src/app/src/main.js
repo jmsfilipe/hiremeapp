@@ -50,7 +50,11 @@ var main = angular.module('hiremeapp.main', [
         templateUrl: "app/src/game/view/chooseQuestion.html",
         controller: "QuestionController as qc",
         params: {user: null, filters: null},
-        access: { requiredLogin: false } //TODO
+        access: { requiredLogin: false },
+        onEnter: function($state, $stateParams){
+            if(!$stateParams.filters) $state.go('index.home');
+        }
+        //TODO
     })
         .state('index.user', {
         url: "/user",

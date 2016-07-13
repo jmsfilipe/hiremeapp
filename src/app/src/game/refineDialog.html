@@ -1,5 +1,5 @@
 
-<md-dialog aria-label="Mango (Fruit)">
+<md-dialog aria-label="Choose your topics">
     <form>
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -15,57 +15,52 @@
                 <md-tab label="Company">
                     <md-content class="md-padding">
                         <h3>Pick one or more companies</h3>
-                        <md-grid-list md-cols-xs="2" md-cols-sm="4" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
+                        <md-grid-list md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
                             <md-grid-tile class="green" ng-repeat="company in dialog.companies track by company._id" ng-click="dialog.addToSelectedItems('company', company)">
-                                <md-grid-tile-footer>
-                                    <h3>{{company.name}}</h3>
-                                </md-grid-tile-footer>
+                                <h3>{{company.name}}</h3>
                             </md-grid-tile>
+
                         </md-grid-list>
                     </md-content>
                 </md-tab>
                 <md-tab label="area">
                     <md-content class="md-padding">
                         <h3 >Pick one or more areas</h3>
-                        <md-grid-list md-cols-xs="2" md-cols-sm="4" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
+                        <md-grid-list md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
                             <md-grid-tile class="green" ng-repeat="area in dialog.areas track by area._id" ng-click="dialog.addToSelectedItems('area', area)">
-                                <md-grid-tile-footer>
-                                    <h3>{{area.name}}</h3>
-                                </md-grid-tile-footer>
+                                <h3>{{area.name}}</h3>
                             </md-grid-tile>
                         </md-grid-list>
-                        </md-content>
+                    </md-content>
                 </md-tab>
                 <md-tab label="tech">
                     <md-content class="md-padding">
                         <h3>Pick one or more technologies</h3>
 
-                        <md-grid-list md-cols-xs="2" md-cols-sm="4" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
+                        <md-grid-list md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
                             <md-grid-tile class="green" ng-repeat="tech in dialog.technologies track by tech._id" ng-click="dialog.addToSelectedItems('tech', tech)">
-                                <md-grid-tile-footer>
-                                    <h3>{{tech.name}}</h3>
-                                </md-grid-tile-footer>
+                                <h3>{{tech.name}}</h3>
                             </md-grid-tile>
                         </md-grid-list>
                     </md-content>
                 </md-tab>
-                </md-tabs>
-                </md-dialog-content>
-                <md-chips ng-model="dialog.selectedItems">
-                  <md-chip-template>
-                    <span>
-                      {{$chip.content.name}}
-                    </span>
-                  </md-chip-template>
-                </md-chips>
-                <md-dialog-actions>
-                    <span flex></span>
-                    <md-button ng-click="dialog.cancel()" >
-                        Cancel
-                    </md-button>
-                    <md-button ng-click="dialog.save()" style="margin-right:20px;" >
-                        Save
-                    </md-button>
-                </md-dialog-actions>
-            </form>
-        </md-dialog>
+            </md-tabs>
+        </md-dialog-content>
+        <md-chips ng-model="dialog.selectedItems">
+            <md-chip-template>
+                <span>
+                    {{$chip.name}}
+                </span>
+            </md-chip-template>
+        </md-chips>
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button ng-click="dialog.cancel()" >
+                Cancel
+            </md-button>
+            <md-button ng-click="dialog.save()" style="margin-right:20px;" >
+                Save
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

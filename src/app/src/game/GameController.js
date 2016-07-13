@@ -60,16 +60,19 @@ var game = angular.module('hiremeapp.game', [
     self.addToSelectedItems = function(type, item){
         switch(type){
             case 'company':
+                item.type = 'company';
                 if(self.selectedItems.indexOf(item) === -1)
-                    self.selectedItems.push({type: 'company', content: item});
+                    self.selectedItems.push(item);
                 break;
             case 'tech':
-                if(self.selectedItems.indexOf(item) === -1)
-                    self.selectedItems.push({type: 'tech', content: item});
+                item.type = 'tech';
+               if(self.selectedItems.indexOf(item) === -1)
+                    self.selectedItems.push(item);
                 break;
             case 'area':
-                if(self.selectedItems.indexOf(item) === -1)
-                    self.selectedItems.push({type: 'area', content: item});
+                item.type = 'area';
+             if(self.selectedItems.indexOf(item) === -1)
+                    self.selectedItems.push(item);
                 break;
         }
     }
