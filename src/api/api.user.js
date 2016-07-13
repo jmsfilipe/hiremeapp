@@ -112,14 +112,15 @@ module.exports = function(apiRoutes){
     apiRoutes.post('/user/settings', function(req, res) {
 
         var user_id = req.body.user_id;
-        var pwd = req.body.password;
-        var email = req.body.email;
-        var gender = req.body.gender;
+        var _pwd = req.body.password;
+        var _email = req.body.email;
+        var _gender = req.body.gender;
 
         User.findByIdAndUpdate(
             user_id,
-            {password: pwd, email: email, gender: gender},
+            {password: _pwd, email: _email, gender: _gender},
             function(err, model) {
+              console.log(model)
               if(err) throw err;
               res.sendStatus(200);
             });

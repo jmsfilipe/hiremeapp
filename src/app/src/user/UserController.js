@@ -96,21 +96,31 @@ var game = angular.module('hiremeapp.user', [
 
 })
 
-.controller('SettingsController', function($scope, $mdDialog, userServices, AuthenticationService){
+.controller('SettingsController', function($scope, $mdDialog, $state, userServices, AuthenticationService){
     var self = this;
 
     self.user = {
-        name: "",
         email: "",
-        password: ""
+        password: "",
+        gender: ""
     }
 
     var userId = AuthenticationService.user._id;
-    self.email = AuthenticationService.user.email;
-    self.gender = AuthenticationService.user.gender;
+    self.user.email = AuthenticationService.user.email;
+    self.user.gender = AuthenticationService.user.gender;
 
     self.updateSettings = function(){
-      
+      var pwd = "";
+      if(self.user.password == ""){
+        pwd = AuthenticationService.user.password;
+      } else{
+        pwd = self.user.password;
+      }
+      userServices.setSettings({user_id: userId, password: pwd, email: self.user.email, gender: self.user.gender}).then(function successCallback(response) {
+        $state.go("index.home");
+      }, function errorCallback(response) {
+
+      });
     }
 
 });

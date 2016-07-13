@@ -1,8 +1,8 @@
-<form name="signupForm" ng-submit="signupForm.$valid && sc.updateSettings(signupForm, sc.user)">
+<form name="signupForm" ng-submit="signupForm.$valid && sc.updateSettings()">
   <div layout-gt-sm="row" >
     <md-input-container>
        <label>Email</label>
-       <input ng-model="sc.email">
+       <input ng-model="sc.user.email">
     </md-input-container>
   </div>
 
@@ -10,7 +10,7 @@
       <md-input-container class="md-block md-primary" flex-gt-sm>
           <label>Password</label>
           <input ng-disable-paste type="password" id="password" name="password" ng-model="sc.user.password"
-                 required minlength="5" maxlength="30" ng-pattern="/^(?=.*?[[a-zA-Z])(?=.*?[0-9])(?=.*?[^\w\s]|.*?[_]).{5,}$/" />
+                 minlength="5" maxlength="30" ng-pattern="/^(?=.*?[[a-zA-Z])(?=.*?[0-9])(?=.*?[^\w\s]|.*?[_]).{5,}$/" />
           <div class="hint" ng-show="signupForm.password.$untouched  || signupForm.password.$valid" >Don't keep it simple!</div>
           <div ng-messages="signupForm.password.$error" ng-if="signupForm.password.$touched">
               <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
@@ -21,7 +21,7 @@
       <md-input-container class="md-block md-primary" flex-gt-sm>
           <label>Confirm password</label>
           <input ng-disable-paste type="password" name="passwordRepeat" ng-model="sc.user.passwordRepeat"
-                 required pw-check="password"  />
+                 pw-check="password"  />
           <div class="hint"
                ng-show="signupForm.passwordRepeat.$untouched || !signupForm.passwordRepeat.$error.pwmatch" >
               Repeat and remember.
@@ -33,7 +33,7 @@
   </div>
 
   <div layout-gt-sm="row" >
-    <md-radio-group ng-model="sc.gender">
+    <md-radio-group ng-model="sc.user.gender">
       <md-radio-button value="M" >Male</md-radio-button>
       <md-radio-button value="F">Female</md-radio-button>
     </md-radio-group>

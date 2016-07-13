@@ -8,6 +8,9 @@ var module = angular.module('hiremeapp.user')
         getScore : function(userData){
           return $http.post('/api/user/get_score', userData);
         },
+        setSettings : function(userData){
+          return $http.post('/api/user/settings', userData);
+        },
         updateScore : function(userData){
           return $http.post('/api/user/score', userData);
         },
