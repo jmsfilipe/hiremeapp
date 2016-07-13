@@ -31,7 +31,7 @@ var main = angular.module('hiremeapp.main', [
         },
     })
         .state('index.home', {
-        access: { requiredLogin: true },
+        access: { requiredLogin: false }, //TODO
         url: '/home',
         controller: "GameController as gm",
         params: {user: null},
@@ -46,7 +46,7 @@ var main = angular.module('hiremeapp.main', [
         access: { requiredLogin: false } //TODO
     })
         .state('index.question', {
-        url: "/game/question",
+        url: "/game/play",
         templateUrl: "app/src/game/view/chooseQuestion.html",
         controller: "QuestionController as qc",
         params: {user: null, filters: null},

@@ -1,10 +1,11 @@
 md-card{
-  &.active{
-    &.correct{
-      background-color: rgba(#8BC34A, 0.5);
+    &.active{
+        &.correct{
+            background-color: #00C853;
+        }
+        &.incorrect{
+            background-color: rgb(255,82,82);
+        }
     }
-    &.incorrect{
-      background-color: rgba(#F44336, 0.5);
-    }
-  }
 }
+

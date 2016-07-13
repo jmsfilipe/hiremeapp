@@ -1,6 +1,7 @@
 "use strict";
 var game = angular.module('hiremeapp.game', [
-    'ngMaterial'
+    'ngMaterial',
+    'ngAnimate'
 ])
 .controller('GameController', function($timeout, $log, $scope, $state, $stateParams, $mdDialog, questionServices){
     var self = this;

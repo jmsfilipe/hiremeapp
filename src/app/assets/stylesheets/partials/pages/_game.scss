@@ -33,6 +33,54 @@
         .md-button:not(.md-fab){
             min-width: 200px;
         }
+
+        md-card{
+
+            width: 100%;
+
+            &:not(.card-question){
+                md-card-content{
+                    word-break: break-word; 
+                    padding: 8px;
+                }
+            }
+        }
+
+
+        .toast{
+
+            &--correct{
+                color: yellow;
+                text-shadow: 2px 2px 2px #fbbd47;
+            }
+            &--incorrect{
+                color: #ff1302;
+
+            }
+
+            position: fixed;
+            top: 40vh;
+            transform: rotate(-15deg);
+            left: 25vw;
+
+            animation-name: example;
+            animation-duration: 2s;
+            animation-delay: 0;
+            animation-timing-function: cubic-bezier(.18,.65,.27,1.04) ;
+            animation-fill-mode: forwards;
+        }
     }
 
+}
+
+
+@keyframes example{
+    0% {
+        transform: rotate(-15deg) scale(1);
+    }
+
+
+    100% {
+        transform: rotate(-745deg) scale(1.75);
+    }
 }

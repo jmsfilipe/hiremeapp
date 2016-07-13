@@ -1,16 +1,26 @@
-<section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+<section class="page page--game" layout="column" layout-align="center center" layout-fill ng-cloak ng-if="qc.ready">
+
+
+    <h1 class="md-primary" >New Game</h1>
+    <span class="flex"></span>
+
     <div layout="row" layout-sm="column" layout-align="space-around">
         <md-progress-circular md-mode="determinate" value="{{qc.counter}}" class="md-accent"></md-progress-circular>
     </div>
-    <md-card md-theme-watch flex="grow">
+    <md-card md-theme-watch >
         <md-card-content layout="row" layout-align="space-between">
             <span><b>{{qc.question}}</b></span>
         </md-card-content>
     </md-card>
-    <md-card md-theme-watch ng-repeat="answer in qc.answers" ng-click="qc.evaluateAnswer(answer, $event)" flex="grow" ng-class="answer.correct ? 'correct' : 'incorrect'">
+    <span class="flex"></span>
+    <md-card md-theme-watch  class="card-question" ng-repeat="answer in qc.answers" ng-click="qc.evaluateAnswer(answer, $event)" ng-class="answer.correct ? 'correct' : 'incorrect'">
         <md-card-content layout="row" layout-align="space-between">
             <span>{{answer.text}}</span>
         </md-card-content>
     </md-card>
-    <md-button class="md-raised md-primary" ng-show="qc.showNext" ng-click="qc.hitNext()">Next</md-button>
+    <span class="flex"></span>
+    <md-button class="md-raised " ng-disabled="! qc.showNext" ng-click="qc.hitNext()">Next</md-button>
+    
+    <h1 class="toast toast--correct" ng-if="qc.showNext && qc.correct">Correct! +1</h1>
+    <h1 class="toast toast--incorrect" ng-if="qc.showNext && !qc.correct">Incorrect :(</h1>
 </section>
