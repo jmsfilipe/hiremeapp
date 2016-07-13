@@ -5,6 +5,12 @@ var module = angular.module('hiremeapp.user')
 })
 .service('userServices', function($http){
     return {
+        getScore : function(userData){
+          return $http.post('/api/user/get_score', userData);
+        },
+        updateScore : function(userData){
+          return $http.post('/api/user/score', userData);
+        },
         totalFriends : function(userData) {
             return $http.post('/api/user/total_friends', userData);
         },

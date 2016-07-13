@@ -82,6 +82,33 @@ module.exports = function(apiRoutes){
 
     });
 
+    apiRoutes.post('/user/score', function(req, res) {
+
+        var user_id = req.body.user_id;
+
+        User.findByIdAndUpdate(
+            user_id,
+            {$inc: {score:1}},
+            function(err, model) {
+              if(err) throw err;
+              res.sendStatus(200);
+            });
+
+    });
+
+    apiRoutes.post('/user/get_score', function(req, res) {
+
+        var user_id = req.body.user_id;
+
+        User.findById(
+            user_id,
+            function(err, model) {
+              if(err) throw err;
+              res.send({score: model.score});
+            });
+
+    });
+
         //add correct question score
     apiRoutes.post('/user/correct_question', function(req, res) {
 

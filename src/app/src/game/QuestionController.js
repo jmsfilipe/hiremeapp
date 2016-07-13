@@ -2,8 +2,9 @@
 var question = angular.module('hiremeapp.question', [
     'ngMaterial'
 ])
-.controller('QuestionController', function($timeout, $log, $scope, $state, $stateParams, $mdDialog, questionServices, $interval){
+.controller('QuestionController', function($timeout, $log, $scope, $state, $stateParams, $mdDialog, AuthenticationService, questionServices, userServices, $interval){
     var self = this;
+    var userId = AuthenticationService.user._id;
     console.log($stateParams)
     if(!$stateParams.filters) $state.go('index.home');
     self.user = $stateParams.user;
@@ -95,7 +96,7 @@ var question = angular.module('hiremeapp.question', [
                   self.showNext = true;
             if(answer.correct){
                 $($event.currentTarget).addClass("active");
-                
+                userServices.updateScore({user_id: userId});
                // self.showSuccessDialog();
           
                 self.correct = true;

@@ -7,8 +7,10 @@ var game = angular.module('hiremeapp.user', [
 
     self.totalFriends = 0;
     self.friendsList = [];
+    self.score = 0;
 
     var userId = AuthenticationService.user._id;
+    self.userName = AuthenticationService.user.name;
 
     userServices.totalFriends({user_id: userId}).then(function successCallback(response) {
         self.totalFriends = response.data.total_friends;
@@ -18,6 +20,12 @@ var game = angular.module('hiremeapp.user', [
 
     userServices.listFriends({user_id: userId}).then(function successCallback(response) {
       self.friendsList = response.data.friends;
+    }, function errorCallback(response) {
+
+    });
+
+    userServices.getScore({user_id: userId}).then(function successCallback(response) {
+        self.score = response.data.score;
     }, function errorCallback(response) {
 
     });
