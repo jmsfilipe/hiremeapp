@@ -2,9 +2,23 @@
     <md-button class="menu" hide-gt-sm ng-click="hc.toggleList()"  md-ink-ripple aria-label="Show User List">
         <md-icon >chrome_reader_mode</md-icon>
     </md-button>
-    <h1>Hire.me App</h1>
+    <h1 ui-sref="index.home">Hire.me App</h1>
     <span flex></span>
-    <md-button class="menu" aria-label="More">
-       <md-icon md-svg-icon="settings_white" ></md-icon>
-    </md-button>
+    <md-menu>
+      <md-button class="menu" aria-label="More" class="md-icon-button" ng-click="hc.openMenu($mdOpenMenu, $event)">
+         <md-icon md-svg-icon="settings_white" ></md-icon>
+      </md-button>
+      <md-menu-content width="2">
+        <md-menu-item>
+          <md-button ui-sref="index.user">
+            Profile
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
+            Settings
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
 </md-toolbar>

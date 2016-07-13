@@ -2,12 +2,12 @@
 var game = angular.module('hiremeapp.header', [
   'ngMaterial'
 ])
-.controller('HeaderController', function($mdSidenav){
+.controller('HeaderController', function(){
   var self = this;
+  var originatorEv;
+  self.openMenu = function($mdOpenMenu, ev) {
+    originatorEv = ev;
+    $mdOpenMenu(ev);
+  };
 
-  self.toggleList   = toggleUsersList;
-
-  function toggleUsersList() {
-    $mdSidenav('left').toggle();
-  }
 });
