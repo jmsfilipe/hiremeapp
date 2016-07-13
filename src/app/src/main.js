@@ -58,6 +58,12 @@ var main = angular.module('hiremeapp.main', [
         controller: "UserController as uc",
         access: { requiredLogin: true }
     })
+        .state('index.settings', {
+        url: "/user/settings",
+        templateUrl: "app/src/user/view/settings.html",
+        controller: "UserController as uc",
+        access: { requiredLogin: true }
+    })
 
 }).controller('RootController', function(AuthenticationService, $state, $scope){
     var self = this;
