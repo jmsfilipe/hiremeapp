@@ -7,13 +7,13 @@
     <div layout="row" layout-sm="column" layout-align="space-around">
         <md-progress-circular md-mode="determinate" value="{{qc.counter}}" class="md-accent"></md-progress-circular>
     </div>
-    <md-card md-theme-watch >
+    <md-card md-theme-watch class="card-question" >
         <md-card-content layout="row" layout-align="space-between">
             <span><b>{{qc.question}}</b></span>
         </md-card-content>
     </md-card>
     <span class="flex"></span>
-    <md-card md-theme-watch  class="card-question" ng-repeat="answer in qc.answers" ng-click="qc.evaluateAnswer(answer, $event)" ng-class="answer.correct ? 'correct' : 'incorrect'">
+    <md-card md-theme-watch  ng-repeat="answer in qc.answers" ng-click="qc.evaluateAnswer(answer, $event)" ng-class="answer.correct ? 'correct' : 'incorrect'">
         <md-card-content layout="row" layout-align="space-between">
             <span>{{answer.text}}</span>
         </md-card-content>
