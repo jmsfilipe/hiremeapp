@@ -6,6 +6,8 @@ var game = angular.module('hiremeapp.user', [
     var self = this;
 
     self.totalFriends = 0;
+    self.friendsList = [];
+
     var userId = AuthenticationService.user._id;
 
     userServices.totalFriends({user_id: userId}).then(function successCallback(response) {
@@ -17,29 +19,36 @@ var game = angular.module('hiremeapp.user', [
     self.showFriendsDialog = function(ev){
 
       userServices.listFriends({user_id: userId}).then(function successCallback(response) {
-          console.log(response)
+        self.friendsList = response.data.friends;
+
+        $mdDialog.show({
+            controller: 'FriendsDialogController as dialog',
+            templateUrl: "app/src/user/friendsDialog.html",
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            locals: {
+                friends: self.friendsList
+            }
+        })
+            .then(function(answer) {
+
+        }, function() {
+            //canceled
+        });
+        
       }, function errorCallback(response) {
 
       });
 
-      $mdDialog.show({
-          controller: 'FriendsDialogController as dialog',
-          templateUrl: "app/src/user/friendsDialog.html",
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose:true
-      })
-          .then(function(answer) {
-          self.filters = answer;
-          $state.go('index.question', {filters: self.filters});
-      }, function() {
-          //canceled
-      });
+
     }
 
 })
-.controller('FriendsDialogController', function($scope, $mdDialog){
+.controller('FriendsDialogController', function($scope, $mdDialog, friends){
     var self = this;
+
+    self.friendsList = friends;
 
     self.cancel = function() {
         $mdDialog.cancel();

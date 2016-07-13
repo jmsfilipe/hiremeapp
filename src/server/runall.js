@@ -8,11 +8,24 @@ var User = require(__dirname+"/../models/User.js").User;
 var Article = require(__dirname+"/../models/Article.js").Article;
 var Company = require(__dirname+"/../models/Company.js").Company;
 
+
+var user_2 = new User({
+  name: 'Carina',
+  friends: [],
+  password: '000000',
+  score: 0,
+  blocked: false,
+  email: 'carina@gmail.com'
+});
+
+user_2.save();
+
 var user_1 = new User({
   name: 'Jorge',
-  friends: [],
-  password: '123123',
+  friends: [user_2._id],
+  password: '000000',
   score: 0,
+  blocked: false,
   email: 'jmsfilipe@gmail.com'
 });
 

@@ -34,7 +34,7 @@ module.exports = function(apiRoutes){
 
         var user_id = req.body.user_id;
 
-        User.findOne(user_id)
+        User.findById(user_id)
             .populate( 'friends')
             .exec(function (err, user) {
               res.send({friends: user.friends});
@@ -46,9 +46,10 @@ module.exports = function(apiRoutes){
 
         var user_id = req.body.user_id;
 
-        User.findOne(
+        User.findById(
             user_id,
             function(err, model) {
+              console.log(model)
                 res.send({total_friends: model.friends.length})
             });
 

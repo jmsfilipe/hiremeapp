@@ -29,7 +29,7 @@ var game = angular.module('hiremeapp.game', [
         });
     };
 
-    self.start= function(){
+    self.start = function(){
 
         $state.go('index.question', {filters: self.filters});
     }
