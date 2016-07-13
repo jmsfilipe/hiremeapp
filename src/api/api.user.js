@@ -34,10 +34,18 @@ module.exports = function(apiRoutes){
     apiRoutes.post('/user/search', function(req, res) {
 
         var term = req.body.term;
+        var user_id = req.body.user_id;
+        var ObjectID = require('mongodb').ObjectID;
+        var _id = new ObjectID(user_id);
 
-        User.find({'name' : new RegExp(term, 'i')}, function(err, docs){
-            res.send(docs);
-        });
+        User.findById(user_id)
+            .exec(function (err, user) {
+              User.find({'name' : new RegExp(term, 'i'), "_id": {"$nin": user.friends, "$ne": _id} }, function(err, docs){
+                console.log(docs)
+                res.send(docs);
+              });
+            });
+
 
     });
 

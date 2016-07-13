@@ -37,9 +37,29 @@ var user_4 = new User({
   gender: 'F'
 });
 
+var user_5 = new User({
+  name: 'Utilizador5',
+  friends: [],
+  password: '000000',
+  score: 0,
+  email: 'idk@gmail.com',
+  gender: 'F'
+});
+
+var user_6 = new User({
+  name: 'Utilizador6',
+  friends: [],
+  password: '000000',
+  score: 0,
+  email: 'idk@gmail.com',
+  gender: 'M'
+});
+
 user_2.save();
 user_3.save();
 user_4.save();
+user_5.save();
+user_6.save();
 
 var user_1 = new User({
   name: 'Jorge',

@@ -59,7 +59,7 @@ var game = angular.module('hiremeapp.user', [
     var userId = AuthenticationService.user._id;
 
     $scope.$watch('searchInput', function() {
-      userServices.search({term: $scope.searchInput}).then(function successCallback(response) {
+      userServices.search({term: $scope.searchInput, user_id: userId}).then(function successCallback(response) {
         self.friendsList = response.data;
       }, function errorCallback(response) {
 
