@@ -109,6 +109,24 @@ module.exports = function(apiRoutes){
 
     });
 
+    apiRoutes.post('/user/settings', function(req, res) {
+
+        var user_id = req.body.user_id;
+        var pwd = req.body.password;
+        var email = req.body.email;
+        var gender = req.body.gender;
+
+        User.findByIdAndUpdate(
+            user_id,
+            {password: pwd, email: email, gender: gender},
+            function(err, model) {
+              if(err) throw err;
+              res.sendStatus(200);
+            });
+
+    });
+
+//--------------------------- NOT USED YET
         //add correct question score
     apiRoutes.post('/user/correct_question', function(req, res) {
 

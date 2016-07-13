@@ -61,7 +61,7 @@ var main = angular.module('hiremeapp.main', [
         .state('index.settings', {
         url: "/user/settings",
         templateUrl: "app/src/user/view/settings.html",
-        controller: "UserController as uc",
+        controller: "SettingsController as sc",
         access: { requiredLogin: true }
     })
 

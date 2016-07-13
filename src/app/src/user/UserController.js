@@ -94,4 +94,23 @@ var game = angular.module('hiremeapp.user', [
         $mdDialog.hide();
     };
 
+})
+
+.controller('SettingsController', function($scope, $mdDialog, userServices, AuthenticationService){
+    var self = this;
+
+    self.user = {
+        name: "",
+        email: "",
+        password: ""
+    }
+
+    var userId = AuthenticationService.user._id;
+    self.email = AuthenticationService.user.email;
+    self.gender = AuthenticationService.user.gender;
+
+    self.updateSettings = function(){
+      
+    }
+
 });
