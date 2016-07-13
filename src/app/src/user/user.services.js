@@ -14,6 +14,9 @@ var module = angular.module('hiremeapp.user')
         listFriends : function(userData) {
             return $http.post('/api/user/list_friends', userData);
         },
+        search : function(userData) {
+            return $http.post('/api/user/search', userData);
+        },
         all : function() {
             return $http.get('/api/users');
         }

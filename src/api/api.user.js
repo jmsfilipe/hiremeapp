@@ -30,6 +30,16 @@ module.exports = function(apiRoutes){
 
     });
 
+    apiRoutes.post('/user/search', function(req, res) {
+
+        var term = req.body.term;
+
+        User.find({'name' : new RegExp(term, 'i')}, function(err, docs){
+            res.send(docs);
+        });
+
+    });
+
     apiRoutes.post('/user/list_friends', function(req, res) {
 
         var user_id = req.body.user_id;

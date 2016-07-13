@@ -16,6 +16,12 @@ var game = angular.module('hiremeapp.user', [
 
     });
 
+    userServices.listFriends({user_id: userId}).then(function successCallback(response) {
+      self.friendsList = response.data.friends;
+    }, function errorCallback(response) {
+
+    });
+
     self.showFriendsDialog = function(ev){
 
       userServices.listFriends({user_id: userId}).then(function successCallback(response) {
@@ -36,7 +42,7 @@ var game = angular.module('hiremeapp.user', [
         }, function() {
             //canceled
         });
-        
+
       }, function errorCallback(response) {
 
       });
@@ -45,10 +51,20 @@ var game = angular.module('hiremeapp.user', [
     }
 
 })
-.controller('FriendsDialogController', function($scope, $mdDialog, friends){
+.controller('FriendsDialogController', function($scope, $mdDialog, userServices){
     var self = this;
 
-    self.friendsList = friends;
+    $scope.searchInput = "";
+    self.friendsList = [];
+
+    $scope.$watch('searchInput', function() {
+      userServices.search({term: $scope.searchInput}).then(function successCallback(response) {
+        self.friendsList = response.data;
+      }, function errorCallback(response) {
+
+      });
+   });
+
 
     self.cancel = function() {
         $mdDialog.cancel();

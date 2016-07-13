@@ -20,7 +20,7 @@
         100
       </md-card-content>
     </md-card>
-    <md-card ng-click="uc.showFriendsDialog($event)">
+    <md-card>
        <md-card-title>
        <md-card-title-text>
          <span class="md-headline">Friends</span>
@@ -79,49 +79,24 @@
      </div>
    </md-content>
 
-   <h3>Companies</h3>
+   <div class="md-toolbar-tools">
+     <h3>Friends</h3>
+     <md-button class="menu" hide-gt-sm md-ink-ripple aria-label="Add friend" ng-click="uc.showFriendsDialog($event)">
+       <md-icon >group_add</md-icon>
+     </md-button>
+   </div>
    <md-content flex layout-padding>
      <div flex-xs flex-gt-xs="50" layout="row">
-       <md-card>
+       <md-card ng-repeat="friend in uc.friendsList">
           <md-card-title>
             <md-card-title-text>
-              <span class="md-headline">Score</span>
+              <span class="md-headline">{{friend.name}}</span>
             </md-card-title-text>
           </md-card-title>
           <md-card-content>
-            100
+            {{friend.email}}
           </md-card-content>
         </md-card>
-        <md-card>
-           <md-card-title>
-             <md-card-title-text>
-               <span class="md-headline">Score</span>
-             </md-card-title-text>
-           </md-card-title>
-           <md-card-content>
-             100
-           </md-card-content>
-         </md-card>
-         <md-card>
-            <md-card-title>
-              <md-card-title-text>
-                <span class="md-headline">Score</span>
-              </md-card-title-text>
-            </md-card-title>
-            <md-card-content>
-              100
-            </md-card-content>
-          </md-card>
-          <md-card>
-             <md-card-title>
-               <md-card-title-text>
-                 <span class="md-headline">Score</span>
-               </md-card-title-text>
-             </md-card-title>
-             <md-card-content>
-               100
-             </md-card-content>
-           </md-card>
       </div>
   </md-content>
 </div>

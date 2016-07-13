@@ -2,19 +2,25 @@
     <form>
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>Friends</h2>
+                <h2>Add friends</h2>
                 <span flex></span>
-                <md-button class="md-icon-button" ng-click="cancel()">
-                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-                </md-button>
             </div>
         </md-toolbar>
         <md-dialog-content>
+          <md-input-container md-no-float class="md-accent" flex="50">
+             <md-icon class="material-icons">&#xE8B6;</md-icon>
+             <input ng-model="searchInput" placeholder="Search here">
+          </md-input-container>
+
           <md-card md-theme-watch flex="grow" ng-repeat="friend in dialog.friendsList">
             <md-card-content layout="row" layout-align="space-between">
               <span><b>{{friend.name}}</b> ({{friend.email}})</span>
             </md-card-content>
+            <md-button class="menu" hide-gt-sm md-ink-ripple aria-label="Add friend">
+              <md-icon >add_circle_outline</md-icon>
+            </md-button>
           </md-card>
+
         </md-dialog-content>
         <md-dialog-actions>
             <span flex></span>
