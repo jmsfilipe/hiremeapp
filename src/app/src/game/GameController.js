@@ -23,11 +23,16 @@ var game = angular.module('hiremeapp.game', [
         })
             .then(function(answer) {
             self.filters = answer;
-            $state.go('index.question', {filters: self.filters});
+
         }, function() {
             //canceled
         });
     };
+
+    self.start= function(){
+
+        $state.go('index.question', {filters: self.filters});
+    }
 })
 .controller('DialogController', function($scope, $mdDialog, refineServices, items){
     var self = this;
@@ -52,20 +57,20 @@ var game = angular.module('hiremeapp.game', [
     });
 
     self.addToSelectedItems = function(type, item){
-      switch(type){
-        case 'company':
-          if(self.selectedItems.indexOf(item) === -1)
-              self.selectedItems.push({type: 'company', content: item});
-        break;
-        case 'tech':
-          if(self.selectedItems.indexOf(item) === -1)
-              self.selectedItems.push({type: 'tech', content: item});
-        break;
-        case 'area':
-          if(self.selectedItems.indexOf(item) === -1)
-              self.selectedItems.push({type: 'area', content: item});
-        break;
-      }
+        switch(type){
+            case 'company':
+                if(self.selectedItems.indexOf(item) === -1)
+                    self.selectedItems.push({type: 'company', content: item});
+                break;
+            case 'tech':
+                if(self.selectedItems.indexOf(item) === -1)
+                    self.selectedItems.push({type: 'tech', content: item});
+                break;
+            case 'area':
+                if(self.selectedItems.indexOf(item) === -1)
+                    self.selectedItems.push({type: 'area', content: item});
+                break;
+        }
     }
 
     self.cancel = function() {

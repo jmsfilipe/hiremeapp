@@ -33,6 +33,8 @@ var main = angular.module('hiremeapp.main', [
         .state('index.home', {
         access: { requiredLogin: true },
         url: '/home',
+        controller: "GameController as gm",
+        params: {user: null},
         templateUrl: 'app/src/home/view/home.html'
 
     })

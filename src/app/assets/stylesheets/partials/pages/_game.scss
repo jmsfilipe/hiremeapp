@@ -30,7 +30,7 @@
             align-self: flex-end;
         }
 
-        a.md-button{
+        .md-button:not(.md-fab){
             min-width: 200px;
         }
     }
