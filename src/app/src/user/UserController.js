@@ -72,7 +72,11 @@ var game = angular.module('hiremeapp.user', [
 
    self.addFriend = function(friend, ev){
      userServices.addFriend({user_id: userId, user_to_add_id: friend._id}).then(function successCallback(response) {
+       userServices.search({term: $scope.searchInput, user_id: userId}).then(function successCallback(response) {
+         self.friendsList = response.data;
+       }, function errorCallback(response) {
 
+       });
      }, function errorCallback(response) {
 
      });
