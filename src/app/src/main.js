@@ -48,7 +48,7 @@ var main = angular.module('hiremeapp.main', [
         .state('index.question', {
         url: "/game/question",
         templateUrl: "app/src/game/view/chooseQuestion.html",
-        controller: "QuestionController as qm",
+        controller: "QuestionController as qc",
         params: {user: null, filters: null},
         access: { requiredLogin: false } //TODO
     })

@@ -2,7 +2,7 @@
 var question = angular.module('hiremeapp.question', [
     'ngMaterial'
 ])
-.controller('QuestionController', function($timeout, $log, $scope, $state, $stateParams, $mdDialog, questionServices){
+.controller('QuestionController', function($timeout, $log, $scope, $state, $stateParams, $mdDialog, questionServices, $interval){
     var self = this;
     console.log($stateParams)
     if(!$stateParams.filters) $state.go('index.game');
@@ -15,77 +15,89 @@ var question = angular.module('hiremeapp.question', [
     self.showNext = false;
     self.disabledAnswers = false;
 
-    $scope.counter = 1;
-    var mytimeout = 1;
     var TIMER = 1000;
+    self.counter = 1;
 
-    self.onTimeout = function(){
-      $scope.counter++;
-      mytimeout = $timeout(self.onTimeout,TIMER);
+
+
+
+
+    var createTimer = function(){
+
+        // Iterate every 100ms, non-stop and increment
+        // the Determinate loader.
+        self.timer = $interval(function() {
+            self.counter += 1;
+            console.log(self.counter);
+            if (self.counter > 100) {
+                self.resetTimer();
+                self.showNext = true;
+                $('md-card').addClass("active");
+            }
+        }, 100);
+
+
     }
 
     self.hitNext = function(){
-      $state.reload();
+        $state.reload();
     }
 
     self.resetTimer = function(){
-      $timeout.cancel(mytimeout);
-      $scope.counter = 1;
+
+        $interval.cancel(self.timer)
+        self.counter = 1;
+        self.timer = undefined;
     }
 
     self.showQuestion = function(filter){
-      self.showNext = false;
-      self.disabledAnswers = false;
-      mytimeout = $timeout(self.onTimeout,TIMER);
-      $scope.$watch('counter', function(nv) {
-          if(nv == 10){
-            self.resetTimer();
-            self.showNext = true;
-            $('md-card').addClass("active");
-          }
-      });
-      var _techs = [], _areas = [], _companies = [];
-      for(var i = 0; i < filter.length; i++){
-        switch(filter[i].type){
-          case 'company':
-            _companies.push(filter[i].content.name);
-          break;
-          case 'tech':
-            _techs.push(filter[i].content.name);
-          break;
-          case 'area':
-            _areas.push(filter[i].content.name);
-          break;
-        }
-      }
-      questionServices.question({
-        technologies: _techs,
-        areas: _areas,
-        companies: _companies,
-        level: 1}).then(function successCallback(response) {
-          self.question = response.data.question;
-          self.answers = response.data.answers;
-          self.explanation = response.data.explanation;
-      }, function errorCallback(response) {
+        self.showNext = false;
+        self.disabledAnswers = false;
 
-      });
+        createTimer();
+
+        var _techs = [], _areas = [], _companies = [];
+        for(var i = 0; i < filter.length; i++){
+            switch(filter[i].type){
+                case 'company':
+                    _companies.push(filter[i].content.name);
+                    break;
+                case 'tech':
+                    _techs.push(filter[i].content.name);
+                    break;
+                case 'area':
+                    _areas.push(filter[i].content.name);
+                    break;
+            }
+        }
+        questionServices.question({
+            technologies: _techs,
+            areas: _areas,
+            companies: _companies,
+            level: 1}).then(function successCallback(response) {
+            self.question = response.data.question;
+            self.answers = response.data.answers;
+            self.explanation = response.data.explanation;
+        }, function errorCallback(response) {
+
+        });
     };
 
     self.evaluateAnswer = function(answer, $event){
 
-      console.log(answer)
-      if(!self.disabledAnswers){
-        self.resetTimer();
-        if(answer.correct){
-          $($event.currentTarget).addClass("active");
-          self.showSuccessDialog();
-        } else{
-          self.showNext = true;
-          $($event.currentTarget).addClass("active");
-          $('md-card.correct').addClass("active");
-          self.disabledAnswers = true;
+        console.log(answer)
+        if(!self.disabledAnswers){
+            self.resetTimer();
+            if(answer.correct){
+                $($event.currentTarget).addClass("active");
+                self.showSuccessDialog();
+            } else{
+                self.showNext = true;
+                $($event.currentTarget).addClass("active");
+                $('md-card.correct').addClass("active");
+                self.disabledAnswers = true;
+            }
         }
-      }
     }
 
     self.showSuccessDialog = function(ev) {
