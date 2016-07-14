@@ -31,7 +31,7 @@ var main = angular.module('hiremeapp.main', [
         },
     })
         .state('index.home', {
-        access: { requiredLogin: true }, 
+        access: { requiredLogin: true },
         url: '/home',
         controller: "GameController as gm",
         params: {user: null},
@@ -59,6 +59,12 @@ var main = angular.module('hiremeapp.main', [
         .state('index.settings', {
         url: "/user/settings",
         templateUrl: "app/src/user/view/settings.html",
+        controller: "SettingsController as sc",
+        access: { requiredLogin: true }
+    })
+        .state('index.about-us', {
+        url: "/about-us",
+        templateUrl: "app/src/home/view/about-us.html",
         controller: "SettingsController as sc",
         access: { requiredLogin: true }
     })
