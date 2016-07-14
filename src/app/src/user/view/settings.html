@@ -1,42 +1,44 @@
-<form name="signupForm" ng-submit="signupForm.$valid && sc.updateSettings()">
-  <div layout-gt-sm="row" >
-    <md-input-container>
-       <label>Email</label>
-       <input ng-model="sc.user.email">
-    </md-input-container>
-  </div>
+<form name="signupForm" ng-submit="signupForm.$valid && sc.updateSettings()" class="page page--settings">
 
-  <div layout-gt-sm="row">
-      <md-input-container class="md-block md-primary" flex-gt-sm>
-          <label>Password</label>
-          <input ng-disable-paste type="password" id="password" name="password" ng-model="sc.user.password"
-                 minlength="5" maxlength="30" ng-pattern="/^(?=.*?[[a-zA-Z])(?=.*?[0-9])(?=.*?[^\w\s]|.*?[_]).{5,}$/" />
-          <div class="hint" ng-show="signupForm.password.$untouched  || signupForm.password.$valid" >Don't keep it simple!</div>
-          <div ng-messages="signupForm.password.$error" ng-if="signupForm.password.$touched">
-              <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                  Your password must be between 5 and 30 characters long and have at least 1 letter, 1 number and 1 special character.
-              </div>
-          </div>
-      </md-input-container>
-      <md-input-container class="md-block md-primary" flex-gt-sm>
-          <label>Confirm password</label>
-          <input ng-disable-paste type="password" name="passwordRepeat" ng-model="sc.user.passwordRepeat"
-                 pw-check="password"  />
-          <div class="hint"
-               ng-show="signupForm.passwordRepeat.$untouched || !signupForm.passwordRepeat.$error.pwmatch" >
-              Repeat and remember.
-          </div>
-          <div ng-messages="signupForm.passwordRepeat.$error" ng-if="signupForm.passwordRepeat.$touched" >
-              <div ng-message="pwmatch">Passwords must match</div>
-          </div>
-      </md-input-container>
-  </div>
+    <h1>Settings</h1>
+    <div layout-gt-sm="row" >
+        <md-input-container class="md-block md-white" flex-gt-sm>
+            <label>Email</label>
+            <input ng-model="sc.user.email">
+        </md-input-container>
+    </div>
 
-  <div layout-gt-sm="row" >
-    <md-radio-group ng-model="sc.user.gender">
-      <md-radio-button value="M" >Male</md-radio-button>
-      <md-radio-button value="F">Female</md-radio-button>
-    </md-radio-group>
-  </div>
-  <md-button class="md-raised md-primary" type="submit" id="submit" value="Submit" > Save </md-button>
+    <div layout-gt-sm="row">
+        <md-input-container class="md-block md-white" flex-gt-sm>
+            <label>Password</label>
+            <input ng-disable-paste type="password" id="password" name="password" ng-model="sc.user.password"
+                   minlength="5" maxlength="30" ng-pattern="/^(?=.*?[[a-zA-Z])(?=.*?[0-9])(?=.*?[^\w\s]|.*?[_]).{5,}$/" />
+            <div class="hint" ng-show="signupForm.password.$untouched  || signupForm.password.$valid" >Don't keep it simple!</div>
+            <div ng-messages="signupForm.password.$error" ng-if="signupForm.password.$touched">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                    Your password must be between 5 and 30 characters long and have at least 1 letter, 1 number and 1 special character.
+                </div>
+            </div>
+        </md-input-container>
+        <md-input-container class="md-block md-white" flex-gt-sm>
+            <label>Confirm password</label>
+            <input ng-disable-paste type="password" name="passwordRepeat" ng-model="sc.user.passwordRepeat"
+                   pw-check="password"  />
+            <div class="hint"
+                 ng-show="signupForm.passwordRepeat.$untouched || !signupForm.passwordRepeat.$error.pwmatch" >
+                Repeat and remember.
+            </div>
+            <div ng-messages="signupForm.passwordRepeat.$error" ng-if="signupForm.passwordRepeat.$touched" >
+                <div ng-message="pwmatch">Passwords must match</div>
+            </div>
+        </md-input-container>
+    </div>
+
+    <div layout-gt-sm="row" >
+        <md-radio-group ng-model="sc.user.gender">
+            <md-radio-button value="M" >Male</md-radio-button>
+            <md-radio-button value="F">Female</md-radio-button>
+        </md-radio-group>
+    </div>
+    <md-button class="md-raised " type="submit" id="submit" value="Submit" > Save </md-button>
 </form>
