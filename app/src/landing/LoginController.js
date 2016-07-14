@@ -9,8 +9,8 @@ var users = angular.module('hiremeapp.landing', [
     var self = this;
 
     self.user = {
-        email: "",
-        password: ""
+        email: "teste@mail.com",
+        password: "123a<"
     }
 
 
