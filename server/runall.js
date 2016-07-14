@@ -123,7 +123,12 @@ article_4.save();
 article_5.save();
 
 var question_1_javascript_beginner = new Question({
-  "question": ["Inside which HTML element do we put the JavaScript?", "Dentro de que elemento HTML se coloca o Javascript?"],
+  "question": [ 
+      
+          'Inside which HTML element do we put the JavaScript?', 
+          'Dentro de que elemento HTML se coloca o Javascript?'
+      
+  ],
   "code_sample": null,
   "explanation": null,
   "level": 1,
