@@ -23,9 +23,7 @@ var game = angular.module('hiremeapp.game', [
             }
         })
             .then(function(answer) {
-            $scope.$applyAsync(function () {
-                self.filters = answer;
-            });
+            self.filters = answer;
 
         }, function() {
             //canceled
@@ -36,6 +34,22 @@ var game = angular.module('hiremeapp.game', [
 
         $state.go('index.question', {filters: self.filters});
     }
+    
+    self.showAlert = function(ev) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    // Modal dialogs should fully cover application
+    // to prevent interaction outside of dialog
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.body))
+        .clickOutsideToClose(true)
+        .title('Multiplayer')
+        .textContent('Sorry, this feature is not yet available. Coming soon! ')
+        .ariaLabel('Multiplayer')
+        .ok('Got it!')
+        .targetEvent(ev)
+    );
+  };
 })
 .controller('DialogController', function($scope, $mdDialog, refineServices, items){
     var self = this;
@@ -74,12 +88,12 @@ var game = angular.module('hiremeapp.game', [
                 break;
             case 'tech':
                 item.type = 'tech';
-                if(self.selectedItems.indexOf(item) === -1)
+               if(self.selectedItems.indexOf(item) === -1)
                     self.selectedItems.push(item);
                 break;
             case 'area':
                 item.type = 'area';
-                if(self.selectedItems.indexOf(item) === -1)
+             if(self.selectedItems.indexOf(item) === -1)
                     self.selectedItems.push(item);
                 break;
             case 'general':
