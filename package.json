@@ -32,6 +32,7 @@
     "angular-messages": "^1.5.7",
     "angular-ui-router": "0.3.1",
     "angular-translate": "2.11.0",
+    "angular-translate-loader-static-files": "2.11.0",
     "body-parser": "^1.4.3",
     "express": "^4.13.4",
     "install": "^0.8.1",

@@ -16,14 +16,14 @@ var express  = require('express'),
 
 // configuration =================
 // used to create, sign, and verify tokens
-var port = process.env.PORT || 8080; 
+var port = process.env.PORT || 8080;
 // connect to mongoDB database on modulus.io
-mongoose.connect(config.database); 
+mongoose.connect(config.database);
 // secret variable
-app.set('superSecret', config.secret); 
+app.set('superSecret', config.secret);
 
 // use morgan to log requests to the console
-app.use(morgan('dev'));             
+app.use(morgan('dev'));
 
 // use body parser so we can get info from POST and/or URL parameters
 app.use(bodyParser.json());                                     // parse application/json
