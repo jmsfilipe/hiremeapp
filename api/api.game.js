@@ -64,6 +64,8 @@ module.exports = function(apiRoutes){
         var companies = req.body.companies;
         var general = req.body.general;
         var level = req.body.level;
+        var lang = req.body.lang;
+
         var questions = [];
 
         var getQuestions = function(){
@@ -140,11 +142,9 @@ module.exports = function(apiRoutes){
         }
 
         var getFinalQuestion = function(){
-            console.log(questions.length);
-            console.log(questions);
             var random = Math.floor(Math.random() * questions.length);
-            console.log("rnd " + random);
             var question = questions[random];
+            console.log(question)
             res.send(question);
         }
 
@@ -160,6 +160,7 @@ module.exports = function(apiRoutes){
                 }
 
                 var question = questions[Math.floor(Math.random() * questions.length)];
+                console.log(question)
                 res.send(question);
             })
 

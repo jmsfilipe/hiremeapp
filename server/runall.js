@@ -14,7 +14,6 @@ var user_2 = new User({
   friends: [],
   password: '000000',
   score: 0,
-  blocked: false,
   email: 'carina@gmail.com',
   gender: 'F'
 });
@@ -55,18 +54,27 @@ var user_6 = new User({
   gender: 'M'
 });
 
+var user_7 = new User({
+  name: 'Teste',
+  friends: [],
+  password: '123a<',
+  score: 0,
+  email: 'teste@mail.com',
+  gender: 'M'
+});
+
 user_2.save();
 user_3.save();
 user_4.save();
 user_5.save();
 user_6.save();
+user_7.save();
 
 var user_1 = new User({
   name: 'Jorge',
   friends: [user_2._id, user_3._id, user_4._id],
   password: '000000',
   score: 0,
-  blocked: false,
   email: 'jmsfilipe@gmail.com',
   gender: 'M'
 });
@@ -115,25 +123,25 @@ article_4.save();
 article_5.save();
 
 var question_1_javascript_beginner = new Question({
-  "question": "Inside which HTML element do we put the JavaScript?",
+  "question": ["Inside which HTML element do we put the JavaScript?", "Dentro de que elemento HTML se coloca o Javascript?"],
   "code_sample": null,
   "explanation": null,
   "level": 1,
   "answers": [
     {
-      "text": "<script>",
+      "text": ["<script>", "<script>"],
       "correct": true
     },
     {
-      "text": "<javascript>",
+      "text": ["<javascript>", "<javascript>"],
       "correct": false
     },
     {
-      "text": "<js>",
+      "text": ["<js>", "<js>"],
       "correct": false
     },
     {
-      "text": "<scripting>",
+      "text": ["<scripting>", "<scripting>"],
       "correct": false
     }
   ]

@@ -2,7 +2,7 @@
 var question = angular.module('hiremeapp.question', [
     'ngMaterial'
 ])
-.controller('QuestionController', function($timeout, $log, $scope, $state, $stateParams, $mdDialog, AuthenticationService, questionServices, userServices, $interval){
+.controller('QuestionController', function($translate, $timeout, $log, $scope, $state, $stateParams, $mdDialog, AuthenticationService, questionServices, userServices, $interval){
 
     var self = this;
     var userId = AuthenticationService.user._id;
@@ -17,6 +17,11 @@ var question = angular.module('hiremeapp.question', [
     self.showNext = false;
     self.disabledAnswers = false;
 
+    if($translate.use() === "en"){
+      self.lang = 0;
+    } else{
+      self.lang = 1;
+    }
 
     self.counter = 1;
     self.ready = false;

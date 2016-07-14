@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var QuestionSchema = new mongoose.Schema({
-  question: String,
+  question: [String],
   code_sample: {
     language: String,
     content: String
@@ -10,7 +10,7 @@ var QuestionSchema = new mongoose.Schema({
   level: Number,
   answers: [
     {
-      text: String,
+      text: [String],
       correct: Boolean
     }
   ]
