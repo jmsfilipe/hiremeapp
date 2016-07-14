@@ -14,11 +14,11 @@ module.exports = function(app, express, mongoose, jwt){
     // route to authenticate a user (POST http://localhost:8080/api/authenticate)
     apiRoutes.post('/authenticate', function(req, res) {
 
-        console.log(req.body.email);
+        console.log(req.body.email.toLowerCase());
 
         // find the user
         User.findOne({
-            email: req.body.email,
+            "email": { $regex: new RegExp("^" + req.body.email.toLowerCase(), "i") },
             blocked: false,
         }, function(err, user) {
 

@@ -9,7 +9,7 @@ module.exports = function(apiRoutes){
         user = new User({
             name: req.body.name,
             password: req.body.password,
-            email: req.body.email
+            email: req.body.email.toLowerCase()
         }).save(function(err, user) {
             if (err) {
                 if (err.name === 'MongoError' && err.code === 11000) {
@@ -31,7 +31,7 @@ module.exports = function(apiRoutes){
 
     //   verifyEmailAvailable
     apiRoutes.get('/signup/validator',  function(req, res) {
-        User.find({ email: req.query.email}).count(function(err, count){
+        User.find({ "email": { $regex: new RegExp("^" + req.query.email.toLowerCase(), "i") }}).count(function(err, count){
 
             if (err) {
                 // Some other error
@@ -44,7 +44,7 @@ module.exports = function(apiRoutes){
     });
 
     apiRoutes.get('/login/validator',  function(req, res) {
-        User.find({ email: req.query.email}).count(function(err, count){
+        User.find({ "email": { $regex: new RegExp("^" + req.query.email.toLowerCase(), "i") }}).count(function(err, count){
 
             if (err) {
                 // Some other error
@@ -55,6 +55,8 @@ module.exports = function(apiRoutes){
             });
         });
     });
+    
+    
 
 
 
