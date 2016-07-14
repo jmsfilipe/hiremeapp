@@ -8,6 +8,7 @@ var game = angular.module('hiremeapp.user', [
     self.totalFriends = 0;
     self.friendsList = [];
     self.score = 0;
+    self.user = AuthenticationService.user;
 
     var userId = AuthenticationService.user._id;
     self.userName = AuthenticationService.user.name;

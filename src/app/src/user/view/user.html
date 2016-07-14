@@ -1,106 +1,119 @@
- <div layout="column">
-   <md-card>
-      <img ng-src="app/assets/images/avatar.jpg" class="md-avatar" alt="" />
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">Profile</span>
-        </md-card-title-text>
-      </md-card-title>
-      <md-card-content>
-        {{uc.userName}}
-      </md-card-content>
-    </md-card>
-   <md-card>
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">Score</span>
-        </md-card-title-text>
-      </md-card-title>
-      <md-card-content>
-        {{uc.score}}
-      </md-card-content>
+<div layout="column">
+    <div layout="row" layout-fill>
+        <div style="
+                    display: flex;
+                    margin: 0 5vw;
+                    color: white;
+                    "><h2>160<h5 style="
+            margin: 0;
+            color: gray;
+            font-weight: 400;
+            ">score</h5></h2></div>
+        <div style="
+                    display: flex;
+                    margin: 0 5vw;
+                    color: white;
+                    "><h2 style="
+            text-align: center;
+            ">200<h5 style="
+            margin: 0;
+            color: gray;
+            font-weight: 400;
+            ">friends</h5></h2></div>
+        <span class="flex"></span>
+        <md-icon md-svg-icon="svg-{{uc.user.gender}}" class="avatar" ng-class="{'md-whiteframe-z2': hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" ui-sref="index.user"></md-icon>
+    </div>
+    <md-card>
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">Score</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            {{uc.score}}
+        </md-card-content>
     </md-card>
     <md-card>
-       <md-card-title>
-       <md-card-title-text>
-         <span class="md-headline">Friends</span>
-       </md-card-title-text>
-     </md-card-title>
-     <md-card-content>
-       {{uc.totalFriends}}
-     </md-card-content>
-   </md-card>
-
-
-
-  <h3>Scores</h3>
-  <md-content flex layout-padding>
-    <div flex-xs flex-gt-xs="50" layout="row">
-      <md-card>
-         <md-card-title>
-           <md-card-title-text>
-             <span class="md-headline">Score</span>
-           </md-card-title-text>
-         </md-card-title>
-         <md-card-content>
-           100
-         </md-card-content>
-       </md-card>
-       <md-card>
-          <md-card-title>
+        <md-card-title>
             <md-card-title-text>
-              <span class="md-headline">Score</span>
+                <span class="md-headline">Friends</span>
             </md-card-title-text>
-          </md-card-title>
-          <md-card-content>
-            100
-          </md-card-content>
-        </md-card>
-        <md-card>
-           <md-card-title>
-             <md-card-title-text>
-               <span class="md-headline">Score</span>
-             </md-card-title-text>
-           </md-card-title>
-           <md-card-content>
-             100
-           </md-card-content>
-         </md-card>
-         <md-card>
-            <md-card-title>
-              <md-card-title-text>
-                <span class="md-headline">Score</span>
-              </md-card-title-text>
-            </md-card-title>
-            <md-card-content>
-              100
-            </md-card-content>
-          </md-card>
-     </div>
-   </md-content>
+        </md-card-title>
+        <md-card-content>
+            {{uc.totalFriends}}
+        </md-card-content>
+    </md-card>
 
-   <div class="md-toolbar-tools">
-     <h3>Friends</h3>
-     <md-button class="menu" aria-label="Add friend" ng-click="uc.showFriendsDialog($event)">
-       <md-icon >group_add</md-icon>
-     </md-button>
-   </div>
-   <md-content flex layout-padding>
-     <div flex-xs flex-gt-xs="50" layout="row">
-       <md-card ng-repeat="friend in uc.friendsList">
 
-          <md-card-title>
-            <md-card-title-text>
-              <span class="md-headline">{{friend.name}}</span>
-            </md-card-title-text>
-            <md-card-title-media>
-              <md-icon md-svg-icon="svg-{{friend.gender}}" class="md-avatar"></md-icon>
-           </md-card-title-media>
-          </md-card-title>
-          <md-card-content>
-            {{friend.email}}
-          </md-card-content>
-        </md-card>
-      </div>
-  </md-content>
+
+    <h3>Scores</h3>
+    <md-content flex layout-padding>
+        <div flex-xs flex-gt-xs="50" layout="row">
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Score</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    100
+                </md-card-content>
+            </md-card>
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Score</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    100
+                </md-card-content>
+            </md-card>
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Score</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    100
+                </md-card-content>
+            </md-card>
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Score</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    100
+                </md-card-content>
+            </md-card>
+        </div>
+    </md-content>
+
+    <div class="md-toolbar-tools">
+        <h3>Friends</h3>
+        <md-button class="menu" aria-label="Add friend" ng-click="uc.showFriendsDialog($event)">
+            <md-icon >group_add</md-icon>
+        </md-button>
+    </div>
+    <md-content flex layout-padding>
+        <div flex-xs flex-gt-xs="50" layout="row">
+            <md-card ng-repeat="friend in uc.friendsList">
+
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">{{friend.name}}</span>
+                    </md-card-title-text>
+                    <md-card-title-media>
+                        <md-icon md-svg-icon="svg-{{friend.gender}}" class="md-avatar"></md-icon>
+                    </md-card-title-media>
+                </md-card-title>
+                <md-card-content>
+                    {{friend.email}}
+                </md-card-content>
+            </md-card>
+        </div>
+    </md-content>
 </div>

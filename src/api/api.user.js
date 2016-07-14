@@ -25,14 +25,14 @@ module.exports = function(apiRoutes){
             user_id,
             {$push: {"friends": user_to_add_id}},
             function(err, model) {
-              if(err) throw err;
-              User.findByIdAndUpdate(
-                  user_to_add_id,
-                  {$push: {"friends": user_id}},
-                  function(err, model) {
-                    if(err) throw err;
-                    res.sendStatus(200);
-                  });
+                if(err) throw err;
+                User.findByIdAndUpdate(
+                    user_to_add_id,
+                    {$push: {"friends": user_id}},
+                    function(err, model) {
+                        if(err) throw err;
+                        res.sendStatus(200);
+                    });
             });
 
 
@@ -46,13 +46,23 @@ module.exports = function(apiRoutes){
         var ObjectID = require('mongodb').ObjectID;
         var _id = new ObjectID(user_id);
 
+
+
         User.findById(user_id)
             .exec(function (err, user) {
-              User.find({'name' : new RegExp(term, 'i'), "_id": {"$nin": user.friends, "$ne": _id} }, function(err, docs){
+            User.find({$or: [{'email' : new RegExp(term, 'i')}, {'name' : new RegExp(term, 'i')}], "_id": {"$nin": user.friends, "$ne": _id} }, function(err, docs){
                 console.log(docs)
+
+          
                 res.send(docs);
-              });
+
             });
+        });
+
+ 
+
+
+
 
 
     });
@@ -64,8 +74,8 @@ module.exports = function(apiRoutes){
         User.findById(user_id)
             .populate( 'friends')
             .exec(function (err, user) {
-              res.send({friends: user.friends});
-            });
+            res.send({friends: user.friends});
+        });
 
     });
 
@@ -76,7 +86,7 @@ module.exports = function(apiRoutes){
         User.findById(
             user_id,
             function(err, model) {
-              console.log(model)
+                console.log(model)
                 res.send({total_friends: model.friends.length})
             });
 
@@ -90,8 +100,8 @@ module.exports = function(apiRoutes){
             user_id,
             {$inc: {score:1}},
             function(err, model) {
-              if(err) throw err;
-              res.sendStatus(200);
+                if(err) throw err;
+                res.sendStatus(200);
             });
 
     });
@@ -103,8 +113,8 @@ module.exports = function(apiRoutes){
         User.findById(
             user_id,
             function(err, model) {
-              if(err) throw err;
-              res.send({score: model.score});
+                if(err) throw err;
+                res.send({score: model.score});
             });
 
     });
@@ -120,15 +130,15 @@ module.exports = function(apiRoutes){
             user_id,
             {password: _pwd, email: _email, gender: _gender},
             function(err, model) {
-              console.log(model)
-              if(err) throw err;
-              res.sendStatus(200);
+                console.log(model)
+                if(err) throw err;
+                res.sendStatus(200);
             });
 
     });
 
-//--------------------------- NOT USED YET
-        //add correct question score
+    //--------------------------- NOT USED YET
+    //add correct question score
     apiRoutes.post('/user/correct_question', function(req, res) {
 
         var user_id = req.body.user_id;
