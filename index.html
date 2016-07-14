@@ -15,7 +15,8 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
               rel="stylesheet">
         <script type="text/javascript" defer src="vendor/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript"  src="vendor/angular/angular.js"></script>
+        <script type="text/javascript" src="vendor/angular/angular.js"></script>
+        <script type="text/javascript" defer src="vendor/angular-translate/dist/angular-translate.min.js"></script>
         <script type="text/javascript" defer src="vendor/angular-animate/angular-animate.js"></script>
         <script type="text/javascript" defer src="vendor/angular-messages/angular-messages.min.js"></script>
         <script type="text/javascript" defer src="vendor/angular-aria/angular-aria.js"></script>
@@ -38,8 +39,8 @@
         <script type="text/javascript" defer src="app/src/landing/authentication.directives.js"></script>
         <script type="text/javascript" defer >
             angular
-                .module('hiremeapp', ['hiremeapp.main', 'hiremeapp.header', 'hiremeapp.sidebar', 'hiremeapp.game', 'hiremeapp.question', 'hiremeapp.user', 'hiremeapp.landing', 'hiremeapp.signup', 'hiremeapp.directives', 'hiremeapp.auth'])
-                .config(function($mdThemingProvider, $mdIconProvider){
+                .module('hiremeapp', ['pascalprecht.translate', 'hiremeapp.main', 'hiremeapp.header', 'hiremeapp.sidebar', 'hiremeapp.game', 'hiremeapp.question', 'hiremeapp.user', 'hiremeapp.landing', 'hiremeapp.signup', 'hiremeapp.directives', 'hiremeapp.auth'])
+                .config(function($translateProvider, $mdThemingProvider, $mdIconProvider){
 
                 $mdIconProvider
                     .defaultIconSet("app/assets/svg/avatars.svg", 128)
@@ -57,6 +58,85 @@
                     .accentPalette('red')
                     .warnPalette('deep-orange');
 
+                $translateProvider.translations('en', {
+                  NEW_GAME: 'New game',
+                  PLAY_NOW: 'Play now',
+                  PROFILE: 'Profile',
+                  CANCEL: 'Cancel',
+                  SAVE: 'Save',
+                  SETTINGS: 'Settings',
+                  CHOOSE_YOUR_TOPICS: 'Choose your topics',
+                  COMPANIES: 'Companies',
+                  AREA: 'Area',
+                  TECH: 'Tech',
+                  GENERAL: 'General',
+                  PICK_ONE_OR_MORE_COMPANIES: 'Pick one or more companies',
+                  PICK_ONE_OR_MORE_AREAS: 'Pick one or more areas',
+                  PICK_ONE_OR_MORE_TECHNOLOGIES: 'Pick one or more technologies',
+                  ENTER_YOUR_EMAIL: 'Enter your email.',
+                  WE_CANT_FIND_YOU: "We can't find you. Are you sure that's your email?",
+                  ENTER_YOUR_PASSWORD: 'Enter your password.',
+                  WRONG_PASSWORD: 'Wrong password.',
+                  NAME: 'Name',
+                  TELL_US_WHAT_WE_SHOULD_CALL_YOU: 'Tell us what we should call you!',
+                  NAME_IS_REQUIRED: 'Name is required.',
+                  THE_NAME_HAS_TO_BE_LESS_THAN_30_CHARACTERS_LONG: 'The name has to be less than 30 characters long.',
+                  HOW_CAN_WE_REACH_YOU: 'How can we reach you?',
+                  THAT_EMAIL_ALREADY_EXISTS: 'That email already exists.',
+                  YOUR_EMAIL_MUST_BE: 'Your email must be between 5 and 100 characters long and look like an e-mail address.',
+                  DONT_KEEP_IT_SIMPLE: "Don't keep it simple!",
+                  YOUR_PASSWORD_MUST_BE: "Your password must be between 5 and 30 characters long and have at least 1 letter, 1 number and 1 special character.",
+                  CONFIRM_PASSWORD: 'Confirm password',
+                  REPEAT_AND_REMEMBER: 'Repeat and remember.',
+                  PASSWORDS_MUST_MATCH: 'Passwords must match',
+                  JOIN_US: 'Join Us',
+                  CLOSE: 'Close',
+                  SCORE: 'Score',
+                  SCORES: 'Scores',
+                  FRIENDS: 'Friends',
+                  MALE: 'Male',
+                  FEMALE: 'Female',
+                })
+                .translations('pt', {
+                  NEW_GAME: 'Novo jogo',
+                  PLAY_NOW: 'jogar agora',
+                  PROFILE: 'Perfil',
+                  CANCEL: 'Cancelar',
+                  SAVE: 'Guardar',
+                  SETTINGS: 'Definições',
+                  CHOOSE_YOUR_TOPICS: 'Escolha os seus tópicos',
+                  COMPANIES: 'Empresas',
+                  AREA: 'Área',
+                  TECH: 'Tech',
+                  GENERAL: 'Geral',
+                  PICK_ONE_OR_MORE_COMPANIES: 'Escolha uma ou mais empresas',
+                  PICK_ONE_OR_MORE_AREAS: 'Escolha uma ou mais áreas',
+                  PICK_ONE_OR_MORE_TECHNOLOGIES: 'Escolha uma ou mais tecnologias.',
+                  ENTER_YOUR_EMAIL: 'Introduza o seu email.',
+                  WE_CANT_FIND_YOU: "Não o encontramos. Tem a certeza que escreveu bem?",
+                  ENTER_YOUR_PASSWORD: 'Introduza a sua password.',
+                  WRONG_PASSWORD: 'Password errada.',
+                  NAME: 'Nome',
+                  TELL_US_WHAT_WE_SHOULD_CALL_YOU: 'Diz-nos como te queres chamar!',
+                  NAME_IS_REQUIRED: 'Nome é obrigatório.',
+                  THE_NAME_HAS_TO_BE_LESS_THAN_30_CHARACTERS_LONG: 'O nome tem que ter menos que 30 carcateres.',
+                  HOW_CAN_WE_REACH_YOU: 'Como podemos entrar em contacto?',
+                  THAT_EMAIL_ALREADY_EXISTS: 'Esse email já está registado.',
+                  YOUR_EMAIL_MUST_BE: 'O email tem que ter entre 5 a 100 caracteres.',
+                  DONT_KEEP_IT_SIMPLE: "Tem que ser mais complicado!",
+                  YOUR_PASSWORD_MUST_BE: "A password tem que ter entre 5 e 30 caracteres e ter, pelo menos, uma letra, número e caracter especial.",
+                  CONFIRM_PASSWORD: 'Confirmar password',
+                  REPEAT_AND_REMEMBER: 'Repetir e lembrar.',
+                  PASSWORDS_MUST_MATCH: 'Passwords não correspondem',
+                  JOIN_US: 'Registar',
+                  CLOSE: 'Fechar',
+                  SCORE: 'Pontuação',
+                  SCORES: 'Pontuações',
+                  FRIENDS: 'Amigos',
+                  MALE: 'Maculino',
+                  FEMALE: 'Feminino'
+                });
+                $translateProvider.preferredLanguage('pt');
             });
         </script>
 

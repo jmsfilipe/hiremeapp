@@ -1,28 +1,28 @@
 <section  layout-fill layout="row" layout-sm="column" layout-align="center center" layout-wrap>
 
     <form name="loginForm" ng-submit="loginForm.$valid && lc.signIn(loginForm, lc.user)">
-        <div layout-gt-sm="row"> 
+        <div layout-gt-sm="row">
 
             <md-input-container class="md-block md-primary" flex-gt-sm>
                 <label >Email</label>
                 <input account-check required name="email" ng-model="lc.user.email" required />
                 <div ng-messages="loginForm.email.$error">
-                    <div ng-message="required">Enter your email.</div>
-                    <div ng-message="registered">We can't find you. Are you sure that's your email?</div>
+                    <div ng-message="required">{{ 'ENTER_YOUR_EMAIL' | translate }}</div>
+                    <div ng-message="registered">{{ 'WE_CANT_FIND_YOU' | translate }}</div>
                 </div>
             </md-input-container>
         </div>
-        <div layout-gt-sm="row"> 
+        <div layout-gt-sm="row">
             <md-input-container class="md-block md-primary" flex-gt-sm>
                 <label>Password</label>
                 <input reset-on-change='invalid' type="password" id="password" name="password" ng-model="lc.user.password" required />
                 <div ng-messages="loginForm.password.$error" >
-                    <div ng-message="required">Enter your password.</div>
-                    <div ng-message="invalid">Wrong password.</div>
+                    <div ng-message="required">{{ 'ENTER_YOUR_PASSWORD' | translate }}</div>
+                    <div ng-message="invalid">{{ 'WRONG_PASSWORD' | translate }}</div>
                 </div>
             </md-input-container>
         </div>
-        <div layout-gt-sm="row"> 
+        <div layout-gt-sm="row">
             <md-button class="md-raised md-primary" type="submit" id="submit" value="Submit" > Log in </md-button>
             <md-button class=" md-primary" ui-sref="signup"> Sign up </md-button>
         </div>

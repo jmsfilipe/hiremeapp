@@ -102,7 +102,6 @@ var question = angular.module('hiremeapp.question', [
             if(answer.correct){
                 $($event.currentTarget).addClass("active");
                 userServices.updateScore({user_id: userId});
-                // self.showSuccessDialog();
 
                 self.correct = true;
             } else{
@@ -114,37 +113,10 @@ var question = angular.module('hiremeapp.question', [
         }
     }
 
-    self.showSuccessDialog = function(ev) {
-
-        $mdDialog.show({
-            controller: 'SuccessDialogController as dialog',
-            templateUrl: "app/src/game/successDialog.html",
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose:true
-        })
-            .then(function(answer) {
-            self.resetTimer();
-            self.showQuestion(self.filters);
-        }, function() {
-            //canceled
-        });
-    };
-
     self.showQuestion(self.filters);
 
 
     $scope.$on("$destroy", function(){
         self.resetTimer();
     });
-})
-.controller('SuccessDialogController', function($scope, $mdDialog){
-    var self = this;
-
-    self.cancel = function() {
-        $mdDialog.cancel();
-    };
-    self.save = function() {
-        $mdDialog.hide();
-    };
 });
