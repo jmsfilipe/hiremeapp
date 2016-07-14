@@ -140,7 +140,11 @@ module.exports = function(apiRoutes){
         }
 
         var getFinalQuestion = function(){
-            var question = questions[Math.floor(Math.random() * questions.length)];
+            console.log(questions.length);
+            console.log(questions);
+            var random = Math.floor(Math.random() * questions.length);
+            console.log("rnd " + random);
+            var question = questions[random];
             res.send(question);
         }
 
