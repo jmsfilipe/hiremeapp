@@ -7,7 +7,7 @@ var Question = require(__dirname+"/../models/Question.js").Question;
 var User = require(__dirname+"/../models/User.js").User;
 var Article = require(__dirname+"/../models/Article.js").Article;
 var Company = require(__dirname+"/../models/Company.js").Company;
-
+var General = require(__dirname+"/../models/General.js").General;
 
 var user_2 = new User({
   name: 'Carina',
@@ -643,3 +643,33 @@ company_2.save();
 company_3.save();
 company_4.save();
 company_5.save();
+
+var question_1_windows = new Question({
+  "question": "What is the most common way to uninstall a program?",
+  "code_sample": null,
+  "explanation": null,
+  "level": 1,
+  "answers": [
+    {
+      "text": "Open the program, then start searching for the uninstall button.",
+      "correct": false
+    },
+    {
+      "text": "Delete the program folder.",
+      "correct": false
+    },
+    {
+      "text": "Search for the program in \"Programs and Features\", in the Control Panel.",
+      "correct": true
+    }
+  ]
+});
+
+question_1_windows.save();
+
+var general_windows = new General({
+    name: 'Windows',
+    questions:[question_1_windows._id]
+});
+
+general_windows.save();

@@ -57,6 +57,12 @@ var game = angular.module('hiremeapp.game', [
 
     });
 
+    refineServices.general().then(function successCallback(response) {
+        self.general = response.data;
+    }, function errorCallback(response) {
+
+    });
+
     self.addToSelectedItems = function(type, item){
         switch(type){
             case 'company':
@@ -71,6 +77,11 @@ var game = angular.module('hiremeapp.game', [
                 break;
             case 'area':
                 item.type = 'area';
+             if(self.selectedItems.indexOf(item) === -1)
+                    self.selectedItems.push(item);
+                break;
+            case 'general':
+                item.type = 'general';
              if(self.selectedItems.indexOf(item) === -1)
                     self.selectedItems.push(item);
                 break;

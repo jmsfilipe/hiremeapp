@@ -61,7 +61,7 @@ var question = angular.module('hiremeapp.question', [
 
         createTimer();
 
-        var _techs = [], _areas = [], _companies = [];
+        var _techs = [], _areas = [], _companies = [], _general = [];
         for(var i = 0; i < filter.length; i++){
             switch(filter[i].type){
                 case 'company':
@@ -73,12 +73,16 @@ var question = angular.module('hiremeapp.question', [
                 case 'area':
                     _areas.push(filter[i].name);
                     break;
+                case 'general':
+                    _general.push(filter[i].name);
+                    break;
             }
         }
         questionServices.question({
             technologies: _techs,
             areas: _areas,
             companies: _companies,
+            general: _general,
             level: 1}).then(function successCallback(response) {
             self.question = response.data.question;
             self.answers = response.data.answers;

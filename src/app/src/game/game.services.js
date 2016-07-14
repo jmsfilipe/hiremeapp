@@ -11,6 +11,9 @@ var module = angular.module('hiremeapp.game')
         companies : function() {
             return $http.get('/api/list_companies');
         },
+        general : function() {
+            return $http.get('/api/list_general');
+        },
         technologies : function(area) {
           if(typeof area === 'undefined'){
             return $http.get('/api/list_technologies');

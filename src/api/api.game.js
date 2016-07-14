@@ -4,6 +4,7 @@ module.exports = function(apiRoutes){
     var Technology = require(__dirname+"/../models/Technology.js").Technology;
     var Area = require(__dirname+"/../models/Area.js").Area;
     var Company = require(__dirname+"/../models/Company.js").Company;
+    var General = require(__dirname+"/../models/General.js").General;
 
     // GAME : API ROUTES -------------------
 
@@ -39,14 +40,20 @@ module.exports = function(apiRoutes){
 
     });
 
-    //list al technologies
+    //list all technologies
     apiRoutes.get('/list_technologies', function(req, res) {
 
         Technology.find({}).exec(function(err, _res){
             res.send(_res);
         });
+    });
 
+    //list all general
+    apiRoutes.get('/list_general', function(req, res) {
 
+        General.find({}).exec(function(err, _res){
+            res.send(_res);
+        });
     });
 
     // get a random question from the techology
@@ -61,8 +68,8 @@ module.exports = function(apiRoutes){
 
         var getQuestions = function(){
 
-            
-            //filteres by company
+
+            //filtered by company
             Company.find({ name: { $in: companies } })
                 .populate('questions')
                 .exec(function(err, _res){
@@ -70,7 +77,21 @@ module.exports = function(apiRoutes){
                     questions = questions.concat(_res[i].questions);
                 }
 
-                console.log('Companies - ' + questions)
+                getGeneral();
+            })
+
+        }
+
+        var getGeneral = function(){
+
+            //filtered by general
+            General.find({ name: { $in: general } })
+                .populate('questions')
+                .exec(function(err, _res){
+                for(var i = 0; i < _res.length; i++){
+                    questions = questions.concat(_res[i].questions);
+                }
+
                 getTechs();
             })
 
@@ -124,7 +145,7 @@ module.exports = function(apiRoutes){
         }
 
         //no filters
-        if(companies.length == 0 && areas.length == 0 && techs.length == 0){
+        if(companies.length == 0 && areas.length == 0 && techs.length == 0 && general.length == 0){
 
             Technology.find()
                 .populate( 'questions', null, { level: { $in: level } } )
