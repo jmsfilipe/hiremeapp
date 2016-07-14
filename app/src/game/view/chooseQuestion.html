@@ -1,7 +1,7 @@
 <section class="page page--game" layout="column" layout-align="center center" ng-cloak ng-if="qc.ready">
 
 
-    <h1 class="md-primary" >New Game</h1>
+    <h1 class="md-primary" >{{ 'NEW_GAME' | translate }}</h1>
     <span class="flex"></span>
 
     <div layout="row" layout-sm="column" layout-align="space-around">
@@ -19,8 +19,8 @@
         </md-card-content>
     </md-card>
     <span class="flex"></span>
-    <md-button class="md-raised " ng-disabled="! qc.showNext" ng-click="qc.hitNext()">Next</md-button>
-    
-    <h1 class="toast toast--correct" ng-if="qc.showNext && qc.correct">Correct! +1</h1>
-    <h1 class="toast toast--incorrect" ng-if="qc.showNext && !qc.correct">Incorrect :(</h1>
+    <md-button class="md-raised " ng-disabled="! qc.showNext" ng-click="qc.hitNext()">{{ 'NEXT' | translate }}</md-button>
+
+    <h1 class="toast toast--correct" ng-if="qc.showNext && qc.correct">{{ 'CORRECT' | translate }}</h1>
+    <h1 class="toast toast--incorrect" ng-if="qc.showNext && !qc.correct">{{ 'INCORRECT' | translate }}</h1>
 </section>

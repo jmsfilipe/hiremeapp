@@ -1,6 +1,6 @@
 <section class="page page--game" layout="column"   layout-align="start center"  ng-cloak>
 
-    <h1 class="md-primary" >New Game</h1>
+    <h1 class="md-primary" >{{ 'NEW_GAME' | translate }}</h1>
 
     <span class="flex"></span>
 
@@ -8,10 +8,10 @@
     <md-button class="md-raised disabled"  ng-click="gm.showAlert($event)" >Multiplayer</md-button>
 
     <span class="flex"></span>
-    <md-button class="md-raised md-accent" ng-click="gm.start()">Play now</md-button>
+    <md-button class="md-raised md-accent" ng-click="gm.start()">{{ 'PLAY_NOW' | translate }}</md-button>
     <span class="flex"></span>
     <md-button id="filter-btn" ng-class="{'filter-on' : gm.filters.length > 0}" aria-label="menu" class="md-fab md-accent" ng-click="gm.showTabDialog($event)">
-   
+
     </md-button>
 
 

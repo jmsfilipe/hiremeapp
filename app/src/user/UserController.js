@@ -96,7 +96,7 @@ var game = angular.module('hiremeapp.user', [
 
 })
 
-.controller('SettingsController', function($scope, $mdDialog, $state, userServices, AuthenticationService){
+.controller('SettingsController', function($translate, $scope, $mdDialog, $state, userServices, AuthenticationService){
     var self = this;
 
     self.user = {
@@ -104,6 +104,12 @@ var game = angular.module('hiremeapp.user', [
         password: "",
         gender: ""
     }
+
+    self.language = 'pt';
+
+    self.changeLanguage = function (langKey) {
+       $translate.use(langKey);
+    };
 
     var userId = AuthenticationService.user._id;
     self.user.email = AuthenticationService.user.email;
