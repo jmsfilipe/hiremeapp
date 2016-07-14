@@ -1,6 +1,10 @@
 {
   "name": "hiremeapp",
   "main": "server/server.js",
+  "scripts": {
+    "prestart": "npm update",
+    "start": "node server/server.js"
+  },
   "version": "0.0.4",
   "description": "hiremeapp",
   "repository": "https://github.com/angular/material-start",
@@ -42,8 +46,5 @@
   "devDependencies": {
     "angular-mocks": "^1.4.9",
     "live-server": "^0.9.1"
-  },
-  "scripts": {
-    "prestart": "npm update"
   }
 }
