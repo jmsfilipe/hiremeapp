@@ -1,48 +1,21 @@
 <div layout="column">
-    <div layout="row" layout-fill>
-        <div style="
-                    display: flex;
-                    margin: 0 5vw;
-                    color: white;
-                    "><h2>160<h5 style="
-            margin: 0;
-            color: gray;
-            font-weight: 400;
-            ">score</h5></h2></div>
-        <div style="
-                    display: flex;
-                    margin: 0 5vw;
-                    color: white;
-                    "><h2 style="
-            text-align: center;
-            ">200<h5 style="
-            margin: 0;
-            color: gray;
-            font-weight: 400;
-            ">friends</h5></h2></div>
+    <div layout="row" layout-fill class="user-info">
+        <section layout="column" layout-align="center center">
+            <h2> {{uc.score}}</h2>
+            <h5 >score</h5>
+        </section>
+        <section layout="column" layout-align="center center" >
+            <h2>{{uc.totalFriends}}</h2>
+            <h5 >friends</h5>
+        </section>
         <span class="flex"></span>
-        <md-icon md-svg-icon="svg-{{uc.user.gender}}" class="avatar" ng-class="{'md-whiteframe-z2': hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" ui-sref="index.user"></md-icon>
+         <section layout="column" layout-align="center center" >
+             <md-icon md-svg-icon="svg-{{uc.user.gender}}" class="avatar md-whiteframe-z2" ng-mouseenter="hover = true" ng-mouseleave="hover = false" ui-sref="index.user"></md-icon>
+            <h4 >friends</h4>
+        </section>
+       
     </div>
-    <md-card>
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">Score</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-            {{uc.score}}
-        </md-card-content>
-    </md-card>
-    <md-card>
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">Friends</span>
-            </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-            {{uc.totalFriends}}
-        </md-card-content>
-    </md-card>
+
 
 
 
@@ -98,22 +71,15 @@
             <md-icon >group_add</md-icon>
         </md-button>
     </div>
-    <md-content flex layout-padding>
+    <md-content class="friends-list" flex layout-padding>
         <div flex-xs flex-gt-xs="50" layout="row">
-            <md-card ng-repeat="friend in uc.friendsList">
+            <div layout="column" layout-align="center center" class="friends-list__item" ng-repeat="friend in uc.friendsList">
 
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline">{{friend.name}}</span>
-                    </md-card-title-text>
-                    <md-card-title-media>
-                        <md-icon md-svg-icon="svg-{{friend.gender}}" class="md-avatar"></md-icon>
-                    </md-card-title-media>
-                </md-card-title>
-                <md-card-content>
-                    {{friend.email}}
-                </md-card-content>
-            </md-card>
+                <md-icon md-svg-icon="svg-{{friend.gender}}" class="avatar" ng-class="{'md-whiteframe-z2': hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" ui-sref="index.user"></md-icon>
+
+                <h3 >{{friend.name}}</h3>
+                <h4>{{friend.email}}</h4>
+                </md-card>
         </div>
     </md-content>
 </div>
