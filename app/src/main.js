@@ -38,15 +38,9 @@ var main = angular.module('hiremeapp.main', [
         templateUrl: 'app/src/home/view/home.html'
 
     })
-        .state('index.game', {
-        url: "/game",
-        templateUrl: "app/src/game/view/chooseGameMode.html",
-        controller: "GameController as gm",
-        params: {user: null},
-        access: { requiredLogin: false } //TODO
-    })
+
         .state('index.question', {
-        url: "/game/play",
+        url: "/play",
         templateUrl: "app/src/game/view/chooseQuestion.html",
         controller: "QuestionController as qc",
         params: {user: null, filters: null},
