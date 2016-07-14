@@ -4,15 +4,14 @@
 
     <span class="flex"></span>
 
-    <md-button class="md-raised "  ng-click="">Single</md-button>
-    <md-button class="md-raised " >Multiplayer</md-button>
+    <md-button class="md-raised "  ng-click="">Single <md-icon >done</md-icon></md-button>
+    <md-button class="md-raised " ng-disabled="true">Multiplayer</md-button>
 
     <span class="flex"></span>
     <md-button class="md-raised md-accent" ng-click="gm.start()">Play now</md-button>
     <span class="flex"></span>
-    <md-button id="filter-btn" aria-label="menu" class="md-fab md-accent" ng-click="gm.showTabDialog($event)">
-        <!--   <md-icon md-svg-src="app/assets/svg/ic_more.svg"></md-icon> -->
-        <img class="png-icon" src="app/assets/images/filter.png" style="width: 24px; height: 24px;">
+    <md-button id="filter-btn" ng-class="{'filter-on' : gm.filters.length > 0}" aria-label="menu" class="md-fab md-accent" ng-click="gm.showTabDialog($event)">
+   
     </md-button>
 
 

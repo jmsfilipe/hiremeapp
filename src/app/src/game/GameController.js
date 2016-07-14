@@ -23,7 +23,9 @@ var game = angular.module('hiremeapp.game', [
             }
         })
             .then(function(answer) {
-            self.filters = answer;
+            $scope.$applyAsync(function () {
+                self.filters = answer;
+            });
 
         }, function() {
             //canceled
@@ -72,12 +74,12 @@ var game = angular.module('hiremeapp.game', [
                 break;
             case 'tech':
                 item.type = 'tech';
-               if(self.selectedItems.indexOf(item) === -1)
+                if(self.selectedItems.indexOf(item) === -1)
                     self.selectedItems.push(item);
                 break;
             case 'area':
                 item.type = 'area';
-             if(self.selectedItems.indexOf(item) === -1)
+                if(self.selectedItems.indexOf(item) === -1)
                     self.selectedItems.push(item);
                 break;
             case 'general':

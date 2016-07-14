@@ -28,7 +28,23 @@
 
         #filter-btn{
             align-self: flex-end;
+            background-repeat: no-repeat;
+            background-size: 30px;
+            background-position: center 60%;
+
+            background-image: url("/app/assets/images/filter.png");
+
+
+            &.filter-on{
+
+                background-image: url("/app/assets/images/filter-on.png");
+
+
+
+            }
+
         }
+
 
         .md-button:not(.md-fab){
             min-width: 200px;
