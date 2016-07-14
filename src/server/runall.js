@@ -665,11 +665,144 @@ var question_1_windows = new Question({
   ]
 });
 
+var question_1_word = new Question({
+  "question": "Line spacing is done by line breaking after each sentence.",
+  "code_sample": null,
+  "explanation": null,
+  "level": 1,
+  "answers": [
+    {
+      "text": "true",
+      "correct": false
+    },
+    {
+      "text": "false",
+      "correct": true
+    }
+  ]
+});
+
+var question_1_excel = new Question({
+  "question": "What function displays row data in a column or column data in a row?",
+  "code_sample": null,
+  "explanation": null,
+  "level": 1,
+  "answers": [
+    {
+      "text": "Hyperlink",
+      "correct": false
+    },
+    {
+      "text": "Index",
+      "correct": false
+    },
+    {
+      "text": "Transpose",
+      "correct": true
+    },
+    {
+      "text": "Rows",
+      "correct": false
+    }
+  ]
+});
+
+var question_1_powerpoint = new Question({
+  "question": "Which short cut key inserts a new slide in current presentation?",
+  "code_sample": null,
+  "explanation": null,
+  "level": 1,
+  "answers": [
+    {
+      "text": "Ctrl + N",
+      "correct": false
+    },
+    {
+      "text": "Ctrl + M",
+      "correct": true
+    },
+    {
+      "text": "Ctrl + S",
+      "correct": false
+    },
+    {
+      "text": "All of the above",
+      "correct": false
+    }
+  ]
+});
+
+var question_1_sample = new Question({
+  "question": "This is a sample question",
+  "code_sample": null,
+  "explanation": null,
+  "level": 1,
+  "answers": [
+    {
+      "text": "Option A",
+      "correct": false
+    },
+    {
+      "text": "Option B",
+      "correct": true
+    },
+    {
+      "text": "Option C",
+      "correct": false
+    },
+    {
+      "text": "Option D",
+      "correct": false
+    }
+  ]
+});
+
 question_1_windows.save();
+question_1_word.save();
+question_1_excel.save();
+question_1_powerpoint.save();
+question_1_sample.save();
 
 var general_windows = new General({
     name: 'Windows',
     questions:[question_1_windows._id]
 });
 
+var general_word = new General({
+    name: 'Word',
+    questions:[question_1_word._id]
+});
+
+var general_excel = new General({
+    name: 'Excel',
+    questions:[question_1_excel._id]
+});
+
+var general_powerpoint = new General({
+    name: 'Powerpoint',
+    questions:[question_1_powerpoint._id]
+});
+
+var general_gmail = new General({
+    name: 'Gmail',
+    questions:[question_1_sample._id]
+});
+
+var general_chrome = new General({
+    name: 'Google Chrome',
+    questions:[question_1_sample._id]
+});
+
+var general_android = new General({
+    name: 'Android',
+    questions:[question_1_sample._id]
+});
+
+
 general_windows.save();
+general_word.save();
+general_excel.save();
+general_powerpoint.save();
+general_gmail.save();
+general_chrome.save();
+general_android.save();
