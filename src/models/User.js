@@ -7,7 +7,7 @@ var UserSchema = new mongoose.Schema({
     blocked: { type: Boolean, default: true },
     score: { type: Number, default: 0 },
     email:{ type: String, unique: true },
-    gender: { type: String },
+    gender: { type: String, default: M },
     answered_questions:[
           {
               type: mongoose.Schema.Types.ObjectId,
