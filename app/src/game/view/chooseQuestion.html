@@ -9,13 +9,13 @@
     </div>
     <md-card md-theme-watch class="card-question" >
         <md-card-content layout="row" layout-align="space-between">
-            <span><b>{{qc.question[0]}}</b></span>
+            <span><b>{{qc.question[qc.lang]}}</b></span>
         </md-card-content>
     </md-card>
     <span class="flex"></span>
     <md-card md-theme-watch  ng-repeat="answer in qc.answers" ng-click="qc.evaluateAnswer(answer, $event)" ng-class="answer.correct ? 'correct' : 'incorrect'">
         <md-card-content layout="row" layout-align="space-between">
-            <span>{{answer.text[0]}}</span>
+            <span>{{answer.text[qc.lang]}}</span>
         </md-card-content>
     </md-card>
     <span class="flex"></span>

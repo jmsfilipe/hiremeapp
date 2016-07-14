@@ -123,32 +123,32 @@ article_4.save();
 article_5.save();
 
 var question_1_javascript_beginner = new Question({
-  "question": ["Inside which HTML element do we put the JavaScript?", "Dentro de que elemento HTML se coloca o Javascript?"],
+  "question": ['Inside which HTML element do we put the JavaScript?', 'Dentro de que elemento HTML se coloca o Javascript?'],
   "code_sample": null,
   "explanation": null,
   "level": 1,
   "answers": [
     {
-      "text": ["<script>", "<script>"],
+      "text": ['<script>', '<script>'],
       "correct": true
     },
     {
-      "text": ["<javascript>", "<javascript>"],
+      "text": ['<javascript>', '<javascript>'],
       "correct": false
     },
     {
-      "text": ["<js>", "<js>"],
+      "text": ['<js>', '<js>'],
       "correct": false
     },
     {
-      "text": ["<scripting>", "<scripting>"],
+      "text": ['<scripting>', '<scripting>'],
       "correct": false
     }
   ]
 });
 
 var question_2_javascript_beginner = new Question({
-  "question": "What is the correct JavaScript syntax to change the content of the HTML element below?",
+  "question": ['What is the correct JavaScript syntax to change the content of the HTML element below?', 'Qual é a sintaxe em Javascript para o conteúdo do elemento HTML em baixo?'],
   "code_sample": {
     "language": "html",
     "content": "<p id=\"demo\">This is a demonstration.</p>"
@@ -157,103 +157,103 @@ var question_2_javascript_beginner = new Question({
   "level": 1,
   "answers": [
     {
-      "text": "#demo.innerHTML = 'Hello World!';",
+      "text": ['#demo.innerHTML = \'Hello World!\';','#demo.innerHTML = \'Hello World!\';'],
       "correct": false
     },
     {
-      "text": "document.getElement('p').innerHTML = 'Hello World!';",
+      "text": ['document.getElement(\'p\').innerHTML = \'Hello World!\';','document.getElement(\'p\').innerHTML = \'Hello World!\';'],
       "correct": false
     },
     {
-      "text": "document.getElementByName('p').innerHTML = 'Hello World!';",
+      "text": ['document.getElementByName(\'p\').innerHTML = \'Hello World!\';','document.getElementByName(\'p\').innerHTML = \'Hello World!\';'],
       "correct": false
     },
     {
-      "text": "document.getElementById('demo').innerHTML = 'Hello World!';",
+      "text": ['document.getElementById(\'demo\').innerHTML = \'Hello World!\';','document.getElementById(\'demo\').innerHTML = \'Hello World!\';'],
       "correct": true
     }
   ]
 });
 
 var question_3_javascript_beginner = new Question({
-  "question": "Where is the correct place to insert a JavaScript?",
+  "question": ['Where is the correct place to insert a JavaScript?', 'Qual é o sítio correcto para inserir Javascript?'],
   "code_sample": null,
   "explanation": null,
   "level": 1,
   "answers": [
     {
-      "text": "The <body> section",
+      "text": ['The <body> section', 'A secção <body>'],
       "correct": false
     },
     {
-      "text": "The <head> section",
+      "text": ['The <head> section', 'A secção <head>'],
       "correct": true
     },
     {
-      "text": "Both the <head> section and the <body> section are correct",
+      "text": ['Both the <head> section and the <body> section are correct', 'Ambas as secções <head> e <body> estão correctas'],
       "correct": false
     }
   ]
 });
 
 var question_4_javascript_beginner = new Question({
-  "question": "What is the correct syntax for referring to an external script called 'xxx.js'?",
+  "question": ['What is the correct syntax for referring to an external script called \'xxx.js\'?', 'Qual é a sintaxe correcta para referenciar um script externo chamado \'xxx.js\'?'],
   "code_sample": null,
   "explanation": null,
   "level": 1,
   "answers": [
     {
-      "text": "<script href='xxx.js'>",
+      "text": ['<script href=\'xxx.js\'>','<script href=\'xxx.js\'>'],
       "correct": false
     },
     {
-      "text": "<script name='xxx.js'>",
+      "text": ['<script name=\'xxx.js\'>','<script name=\'xxx.js\'>'],
       "correct": false
     },
     {
-      "text": "<script src='xxx.js'>",
+      "text":  ['<script src=\'xxx.js\'>','<script src=\'xxx.js\'>'],
       "correct": true
     }
   ]
 });
 
 var question_5_javascript_beginner = new Question({
-  "question": "The external JavaScript file must contain the <script> tag.",
+  "question": ['The external JavaScript file must contain the <script> tag.', 'Um ficheiro externo de Javascript tem de ter a tag <script>'],
   "code_sample": null,
   "explanation": null,
   "level": 1,
   "answers": [
     {
-      "text": "true",
+      "text": ['true', 'verdadeiro'],
       "correct": false
     },
     {
-      "text": "false",
+      "text": ['false', 'falso'],
       "correct": true
     }
   ]
 });
 
 var question_6_javascript_beginner = new Question({
-  "question": "How do you write 'Hello World' in an alert box?",
+  "question": ['How do you write \'Hello World\' in an alert box?', 'Como se escreve \'Hello World\' numa alert box?'],
   "code_sample": null,
   "explanation": null,
   "level": 1,
   "answers": [
     {
-      "text": "alert('Hello World');",
+      "text": ['alert(\'Hello World\');','alert(\'Hello World\');'],
       "correct": true
     },
     {
-      "text": "alertBox('Hello World');",
+      "text": ['alertBox(\'Hello World\');','alertBox(\'Hello World\');'],
       "correct": false
     },
     {
-      "text": "msg('Hello World');",
+      "text": ['msg(\'Hello World\');','msg(\'Hello World\');'],
       "correct": false
     },
     {
-      "text": "msgBox('Hello World');",
+      "text": ['msgBox(\'Hello World\');','msgBox(\'Hello World\');'],
       "correct": false
     }
   ]
@@ -351,71 +351,71 @@ var question_10_javascript_expert = new Question({
 });
 
 var question_11_postgres_beginner = new Question({
-  "question": "Which SQL statement is used to extract data from a database?",
+  "question": ['Which SQL statement is used to extract data from a database?','Que expressão SQL é usada para extrair dados da base de dados?'],
   "code_sample": null,
   "explanation": null,
   "level": 1,
   "answers": [
     {
-      "text": "SELECT",
+      "text": ['SELECT', 'SELECT'],
       "correct": true
     },
     {
-      "text": "OPEN",
+      "text": ['OPEN', 'OPEN'],
       "correct": false
     },
     {
-      "text": "EXTRACT",
+      "text": ['EXTRACT', 'EXTRACT'],
       "correct": false
     },
     {
-      "text": "GET",
+      "text": ['GET', 'GET'],
       "correct": false
     }
   ]
 });
 
 var question_12_postgres_beginner = new Question({
-  "question": "With SQL, how do you select a column named \"FirstName\" from a table named \"Persons\"?",
+  "question": ['With SQL, how do you select a column named "FirstName" from a table named "Persons"?', 'Com SQL, como se selecciona uma coluna chamada "FirstName" de uma tabela chamada "Persons"?'],
   "code_sample": null,
   "explanation": null,
   "level": 1,
   "answers": [
     {
-      "text": "SELECT FirstName FROM Persons",
+      "text": ['SELECT FirstName FROM Persons', 'SELECT FirstName FROM Persons'],
       "correct": true
     },
     {
-      "text": "SELECT Persons.FirstName",
+      "text": ['SELECT Persons.FirstName', 'SELECT Persons.FirstName'],
       "correct": false
     },
     {
-      "text": "EXTRACT FirstName FROM Persons",
+      "text": ['EXTRACT FirstName FROM Persons','EXTRACT FirstName FROM Persons'],
       "correct": false
     }
   ]
 });
 
 var question_13_postgres_beginner = new Question({
-  "question": "With SQL, how do you select all the records from a table named \"Persons\" where the value of the column \"FirstName\" starts with an \"a\"?",
+  "question": ['With SQL, how do you select all the records from a table named "Persons" where the value of the column "FirstName" starts with an "a"?','Com SQL, como se seleccionam todos os resultados de uma tabela chamada "Persons" onde o valor da coluna "FirstName" começa com um "a"?'],
   "code_sample": null,
   "explanation": null,
   "level": 1,
   "answers": [
     {
-      "text": "SELECT * FROM Persons WHERE FirstName='a'",
+      "text": ['SELECT * FROM Persons WHERE FirstName=\'a\'', 'SELECT * FROM Persons WHERE FirstName=\'a\''],
       "correct": false
     },
     {
-      "text": "SELECT * FROM Persons WHERE FirstName='%a%'",
+      "text": ['SELECT * FROM Persons WHERE FirstName=\'%a%\'','SELECT * FROM Persons WHERE FirstName=\'%a%\''],
       "correct": false
     },
     {
-      "text": "SELECT * FROM Persons WHERE FirstName LIKE 'a%'",
+      "text": ['SELECT * FROM Persons WHERE FirstName LIKE \'a%\'','SELECT * FROM Persons WHERE FirstName LIKE \'a%\''],
       "correct": false
     },
     {
-      "text": "SELECT * FROM Persons WHERE FirstName LIKE '%a'",
+      "text": ['SELECT * FROM Persons WHERE FirstName LIKE \'%a\'','SELECT * FROM Persons WHERE FirstName LIKE \'%a\''],
       "correct": true
     }
   ]
@@ -595,25 +595,25 @@ area_databases.save(function (err, area_databases) {
 });
 
 var question_company = new Question({
-  "question": "This is a sample text of a question inserted by a company.",
+  "question": ['This is a sample text of a question inserted by a company.','Esta é uma pergunta de teste inserida por uma empresa.'],
   "code_sample": null,
   "explanation": null,
   "level": 1,
   "answers": [
     {
-      "text": "Option A",
+      "text": ['Option A', 'Opção A'],
       "correct": false
     },
     {
-      "text": "Option B",
+      "text": ['Option B', 'Opção B'],
       "correct": false
     },
     {
-      "text": "Option C",
+      "text": ['Option C', 'Opção C'],
       "correct": false
     },
     {
-      "text": "Option D",
+      "text": ['Option D', 'Opção D'],
       "correct": true
     }
   ]
@@ -653,114 +653,114 @@ company_4.save();
 company_5.save();
 
 var question_1_windows = new Question({
-  "question": "What is the most common way to uninstall a program?",
+  "question": ['What is the most common way to uninstall a program?', 'Qual é a maneira mais fácil de desisntalar um programa?'],
   "code_sample": null,
   "explanation": null,
   "level": 1,
   "answers": [
     {
-      "text": "Open the program, then start searching for the uninstall button.",
+      "text": ['Open the program, then start searching for the uninstall button.', 'Abrir o programa e começar a procurar pelo botão de desinstalar.'],
       "correct": false
     },
     {
-      "text": "Delete the program folder.",
+      "text": ['Delete the program folder.','Apagar a pasta do programa.'],
       "correct": false
     },
     {
-      "text": "Search for the program in \"Programs and Features\", in the Control Panel.",
+      "text": ['Search for the program in "Programs and Features", in the Control Panel.','Procurar pelo programa em "Programs and Features", no Painel de Controlo.'],
       "correct": true
     }
   ]
 });
 
 var question_1_word = new Question({
-  "question": "Line spacing is done by line breaking after each sentence.",
+  "question": ['Line spacing is done by line breaking after each sentence.', 'O espaçamento de linhas é feito dando "enter" depois de cada frase.'],
   "code_sample": null,
   "explanation": null,
   "level": 1,
   "answers": [
     {
-      "text": "true",
+      "text": ['true', 'verdadeiro'],
       "correct": false
     },
     {
-      "text": "false",
+      "text": ['false', 'falso'],
       "correct": true
     }
   ]
 });
 
 var question_1_excel = new Question({
-  "question": "What function displays row data in a column or column data in a row?",
+  "question": ['What function displays row data in a column or column data in a row?', 'Que função mostra dados de uma linha numa coluna ou dados de coluna numa linha?'],
   "code_sample": null,
   "explanation": null,
   "level": 1,
   "answers": [
     {
-      "text": "Hyperlink",
+      "text": ['Hyperlink', 'Hyperlink'],
       "correct": false
     },
     {
-      "text": "Index",
+      "text": ['Index', 'Index'],
       "correct": false
     },
     {
-      "text": "Transpose",
+      "text": ['Transpose', 'Transpose'],
       "correct": true
     },
     {
-      "text": "Rows",
+      "text": ['Rows', 'Rows'],
       "correct": false
     }
   ]
 });
 
 var question_1_powerpoint = new Question({
-  "question": "Which short cut key inserts a new slide in current presentation?",
+  "question": ['Which short cut key inserts a new slide in current presentation?', 'Qual é o atalho para inserir um novo diapositivo na apresentação?'],
   "code_sample": null,
   "explanation": null,
   "level": 1,
   "answers": [
     {
-      "text": "Ctrl + N",
+      "text": ['Ctrl + N', 'Ctrl + N'],
       "correct": false
     },
     {
-      "text": "Ctrl + M",
+      "text": ['Ctrl + M', 'Ctrl + M'],
       "correct": true
     },
     {
-      "text": "Ctrl + S",
+      "text": ['Ctrl + S', 'Ctrl + S'],
       "correct": false
     },
     {
-      "text": "All of the above",
+      "text": ['All of the aboce', 'Todas as anteriores'],
       "correct": false
     }
   ]
 });
 
 var question_1_sample = new Question({
-  "question": "This is a sample question",
+  "question": ['This is a sample question.','Esta é uma pergunta de teste.'],
   "code_sample": null,
   "explanation": null,
   "level": 1,
   "answers": [
     {
-      "text": "Option A",
+      "text": ['Option A', 'Opção A'],
       "correct": false
     },
     {
-      "text": "Option B",
+      "text": ['Option B', 'Opção B'],
+      "correct": false
+    },
+    {
+      "text": ['Option C', 'Opção C'],
+      "correct": false
+    },
+    {
+      "text": ['Option D', 'Opção D'],
       "correct": true
-    },
-    {
-      "text": "Option C",
-      "correct": false
-    },
-    {
-      "text": "Option D",
-      "correct": false
     }
   ]
 });
