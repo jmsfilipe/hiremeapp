@@ -42,14 +42,14 @@ module.exports = function(apiRoutes){
     //list al technologies
     apiRoutes.get('/list_technologies', function(req, res) {
 
-    Technology.find({}).exec(function(err, _res){
+        Technology.find({}).exec(function(err, _res){
             res.send(_res);
         });
 
 
     });
 
-        // get a random question from the techology
+    // get a random question from the techology
     apiRoutes.post('/get_question', function(req, res) {
 
         var techs = req.body.technologies;
@@ -57,74 +57,98 @@ module.exports = function(apiRoutes){
         var companies = req.body.companies;
         var general = req.body.general;
         var level = req.body.level;
-
         var questions = [];
-        if(companies.length > 0){
-          Company.find({ name: { $in: companies } })
+
+        var getQuestions = function(){
+
+            
+            //filteres by company
+            Company.find({ name: { $in: companies } })
                 .populate('questions')
                 .exec(function(err, _res){
-                  for(var i = 0; i < _res.length; i++){
+                for(var i = 0; i < _res.length; i++){
                     questions = questions.concat(_res[i].questions);
-                    }
-                  })
-                  console.log(questions)
-        }
-        if(techs.length > 0){ //filtered by techs
-          Area.find()
-              .populate( 'technologies', null, { name: { $in: techs } } )
-              .exec(function(err, _res){
-              Technology.find({'name': { $in: techs }})
-                  .populate( 'questions', null, { level: { $in: level } } )
-                  .exec(function(err, _res){
-                    for(var i = 0; i < _res.length; i++){
-                      questions = questions.concat(_res[i].questions);
-                    }
-              })
-          })
-        }
-        if(areas.length > 0){ //filtered by areas
-          Area.find({'name': { $in: areas }})
-              .populate( 'technologies' )
-              .exec(function(err, _res){
-
-              var techIds = [];
-              for(var i = 0; i < _res.length; i++){
-                for(var j = 0; j < _res[i].technologies.length; j++){
-                  techIds.push(_res[i].technologies[j]._id);
                 }
-              }
 
-              Technology.find({_id: {$in: techIds}})
-                  .populate( 'questions', null, { level: { $in: level } } )
-                  .exec(function(err, _res){
-                    for(var i = 0; i < _res.length; i++){
-                      questions = questions.concat(_res[i].questions);
-                    }
-              })
-          })
-        }
-        var question = questions[Math.floor(Math.random() * questions.length)];
-        console.log(questions)
-        console.log(question)
-        res.send(question);
-        /*else{
-
-          Area.find({'name': { $in: areas }})
-          .populate( 'technologies', null, { name: { $in: techs } } )
-          .exec(function(err, _res){
-            Technology.find({'name': { $in: techs }})
-            .populate( 'questions', null, { level: { $in: level } } )
-            .exec(function(err, _res){
-
-              for(var i = 0; i < _res.length; i++){
-                questions = questions.concat(_res[i].questions);
-              }
-
-              var question = questions[Math.floor(Math.random() * questions.length)];
-              res.send(question);
+                console.log('Companies - ' + questions)
+                getTechs();
             })
-          })
-        }*/
+
+        }
+
+        //filtered by techs
+        var getTechs = function(){
+            Area.find()
+                .populate( 'technologies', null, { name: { $in: techs } } )
+                .exec(function(err, _res){
+                Technology.find({'name': { $in: techs }})
+                    .populate( 'questions', null, { level: { $in: level } } )
+                    .exec(function(err, _res){
+                    for(var i = 0; i < _res.length; i++){
+                        questions = questions.concat(_res[i].questions);
+                    }
+
+                    getAreas();
+                })
+            })
+        }
+
+        //filtered by Area
+        var getAreas = function(){
+            Area.find({'name': { $in: areas }})
+                .populate( 'technologies' )
+                .exec(function(err, _res){
+
+                var techIds = [];
+                for(var i = 0; i < _res.length; i++){
+                    for(var j = 0; j < _res[i].technologies.length; j++){
+                        techIds.push(_res[i].technologies[j]._id);
+                    }
+                }
+
+                Technology.find({_id: {$in: techIds}})
+                    .populate( 'questions', null, { level: { $in: level } } )
+                    .exec(function(err, _res){
+                    for(var i = 0; i < _res.length; i++){
+                        questions = questions.concat(_res[i].questions);
+                    }
+
+                    getFinalQuestion();
+                })
+            })
+        }
+
+        var getFinalQuestion = function(){
+            var question = questions[Math.floor(Math.random() * questions.length)];
+            res.send(question);
+        }
+
+        //no filters
+        if(companies.length == 0 && areas.length == 0 && techs.length == 0){
+
+            Technology.find()
+                .populate( 'questions', null, { level: { $in: level } } )
+                .exec(function(err, _res){
+
+                for(var i = 0; i < _res.length; i++){
+                    questions = questions.concat(_res[i].questions);
+                }
+
+                var question = questions[Math.floor(Math.random() * questions.length)];
+                res.send(question);
+            })
+
+        }
+
+        else getQuestions();
+
+
+
+
+
+
+
+
 
     });
 

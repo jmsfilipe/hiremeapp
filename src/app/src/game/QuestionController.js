@@ -3,7 +3,7 @@ var question = angular.module('hiremeapp.question', [
     'ngMaterial'
 ])
 .controller('QuestionController', function($timeout, $log, $scope, $state, $stateParams, $mdDialog, AuthenticationService, questionServices, userServices, $interval){
-  
+
     var self = this;
     var userId = AuthenticationService.user._id;
     console.log($stateParams)
@@ -128,6 +128,11 @@ var question = angular.module('hiremeapp.question', [
     };
 
     self.showQuestion(self.filters);
+
+
+    $scope.$on("$destroy", function(){
+        self.resetTimer();
+    });
 })
 .controller('SuccessDialogController', function($scope, $mdDialog){
     var self = this;
