@@ -12,7 +12,7 @@
         <md-input-container class="md-block md-primary" flex-gt-sm>
             <label>Password</label>
             <input ng-disable-paste type="password" id="password" name="password" ng-model="sc.user.password"
-                   required minlength="5" maxlength="30" ng-pattern="/^(?=.*?[[a-zA-Z])(?=.*?[0-9])(?=.*?[^\w\s]|.*?[_]).{5,}$/" />
+                   minlength="5" maxlength="30" ng-pattern="/^(?=.*?[[a-zA-Z])(?=.*?[0-9])(?=.*?[^\w\s]|.*?[_]).{5,}$/" />
             <div class="hint" ng-show="signupForm.password.$untouched  || signupForm.password.$valid" >{{ 'DONT_KEEP_IT_SIMPLE' | translate }}</div>
             <div ng-messages="signupForm.password.$error" ng-if="signupForm.password.$touched">
                 <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
@@ -23,7 +23,7 @@
         <md-input-container class="md-block md-primary" flex-gt-sm>
             <label>{{ 'CONFIRM_PASSWORD' | translate }}</label>
             <input ng-disable-paste type="password" name="passwordRepeat" ng-model="sc.user.passwordRepeat"
-                   required pw-check="password"  />
+                   pw-check="password"  />
             <div class="hint"
                  ng-show="signupForm.passwordRepeat.$untouched || !signupForm.passwordRepeat.$error.pwmatch" >
                 {{ 'REPEAT_AND_REMEMBER' | translate }}

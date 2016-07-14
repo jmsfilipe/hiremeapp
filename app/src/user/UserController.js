@@ -105,10 +105,10 @@ var game = angular.module('hiremeapp.user', [
         gender: ""
     }
 
-    self.language = 'pt';
+    self.language = $translate.use();
 
     self.changeLanguage = function (langKey) {
-       $translate.use(langKey);
+       self.language = langKey;
     };
 
     var userId = AuthenticationService.user._id;
@@ -116,6 +116,7 @@ var game = angular.module('hiremeapp.user', [
     self.user.gender = AuthenticationService.user.gender;
 
     self.updateSettings = function(){
+        $translate.use(self.language);
         var pwd = "";
         if(self.user.password == ""){
             pwd = AuthenticationService.user.password;
