@@ -16,7 +16,6 @@ var express  = require('express'),
 
 // configuration =================
 // used to create, sign, and verify tokens
-var port = process.env.PORT || 8080;
 // connect to mongoDB database on modulus.io
 mongoose.connect(config.database);
 // secret variable
@@ -47,5 +46,5 @@ app.use('/vendor', express.static(__dirname + '/../node_modules'));
 app.use(express.static(__dirname + '/../'));
 
 // listen (start app with node server.js) ======================================
-app.listen(port);
-console.log('Magic happens at http://localhost:' + port);
+app.listen(process.env.PORT || 8080);
+console.log('Magic happens at http://localhost:8080');
