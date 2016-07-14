@@ -44,6 +44,16 @@
                         </md-grid-list>
                     </md-content>
                 </md-tab>
+                <md-tab label="general">
+                    <md-content class="md-padding">
+                        <h3 >Pick one or more areas</h3>
+                        <md-grid-list md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
+                            <md-grid-tile class="green" ng-repeat="area in dialog.general track by area._id" ng-click="dialog.addToSelectedItems('general', area)">
+                                <h3>{{area.name}}</h3>
+                            </md-grid-tile>
+                        </md-grid-list>
+                    </md-content>
+                </md-tab>
             </md-tabs>
         </md-dialog-content>
         <md-chips ng-model="dialog.selectedItems">

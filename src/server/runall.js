@@ -586,9 +586,60 @@ area_databases.save(function (err, area_databases) {
     }
 });
 
+var question_company = new Question({
+  "question": "This is a sample text of a question inserted by a company.",
+  "code_sample": null,
+  "explanation": null,
+  "level": 1,
+  "answers": [
+    {
+      "text": "Option A",
+      "correct": false
+    },
+    {
+      "text": "Option B",
+      "correct": false
+    },
+    {
+      "text": "Option C",
+      "correct": false
+    },
+    {
+      "text": "Option D",
+      "correct": true
+    }
+  ]
+});
+
+question_company.save();
+
 var company_1 = new Company({
-  name: 'Shift n Chill',
-  questions:[question_1_javascript_beginner._id, question_2_javascript_beginner._id, question_3_javascript_beginner._id]
+  name: 'Google',
+  questions:[question_company._id]
+});
+
+var company_2 = new Company({
+  name: 'Yahoo',
+  questions:[question_company._id]
+});
+
+var company_3 = new Company({
+  name: 'Microsoft',
+  questions:[question_company._id]
+});
+
+var company_4 = new Company({
+  name: 'Outsystems',
+  questions:[question_company._id]
+});
+
+var company_5 = new Company({
+  name: 'Adobe',
+  questions:[question_company._id]
 });
 
 company_1.save();
+company_2.save();
+company_3.save();
+company_4.save();
+company_5.save();
