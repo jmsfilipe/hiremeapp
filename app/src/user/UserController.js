@@ -35,6 +35,16 @@ var game = angular.module('hiremeapp.user', [
 
     });
 
+    self.getColorClass = function(score){
+      if(score < 6){
+        return "intern";
+      } else if(score < 20){
+        return "junior";
+      } else{
+        return "senior";
+      }
+    }
+
     self.showFriendsDialog = function(ev){
 
         userServices.listFriends({user_id: userId}).then(function successCallback(response) {
