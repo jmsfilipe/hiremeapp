@@ -41,8 +41,8 @@
         </md-radio-group>
     </div>
 
+    <h1>{{ 'LANGUAGE' | translate }}</h1>
     <div layout-gt-sm="row">
-      <label>{{ 'LANGUAGE' | translate }}</label>
       <md-radio-group ng-model="sc.language">
           <md-radio-button value="pt" ng-click="sc.changeLanguage('pt')">{{ 'PORTUGUESE' | translate }}</md-radio-button>
           <md-radio-button value="en" ng-click="sc.changeLanguage('en')">{{ 'ENGLISH' | translate }}</md-radio-button>
