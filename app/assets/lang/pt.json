@@ -42,5 +42,6 @@
    "NEXT": "Próxima",
    "CORRECT": "Certo! +1",
    "INCORRECT": "Errado :(",
-   "ABOUT_US": "Sobre nós"
+   "ABOUT_US": "Sobre nós",
+   "LOGOUT": "Sair"
 }

@@ -16,4 +16,8 @@ var game = angular.module('hiremeapp.header', [
         $mdSidenav('left').toggle();
     }
 
+    self.signOut = function(){
+      //TODO
+    }
+
 });

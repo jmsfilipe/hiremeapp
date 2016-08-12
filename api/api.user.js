@@ -145,69 +145,74 @@ module.exports = function(apiRoutes){
         var companyName = "";
         var generalName = "";
 
+        Technology.find({ questions: question_id})
+        .exec(function(err, _resTechnology){
+
+          if(_resTechnology.length > 0){
+            techName = _resTechnology[0].name;
+
+          Area.find({ technologies: _resTechnology[0]._id})
+          .exec(function(err, _resArea){
+
+
+            if(_resArea.length > 0)
+            areaName = _resArea[0].name;
+
+            if(areaName){
+              var area = {};
+              area["area."+areaName] = 1;
+              User.findOneAndUpdate({_id: user_id}, {$inc: area}, function(err, doc){
+                if(err){
+                  console.log("Something wrong when updating data!");
+                }
+              });
+
+              var tech = {};
+              tech["tech."+techName] = 1;
+              User.findOneAndUpdate({_id: user_id}, {$inc: tech}, function(err, doc){
+                if(err){
+                  console.log("Something wrong when updating data!");
+                }
+              });
+            }
+          });
+        }
+
+        });
+
+        Company.find({ questions: question_id})
+        .exec(function(err, _resCompany){
+
+          if(_resCompany.length > 0)
+            companyName = _resCompany[0].name;
+
+          if(companyName){
+            var company = {};
+            company["company."+companyName.toLowerCase()] = 1;
+            User.findOneAndUpdate({_id: user_id}, {$inc: company}, function(err, doc){
+              console.log(companyName)
+              if(err){
+                console.log("Something wrong when updating data!");
+              }
+            });
+          }
+
+        });
 
         General.find({ questions: question_id})
-        .exec(function(err, _res){
-          if(_res.length > 0)
-            generalName = _res[0].name;
+        .exec(function(err, _resGeneral){
+          if(_resGeneral.length > 0)
+            generalName = _resGeneral[0].name;
 
-            Company.find({ questions: question_id})
-            .exec(function(err, _res){
-              if(_res.length > 0)
-              companyName = _res[0].name;
-
-              Technology.find({ questions: question_id})
-              .exec(function(err, _res){
-                if(_res.length > 0){
-                  techName = _res[0].name;
-
-                  Area.find({ technologies: _res[0]._id})
-                  .exec(function(err, _res2){
-                    if(_res2.length > 0)
-                    areaName = _res2[0].name;
-
-                    if(generalName){
-                      var general = {};
-                      general[generalName] = 1;
-                      User.findOneAndUpdate({_id: user_id}, {$inc: general}, function(err, doc){
-                          if(err){
-                              console.log("Something wrong when updating data!");
-                          }
-                      });
-                    }
-
-                    if(companyName){
-                      var company = {};
-                      company[companyName] = 1;
-                      User.findOneAndUpdate({_id: user_id}, {$inc: company}, function(err, doc){
-                          if(err){
-                              console.log("Something wrong when updating data!");
-                          }
-                      });
-                    }
-
-                    if(areaName){
-                      var area = {};
-                      area["area."+areaName] = 1;
-                      User.findOneAndUpdate({_id: user_id}, {$inc: area}, function(err, doc){
-                          if(err){
-                              console.log("Something wrong when updating data!");
-                          }
-                      });
-
-                      var tech = {};
-                      tech["tech."+techName] = 1;
-                      User.findOneAndUpdate({_id: user_id}, {$inc: tech}, function(err, doc){
-                          if(err){
-                              console.log("Something wrong when updating data!");
-                          }
-                      });
-                    }
-                  });
-                }
-
+          if(generalName){
+            var general = {};
+            general["general."+generalName.toLowerCase()] = 1;
+            User.findOneAndUpdate({_id: user_id}, {$inc: general}, function(err, doc){
+              if(err){
+                console.log("Something wrong when updating data!");
+              }
             });
-        });
+          }
       });
 
     });
