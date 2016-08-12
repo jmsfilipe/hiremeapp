@@ -6,6 +6,8 @@ var question = angular.module('hiremeapp.question', [
 
     var self = this;
     var userId = AuthenticationService.user._id;
+    var questionId;
+
     console.log($stateParams)
 
     self.user = $stateParams.user;
@@ -89,10 +91,11 @@ var question = angular.module('hiremeapp.question', [
             companies: _companies,
             general: _general,
             level: 1}).then(function successCallback(response) {
-            self.question = response.data.question;
-            self.answers = response.data.answers;
-            self.explanation = response.data.explanation;
-            self.ready = true;
+              self.question = response.data.question;
+              self.answers = response.data.answers;
+              self.explanation = response.data.explanation;
+              self.ready = true;
+              questionId = response.data._id;
         }, function errorCallback(response) {
 
         });
@@ -107,6 +110,7 @@ var question = angular.module('hiremeapp.question', [
             if(answer.correct){
                 $($event.currentTarget).addClass("active");
                 userServices.updateScore({user_id: userId});
+                userServices.correctQuestionScore({user_id: userId, question_id: questionId});
 
                 self.correct = true;
             } else{

@@ -12,7 +12,7 @@ var module = angular.module('hiremeapp.user')
           return $http.post('/api/user/settings', userData);
         },
         updateScore : function(userData){
-          return $http.post('/api/user/score', userData);
+          return $http.post('/api/user/update_score', userData);
         },
         totalFriends : function(userData) {
             return $http.post('/api/user/total_friends', userData);
@@ -28,6 +28,12 @@ var module = angular.module('hiremeapp.user')
         },
         all : function() {
             return $http.get('/api/users');
+        },
+        correctQuestionScore : function(data) {
+            return $http.post('/api/user/correct_question', data);
+        },
+        listScores : function(data) {
+            return $http.post('/api/user/list_scores/', data);
         }
     };
 });

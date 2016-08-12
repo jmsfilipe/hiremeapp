@@ -29,6 +29,12 @@ var game = angular.module('hiremeapp.user', [
 
     });
 
+    userServices.listScores({user_id: userId}).then(function successCallback(response) {
+      self.scores = response.data;
+    }, function errorCallback(response) {
+
+    });
+
     self.showFriendsDialog = function(ev){
 
         userServices.listFriends({user_id: userId}).then(function successCallback(response) {

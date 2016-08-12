@@ -5,6 +5,7 @@ module.exports = function(apiRoutes){
     var Company = require(__dirname+"/../models/Company.js").Company;
     var Question = require(__dirname+"/../models/Question.js").Question;
     var User = require(__dirname+"/../models/User.js").User;
+    var General = require(__dirname+"/../models/General.js").General;
 
     // USER : API ROUTES -------------------
 
@@ -16,6 +17,7 @@ module.exports = function(apiRoutes){
         });
     });
 
+    //add friend to friends list
     apiRoutes.post('/user/add_friend', function(req, res) {
 
         var user_id = req.body.user_id;
@@ -39,6 +41,7 @@ module.exports = function(apiRoutes){
 
     });
 
+    //search friend by name or email
     apiRoutes.post('/user/search', function(req, res) {
 
         var term = req.body.term;
@@ -46,27 +49,17 @@ module.exports = function(apiRoutes){
         var ObjectID = require('mongodb').ObjectID;
         var _id = new ObjectID(user_id);
 
-
-
         User.findById(user_id)
             .exec(function (err, user) {
             User.find({$or: [{'email' : new RegExp(term, 'i')}, {'name' : new RegExp(term, 'i')}], "_id": {"$nin": user.friends, "$ne": _id} }, function(err, docs){
-                console.log(docs)
-
-          
                 res.send(docs);
 
             });
         });
 
- 
-
-
-
-
-
     });
 
+    //list all the friends of a user
     apiRoutes.post('/user/list_friends', function(req, res) {
 
         var user_id = req.body.user_id;
@@ -79,6 +72,7 @@ module.exports = function(apiRoutes){
 
     });
 
+    //total number of friends of a user
     apiRoutes.post('/user/total_friends', function(req, res) {
 
         var user_id = req.body.user_id;
@@ -92,7 +86,8 @@ module.exports = function(apiRoutes){
 
     });
 
-    apiRoutes.post('/user/score', function(req, res) {
+    //increment the global score of a user
+    apiRoutes.post('/user/update_score', function(req, res) {
 
         var user_id = req.body.user_id;
 
@@ -106,6 +101,7 @@ module.exports = function(apiRoutes){
 
     });
 
+    //get the global score of a user
     apiRoutes.post('/user/get_score', function(req, res) {
 
         var user_id = req.body.user_id;
@@ -119,6 +115,7 @@ module.exports = function(apiRoutes){
 
     });
 
+    //save the settings panel
     apiRoutes.post('/user/settings', function(req, res) {
 
         var user_id = req.body.user_id;
@@ -137,68 +134,98 @@ module.exports = function(apiRoutes){
 
     });
 
-    //--------------------------- NOT USED YET
     //add correct question score
     apiRoutes.post('/user/correct_question', function(req, res) {
 
         var user_id = req.body.user_id;
         var question_id = req.body.question_id;
 
-        User.findByIdAndUpdate(
-            user_id,
-            {$push: {"correct_questions": question_id}},
-            function(err, model) {
-                console.log(err)
+        var techName = "";
+        var areaName = "";
+        var companyName = "";
+        var generalName = "";
+
+
+        General.find({ questions: question_id})
+        .exec(function(err, _res){
+          if(_res.length > 0)
+            generalName = _res[0].name;
+
+            Company.find({ questions: question_id})
+            .exec(function(err, _res){
+              if(_res.length > 0)
+              companyName = _res[0].name;
+
+              Technology.find({ questions: question_id})
+              .exec(function(err, _res){
+                if(_res.length > 0){
+                  techName = _res[0].name;
+
+                  Area.find({ technologies: _res[0]._id})
+                  .exec(function(err, _res2){
+                    if(_res2.length > 0)
+                    areaName = _res2[0].name;
+
+                    if(generalName){
+                      var general = {};
+                      general[generalName] = 1;
+                      User.findOneAndUpdate({_id: user_id}, {$inc: general}, function(err, doc){
+                          if(err){
+                              console.log("Something wrong when updating data!");
+                          }
+                      });
+                    }
+
+                    if(companyName){
+                      var company = {};
+                      company[companyName] = 1;
+                      User.findOneAndUpdate({_id: user_id}, {$inc: company}, function(err, doc){
+                          if(err){
+                              console.log("Something wrong when updating data!");
+                          }
+                      });
+                    }
+
+                    if(areaName){
+                      var area = {};
+                      area["area."+areaName] = 1;
+                      User.findOneAndUpdate({_id: user_id}, {$inc: area}, function(err, doc){
+                          if(err){
+                              console.log("Something wrong when updating data!");
+                          }
+                      });
+
+                      var tech = {};
+                      tech["tech."+techName] = 1;
+                      User.findOneAndUpdate({_id: user_id}, {$inc: tech}, function(err, doc){
+                          if(err){
+                              console.log("Something wrong when updating data!");
+                          }
+                      });
+                    }
+                  });
+                }
+
             });
+        });
+      });
 
     });
 
-
-    //add answered question score
-    apiRoutes.post('/user/answered_question', function(req, res) {
+    //get a user score, grouped by technologies
+    apiRoutes.post('/user/list_scores/', function(req, res) {
 
         var user_id = req.body.user_id;
-        var question_id = req.body.question_id;
 
-        User.findByIdAndUpdate(
-            user_id,
-            {$push: {"answered_questions": question_id}},
-            function(err, model) {
-                console.log(err)
-            });
-
-    });
-
-    //get a score from a specific technology
-    apiRoutes.get('/user/:user/technology_score/:tech', function(req, res) {
-
-        var technology = req.params.tech;
-        var user_id = req.params.user;
-
-        Technology.findOne({ name: { $in: [technology]} })
-            .exec(function(err, tech){
-            User.find({ correct_questions: { $in: tech.questions} }, function(err, user) {
-                if (err) throw err;
-                res.send({score: user[0].correct_questions.length});
-            });
-        });
-
-    });
-
-    //get a score from a specific area
-    apiRoutes.get('/user/:user/area_score/:area', function(req, res) {
-
-        var area = req.params.area;
-        var user_id = req.params.user;
-
-        Area.findOne({ name: { $in: [area]} })
-            .exec(function(err, area){
-            console.log(area)
-            User.find({ correct_questions: { $in: area.technologies.questions} }, function(err, user) {
-                if (err) throw err;
-                res.send({score: user[0].correct_questions.length});
-            });
-        });
+        User.findOne({ _id: user_id})
+            .exec(function(error, user) {
+              res.send({
+                total_score: user.score,
+                company_scores: user.company,
+                general_scores: user.general,
+                tech_scores: user.tech,
+                area_scores: user.area});
+        })
 
     });
 

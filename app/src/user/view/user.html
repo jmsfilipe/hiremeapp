@@ -23,49 +23,48 @@
     </div>
     <md-content flex layout-padding class="score-list">
         <div flex-xs flex-gt-xs="50" layout="row" >
-            <md-card>
+            <md-card ng-repeat="(techName, techScore) in uc.scores.tech_scores" ng-if="techScore != 0">
                 <md-card-title class="senior">
                     <md-card-title-text>
-                        <span class="md-headline">12</span>
+                        <span class="md-headline">{{techScore}}</span>
                     </md-card-title-text>
                 </md-card-title>
                 <md-card-content>
-                    <span class="md-headline">Web</span>
-                    <span >Javascript</span>
+                    <span class="md-headline">{{techName}}</span>
+                    <span>Technology</span>
                 </md-card-content>
             </md-card>
-            <md-card>
+            <md-card ng-repeat="(areaName, areaScore) in uc.scores.area_scores" ng-if="areaScore != 0">
                 <md-card-title class="junior">
                     <md-card-title-text>
-                        <span class="md-headline">6</span>
+                        <span class="md-headline">{{areaScore}}</span>
                     </md-card-title-text>
                 </md-card-title>
                 <md-card-content>
-                    <span class="md-headline">General</span>
-                    <span >Internet</span>
+                    <span class="md-headline">{{areaName}}</span>
+                    <span>Area</span>
                 </md-card-content>
             </md-card>
-
-            <md-card>
+            <md-card ng-repeat="(generalName, generalScore) in uc.scores.general_scores" ng-if="generalScore != 0">
                 <md-card-title class="intern">
                     <md-card-title-text>
-                        <span class="md-headline">1</span>
+                        <span class="md-headline">{{generalScore}}</span>
                     </md-card-title-text>
                 </md-card-title>
                 <md-card-content>
-                    <span class="md-headline">General</span>
-                    <span >Excel</span>
+                    <span class="md-headline">{{generalName}}</span>
+                    <span>General</span>
                 </md-card-content>
             </md-card>
-            <md-card>
+            <md-card ng-repeat="(companyName, companyScore) in uc.scores.company_scores" ng-if="companyScore != 0">
                 <md-card-title class="intern">
                     <md-card-title-text>
-                        <span class="md-headline">2</span>
+                        <span class="md-headline">{{companyScore}}</span>
                     </md-card-title-text>
                 </md-card-title>
                 <md-card-content>
-                    <span class="md-headline">General</span>
-                    <span >Word</span>
+                    <span class="md-headline">{{companyName}}</span>
+                    <span>Company</span>
                 </md-card-content>
             </md-card>
         </div>
