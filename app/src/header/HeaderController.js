@@ -2,22 +2,20 @@
 var game = angular.module('hiremeapp.header', [
     'ngMaterial'
 ])
-.controller('HeaderController', function($mdSidenav){
+.controller('HeaderController', ['$mdSidenav', 'AuthenticationService', '$state', function($mdSidenav, AuthenticationService,$state){
     var self = this;
     var originatorEv;
     self.openMenu = function($mdOpenMenu, ev) {
-        originatorEv = ev;
         $mdOpenMenu(ev);
     };
-
-
 
     self.toggleSidebar = function() {
         $mdSidenav('left').toggle();
     }
 
     self.signOut = function(){
-      //TODO
+        AuthenticationService.logOut();
+        $state.go('landing');
     }
 
-});
+}]);

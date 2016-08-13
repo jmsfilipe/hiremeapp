@@ -20,9 +20,9 @@ var question = angular.module('hiremeapp.question', [
     self.disabledAnswers = false;
 
     if($translate.use() === "en"){
-      self.lang = 0;
+        self.lang = 0;
     } else{
-      self.lang = 1;
+        self.lang = 1;
     }
 
     self.counter = 1;
@@ -91,13 +91,13 @@ var question = angular.module('hiremeapp.question', [
             companies: _companies,
             general: _general,
             level: 1}).then(function successCallback(response) {
-              self.question = response.data.question;
-              self.answers = response.data.answers;
-              self.explanation = response.data.explanation;
-              self.ready = true;
-              questionId = response.data._id;
+            self.question = response.data.question;
+            self.answers = response.data.answers;
+            self.explanation = response.data.explanation;
+            self.ready = true;
+            questionId = response.data._id;
         }, function errorCallback(response) {
-
+            //TODO
         });
     };
 

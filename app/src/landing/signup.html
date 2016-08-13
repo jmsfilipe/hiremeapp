@@ -1,27 +1,24 @@
 <section layout-fill layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-
     <form name="signupForm" ng-submit="signupForm.$valid && sc.signUp(signupForm, sc.user)">
-        <div layout-gt-sm="row" >
-
+        <div layout-gt-sm="row">
+            
             <md-input-container class="md-block  md-primary" flex-gt-sm>
                 <label>{{ 'NAME' | translate }}</label>
-                <input required name="name" ng-model="sc.user.name" />
-                <div class="hint" ng-show="signupForm.name.$untouched  || signupForm.name.$valid">{{ 'TELL_US_WHAT_WE_SHOULD_CALL_YOU' | translate }}</div>
+                <input required name="name" ng-model="sc.user.name"/>
+                <div class="hint" ng-show="signupForm.name.$untouched  || signupForm.name.$valid">{{'WHAT_WE_SHOULD_CALL_YOU' | translate }}</div>
                 <div ng-messages="signupForm.name.$error" ng-if="signupForm.name.$touched">
                     <div ng-message="required">{{ 'NAME_IS_REQUIRED' | translate }}</div>
-                    <div ng-message="md-maxlength">{{ 'THE_NAME_HAS_TO_BE_LESS_THAN_30_CHARACTERS_LONG' | translate }}</div>
+                    <div ng-message="md-maxlength">{{ 'NAME_LESS_30_CHARACTERS_LONG' | translate }}</div>
                 </div>
             </md-input-container>
 
             <md-input-container class="md-block md-primary" flex-gt-sm>
                 <label >Email</label>
                 <input required name="email" ng-model="sc.user.email" required minlength="5" maxlength="100" ng-pattern='/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/' email-check />
-                <div class="hint" ng-show=" ( !signupForm.$submitted && signupForm.email.$untouched)  || signupForm.email.$valid ">{{ 'HOW_CAN_WE_REACH_YOU' | translate }}</div>
+                <div class="hint" ng-show="signupForm.email.$untouched  || signupForm.email.$valid">{{ 'HOW_CAN_WE_REACH_YOU' | translate }}</div>
                 <div ng-messages="signupForm.email.$error" >
-                    <div ng-message="duplicated">{{ THAT_EMAIL_ALREADY_EXISTS' | translate }}</div>
-                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']" ng-if="signupForm.email.$touched">
-                        {{ 'YOUR_EMAIL_MUST_BE' | translate }}
-                    </div>
+                    <div ng-message="duplicated">{{ 'THAT_EMAIL_ALREADY_EXISTS' | translate }}</div>
+                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']" ng-if="signupForm.email.$touched">{{ 'YOUR_EMAIL_MUST_BE' | translate }}</div>
                 </div>
             </md-input-container>
         </div>
@@ -32,27 +29,24 @@
                        required minlength="5" maxlength="30" ng-pattern="/^(?=.*?[[a-zA-Z])(?=.*?[0-9])(?=.*?[^\w\s]|.*?[_]).{5,}$/" />
                 <div class="hint" ng-show="signupForm.password.$untouched  || signupForm.password.$valid" >{{ 'DONT_KEEP_IT_SIMPLE' | translate }}</div>
                 <div ng-messages="signupForm.password.$error" ng-if="signupForm.password.$touched">
-                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                        {{ 'YOUR_PASSWORD_MUST_BE' | translate }}
-                    </div>
+                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">{{ 'YOUR_PASSWORD_MUST_BE' | translate }}</div>
                 </div>
             </md-input-container>
             <md-input-container class="md-block md-primary" flex-gt-sm>
                 <label>{{ 'CONFIRM_PASSWORD' | translate }}</label>
                 <input ng-disable-paste type="password" name="passwordRepeat" ng-model="sc.user.passwordRepeat"
                        required pw-check="password"  />
-                <div class="hint"
-                     ng-show="signupForm.passwordRepeat.$untouched || !signupForm.passwordRepeat.$error.pwmatch" >
+                <div class="hint" ng-show="signupForm.passwordRepeat.$untouched || signupForm.passwordRepeat.$valid" >
                     {{ 'REPEAT_AND_REMEMBER' | translate }}
                 </div>
-                <div ng-messages="signupForm.passwordRepeat.$error" ng-if="signupForm.passwordRepeat.$touched" >
-                    <div ng-message="pwmatch">{{ 'PASSWORDS_MUST_MATCH' | translate }}</div>
+                <div  ng-messages="signupForm.passwordRepeat.$error" ng-if="signupForm.passwordRepeat.$touched" >
+                    <div ng-message-exp="['required', 'pwmatch']">{{ 'PASSWORDS_MUST_MATCH' | translate }}</div>
                 </div>
             </md-input-container>
         </div>
         <div layout-gt-sm="row"  layout-align="center center">
-            <md-button class="md-raised md-primary" type="submit" id="submit" value="Submit" > {{ 'JOIN_US' | translate }} </md-button>
-            <md-button class="md-primary" ui-sref="landing"> Sign in </md-button>
+            <md-button class="md-raised md-primary" type="submit" id="submit" value="Submit">{{ 'JOIN_US' | translate }}</md-button>
+            <md-button class="md-primary" ui-sref="landing"> {{ 'SIGN_IN' | translate }}</md-button>
         </div>
 
 

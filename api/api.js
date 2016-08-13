@@ -8,7 +8,7 @@ module.exports = function(app, express, mongoose, jwt){
     var apiRoutes = express.Router(); 
 
     // unauthenticated related routes
-    require('./api.unauthenticated.js')(apiRoutes);
+    require('./api.unauthenticated.js')(apiRoutes, jwt, app);
 
 
     // route to authenticate a user (POST http://localhost:8080/api/authenticate)
@@ -18,7 +18,7 @@ module.exports = function(app, express, mongoose, jwt){
 
         // find the user
         User.findOne({
-            "email": { $regex: new RegExp("^" + req.body.email.toLowerCase(), "i") },
+            email: { $regex: new RegExp("^" + req.body.email.toLowerCase() + '$', "i") },
             blocked: false,
         }, function(err, user) {
 
@@ -27,12 +27,12 @@ module.exports = function(app, express, mongoose, jwt){
 
 
             if (!user) {
-                res.json({ success: false, message: 'Authentication failed. User not found.' });
+                res.json({ success: false, code: 'InvalidUser', message: 'Authentication failed. User not found.' });
             } else if (user) {
 
                 // check if password matches
                 if (user.password != req.body.password) {
-                    res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+                    res.json({ success: false, code: 'AuthenticationFailed', message: 'Authentication failed. Wrong password.' });
                 } else {
 
                     // if user is found and password is right

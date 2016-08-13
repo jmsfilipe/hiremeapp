@@ -15,17 +15,24 @@ var users = angular.module('hiremeapp.signup', [
     }
 
     self.signUp = function(form, userData){
-        // Load all articles
 
-        signupServices.signUp(userData)
-            .success(function(data) {
-            $state.go('index.home', { "user": self.signupForm});
-        })
-            .error(function(data) {
-            form.email.$setValidity("duplicated", false);
+        signupServices.signUp(userData).then(function successCallback(response) {
+            if(response.data.success){
+                AuthenticationService.logIn(response.data.user, response.data.jwt) ;
+                $state.go('index.home', { "user": response.data.user});
+            }
+            else switch(response.data.code){
+                case 'DuplicatedUser':
+                    form.email.$setValidity("duplicated", false);
+                    break;
+                default:
+                    break;
+            }
+        }, function errorCallback(response) {
+            //TODO
         });
-
     }
+
 
     // *********************************
     // Internal methods

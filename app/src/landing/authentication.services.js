@@ -20,7 +20,6 @@ var module = angular.module('hiremeapp.auth', ['angular-jwt'])
         user: null,
         logOut: logOut,
         logIn: logIn
-
     }
 
     return auth;

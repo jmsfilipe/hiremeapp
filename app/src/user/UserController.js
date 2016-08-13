@@ -20,29 +20,29 @@ var game = angular.module('hiremeapp.user', [
         self.totalFriends = response.data.friends.length;
         console.log(response.data.friends.length);
     }, function errorCallback(response) {
-
+        //TODO
     });
 
     userServices.getScore({user_id: userId}).then(function successCallback(response) {
         self.score = response.data.score;
     }, function errorCallback(response) {
-
+        //TODO
     });
 
     userServices.listScores({user_id: userId}).then(function successCallback(response) {
-      self.scores = response.data;
+        self.scores = response.data;
     }, function errorCallback(response) {
-
+        //TODO
     });
 
     self.getColorClass = function(score){
-      if(score < 6){
-        return "intern";
-      } else if(score < 20){
-        return "junior";
-      } else{
-        return "senior";
-      }
+        if(score < 6){
+            return "intern";
+        } else if(score < 20){
+            return "junior";
+        } else{
+            return "senior";
+        }
     }
 
     self.showFriendsDialog = function(ev){
@@ -65,10 +65,10 @@ var game = angular.module('hiremeapp.user', [
                     self.friendsList = response.data.friends;
                     self.totalFriends = response.data.friends.length;
                 }, function errorCallback(response) {
-
+                    //TODO
                 });
             }, function() {
-                //canceled
+
             });
 
         }, function errorCallback(response) {
@@ -90,7 +90,7 @@ var game = angular.module('hiremeapp.user', [
         userServices.search({term: $scope.searchInput, user_id: userId}).then(function successCallback(response) {
             self.friendsList = response.data;
         }, function errorCallback(response) {
-
+            //TODO
         });
     });
 
@@ -99,10 +99,10 @@ var game = angular.module('hiremeapp.user', [
             userServices.search({term: $scope.searchInput, user_id: userId}).then(function successCallback(response) {
                 self.friendsList = response.data;
             }, function errorCallback(response) {
-
+                //TODO
             });
         }, function errorCallback(response) {
-
+            //TODO
         });
     }
 
@@ -124,7 +124,7 @@ var game = angular.module('hiremeapp.user', [
     self.language = $translate.use();
 
     self.changeLanguage = function (langKey) {
-       self.language = langKey;
+        self.language = langKey;
     };
 
     var userId = AuthenticationService.user._id;
@@ -142,7 +142,7 @@ var game = angular.module('hiremeapp.user', [
         userServices.setSettings({user_id: userId, password: pwd, email: self.user.email, gender: self.user.gender}).then(function successCallback(response) {
             $state.go("index.home");
         }, function errorCallback(response) {
-
+            //TODO
         });
     }
 

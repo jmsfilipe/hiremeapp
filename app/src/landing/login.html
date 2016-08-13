@@ -1,11 +1,11 @@
 <section  layout-fill layout="row" layout-sm="column" layout-align="center center" layout-wrap>
 
-    <form name="loginForm" ng-submit="loginForm.$valid && lc.signIn(loginForm, lc.user)">
+    <form novalidate  name="loginForm" ng-submit="loginForm.$valid && lc.signIn(loginForm, lc.user)">
         <div layout-gt-sm="row">
 
             <md-input-container class="md-block md-primary" flex-gt-sm>
                 <label >Email</label>
-                <input account-check required name="email" ng-model="lc.user.email" required />
+                <input account-check name="email" id="email" ng-model="lc.user.email" required ng-change-validate="password"/>
                 <div ng-messages="loginForm.email.$error">
                     <div ng-message="required">{{ 'ENTER_YOUR_EMAIL' | translate }}</div>
                     <div ng-message="registered">{{ 'WE_CANT_FIND_YOU' | translate }}</div>
@@ -15,7 +15,7 @@
         <div layout-gt-sm="row">
             <md-input-container class="md-block md-primary" flex-gt-sm>
                 <label>Password</label>
-                <input reset-on-change='invalid' type="password" id="password" name="password" ng-model="lc.user.password" required />
+                <input ng-change-validate="password" type="password" id="password" name="password" ng-model="lc.user.password" required />
                 <div ng-messages="loginForm.password.$error" >
                     <div ng-message="required">{{ 'ENTER_YOUR_PASSWORD' | translate }}</div>
                     <div ng-message="invalid">{{ 'WRONG_PASSWORD' | translate }}</div>
@@ -23,8 +23,8 @@
             </md-input-container>
         </div>
         <div layout-gt-sm="row">
-            <md-button class="md-raised md-primary" type="submit" id="submit" value="Submit" > Log in </md-button>
-            <md-button class=" md-primary" ui-sref="signup"> Sign up </md-button>
+            <md-button class="md-raised md-primary" type="submit" id="submit" value="Submit">{{ 'SIGN_IN' | translate }}</md-button>
+            <md-button class=" md-primary" ui-sref="signup">{{ 'JOIN_US' | translate }}</md-button>
         </div>
     </form>
 

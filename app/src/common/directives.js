@@ -3,31 +3,24 @@ var users = angular.module('hiremeapp.directives', [
     'ngMaterial',
     'ngMessages'
 
-]).directive('resetOnChange', function (loginServices) {
+]).directive('ngChangeValidate', function (loginServices, $parse) {
     return {
-        require: 'ngModel',
+        require: '^form',
         restrict: 'A',
+        priority: 1,
+        scope: {
+            'ngChangeValidate' : '&'
+        },
         link: function (scope, elem, attrs, ctrl) {
+            console.log(ctrl);
 
-            var toReset = (scope.$eval(attrs.resetOnChange) instanceof Array) 
-            ? scope.$eval(attrs.resetOnChange) 
-            : [attrs.resetOnChange];
+            var ngMessages = (scope.$eval(attrs.ngChangeValidate) instanceof Array) ? scope.$eval(attrs.ngChangeValidate) 
+            : [attrs.ngChangeValidate];
 
             $(elem).on('keyup', function () {
 
-                loginServices.validateAccount({email: elem.val()})
-                    .then(function successCallback(response) {
-
-
-                    for(var x in toReset)
-                        ctrl.$setValidity(toReset[x], true);
-
-                }, function errorCallback(response) {
-
-                });
-
-
-
+                for (var index in ngMessages)
+                    ctrl[ngMessages[index]].$setValidity('invalid', true);
             });
         }
     }
