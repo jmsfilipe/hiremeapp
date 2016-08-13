@@ -1,9 +1,5 @@
 "use strict";
-var users = angular.module('hiremeapp.landing', [
-    'ngMaterial',
-    'ngMessages',
-    'hiremeapp.auth.directives'
-])
+angular.module('hiremeapp.auth')
 .controller('LoginController', ['loginServices', '$state', 'AuthenticationService', function(loginServices, $state,  AuthenticationService){
     var self = this;
 
@@ -18,7 +14,7 @@ var users = angular.module('hiremeapp.landing', [
 
             if(response.data.success){
                 AuthenticationService.logIn(response.data.user, response.data.jwt) ;
-                $state.go('index.home', { "user": response.data.user});
+                $state.go('index.game', { "user": response.data.user});
             }
             else switch(response.data.code){
                 case 'InvalidUser':

@@ -1,10 +1,6 @@
 "use strict";
-var users = angular.module('hiremeapp.auth.directives', [
-    'ngMaterial',
-    'ngMessages'
-
-])
-.directive('emailCheck', function (signupServices) {
+angular.module('hiremeapp.auth')
+.directive('emailCheck', ['signupServices', function (signupServices) {
     return {
         require: 'ngModel',
         link: function (scope, elem, attrs, ctrl) {
@@ -19,7 +15,7 @@ var users = angular.module('hiremeapp.auth.directives', [
             });
         }
     }
-}).directive('pwCheck', [function () {
+}]).directive('pwCheck', [function () {
     return {
         require: 'ngModel',
         link: function (scope, elem, attrs, ctrl) {
@@ -33,7 +29,7 @@ var users = angular.module('hiremeapp.auth.directives', [
             });
         }
     }
-}]).directive('accountCheck', function (loginServices) {
+}]).directive('accountCheck', ['loginServices', function (loginServices) {
     return {
         require: 'ngModel',
         link: function (scope, elem, attrs, ctrl) {
@@ -55,4 +51,4 @@ var users = angular.module('hiremeapp.auth.directives', [
             });
         }
     }
-});
+}]);

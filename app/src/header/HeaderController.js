@@ -15,7 +15,7 @@ var game = angular.module('hiremeapp.header', [
 
     self.signOut = function(){
         AuthenticationService.logOut();
-        $state.go('landing');
+        $state.go('signin');
     }
 
 }]);

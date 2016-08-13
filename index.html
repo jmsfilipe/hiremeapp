@@ -11,7 +11,7 @@
         <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
         <link rel="stylesheet" href="vendor/angular-material/angular-material.css" type="text/css">
         <link rel="stylesheet" href="app/assets/stylesheets/app.css" type="text/css">
-       <link href="https://fonts.googleapis.com/css?family=Bangers|Galada" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Bangers|Galada" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
               rel="stylesheet">
         <script type="text/javascript" defer src="vendor/jquery/dist/jquery.min.js"></script>
@@ -31,16 +31,17 @@
         <script type="text/javascript" defer src="app/src/game/GameController.js"></script>
         <script type="text/javascript" defer src="app/src/game/QuestionController.js"></script>
         <script type="text/javascript" defer src="app/src/game/game.services.js"></script>
-        <script type="text/javascript" defer src="app/src/landing/SignupController.js"></script>
         <script type="text/javascript" defer src="app/src/common/directives.js"></script>
         <script type="text/javascript" defer src="app/src/user/UserController.js"></script>
         <script type="text/javascript" defer src="app/src/user/user.services.js"></script>
-        <script type="text/javascript" defer src="app/src/landing/LoginController.js"></script>
-        <script type="text/javascript" defer src="app/src/landing/authentication.services.js"></script>
-        <script type="text/javascript" defer src="app/src/landing/authentication.directives.js"></script>
+        <script type="text/javascript" defer src="app/src/auth/auth.js"></script>
+        <script type="text/javascript" defer src="app/src/auth/SignupController.js"></script>
+        <script type="text/javascript" defer src="app/src/auth/LoginController.js"></script>
+        <script type="text/javascript" defer src="app/src/auth/authentication.services.js"></script>
+        <script type="text/javascript" defer src="app/src/auth/authentication.directives.js"></script>
         <script type="text/javascript" defer >
             angular
-                .module('hiremeapp', ['pascalprecht.translate', 'hiremeapp.main', 'hiremeapp.header', 'hiremeapp.sidebar', 'hiremeapp.game', 'hiremeapp.question', 'hiremeapp.user', 'hiremeapp.landing', 'hiremeapp.signup', 'hiremeapp.directives', 'hiremeapp.auth'])
+                .module('hiremeapp', ['pascalprecht.translate', 'hiremeapp.main', 'hiremeapp.header', 'hiremeapp.sidebar', 'hiremeapp.game', 'hiremeapp.question', 'hiremeapp.user', 'hiremeapp.directives', 'hiremeapp.auth'])
                 .config(function($translateProvider, $mdThemingProvider, $mdIconProvider){
 
                 $mdIconProvider
@@ -60,8 +61,8 @@
                     .warnPalette('deep-orange');
 
                 $translateProvider.useStaticFilesLoader({
-                  prefix: 'app/assets/lang/',
-                  suffix: '.json'
+                    prefix: 'app/assets/lang/',
+                    suffix: '.json'
                 });
                 $translateProvider.preferredLanguage('pt');
 

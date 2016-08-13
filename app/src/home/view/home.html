@@ -4,15 +4,12 @@
 
     <span class="flex"></span>
 
-    <md-button class="md-raised "  ng-click="">Single <md-icon >done</md-icon></md-button>
-    <md-button class="md-raised disabled"  ng-click="gm.showAlert($event)" >Multiplayer</md-button>
+    <md-button class="md-raised">Single <md-icon >done</md-icon></md-button>
+    <md-button class="md-raised disabled" ng-click="ctrl.showAlert($event)" >Multiplayer</md-button>
 
     <span class="flex"></span>
-    <md-button class="md-raised md-accent" ng-click="gm.start()">{{ 'PLAY_NOW' | translate }}</md-button>
+    <md-button class="md-raised md-accent" ng-click="ctrl.start()">{{ 'PLAY_NOW' | translate }}</md-button>
     <span class="flex"></span>
-    <md-button id="filter-btn" ng-class="{'filter-on' : gm.filters.length > 0}" aria-label="menu" class="md-fab md-accent" ng-click="gm.showTabDialog($event)">
-
-    </md-button>
-
+    <md-button id="filter-btn" ng-class="{'filter-on' : ctrl.filters.length > 0}" aria-label="menu" class="md-fab md-accent" ng-click="ctrl.showTabDialog($event)"></md-button>
 
 </section>

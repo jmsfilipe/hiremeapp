@@ -6,34 +6,36 @@ var main = angular.module('hiremeapp.main', [
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
-        .state('landing', {
+        .state('signin', {
         url: "/",
-        templateUrl: "app/src/landing/login.html",
-        controller: "LoginController as lc",
+        templateUrl: "app/src/auth/login.html",
+        controller: "LoginController as ctrl",
         access: { requiredLogin: false }
     })
         .state('signup', {
         url: "/signup",
-        templateUrl: "app/src/landing/signup.html",
-        controller: "SignupController as sc",
+        templateUrl: "app/src/auth/signup.html",
+        controller: "SignupController as ctrl",
         access: { requiredLogin: false }
     })
         .state('index', {
         abstract: true,
         views: {
             '@' : {
-                templateUrl: "app/src/home/view/main.html",
-                //controller: 'IndexCtrl'
+                templateUrl: "app/src/home/view/main.html"
             },
-            'top@index' : { templateUrl: 'app/src/header/header.html',},
+            'top@index' : { templateUrl: 'app/src/header/header.html',
+                           controller: 'HeaderController as header'
+                          },
             'sidebar@index' : { templateUrl: 'app/src/sidebar/sidebar.html',
-                               controller: 'SidebarController'}
+                               controller: 'SidebarController as sidebar'
+                              }
         },
     })
-        .state('index.home', {
+        .state('index.game', {
         access: { requiredLogin: true },
         url: '/home',
-        controller: "GameController as gm",
+        controller: "GameController as ctrl",
         params: {user: null},
         templateUrl: 'app/src/home/view/home.html'
 
@@ -42,48 +44,45 @@ var main = angular.module('hiremeapp.main', [
         .state('index.question', {
         url: "/play",
         templateUrl: "app/src/game/view/chooseQuestion.html",
-        controller: "QuestionController as qc",
+        controller: "QuestionController as ctrl",
         params: {user: null, filters: null},
         access: { requiredLogin: true },
         onEnter: function($state, $stateParams){
-            if(!$stateParams.filters) $state.go('index.home');
+            if(!$stateParams.filters) $state.go('index.game');
         }
-        //TODO
     })
         .state('index.user', {
         url: "/user",
         templateUrl: "app/src/user/view/user.html",
-        controller: "UserController as uc",
+        controller: "UserController as ctrl",
         access: { requiredLogin: true }
     })
         .state('index.settings', {
         url: "/user/settings",
         templateUrl: "app/src/user/view/settings.html",
-        controller: "SettingsController as sc",
+        controller: "SettingsController as ctrl",
         access: { requiredLogin: true }
     })
         .state('index.about-us', {
         url: "/about-us",
         templateUrl: "app/src/home/view/about-us.html",
-        controller: "SettingsController as sc",
+        controller: "SettingsController as ctrl",
         access: { requiredLogin: true }
     })
 
-}).controller('RootController', function(AuthenticationService, $state, $scope){
+}).controller('RootController', ['AuthenticationService', '$state', '$scope', function(AuthenticationService, $state, $scope){
     var self = this;
-
     self.auth = AuthenticationService;
 
     $scope.$on('unauthenticated', function() {
         auth.logOut();
-        $state.go('landing');
+        $state.go('signin');
     });
 
     $scope.$on("$stateChangeStart", function(event, nextRoute, currentRoute) {
         if (nextRoute.access.requiredLogin && !self.auth.isLogged) {
             event.preventDefault();
-            $state.go('landing');
+            $state.go('signin');
         }
     });
-})
-;
+}]);

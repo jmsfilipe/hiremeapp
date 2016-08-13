@@ -140,7 +140,7 @@ var game = angular.module('hiremeapp.user', [
             pwd = self.user.password;
         }
         userServices.setSettings({user_id: userId, password: pwd, email: self.user.email, gender: self.user.gender}).then(function successCallback(response) {
-            $state.go("index.home");
+            $state.go("index.game");
         }, function errorCallback(response) {
             //TODO
         });

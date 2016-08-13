@@ -1,17 +1,17 @@
-<form name="signupForm" ng-submit="signupForm.$valid && sc.updateSettings()" class="page page--settings">
+<form name="signupForm" ng-submit="signupForm.$valid && ctrl.updateSettings()" class="page page--settings">
 
     <h1>{{ 'SETTINGS' | translate }}</h1>
     <div layout-gt-sm="row" >
         <md-input-container class="md-block md-white" flex-gt-sm>
             <label>Email</label>
-            <input ng-model="sc.user.email">
+            <input ng-model="ctrl.user.email">
         </md-input-container>
     </div>
 
     <div layout-gt-sm="row">
         <md-input-container class="md-block md-primary" flex-gt-sm>
             <label>Password</label>
-            <input ng-disable-paste type="password" id="password" name="password" ng-model="sc.user.password"
+            <input ng-disable-paste type="password" id="password" name="password" ng-model="ctrl.user.password"
                    minlength="5" maxlength="30" ng-pattern="/^(?=.*?[[a-zA-Z])(?=.*?[0-9])(?=.*?[^\w\s]|.*?[_]).{5,}$/" />
             <div class="hint" ng-show="signupForm.password.$untouched  || signupForm.password.$valid" >{{ 'DONT_KEEP_IT_SIMPLE' | translate }}</div>
             <div ng-messages="signupForm.password.$error" ng-if="signupForm.password.$touched">
@@ -22,7 +22,7 @@
         </md-input-container>
         <md-input-container class="md-block md-primary" flex-gt-sm>
             <label>{{ 'CONFIRM_PASSWORD' | translate }}</label>
-            <input ng-disable-paste type="password" name="passwordRepeat" ng-model="sc.user.passwordRepeat"
+            <input ng-disable-paste type="password" name="passwordRepeat" ng-model="ctrl.user.passwordRepeat"
                    pw-check="password"  />
             <div class="hint"
                  ng-show="signupForm.passwordRepeat.$untouched || !signupForm.passwordRepeat.$error.pwmatch" >
@@ -35,7 +35,7 @@
     </div>
 
     <div layout-gt-sm="row" >
-        <md-radio-group ng-model="sc.user.gender">
+        <md-radio-group ng-model="ctrl.user.gender">
             <md-radio-button value="M" >{{ 'MALE' | translate }}</md-radio-button>
             <md-radio-button value="F">{{ 'FEMALE' | translate }}</md-radio-button>
         </md-radio-group>
@@ -43,9 +43,9 @@
 
     <h1>{{ 'LANGUAGE' | translate }}</h1>
     <div layout-gt-sm="row">
-      <md-radio-group ng-model="sc.language">
-          <md-radio-button value="pt" ng-click="sc.changeLanguage('pt')">{{ 'PORTUGUESE' | translate }}</md-radio-button>
-          <md-radio-button value="en" ng-click="sc.changeLanguage('en')">{{ 'ENGLISH' | translate }}</md-radio-button>
+      <md-radio-group ng-model="ctrl.language">
+          <md-radio-button value="pt" ng-click="ctrl.changeLanguage('pt')">{{ 'PORTUGUESE' | translate }}</md-radio-button>
+          <md-radio-button value="en" ng-click="ctrl.changeLanguage('en')">{{ 'ENGLISH' | translate }}</md-radio-button>
       </md-radio-group>
     </div>
     <md-button class="md-raised " type="submit" id="submit" value="Submit" > {{ 'SAVE' | translate }} </md-button>

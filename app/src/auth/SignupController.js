@@ -1,11 +1,6 @@
 "use strict";
-var users = angular.module('hiremeapp.signup', [
-    'ngMaterial',
-    'ngMessages',
-    'hiremeapp.auth.directives'
-
-])
-.controller('SignupController', function(signupServices, $timeout, $log, $scope, $state, $stateParams){
+angular.module('hiremeapp.auth')
+.controller('SignupController', ['signupServices', '$state', function(signupServices, $state){
     var self = this;
 
     self.user = {
@@ -19,7 +14,7 @@ var users = angular.module('hiremeapp.signup', [
         signupServices.signUp(userData).then(function successCallback(response) {
             if(response.data.success){
                 AuthenticationService.logIn(response.data.user, response.data.jwt) ;
-                $state.go('index.home', { "user": response.data.user});
+                $state.go('index.game', { "user": response.data.user});
             }
             else switch(response.data.code){
                 case 'DuplicatedUser':
@@ -33,11 +28,8 @@ var users = angular.module('hiremeapp.signup', [
         });
     }
 
-
     // *********************************
     // Internal methods
     // *********************************
 
-
-
-});
+}]);
