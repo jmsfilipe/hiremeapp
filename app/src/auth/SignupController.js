@@ -1,6 +1,6 @@
 "use strict";
 angular.module('hiremeapp.auth')
-.controller('SignupController', ['signupServices', '$state', function(signupServices, $state){
+.controller('SignupController', ['signupServices', function(signupServices){
     var self = this;
 
     self.user = {
@@ -14,7 +14,6 @@ angular.module('hiremeapp.auth')
         signupServices.signUp(userData).then(function successCallback(response) {
             if(response.data.success){
                 AuthenticationService.logIn(response.data.user, response.data.jwt) ;
-                $state.go('index.game', { "user": response.data.user});
             }
             else switch(response.data.code){
                 case 'DuplicatedUser':

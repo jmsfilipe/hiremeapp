@@ -1,6 +1,6 @@
 "use strict";
 angular.module('hiremeapp.auth')
-.controller('LoginController', ['loginServices', '$state', 'AuthenticationService', function(loginServices, $state,  AuthenticationService){
+.controller('LoginController', ['loginServices', 'AuthenticationService', function(loginServices,  AuthenticationService){
     var self = this;
 
     //mock user
@@ -14,7 +14,6 @@ angular.module('hiremeapp.auth')
 
             if(response.data.success){
                 AuthenticationService.logIn(response.data.user, response.data.jwt) ;
-                $state.go('index.game', { "user": response.data.user});
             }
             else switch(response.data.code){
                 case 'InvalidUser':

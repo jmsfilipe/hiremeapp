@@ -23,8 +23,7 @@ angular.module('hiremeapp.auth')
             var firstPassword = '#' + attrs.pwCheck;
             $(elem).add(firstPassword).on('keyup', function () {
                 scope.$apply(function () {
-                    var v = elem.val()===$(firstPassword).val();
-                    ctrl.$setValidity('pwmatch', v);
+                    ctrl.$setValidity('pwmatch',  elem.val()===$(firstPassword).val());
                 });
             });
         }
@@ -46,7 +45,7 @@ angular.module('hiremeapp.auth')
                     ctrl.$setValidity("registered", response.data.valid);
 
                 }, function errorCallback(response) {
-                    //canceled
+                    //TODO
                 });
             });
         }

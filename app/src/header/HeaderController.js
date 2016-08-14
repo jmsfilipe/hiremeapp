@@ -2,7 +2,7 @@
 var game = angular.module('hiremeapp.header', [
     'ngMaterial'
 ])
-.controller('HeaderController', ['$mdSidenav', 'AuthenticationService', '$state', function($mdSidenav, AuthenticationService,$state){
+.controller('HeaderController', ['$mdSidenav', 'AuthenticationService', function($mdSidenav, AuthenticationService){
     var self = this;
     var originatorEv;
     self.openMenu = function($mdOpenMenu, ev) {
@@ -15,7 +15,6 @@ var game = angular.module('hiremeapp.header', [
 
     self.signOut = function(){
         AuthenticationService.logOut();
-        $state.go('signin');
     }
 
 }]);

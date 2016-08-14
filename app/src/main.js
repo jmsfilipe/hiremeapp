@@ -70,19 +70,18 @@ var main = angular.module('hiremeapp.main', [
         access: { requiredLogin: true }
     })
 
-}).controller('RootController', ['AuthenticationService', '$state', '$scope', function(AuthenticationService, $state, $scope){
+}).controller('RootController', ['AuthenticationService', '$scope', function(AuthenticationService, $scope){
     var self = this;
     self.auth = AuthenticationService;
 
     $scope.$on('unauthenticated', function() {
-        auth.logOut();
-        $state.go('signin');
+        self.auth.logOut();
     });
 
     $scope.$on("$stateChangeStart", function(event, nextRoute, currentRoute) {
         if (nextRoute.access.requiredLogin && !self.auth.isLogged) {
             event.preventDefault();
-            $state.go('signin');
+            self.auth.logOut();
         }
     });
 }]);

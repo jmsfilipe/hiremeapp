@@ -1,26 +1,28 @@
 "use strict";
 angular.module('hiremeapp.auth')
-    .factory('AuthenticationService', function() {
+    .factory('AuthenticationService', ['$state', function($state) {
 
-    var logOut = function(){
-        auth.isLogged = false;
-        localStorage.setItem('JWT', undefined);
-        auth.user = null;
-    }
-    var logIn = function(user, jwt){
-        auth.isLogged = true;
-        localStorage.setItem('JWT', jwt);
-        auth.user = user;
-    }
-    var auth = {
-        isLogged: false,
-        user: null,
-        logOut: logOut,
-        logIn: logIn
-    }
+        var logOut = function(){
+            auth.isLogged = false;
+            localStorage.setItem('JWT', undefined);
+            auth.user = null;
+            $state.go('signin');
+        }
+        var logIn = function(user, jwt){
+            auth.isLogged = true;
+            localStorage.setItem('JWT', jwt);
+            auth.user = user;
+            $state.go('index.game', { "user": user});
+        }
+        var auth = {
+            isLogged: false,
+            user: null,
+            logOut: logOut,
+            logIn: logIn
+        }
 
-    return auth;
-}).service('loginServices', function($http){
+        return auth;
+    }]).service('loginServices', function($http){
     return {
         authenticate : function(userData) {
             return $http.post('/api/authenticate', userData);
