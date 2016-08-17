@@ -17,4 +17,15 @@ var game = angular.module('hiremeapp.header', [
         AuthenticationService.logOut();
     }
 
+    var pusher = new Pusher('103852ed8f71511f0f4b', {
+      cluster: 'eu',
+      encrypted: true
+    });
+
+    var channel = pusher.subscribe(AuthenticationService.user._id);
+
+    channel.bind('notification', function(data) {
+      alert(data.message);
+    });
+
 }]);

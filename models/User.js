@@ -6,6 +6,10 @@ var UserSchema = new mongoose.Schema({
     password: { type: String },
     blocked: { type: Boolean, default: false },
     email:{ type: String, unique: true },
+    notifications: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Notifications'
+    },
     gender: { type: String, default: 'M' },
 
     score: { type: Number, default: 0 },

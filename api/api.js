@@ -1,11 +1,11 @@
-module.exports = function(app, express, mongoose, jwt){
+module.exports = function(app, express, mongoose, jwt, pusher){
 
     var User = require(__dirname+"/../models/User.js").User;
 
     // API ROUTES -------------------
 
     // get an instance of the router for api routes
-    var apiRoutes = express.Router(); 
+    var apiRoutes = express.Router();
 
     // unauthenticated related routes
     require('./api.unauthenticated.js')(apiRoutes, jwt, app);
@@ -22,7 +22,7 @@ module.exports = function(app, express, mongoose, jwt){
             blocked: false,
         }, function(err, user) {
 
-            if (err) 
+            if (err)
                 return res.status(500).send(err);
 
 
@@ -47,7 +47,7 @@ module.exports = function(app, express, mongoose, jwt){
                         jwt: token,
                         user: user
                     });
-                }   
+                }
 
             }
 
@@ -67,12 +67,12 @@ module.exports = function(app, express, mongoose, jwt){
         if (token) {
 
             // verifies secret and checks exp
-            jwt.verify(token, app.get('superSecret'), function(err, decoded) {      
+            jwt.verify(token, app.get('superSecret'), function(err, decoded) {
                 if (err) {
-                    return res.status(401).send({ success: false, message: 'Failed to authenticate token.' });    
+                    return res.status(401).send({ success: false, message: 'Failed to authenticate token.' });
                 } else {
                     // if everything is good, save to request for use in other routes
-                    req.decoded = decoded;    
+                    req.decoded = decoded;
                     next();
                 }
             });
@@ -82,9 +82,9 @@ module.exports = function(app, express, mongoose, jwt){
 
             // if there is no token
             // return an error
-            return res.status(401).send({ 
-                success: false, 
-                message: 'No token provided.' 
+            return res.status(401).send({
+                success: false,
+                message: 'No token provided.'
             });
 
         }

@@ -82,6 +82,14 @@ var game = angular.module('hiremeapp.user', [
 .controller('FriendsDialogController', function($scope, $mdDialog, userServices, AuthenticationService){
     var self = this;
 
+    var pusher = new Pusher({
+      appId: '237761',
+      key: '103852ed8f71511f0f4b',
+      secret: '13b26dbfe039260d2dc2',
+      cluster: 'eu',
+      encrypted: true
+    });
+
     $scope.searchInput = "";
     self.friendsList = [];
     var userId = AuthenticationService.user._id;
@@ -98,6 +106,9 @@ var game = angular.module('hiremeapp.user', [
         userServices.addFriend({user_id: userId, user_to_add_id: friend._id}).then(function successCallback(response) {
             userServices.search({term: $scope.searchInput, user_id: userId}).then(function successCallback(response) {
                 self.friendsList = response.data;
+                pusher.trigger(friend._id, 'notification', {
+                  "message": "hello world"
+                });
             }, function errorCallback(response) {
                 //TODO
             });

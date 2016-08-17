@@ -30,7 +30,17 @@ app.use(bodyParser.urlencoded({'extended':'true'}));            // parse applica
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
-require('../api/api.js')(app, express, mongoose, jwt);
+var Pusher = require('pusher');
+
+var pusher = new Pusher({
+  appId: '237761',
+  key: '103852ed8f71511f0f4b',
+  secret: '13b26dbfe039260d2dc2',
+  cluster: 'eu',
+  encrypted: true
+});
+
+require('../api/api.js')(app, express, mongoose, jwt, pusher);
 
 
 //sass configuration
