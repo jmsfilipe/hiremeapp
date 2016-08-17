@@ -40,6 +40,16 @@ app.use('/app/assets/stylesheets', sassMiddleware({
     outputStyle: 'expanded'
 }));
 
+var Pusher = require('pusher');
+
+var pusher = new Pusher({ appId: '237761', key: '103852ed8f71511f0f4b', secret:  '13b26dbfe039260d2dc2' });
+
+app.post('/pusher/auth', function(req, res) {
+  var socketId = req.body.socket_id;
+  var channel = req.body.channel_name;
+  var auth = pusher.authenticate(socketId, channel);
+  res.send(auth);
+});
 
 // set the static files location /app/img will be /img for users
 app.use('/vendor', express.static(__dirname + '/../node_modules'));

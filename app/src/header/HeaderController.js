@@ -22,9 +22,11 @@ var game = angular.module('hiremeapp.header', [
       encrypted: true
     });
 
-    var channel = pusher.subscribe(AuthenticationService.user._id);
+    var channel = pusher.subscribe("private-"+AuthenticationService.user._id);
 
-    channel.bind('notification', function(data) {
+    console.log("im subscribing: " + "private-"+AuthenticationService.user._id)
+
+    channel.bind('client-notification', function(data) {
       alert(data.message);
     });
 

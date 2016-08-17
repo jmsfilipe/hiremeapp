@@ -82,10 +82,7 @@ var game = angular.module('hiremeapp.user', [
 .controller('FriendsDialogController', function($scope, $mdDialog, userServices, AuthenticationService){
     var self = this;
 
-    var pusher = new Pusher({
-      appId: '237761',
-      key: '103852ed8f71511f0f4b',
-      secret: '13b26dbfe039260d2dc2',
+    var pusher = new Pusher('103852ed8f71511f0f4b', {
       cluster: 'eu',
       encrypted: true
     });
@@ -106,9 +103,13 @@ var game = angular.module('hiremeapp.user', [
         userServices.addFriend({user_id: userId, user_to_add_id: friend._id}).then(function successCallback(response) {
             userServices.search({term: $scope.searchInput, user_id: userId}).then(function successCallback(response) {
                 self.friendsList = response.data;
-                pusher.trigger(friend._id, 'notification', {
-                  "message": "hello world"
+
+                var channel = pusher.subscribe("private-"+friend._id);
+                channel.bind('pusher:subscription_succeeded', function() {
+                  console.log("i trigered: " + "private-"+friend._id)
+                  var triggered = channel.trigger("client-notification", { "message": "hello world" });
                 });
+
             }, function errorCallback(response) {
                 //TODO
             });
