@@ -1,6 +1,6 @@
 "use strict";
 angular.module('hiremeapp.auth')
-.controller('SignupController', ['signupServices', function(signupServices){
+.controller('SignupController', ['signupServices', 'AuthenticationService', function(signupServices, AuthenticationService){
     var self = this;
 
     self.user = {
