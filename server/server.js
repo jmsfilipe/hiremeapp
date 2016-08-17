@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({'extended':'true'}));            // parse applica
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
-require('../api/api.js')(app, express, mongoose, jwt, pusher);
+require('../api/api.js')(app, express, mongoose, jwt);
 
 
 //sass configuration

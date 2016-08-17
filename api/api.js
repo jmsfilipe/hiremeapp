@@ -1,4 +1,4 @@
-module.exports = function(app, express, mongoose, jwt, pusher){
+module.exports = function(app, express, mongoose, jwt){
 
     var User = require(__dirname+"/../models/User.js").User;
 
