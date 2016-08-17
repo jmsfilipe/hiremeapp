@@ -20,8 +20,14 @@ var module = angular.module('hiremeapp.user')
         addFriend : function(userData) {
             return $http.post('/api/user/add_friend', userData);
         },
+        addFriendRequest : function(userData) {
+            return $http.post('/api/user/add_friend_request', userData);
+        },
         listFriends : function(userData) {
             return $http.post('/api/user/list_friends', userData);
+        },
+        listFriendRequests : function(userData) {
+            return $http.post('/api/user/list_friend_requests', userData);
         },
         search : function(userData) {
             return $http.post('/api/user/search', userData);
@@ -34,6 +40,12 @@ var module = angular.module('hiremeapp.user')
         },
         listScores : function(data) {
             return $http.post('/api/user/list_scores/', data);
+        },
+        getNotifications : function(data) {
+            return $http.post('/api/user/notifications/', data);
+        },
+        addNotification : function(data) {
+            return $http.post('/api/user/add_notification/', data);
         }
     };
 });

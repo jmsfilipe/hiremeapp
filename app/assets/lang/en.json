@@ -44,5 +44,6 @@
     "CORRECT": "Correct! +1",
     "INCORRECT": "Incorrect :(",
     "ABOUT_US": "About us",
-    "LOGOUT": "Sign out"
+    "LOGOUT": "Sign out",
+    "PENDING_FRIEND_REQUESTS": "Pending friend requests"
 }

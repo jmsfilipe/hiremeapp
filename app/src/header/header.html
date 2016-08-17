@@ -6,6 +6,24 @@
     <span flex></span>
     <md-menu>
       <md-button class="menu" aria-label="More" class="md-icon-button" ng-click="header.openMenu($mdOpenMenu, $event)">
+        {{header.friendRequestNumber}}
+        <md-icon md-svg-icon="person" ></md-icon>
+      </md-button>
+      <md-menu-content width="2">
+        <h4>Pending requests</h4>
+        <md-menu-item ng-repeat="friend in header.friendRequestList">
+          <span>{{friend.name}}</span>
+          <md-button ng-click="header.addFriend(friend, $event)">
+            <md-icon md-svg-icon="done" ></md-icon>
+          </md-button>
+          <md-button>
+            <md-icon md-svg-icon="clear" ></md-icon>
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+    <md-menu>
+      <md-button class="menu" aria-label="More" class="md-icon-button" ng-click="header.openMenu($mdOpenMenu, $event)">
          <md-icon md-svg-icon="settings_white" ></md-icon>
       </md-button>
       <md-menu-content width="2">

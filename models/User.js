@@ -3,6 +3,7 @@ var mongoose = require("mongoose");
 var UserSchema = new mongoose.Schema({
     name: { type: String },
     friends: [this],
+    friend_requests: [this],
     password: { type: String },
     blocked: { type: Boolean, default: false },
     email:{ type: String, unique: true },

@@ -19,38 +19,38 @@ var user_2 = new User({
 });
 
 var user_3 = new User({
-  name: 'Utilizador3',
+  name: 'André',
   friends: [],
   password: '000000',
   score: 0,
-  email: 'idk@gmail.com',
+  email: 'andre@gmail.com',
   gender: 'M'
 });
 
 var user_4 = new User({
-  name: 'Utilizador4',
+  name: 'Joana',
   friends: [],
   password: '000000',
   score: 0,
-  email: 'idk@gmail.com',
+  email: 'joana@gmail.com',
   gender: 'F'
 });
 
 var user_5 = new User({
-  name: 'Utilizador5',
+  name: 'Maria',
   friends: [],
   password: '000000',
   score: 0,
-  email: 'idk@gmail.com',
+  email: 'maria@gmail.com',
   gender: 'F'
 });
 
 var user_6 = new User({
-  name: 'Utilizador6',
+  name: 'Miguel',
   friends: [],
   password: '000000',
   score: 0,
-  email: 'idk@gmail.com',
+  email: 'miguel@gmail.com',
   gender: 'M'
 });
 

@@ -17,6 +17,32 @@ module.exports = function(apiRoutes){
         });
     });
 
+    // route to return all notifications
+    apiRoutes.post('/user/notifications', function(req, res) {
+        var user_id = req.body.user_id;
+        User.findById(
+            user_id,
+            function(err, model) {
+                if(err) throw err;
+                res.json(users.notifications);
+            });
+    });
+
+    // route to add a notifications
+    apiRoutes.post('/user/add_notification', function(req, res) {
+        var user_id = req.body.user_id;
+        var content = req.body.content;
+        var link = req.body.link;
+
+        User.findByIdAndUpdate(
+            user_id,
+            {$push: {"notifications": {content: content, link: link, isRead: false}}},
+            function(err, model) {
+                if(err) throw err;
+                res.sendStatus(200);
+            });
+    });
+
     //add friend to friends list
     apiRoutes.post('/user/add_friend', function(req, res) {
 
@@ -33,10 +59,30 @@ module.exports = function(apiRoutes){
                     {$push: {"friends": user_id}},
                     function(err, model) {
                         if(err) throw err;
-                        res.sendStatus(200);
+                        User.findByIdAndUpdate(
+                            user_id,
+                            {$pull: {"friend_requests": user_to_add_id}},
+                            function(err, model) {
+                                if(err) throw err;
+                                      res.sendStatus(200);
+                            });
+                        });
                     });
-            });
+    });
 
+    //add friend to friends list
+    apiRoutes.post('/user/add_friend_request', function(req, res) {
+
+        var user_id = req.body.user_id;
+        var user_to_add_id = req.body.user_to_add_id;
+
+        User.findByIdAndUpdate(
+            user_to_add_id,
+            {$push: {"friend_requests": user_id}},
+            function(err, model) {
+                if(err) throw err;
+                res.sendStatus(200);
+            });
 
 
     });
@@ -68,6 +114,19 @@ module.exports = function(apiRoutes){
             .populate( 'friends')
             .exec(function (err, user) {
             res.send({friends: user.friends});
+        });
+
+    });
+
+    //list all the friends of a user
+    apiRoutes.post('/user/list_friend_requests', function(req, res) {
+
+        var user_id = req.body.user_id;
+
+        User.findById(user_id)
+            .populate( 'friend_requests')
+            .exec(function (err, user) {
+            res.send({friend_requests: user.friend_requests});
         });
 
     });

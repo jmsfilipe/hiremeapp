@@ -89,7 +89,9 @@ var game = angular.module('hiremeapp.user', [
 
     $scope.searchInput = "";
     self.friendsList = [];
+
     var userId = AuthenticationService.user._id;
+    var userName = AuthenticationService.user.name;
 
     $scope.$watch('searchInput', function() {
         userServices.search({term: $scope.searchInput, user_id: userId}).then(function successCallback(response) {
@@ -99,23 +101,18 @@ var game = angular.module('hiremeapp.user', [
         });
     });
 
-    self.addFriend = function(friend, ev){
-        userServices.addFriend({user_id: userId, user_to_add_id: friend._id}).then(function successCallback(response) {
-            userServices.search({term: $scope.searchInput, user_id: userId}).then(function successCallback(response) {
-                self.friendsList = response.data;
+    self.askFriend = function(friend, ev){
 
-                var channel = pusher.subscribe("private-"+friend._id);
-                channel.bind('pusher:subscription_succeeded', function() {
-                  console.log("i trigered: " + "private-"+friend._id)
-                  var triggered = channel.trigger("client-notification", { "message": "hello world" });
-                });
+      userServices.addFriendRequest({user_id: userId, user_to_add_id: friend._id});
 
-            }, function errorCallback(response) {
-                //TODO
-            });
-        }, function errorCallback(response) {
-            //TODO
-        });
+      self.friendsList = self.friendsList.filter(function(el) { //remove from interface
+          return el._id !== friend._id;
+      });
+
+      var channel = pusher.subscribe("private-"+friend._id);
+      channel.bind('pusher:subscription_succeeded', function() {
+        var triggered = channel.trigger("client-friend-request", { "name": userName, "_id": userId });
+      });
     }
 
     self.close = function() {

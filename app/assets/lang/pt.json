@@ -20,7 +20,6 @@
     "NAME": "Nome",
     "WHAT_WE_SHOULD_CALL_YOU": "Diz-nos como te devemos chamar!",
     "NAME_IS_REQUIRED": "Nome é obrigatório.",
-    "NAME_IS_REQUIRED": "Nome é obrigatório.",
     "NAME_LESS_30_CHARACTERS_LONG": "O nome tem que ter menos que 30 caracteres.",
     "HOW_CAN_WE_REACH_YOU": "Como te podemos contactar?",
     "THAT_EMAIL_ALREADY_EXISTS": "Esse email já está registado.",
@@ -45,5 +44,6 @@
     "CORRECT": "Certo! +1",
     "INCORRECT": "Errado :(",
     "ABOUT_US": "Sobre nós",
-    "LOGOUT": "Sair"
+    "LOGOUT": "Sair",
+    "PENDING_FRIEND_REQUESTS": "Pedidos de amizade"
 }
