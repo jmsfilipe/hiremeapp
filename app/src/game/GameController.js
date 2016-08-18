@@ -36,20 +36,46 @@ var game = angular.module('hiremeapp.game', [
     }
 
     self.showAlert = function(ev) {
-        // Appending dialog to document.body to cover sidenav in docs app
-        // Modal dialogs should fully cover application
-        // to prevent interaction outside of dialog
-        $mdDialog.show(
-            $mdDialog.alert()
-            .parent(angular.element(document.body))
-            .clickOutsideToClose(true)
-            .title('Multiplayer')
-            .textContent('Sorry, this feature is not yet available. Coming soon! ')
-            .ariaLabel('Multiplayer')
-            .ok('Got it!')
-            .targetEvent(ev)
-        );
+
+      $mdDialog.show({
+          controller: 'MultiplayerDialogController as dialog',
+          templateUrl: "app/src/game/multiplayerDialog.html",
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+          locals: {
+
+          }
+      })
+        .then(function(answer) {
+
+
+      }, function() {
+          //canceled
+      });
+
+
     };
+})
+.controller('MultiplayerDialogController', function($scope, $mdDialog, refineServices, userServices, AuthenticationService){
+    var self = this;
+
+    var userId = AuthenticationService.user._id;
+
+    userServices.friendsState({user_id: userId}).then(function successCallback(response) {
+        self.friendsList = response.data;
+    }, function errorCallback(response) {
+        //TODO
+
+    });
+
+    self.cancel = function() {
+        $mdDialog.cancel();
+    };
+    self.save = function() {
+        $mdDialog.hide(self.selectedItems);
+    };
+
 })
 .controller('DialogController', function($scope, $mdDialog, refineServices, items){
     var self = this;

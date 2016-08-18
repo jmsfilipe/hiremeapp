@@ -46,6 +46,12 @@ var module = angular.module('hiremeapp.user')
         },
         addNotification : function(data) {
             return $http.post('/api/user/add_notification/', data);
+        },
+        registerAsOnline: function(data){
+          return $http.post('/api/user/register_as_online/', data);
+        },
+        friendsState: function(data){
+          return $http.post('/api/user/friends_state/', data);
         }
     };
 });

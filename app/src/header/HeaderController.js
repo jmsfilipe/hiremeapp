@@ -26,6 +26,7 @@ var game = angular.module('hiremeapp.header', [
         //TODO
     });
 
+
     self.addFriend = function(friend, ev){
         userServices.addFriend({user_id: userId, user_to_add_id: friend._id}).then(function successCallback(response) {
           self.friendRequestList = self.friendRequestList.filter(function(el) { //remove from interface

@@ -1,6 +1,6 @@
 "use strict";
 angular.module('hiremeapp.auth')
-.controller('LoginController', ['loginServices', 'AuthenticationService', function(loginServices,  AuthenticationService){
+.controller('LoginController', ['loginServices', 'AuthenticationService', 'userServices', function(loginServices, AuthenticationService, userServices){
     var self = this;
 
     //mock user
@@ -13,7 +13,8 @@ angular.module('hiremeapp.auth')
         loginServices.authenticate(userData).then(function successCallback(response) {
 
             if(response.data.success){
-                AuthenticationService.logIn(response.data.user, response.data.jwt) ;
+                AuthenticationService.logIn(response.data.user, response.data.jwt);
+                userServices.registerAsOnline({user_id: AuthenticationService.user._id});
             }
             else switch(response.data.code){
                 case 'InvalidUser':

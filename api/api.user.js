@@ -6,6 +6,7 @@ module.exports = function(apiRoutes){
     var Question = require(__dirname+"/../models/Question.js").Question;
     var User = require(__dirname+"/../models/User.js").User;
     var General = require(__dirname+"/../models/General.js").General;
+    var WhoseOnline = require(__dirname+"/../models/WhoseOnline.js").WhoseOnline;
 
     // USER : API ROUTES -------------------
 
@@ -17,30 +18,58 @@ module.exports = function(apiRoutes){
         });
     });
 
-    // route to return all notifications
-    apiRoutes.post('/user/notifications', function(req, res) {
+    apiRoutes.post('/user/friends_state', function(req, res) {
         var user_id = req.body.user_id;
-        User.findById(
-            user_id,
-            function(err, model) {
+        User.findById(user_id)
+            .populate('friends')
+            .lean()
+            .exec(function(err, model) {
                 if(err) throw err;
-                res.json(users.notifications);
+                var friends = model.friends;
+                WhoseOnline.find({'user': { $in: friends }})
+                    .populate( 'user' )
+                    .exec(function(err, _res){
+                      var onlineFriends = _res;
+
+                      for(var i = 0; i < friends.length; i++) {
+                        for(var j = 0; j < onlineFriends.length; j++) {
+                          if(onlineFriends[j].user._id.equals(friends[i]._id)){
+                            friends[i].status = "online";
+                          }
+                        }
+                      }
+                      res.json(friends);
+                })
             });
     });
 
-    // route to add a notifications
-    apiRoutes.post('/user/add_notification', function(req, res) {
+    apiRoutes.post('/user/register_as_online', function(req, res) {
         var user_id = req.body.user_id;
-        var content = req.body.content;
-        var link = req.body.link;
 
-        User.findByIdAndUpdate(
-            user_id,
-            {$push: {"notifications": {content: content, link: link, isRead: false}}},
-            function(err, model) {
-                if(err) throw err;
-                res.sendStatus(200);
-            });
+        WhoseOnline.findOne({'user': user_id})
+            .exec(function (err, online) {
+            if(online){
+              online.timestamp = Date.now();
+              online.save(function (err) {
+                  if(err) {
+                      console.error('ERROR!');
+                  }
+              });
+            } else{
+              var entry = new WhoseOnline({user: user_id});
+
+              entry.save(function (err) {
+                if (err) {
+                  return err;
+                }
+                else {
+                  console.log("Post saved");
+                }
+              });
+
+            }
+        });
+
     });
 
     //add friend to friends list
@@ -213,51 +242,57 @@ module.exports = function(apiRoutes){
           Area.find({ technologies: _resTechnology[0]._id})
           .exec(function(err, _resArea){
 
+              if(_resArea.length > 0)
+                areaName = _resArea[0].name;
 
-            if(_resArea.length > 0)
-            areaName = _resArea[0].name;
-
-            if(areaName){
-              var area = {};
-              area["area."+areaName] = 1;
-              User.findOneAndUpdate({_id: user_id}, {$inc: area}, function(err, doc){
-                if(err){
-                  console.log("Something wrong when updating data!");
-                }
-              });
-
-              var tech = {};
-              tech["tech."+techName] = 1;
-              User.findOneAndUpdate({_id: user_id}, {$inc: tech}, function(err, doc){
-                if(err){
-                  console.log("Something wrong when updating data!");
-                }
-              });
-            }
-          });
-        }
-
-        });
-
-        Company.find({ questions: question_id})
-        .exec(function(err, _resCompany){
-
-          if(_resCompany.length > 0)
-            companyName = _resCompany[0].name;
-
-          if(companyName){
-            var company = {};
-            company["company."+companyName.toLowerCase()] = 1;
-            User.findOneAndUpdate({_id: user_id}, {$inc: company}, function(err, doc){
-              console.log(companyName)
-              if(err){
-                console.log("Something wrong when updating data!");
+              if(areaName){
+                var area = {};
+                area["area."+areaName] = 1;
+                User.findOneAndUpdate({_id: user_id}, {$inc: area}, function(err, doc){
+                  if(err){
+                    console.log("Something wrong when updating data!");
+                  }
+                  var tech = {};
+                  tech["tech."+techName] = 1;
+                  User.findOneAndUpdate({_id: user_id}, {$inc: tech}, function(err, doc){
+                    if(err){
+                      console.log("Something wrong when updating data!");
+                    }
+                    res.sendStatus(200);
+                  });
+                });
+              } else{
+                getCompany();
               }
             });
           }
-
         });
 
+        var getCompany = function(){
+          Company.find({ questions: question_id})
+          .exec(function(err, _resCompany){
+
+            if(_resCompany.length > 0)
+              companyName = _resCompany[0].name;
+
+            if(companyName){
+              var company = {};
+              company["company."+companyName.toLowerCase()] = 1;
+              User.findOneAndUpdate({_id: user_id}, {$inc: company}, function(err, doc){
+                console.log(companyName)
+                if(err){
+                  console.log("Something wrong when updating data!");
+                }
+                res.sendStatus(200);
+              });
+            } else{
+              getGeneral();
+            }
+
+          });
+      }
+
+      var getGeneral = function(){
         General.find({ questions: question_id})
         .exec(function(err, _resGeneral){
           if(_resGeneral.length > 0)
@@ -270,9 +305,12 @@ module.exports = function(apiRoutes){
               if(err){
                 console.log("Something wrong when updating data!");
               }
+              res.sendStatus(200);
             });
           }
-      });
+        });
+      }
+
 
     });
 

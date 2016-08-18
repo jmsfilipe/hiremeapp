@@ -1,0 +1,35 @@
+
+<md-dialog aria-label="Choose your topics" class="grid-dialog">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{ 'CHOOSE_YOUR_FRIENDS' | translate }}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="max-width:800px;max-height:810px;">
+
+          <md-list>
+            <md-list-item ng-repeat="friend in dialog.friendsList" ng-click="dialog.askFriend(friend, $event)">
+                <md-icon md-svg-icon="svg-{{friend.gender}}" class="md-avatar"></md-icon>
+                <p> {{ friend.name }} ({{friend.email}})</p>
+                <i class="friend-status" ng-class="friend.status == 'online' ? 'online' : 'offline'"></i>
+              </md-list-item>
+          </md-list>
+
+        </md-dialog-content>
+
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button ng-click="dialog.cancel()" >
+                {{ 'CANCEL' | translate }}
+            </md-button>
+            <md-button ng-click="dialog.save()" style="margin-right:20px;" >
+                {{ 'SAVE' | translate }}
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -163,3 +163,15 @@ md-dialog{
     min-width: 50% !important;
 }
 
+
+.friend-status{
+  border-radius: 100%;
+  width: 15px;
+  height: 15px;
+  &.online{
+    background-color: #00C853;
+  }
+  &.offline{
+    background-color:rgb(255,82,82);
+  }
+}

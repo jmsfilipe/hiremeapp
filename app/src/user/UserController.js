@@ -13,8 +13,6 @@ var game = angular.module('hiremeapp.user', [
     var userId = AuthenticationService.user._id;
     self.userName = AuthenticationService.user.name;
 
-
-
     userServices.listFriends({user_id: userId}).then(function successCallback(response) {
         self.friendsList = response.data.friends;
         self.totalFriends = response.data.friends.length;
