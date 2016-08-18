@@ -9,7 +9,7 @@ var main = angular.module('hiremeapp.main', [
         .state('landing', {
         url: "/",
         templateUrl: "app/src/landing/landing.html",
-        controller: "LandingController as ctrl",
+        controller: "LoginController as ctrl",
         access: { requiredLogin: false }
     })
         .state('signin', {
