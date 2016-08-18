@@ -40,9 +40,11 @@
         <script type="text/javascript" defer src="app/src/auth/LoginController.js"></script>
         <script type="text/javascript" defer src="app/src/auth/authentication.services.js"></script>
         <script type="text/javascript" defer src="app/src/auth/authentication.directives.js"></script>
+        <script type="text/javascript" defer src="app/src/landing/LandingController.js"></script>
+
         <script type="text/javascript" defer >
             angular
-                .module('hiremeapp', ['pascalprecht.translate', 'hiremeapp.main', 'hiremeapp.header', 'hiremeapp.sidebar', 'hiremeapp.game', 'hiremeapp.question', 'hiremeapp.user', 'hiremeapp.directives', 'hiremeapp.auth'])
+                .module('hiremeapp', ['pascalprecht.translate', 'hiremeapp.main', 'hiremeapp.header', 'hiremeapp.sidebar', 'hiremeapp.game', 'hiremeapp.question', 'hiremeapp.user', 'hiremeapp.directives', 'hiremeapp.auth',  'hiremeapp.landing'])
                 .config(function($translateProvider, $mdThemingProvider, $mdIconProvider){
 
                 $mdIconProvider

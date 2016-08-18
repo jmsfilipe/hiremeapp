@@ -5,9 +5,15 @@ var main = angular.module('hiremeapp.main', [
 .config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
 
-    $stateProvider
-        .state('signin', {
+    $stateProvider     
+        .state('landing', {
         url: "/",
+        templateUrl: "app/src/landing/landing.html",
+        controller: "LandingController as ctrl",
+        access: { requiredLogin: false }
+    })
+        .state('signin', {
+        url: "/signin",
         templateUrl: "app/src/auth/login.html",
         controller: "LoginController as ctrl",
         access: { requiredLogin: false }

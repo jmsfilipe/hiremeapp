@@ -1,0 +1,81 @@
+.page{
+    &--landing{
+
+
+        background: $color-landing url("/app/assets/images/clouds.png") center/cover no-repeat;
+        height: 100%;
+        animation: fadeIn 2s linear;
+        overflow: hidden;
+        .laptop{
+            height: 80%;
+            width: 100%;
+            background:  url("/app/assets/images/laptop.png") center/contain no-repeat;
+
+            &::after { 
+                content: "";
+                background:  url("/app/assets/images/rocket.png") center/contain no-repeat;
+                width: 30%;
+                height: 30%;
+                top: 60%;
+                left: -20%;
+                right: 0;
+                transform: rotate(70deg);
+                position: absolute;
+                margin: 0 auto;
+                animation: rotate 3s 1s linear ;
+             //   animation-timing-function: cubic-bezier(.49,.27,.79,.64);
+                animation-fill-mode: forwards;
+            }
+        }
+    }
+}
+
+
+@keyframes rotate{
+    0% {
+        top: 60%;
+        left: -20%;
+        transform: rotate(70deg);
+        width: 30%;
+        height: 30%;
+    }
+    40% {
+        transform: rotate(70deg);
+        top: 40%;
+        left: 100%;
+
+    }
+
+  /*  32% {
+        transform: rotate(30deg);
+        top: 35%;
+        left: 150%;
+
+    }*/
+
+
+    50% {
+        transform: rotate(-60deg);
+        top: 30%;
+        left: 100%;
+    }
+
+    100% {
+        transform: rotate(-60deg);
+        left: -60%;
+        top: -30%;
+        width: 10%;
+        height: 10%;
+    }
+}
+
+@keyframes fadeIn{
+    0% {
+        opacity: 0;
+    }
+
+
+    100% {
+        opacity: 1;
+    }
+}

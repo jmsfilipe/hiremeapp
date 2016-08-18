@@ -19,3 +19,7 @@ md-input-container.md-default-theme:not(.md-input-invalid).md-white.md-input-res
 md-input-container:not(.md-input-invalid).md-white.md-input-resized .md-input {
    border-color: white;
 }
+
+body{
+    overflow: hidden;
+}
