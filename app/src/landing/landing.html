@@ -1,4 +1,34 @@
 <div class="page page--landing" flex layout-align="center center" layout="row" >
 
-    <div class="laptop"></div>
+    <div class="laptop">    </div>
+    
+     <form novalidate  name="loginForm" ng-submit="loginForm.$valid && ctrl.signIn(loginForm, ctrl.user)">
+        <div layout-gt-sm="row">
+
+            <md-input-container class="md-block md-primary" flex-gt-sm>
+                <label >Email</label>
+                <input account-check name="email" id="email" ng-model="ctrl.user.email" required ng-change-validate="password"/>
+                <div ng-messages="loginForm.email.$error">
+                    <div ng-message="required">{{ 'ENTER_YOUR_EMAIL' | translate }}</div>
+                    <div ng-message="registered">{{ 'WE_CANT_FIND_YOU' | translate }}</div>
+                </div>
+            </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block md-primary" flex-gt-sm>
+                <label>Password</label>
+                <input ng-change-validate="password" type="password" id="password" name="password" ng-model="ctrl.user.password" required />
+                <div ng-messages="loginForm.password.$error" >
+                    <div ng-message="required">{{ 'ENTER_YOUR_PASSWORD' | translate }}</div>
+                    <div ng-message="invalid">{{ 'WRONG_PASSWORD' | translate }}</div>
+                </div>
+            </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+            <md-button class="md-raised md-primary" type="submit" id="submit" value="Submit">{{ 'SIGN_IN' | translate }}</md-button>
+            <md-button class=" md-primary" ui-sref="signup">{{ 'JOIN_US' | translate }}</md-button>
+        </div>
+    </form>
+    
+
 </div>
