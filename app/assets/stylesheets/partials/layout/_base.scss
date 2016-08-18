@@ -1,5 +1,5 @@
 md-content{
-    background-color: rgb(0,188,212);
+    background-color: $color-landing;
 }
 
 
@@ -17,9 +17,13 @@ md-input-container.md-white.md-default-theme:not(.md-input-invalid).md-input-foc
 md-input-container:not(.md-input-invalid).md-white.md-input-focused .md-input, 
 md-input-container.md-default-theme:not(.md-input-invalid).md-white.md-input-resized .md-input, 
 md-input-container:not(.md-input-invalid).md-white.md-input-resized .md-input {
-   border-color: white;
+    border-color: white;
 }
 
 body{
     overflow: hidden;
+}
+
+.page{
+    padding: 40px;
 }

@@ -2,6 +2,8 @@
 
 
     &--game{
+        background: #63a69f url("/app/assets/images/clouds.png") center/cover no-repeat;
+        padding: 40px;
         min-height: 100%;
         h1{
 
@@ -72,11 +74,11 @@
         .toast{
 
             &--correct{
-                color: yellow;
-                text-shadow: 2px 2px 2px #fbbd47;
+                color: #eff24c;
+                text-shadow: 2px 2px 2px #f0b354;
             }
             &--incorrect{
-                color: #ff1302;
+                color: #f06554;
 
             }
 
@@ -116,7 +118,7 @@
 
         &--game{
             .toast{
-            font-size: calc(0.1 * (100vw - 400px));
+                font-size: calc(0.1 * (100vw - 400px));
                 left: calc(.25 * (100vw - 400px)); //sidebar width
 
             }
