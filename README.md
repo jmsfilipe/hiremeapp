@@ -15,4 +15,15 @@
     node runall.js
     
 ## Deploy
-    http://hiremeapp-67338.onmodulus.net/
+    hiremeapp.herokuapp.com
+    
+## TO-DO
+    [ ] Landing testing IE, Safari, Mozilla
+    [ ] Notifications Area CSS
+    [ ] Multiplayer
+    [ ] Content++
+    [ ] No repeated questions
+    [ ] Email Confirmation
+    [ ] Email Reset
+    [ ] Passwords Hashed
+    [ ] Postgres
