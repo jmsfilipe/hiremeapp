@@ -5,7 +5,7 @@ var main = angular.module('hiremeapp.main', [
 .config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
 
-    $stateProvider     
+    $stateProvider
         .state('landing', {
         url: "/",
         templateUrl: "app/src/landing/landing.html",
@@ -76,7 +76,7 @@ var main = angular.module('hiremeapp.main', [
         access: { requiredLogin: true }
     })
 
-}).controller('RootController', ['AuthenticationService', '$scope', function(AuthenticationService, $scope){
+}).controller('RootController', ['userServices', 'AuthenticationService', '$scope', function(userServices, AuthenticationService, $scope){
     var self = this;
     self.auth = AuthenticationService;
 
@@ -88,6 +88,8 @@ var main = angular.module('hiremeapp.main', [
         if (nextRoute.access.requiredLogin && !self.auth.isLogged) {
             event.preventDefault();
             self.auth.logOut();
+        } else if(self.auth.isLogged){
+          userServices.registerAsOnline({user_id: self.auth.user._id});
         }
     });
 }]);

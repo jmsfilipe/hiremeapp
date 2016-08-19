@@ -14,7 +14,6 @@ angular.module('hiremeapp.auth')
 
             if(response.data.success){
                 AuthenticationService.logIn(response.data.user, response.data.jwt);
-                userServices.registerAsOnline({user_id: AuthenticationService.user._id});
             }
             else switch(response.data.code){
                 case 'InvalidUser':
