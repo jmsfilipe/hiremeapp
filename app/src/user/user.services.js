@@ -23,6 +23,9 @@ var module = angular.module('hiremeapp.user')
         addFriendRequest : function(userData) {
             return $http.post('/api/user/add_friend_request', userData);
         },
+        removeFriendRequest : function(userData) {
+            return $http.post('/api/user/remove_friend_request', userData);
+        },
         listFriends : function(userData) {
             return $http.post('/api/user/list_friends', userData);
         },

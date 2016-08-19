@@ -112,8 +112,21 @@ module.exports = function(apiRoutes){
                 if(err) throw err;
                 res.sendStatus(200);
             });
+    });
 
+    //add friend to friends list
+    apiRoutes.post('/user/remove_friend_request', function(req, res) {
 
+        var user_id = req.body.user_id;
+        var user_to_remove_id = req.body.user_to_remove_id;
+
+        User.findByIdAndUpdate(
+            user_id,
+            {$pull: {"friend_requests": user_to_remove_id}},
+            function(err, model) {
+                if(err) throw err;
+                res.sendStatus(200);
+            });
     });
 
     //search friend by name or email
@@ -265,6 +278,8 @@ module.exports = function(apiRoutes){
                 getCompany();
               }
             });
+          } else{
+            getCompany();
           }
         });
 

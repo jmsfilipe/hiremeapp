@@ -38,6 +38,17 @@ var game = angular.module('hiremeapp.header', [
         });
     }
 
+    self.removeFriendRequest = function(friend, ev){
+        userServices.removeFriendRequest({user_id: userId, user_to_remove_id: friend._id}).then(function successCallback(response) {
+          self.friendRequestList = self.friendRequestList.filter(function(el) { //remove from interface
+              return el._id !== friend._id;
+          });
+          self.friendRequestNumber--;
+        }, function errorCallback(response) {
+            //TODO
+        });
+    }
+
     var pusher = new Pusher('103852ed8f71511f0f4b', {
       cluster: 'eu',
       encrypted: true

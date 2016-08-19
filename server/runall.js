@@ -260,91 +260,80 @@ var question_6_javascript_beginner = new Question({
 });
 
 var question_7_javascript_intermediate = new Question({
-  "question": "Number is a datatype in Javascript",
+  "question": ["Number is a datatype in Javascript.", "Number é um tipo de dados em Javascript."],
   "code_sample": null,
   "explanation": null,
   "level": 2,
   "answers": [
     {
-      "text": "True",
+      "text": ["True", "Verdadeiro"],
       "correct": true
     },
     {
-      "text": "False",
+      "text": ["False", "Falso"],
       "correct": false
     }
   ]
 });
 
 var question_8_javascript_intermediate = new Question({
-  "question": "When evaluating 5 + \"cats\"...",
+  "question": ["When evaluating 5 + \"cats\"...", "Quando de avalia 5 + \"cats\"..."],
   "code_sample": null,
   "explanation": null,
   "level": 2,
   "answers": [
     {
-      "text": "5 is automatically converted to a string",
+      "text": ["5 is automatically converted to a string", "5 é automaticamente convertido numa string"],
       "correct": true
     },
     {
-      "text": "\"cats\" is automatically converted to a string. It fails.",
+      "text": ["\"cats\" is automatically converted to a string. It fails.", "\"cats\" é automaticamente convertido numa string. Falha."],
       "correct": false
     },
     {
-      "text": "Reference Error",
+      "text": ["Reference Error", "Reference Error"],
       "correct": false
     }
   ]
 });
 
 var question_9_javascript_expert = new Question({
-  "question": "What will be the output of the code below?",
-  "code_sample": {
-    "language": "javascript",
-    "content": "var trees = [\"xyz\",\"xxxx\",\"test\",\"ryan\",\"apple\"];\ndelete trees[3];\n  console.log(trees.length);"
-  },
-  "explanation": "When we use the delete operator to delete an array element, the array length is not affected from this. This holds even if you deleted all elements of an array using the delete operator.",
+  "question": ["What is the difference between == and === ?", "Qual é a diferença entre == e === ?"],
+  "code_sample": null,
+  "explanation": null,
   "level": 3,
   "answers": [
     {
-      "text": "5",
+      "text": ["\'==\' evaluates equality of the value, while \'===\' evaluates  equality of type and value.", "\'==\' avalia o valor, enquanto \'===\' avalia o tipo e o valor."],
       "correct": true
     },
     {
-      "text": "4",
-      "correct": false
-    },
-    {
-      "text": "3",
-      "correct": false
-    },
-    {
-      "text": "6",
+      "text": ["\'===\' evaluates equality of the value, while \'==\' evaluates  equality of type and value.", "\'===\' avalia o valor, enquanto \'==\' avalia o tipo e o valor."],
       "correct": false
     }
   ]
 });
 
 var question_10_javascript_expert = new Question({
-  "question": "\"\" == 0 returns what?",
+  "question": ["\"\" == 0 returns what?", "O que retorna \"\" == 0 ?"],
   "code_sample": null,
   "explanation": null,
   "level": 3,
   "answers": [
     {
-      "text": "true",
+      "text": ["true", "true"],
       "correct": true
     },
     {
-      "text": "false",
+      "text": ["false", "false"],
       "correct": false
     },
     {
-      "text": "Reference Error",
+      "text": ["Reference Error", "Reference Error"],
       "correct": false
     },
     {
-      "text": "Not executed",
+      "text": ["Not executed", "Not executed"],
       "correct": false
     }
   ]
@@ -422,82 +411,39 @@ var question_13_postgres_beginner = new Question({
 });
 
 var question_14_postgres_intermediate = new Question({
-  "question": "What are the different types of JOIN clauses?",
+  "question": ['What are the different types of JOIN clauses?','Quais são os diferentes tipos de JOIN?'],
   "code_sample": null,
   "explanation": null,
   "level": 2,
   "answers": [
     {
-      "text": "INNER JOIN, LEFT (OUTER) JOIN, RIGHT (OUTER) JOIN, FULL JOIN, CROSS JOIN",
+      "text": ["INNER JOIN, LEFT (OUTER) JOIN, RIGHT (OUTER) JOIN, FULL JOIN, CROSS JOIN", "INNER JOIN, LEFT (OUTER) JOIN, RIGHT (OUTER) JOIN, FULL JOIN, CROSS JOIN"],
       "correct": true
     },
     {
-      "text": "SIMPLE JOIN, LEFT (OUTER) JOIN, RIGHT (OUTER) JOIN, FULL JOIN, EITHER JOIN",
+      "text": ["SIMPLE JOIN, LEFT (OUTER) JOIN, RIGHT (OUTER) JOIN, FULL JOIN, EITHER JOIN", "SIMPLE JOIN, LEFT (OUTER) JOIN, RIGHT (OUTER) JOIN, FULL JOIN, EITHER JOIN"],
       "correct": false
     }
   ]
 });
 
-var question_15_postgres_intermediate = new Question({
-  "question": "What is wrong with the following query?",
-  "code_sample": {
-    "language": "sql",
-    "content": "SELECT Id, YEAR(BillingDate) AS BillingYear\nFROM Invoices\nWHERE BillingYear >= 2010;"
-  },
-  "explanation": null,
-  "level": 2,
-  "answers": [
-    {
-      "text": "Nothing",
-      "correct": false
-    },
-    {
-      "text": "Sould be WHERE YEAR(BillingDate) >= 2010; instead",
-      "correct": true
-    }
-  ]
-});
 
-var question_16_postgres_expert = new Question({
-  "question": "What will be the result of the query below?",
-  "code_sample": {
-    "language": "sql",
-    "content": "select case when null = null then 'Yup' else 'Nope' end as Result;"
-  },
-  "explanation": "This query will actually yield “Nope”, seeming to imply that null is not equal to itself! The reason for this is that the proper way to compare a value to null in SQL is with the is operator, not with =.",
-  "level": 3,
-  "answers": [
-    {
-      "text": "Yup",
-      "correct": false
-    },
-    {
-      "text": "Nope",
-      "correct": true
-    },
-    {
-      "text": "Error",
-      "correct": false
-    }
-  ]
-});
-
-var question_17_postgres_expert = new Question({
-  "question": "What are the ACID properties?",
+var question_15_postgres_expert = new Question({
+  "question": ["What are the ACID properties?", "Quais são as propriedades ACID?"],
   "code_sample": null,
   "explanation": null,
   "level": 3,
   "answers": [
     {
-      "text": "Atomicity, Consistency, Isolation, Durability",
+      "text": ["Atomicity, Consistency, Isolation, Durability","Atomicity, Consistency, Isolation, Durability"],
       "correct": true
     },
     {
-      "text": "Adaptability, Computability, Invariability, Destructibility",
+      "text": ["Adaptability, Computability, Invariability, Destructibility","Adaptability, Computability, Invariability, Destructibility"],
       "correct": false
     },
     {
-      "text": "Adaptability, Consistency, Invariability, Disposability",
+      "text": ["Adaptability, Consistency, Invariability, Disposability","Adaptability, Consistency, Invariability, Disposability"],
       "correct": false
     }
   ]
@@ -517,9 +463,7 @@ question_11_postgres_beginner.save();
 question_12_postgres_beginner.save();
 question_13_postgres_beginner.save();
 question_14_postgres_intermediate.save();
-question_15_postgres_intermediate.save();
-question_16_postgres_expert.save();
-question_17_postgres_expert.save();
+question_15_postgres_expert.save();
 
 var tech_javascript = new Technology({
     name: 'javascript',
@@ -532,8 +476,8 @@ var tech_javascript = new Technology({
 var tech_postgres = new Technology({
     name: 'postgres',
     questions:[question_11_postgres_beginner._id, question_12_postgres_beginner._id, question_13_postgres_beginner._id,
-              question_14_postgres_intermediate._id, question_15_postgres_intermediate._id,
-              question_16_postgres_expert._id, question_17_postgres_expert._id]
+              question_14_postgres_intermediate._id,
+              question_15_postgres_expert._id]
 });
 
 tech_javascript.save(function (err, tech_javascript) {
@@ -594,63 +538,36 @@ area_databases.save(function (err, area_databases) {
     }
 });
 
-var question_company = new Question({
-  "question": ['This is a sample text of a question inserted by a company.','Esta é uma pergunta de teste inserida por uma empresa.'],
-  "code_sample": null,
-  "explanation": null,
-  "level": 1,
-  "answers": [
-    {
-      "text": ['Option A', 'Opção A'],
-      "correct": false
-    },
-    {
-      "text": ['Option B', 'Opção B'],
-      "correct": false
-    },
-    {
-      "text": ['Option C', 'Opção C'],
-      "correct": false
-    },
-    {
-      "text": ['Option D', 'Opção D'],
-      "correct": true
-    }
-  ]
-});
-
-question_company.save();
-
-var company_1 = new Company({
+var company_google = new Company({
   name: 'Google',
-  questions:[question_company._id]
+  questions:[question_1_javascript_beginner._id, question_2_javascript_beginner._id]
 });
 
-var company_2 = new Company({
+var company_yahoo = new Company({
   name: 'Yahoo',
-  questions:[question_company._id]
+  questions:[question_3_javascript_beginner._id, question_4_javascript_beginner._id]
 });
 
-var company_3 = new Company({
+var company_microsoft = new Company({
   name: 'Microsoft',
-  questions:[question_company._id]
+  questions:[question_5_javascript_beginner._id, question_6_javascript_beginner._id]
 });
 
-var company_4 = new Company({
+var company_outsystems = new Company({
   name: 'Outsystems',
-  questions:[question_company._id]
+  questions:[question_7_javascript_intermediate._id, question_8_javascript_intermediate._id]
 });
 
-var company_5 = new Company({
+var company_adobe = new Company({
   name: 'Adobe',
-  questions:[question_company._id]
+  questions:[question_14_postgres_intermediate._id, question_15_postgres_expert._id]
 });
 
-company_1.save();
-company_2.save();
-company_3.save();
-company_4.save();
-company_5.save();
+company_google.save();
+company_yahoo.save();
+company_microsoft.save();
+company_outsystems.save();
+company_adobe.save();
 
 var question_1_windows = new Question({
   "question": ['What is the most common way to uninstall a program?', 'Qual é a maneira mais fácil de desisntalar um programa?'],
@@ -740,26 +657,64 @@ var question_1_powerpoint = new Question({
   ]
 });
 
-var question_1_sample = new Question({
-  "question": ['This is a sample question.','Esta é uma pergunta de teste.'],
+var question_1_gmail = new Question({
+  "question": ['How do you send mail to people without showing their email addresses?','Como é que se envia um email sem mostrar aos outros o seu próprio endereço?'],
   "code_sample": null,
   "explanation": null,
   "level": 1,
   "answers": [
     {
-      "text": ['Option A', 'Opção A'],
+      "text": ['Add Cc', 'Adicionar Cc'],
       "correct": false
     },
     {
-      "text": ['Option B', 'Opção B'],
+      "text": ['Add to', 'Adicionar para'],
       "correct": false
     },
     {
-      "text": ['Option C', 'Opção C'],
+      "text": ['Add Bcc', 'Adicionar Bcc'],
+      "correct": true
+    }
+  ]
+});
+
+var question_1_chrome = new Question({
+  "question": ['On Windows, what is the shortcut to open a new window in Chrome?','No windows, qual é o atalho para abrir uma nova janela no Chrome?'],
+  "code_sample": null,
+  "explanation": null,
+  "level": 1,
+  "answers": [
+    {
+      "text": ['Ctrl + n', 'Ctrl + n'],
+      "correct": true
+    },
+    {
+      "text": ['Shift + n', 'Shift + n'],
       "correct": false
     },
     {
-      "text": ['Option D', 'Opção D'],
+      "text": ['Alt + n', 'Alt + n'],
+      "correct": false
+    }
+  ]
+});
+
+var question_1_android = new Question({
+  "question": ['What is the \'playstore\' app?','O que é a aplicação \'playstore\'?'],
+  "code_sample": null,
+  "explanation": null,
+  "level": 1,
+  "answers": [
+    {
+      "text": ['An application in which you can play videos.', 'Uma aplicação onde se podem reproduzir vídeos.'],
+      "correct": false
+    },
+    {
+      "text": ['An application for GPS navigation.', 'Uma aplicação para navegação GPS.'],
+      "correct": false
+    },
+    {
+      "text": ['An official Google application, in which you can search for and install new apps.', 'Uma aplicação oficial da Google, em que se pode procurar e instalar outras aplicações.'],
       "correct": true
     }
   ]
@@ -769,7 +724,9 @@ question_1_windows.save();
 question_1_word.save();
 question_1_excel.save();
 question_1_powerpoint.save();
-question_1_sample.save();
+question_1_gmail.save();
+question_1_chrome.save();
+question_1_android.save();
 
 var general_windows = new General({
     name: 'Windows',
@@ -793,17 +750,17 @@ var general_powerpoint = new General({
 
 var general_gmail = new General({
     name: 'Gmail',
-    questions:[question_1_sample._id]
+    questions:[question_1_gmail._id]
 });
 
 var general_chrome = new General({
-    name: 'Google Chrome',
-    questions:[question_1_sample._id]
+    name: 'Chrome',
+    questions:[question_1_chrome._id]
 });
 
 var general_android = new General({
     name: 'Android',
-    questions:[question_1_sample._id]
+    questions:[question_1_android._id]
 });
 
 
