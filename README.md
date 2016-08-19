@@ -18,12 +18,12 @@
     hiremeapp.herokuapp.com
     
 ## TO-DO
-    [ ] Landing testing IE, Safari, Mozilla
-    [ ] Notifications Area CSS
-    [ ] Multiplayer
-    [ ] Content++
-    [ ] No repeated questions
-    [ ] Email Confirmation
-    [ ] Email Reset
-    [ ] Passwords Hashed
-    [ ] Postgres
+- [ ] Landing testing IE, Safari, Mozilla
+- [ ] Notifications Area CSS
+- [ ] Multiplayer
+- [ ] Content++
+- [ ] No repeated questions
+- [ ] Email Confirmation
+- [ ] Email Reset
+- [ ] Passwords Hashed
+- [ ] Postgres
