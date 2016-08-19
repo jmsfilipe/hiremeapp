@@ -12,13 +12,16 @@
         </md-toolbar>
         <md-dialog-content style="max-width:800px;max-height:810px;">
 
-          <md-list>
-            <md-list-item ng-repeat="friend in dialog.friendsList" ng-click="dialog.askFriend(friend, $event)">
-                <md-icon md-svg-icon="svg-{{friend.gender}}" class="md-avatar"></md-icon>
-                <p> {{ friend.name }} ({{friend.email}})</p>
-                <i class="friend-status" ng-class="friend.status == 'online' ? 'online' : 'offline'"></i>
-              </md-list-item>
-          </md-list>
+            <md-list>
+                <md-list-item  ng-repeat="friend in dialog.friendsList" ng-click="dialog.selected = friend.email"  class="list-item" ng-class="{'list-item--selected': friend.email == dialog.selected}">
+                    <md-icon md-svg-icon="svg-{{friend.gender}}" class="md-avatar"></md-icon>
+                    <p> {{ friend.name }} ({{friend.email}})</p>
+                    <i class="friend-status" ng-class="friend.status == 'online' ? 'online' : 'offline'"></i>
+                </md-list-item>
+
+            </md-list>   
+            
+
 
         </md-dialog-content>
 

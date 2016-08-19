@@ -3,11 +3,12 @@ var game = angular.module('hiremeapp.game', [
     'ngMaterial',
     'ngAnimate'
 ])
-.controller('GameController', function($timeout, $log, $scope, $state, $stateParams, $mdDialog, questionServices){
+.controller('GameController', function($timeout, $scope, $state, $stateParams, $mdDialog, questionServices, userServices, AuthenticationService){
     var self = this;
     self.user = $stateParams.user;
     self.filters = [];
     self.fabIsOpen = false;
+    self.mode = 'single'; //0 single, 1 multi
 
     console.log(self.user);
 
@@ -35,32 +36,71 @@ var game = angular.module('hiremeapp.game', [
         $state.go('index.question', {filters: self.filters});
     }
 
-    self.showAlert = function(ev) {
 
-      $mdDialog.show({
-          controller: 'MultiplayerDialogController as dialog',
-          templateUrl: "app/src/game/multiplayerDialog.html",
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose:true,
-          locals: {
+    self.showAlertNoFriends = function(ev) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        // Modal dialogs should fully cover application
+        // to prevent interaction outside of dialog
+        $mdDialog.show(
+            $mdDialog.alert()
+            .parent(angular.element(document.body))
+            .clickOutsideToClose(true)
+            .title('Multiplayer')
+            .textContent('Add some friends first! ')
+            .ariaLabel('Multiplayer')
+            .ok('Got it!')
+            .targetEvent(ev)
+        );
+    };
 
-          }
-      })
-        .then(function(answer) {
+    self.showDialogChooseFriend = function(ev){
+        $mdDialog.show({
+            controller: 'MultiplayerDialogController as dialog',
+            templateUrl: "app/src/game/multiplayerDialog.html",
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            locals: {
+                selectedFriend: self.selectedFriend
+            }
+        })
+            .then(function(selectedFriend) {
+            self.selectedFriend = selectedFriend;
+            self.mode = 'multi';
 
+            console.log(self.selectedFriend);
 
-      }, function() {
-          //canceled
-      });
+        }, function() {
+            //canceled
+        });
 
+    }
+
+    self.selectMultiplayer = function(ev) {
+
+        userServices.listFriends({user_id: AuthenticationService.user._id}).then(function successCallback(response) {
+
+            if(response.data.friends.length == 0){
+                self.showAlertNoFriends(ev);
+            } else self.showDialogChooseFriend(ev);
+
+        }, function errorCallback(response) {
+            //TODO
+        });
+    };
+
+    self.selectSingleplayer = function(ev) {
+        self.selectedFriend = undefined;
+        self.mode = 'single';
 
     };
 })
-.controller('MultiplayerDialogController', function($scope, $mdDialog, refineServices, userServices, AuthenticationService){
+.controller('MultiplayerDialogController', function($scope, $mdDialog, refineServices, userServices, AuthenticationService, selectedFriend){
     var self = this;
 
     var userId = AuthenticationService.user._id;
+
+    self.selected = selectedFriend;
 
     userServices.friendsState({user_id: userId}).then(function successCallback(response) {
         self.friendsList = response.data;
@@ -73,7 +113,7 @@ var game = angular.module('hiremeapp.game', [
         $mdDialog.cancel();
     };
     self.save = function() {
-        $mdDialog.hide(self.selectedItems);
+        $mdDialog.hide(self.selected);
     };
 
 })

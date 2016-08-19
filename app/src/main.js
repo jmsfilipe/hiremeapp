@@ -43,7 +43,7 @@ var main = angular.module('hiremeapp.main', [
         url: '/home',
         controller: "GameController as ctrl",
         params: {user: null},
-        templateUrl: 'app/src/home/view/home.html'
+        templateUrl: 'app/src/game/view/home.html'
 
     })
 
