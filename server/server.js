@@ -42,7 +42,7 @@ app.use('/app/assets/stylesheets', sassMiddleware({
 
 var Pusher = require('pusher');
 
-var pusher = new Pusher({ appId: '237761', key: '103852ed8f71511f0f4b', secret:  '13b26dbfe039260d2dc2' });
+var pusher = new Pusher({ appId: '239636', key: '5ae72eeb02c097ac4523', secret:  '403d31c095a66e576107' });
 
 app.post('/pusher/auth', function(req, res) {
   var socketId = req.body.socket_id;

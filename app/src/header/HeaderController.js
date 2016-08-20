@@ -49,7 +49,7 @@ var game = angular.module('hiremeapp.header', [
         });
     }
 
-    var pusher = new Pusher('103852ed8f71511f0f4b', {
+    var pusher = new Pusher('5ae72eeb02c097ac4523', {
       cluster: 'eu',
       encrypted: true
     });

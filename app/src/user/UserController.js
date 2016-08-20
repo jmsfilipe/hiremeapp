@@ -80,7 +80,7 @@ var game = angular.module('hiremeapp.user', [
 .controller('FriendsDialogController', function($scope, $mdDialog, userServices, AuthenticationService){
     var self = this;
 
-    var pusher = new Pusher('103852ed8f71511f0f4b', {
+    var pusher = new Pusher('5ae72eeb02c097ac4523', {
       cluster: 'eu',
       encrypted: true
     });
