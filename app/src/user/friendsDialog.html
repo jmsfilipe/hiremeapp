@@ -13,7 +13,8 @@
             <md-list-item ng-repeat="friend in dialog.friendsList" ng-click="dialog.askFriend(friend, $event)">
                 <md-icon md-svg-icon="svg-{{friend.gender}}" class="md-avatar"></md-icon>
                 <p> {{ friend.name }} ({{friend.email}})</p>
-                <md-icon style="color: black;">add_circle_outline</md-icon>
+                <md-icon ng-show="!friend.pending" style="color: black;">add_circle_outline</md-icon>
+                <md-icon ng-show="friend.pending" style="color: black;">update</md-icon>
               </md-list-item>
           </md-list>
 

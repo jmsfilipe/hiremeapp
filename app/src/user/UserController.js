@@ -101,16 +101,18 @@ var game = angular.module('hiremeapp.user', [
 
     self.askFriend = function(friend, ev){
 
-      userServices.addFriendRequest({user_id: userId, user_to_add_id: friend._id});
+      if(!friend.pending){
+        userServices.addFriendRequest({user_id: userId, user_to_add_id: friend._id});
 
-      self.friendsList = self.friendsList.filter(function(el) { //remove from interface
-          return el._id !== friend._id;
-      });
+      friend.pending = true;
 
       var channel = pusher.subscribe("private-"+friend._id);
       channel.bind('pusher:subscription_succeeded', function() {
         var triggered = channel.trigger("client-friend-request", { "name": userName, "_id": userId });
       });
+
+      }
+
     }
 
     self.close = function() {
