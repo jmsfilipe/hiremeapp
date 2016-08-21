@@ -9,18 +9,7 @@
             animation: fadeIn 1s  linear ;              
             animation-fill-mode: forwards;
             opacity: 0;
-
-            md-input-container label{
-                color: white;
-            }
-            md-input-container .md-input{
-                border-color: $color-white-alpha-7;
-            }
-
-            .hint{
-                color: $color-white-alpha-4;
-
-            }
+           
         }
 
     }

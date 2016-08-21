@@ -5,48 +5,49 @@
     <h1 class="logo" ui-sref="index.game">Hire.me App</h1>
     <span flex></span>
     <md-menu>
-      <md-button class="menu" aria-label="More"  class="md-icon-button" ng-click="header.openMenu($mdOpenMenu, $event)">
-        <span ng-if="header.friendRequestNumber > 0">{{header.friendRequestNumber}}</span>
-        <md-icon md-svg-icon="person" ></md-icon>
-      </md-button>
-      <md-menu-content width="2">
-        <h4>Pending requests</h4>
-        <md-menu-item ng-repeat="friend in header.friendRequestList">
-          <span>{{friend.name}}</span>
-          <md-button ng-click="header.addFriend(friend, $event)">
-            <md-icon md-svg-icon="done" ></md-icon>
-          </md-button>
-          <md-button ng-click="header.removeFriendRequest(friend, $event)">
-            <md-icon md-svg-icon="clear" ></md-icon>
-          </md-button>
-        </md-menu-item>
-      </md-menu-content>
+        <md-button class="menu" aria-label="Friend Request"  class="md-icon-button" ng-click="header.openMenu($mdOpenMenu, $event)">
+            <span ng-if="header.friendRequestNumber > 0">{{header.friendRequestNumber}}</span>
+            <md-icon md-svg-icon="person" ></md-icon>
+        </md-button>
+        <md-menu-content class="notifications" width="2">
+            <h4>Pending requests</h4>
+            <md-menu-item ng-repeat="friend in header.friendRequestList">
+              <md-icon md-svg-icon="svg-{{friend.gender}}" class="md-avatar"></md-icon>
+                    <p> {{ friend.name }} ({{friend.email}})</p>
+                <md-button ng-click="header.addFriend(friend, $event)">
+                    <md-icon class="ng-scope material-icons">done</md-icon>
+                </md-button>
+                <md-button ng-click="header.removeFriendRequest(friend, $event)">
+                    <md-icon class="ng-scope material-icons">clear</md-icon>
+                </md-button>
+            </md-menu-item>
+        </md-menu-content>
     </md-menu>
     <md-menu>
-      <md-button class="menu" aria-label="More" class="md-icon-button" ng-click="header.openMenu($mdOpenMenu, $event)">
-         <md-icon md-svg-icon="settings_white" ></md-icon>
-      </md-button>
-      <md-menu-content width="2">
-        <md-menu-item>
-          <md-button ui-sref="index.user">
-            {{ 'PROFILE' | translate }}
-          </md-button>
-        </md-menu-item>
-        <md-menu-item>
-          <md-button ui-sref="index.settings">
-            {{ 'SETTINGS' | translate }}
-          </md-button>
-        </md-menu-item>
-        <md-menu-item>
-          <md-button ui-sref="index.about-us">
-            {{ 'ABOUT_US' | translate }}
-          </md-button>
-        </md-menu-item>
-        <md-menu-item>
-          <md-button ng-click="header.signOut()">
-            {{ 'LOGOUT' | translate }}
-          </md-button>
-        </md-menu-item>
-      </md-menu-content>
+        <md-button class="menu" aria-label="More" class="md-icon-button" ng-click="header.openMenu($mdOpenMenu, $event)">
+            <md-icon md-svg-icon="settings_white" ></md-icon>
+        </md-button>
+        <md-menu-content width="2">
+            <md-menu-item>
+                <md-button ui-sref="index.user">
+                    {{ 'PROFILE' | translate }}
+                </md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button ui-sref="index.settings">
+                    {{ 'SETTINGS' | translate }}
+                </md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button ui-sref="index.about-us">
+                    {{ 'ABOUT_US' | translate }}
+                </md-button>
+            </md-menu-item>
+            <md-menu-item>
+                <md-button ng-click="header.signOut()">
+                    {{ 'LOGOUT' | translate }}
+                </md-button>
+            </md-menu-item>
+        </md-menu-content>
     </md-menu>
 </md-toolbar>

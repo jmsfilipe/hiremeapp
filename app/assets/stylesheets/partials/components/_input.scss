@@ -7,8 +7,10 @@
     font-size: 12px;
     line-height: 14px;
     transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
-    color: grey;
+    color: $color-white-alpha-4;
+
 }
+
 
 
 
@@ -25,4 +27,17 @@
 
 md-input-container{
     margin: 18px;
+}
+
+md-input-container {
+    &.md-accent{
+        label{
+            color: white;
+        }
+
+        .md-input{
+            border-color: $color-white-alpha-7;
+        }
+    }
+
 }

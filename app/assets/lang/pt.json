@@ -46,5 +46,7 @@
     "ABOUT_US": "Sobre nós",
     "LOGOUT": "Sair",
     "PENDING_FRIEND_REQUESTS": "Pedidos de amizade",
-    "CHOOSE_YOUR_FRIENDS": "Escolhe o teu amigo"
+    "CHOOSE_YOUR_FRIENDS": "Escolhe o teu amigo",
+    "SEX": "Sexo: ",
+    "PREFERENCES": "Preferências"
 }

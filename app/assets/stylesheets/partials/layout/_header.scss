@@ -15,9 +15,63 @@ md-toolbar{
     > *{
         cursor: pointer;
     }
-    
+
     .logo:hover{
         background-color: rgba(158,158,158,0.2);
-        
+
+    }
+
+    .md-button{
+        span{
+            position: absolute;
+            bottom: 5px;
+            right: 0px;
+            line-height: initial;
+            background-color: $color-secondary;
+            padding: 0 4px;
+            /* border-radius: 50%; */
+            font-size: 12px;
+        }
+    }
+}
+
+.notifications{
+    > *{
+        border-bottom: 1px solid gainsboro;
+        margin: 0;
+        padding: .5em 1em;
+    }
+
+    .md-button{
+        min-width: 36px;
+        width: 36px;
+        text-align: center;
+        padding: 0;
+        margin: 0 8px;
+
+        md-icon{
+            margin: auto;
+        }
+    }
+
+    md-menu-item{
+        max-width: 300px;
+
+        md-icon{
+
+            width: 24px;
+            padding-left: 0;
+        }
+    }
+}
+
+.md-open-menu-container{
+    &.md-active {
+        > md-menu-content {
+            > * {
+                border-bottom: 1px solid gainsboro;
+                color: $color-landing;
+            }
+        }
     }
 }

@@ -2,14 +2,14 @@
 
     <h1>{{ 'SETTINGS' | translate }}</h1>
     <div layout-gt-sm="row" >
-        <md-input-container class="md-block md-white" flex-gt-sm>
+        <md-input-container class="md-block md-accent" flex-gt-sm>
             <label>Email</label>
             <input ng-model="ctrl.user.email">
         </md-input-container>
     </div>
 
     <div layout-gt-sm="row">
-        <md-input-container class="md-block md-primary" flex-gt-sm>
+        <md-input-container class="md-block md-accent" flex-gt-sm>
             <label>Password</label>
             <input ng-disable-paste type="password" id="password" name="password" ng-model="ctrl.user.password"
                    minlength="5" maxlength="30" ng-pattern="/^(?=.*?[[a-zA-Z])(?=.*?[0-9])(?=.*?[^\w\s]|.*?[_]).{5,}$/" />
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </md-input-container>
-        <md-input-container class="md-block md-primary" flex-gt-sm>
+        <md-input-container class="md-block md-accent" flex-gt-sm>
             <label>{{ 'CONFIRM_PASSWORD' | translate }}</label>
             <input ng-disable-paste type="password" name="passwordRepeat" ng-model="ctrl.user.passwordRepeat"
                    pw-check="password"  />
@@ -35,15 +35,17 @@
     </div>
 
     <div layout-gt-sm="row" >
-        <md-radio-group ng-model="ctrl.user.gender">
+        <md-radio-group layout="row" ng-model="ctrl.user.gender" >
+            <span>{{ 'SEX' | translate }} </span>
             <md-radio-button value="M" >{{ 'MALE' | translate }}</md-radio-button>
             <md-radio-button value="F">{{ 'FEMALE' | translate }}</md-radio-button>
         </md-radio-group>
     </div>
 
-    <h1>{{ 'LANGUAGE' | translate }}</h1>
+    <h1>{{ 'PREFERENCES' | translate }}</h1>
     <div layout-gt-sm="row">
-      <md-radio-group ng-model="ctrl.language">
+      <md-radio-group layout="row" ng-model="ctrl.language">
+          <span>{{ 'LANGUAGE' | translate }} </span>
           <md-radio-button value="pt" ng-click="ctrl.changeLanguage('pt')">{{ 'PORTUGUESE' | translate }}</md-radio-button>
           <md-radio-button value="en" ng-click="ctrl.changeLanguage('en')">{{ 'ENGLISH' | translate }}</md-radio-button>
       </md-radio-group>

@@ -1,13 +1,21 @@
 .page{
     &--settings{
 
-
-        md-radio-button{
+        > div{
             margin: 18px;
+        }
+
+        md-radio-group md-radio-button{
+
+            margin: 0 1em;
         }
 
         button{
             margin: 18px;
+        }
+
+        md-input-container{
+            margin: 0;
         }
     }
 }
