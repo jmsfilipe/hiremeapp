@@ -1,6 +1,6 @@
 <form name="signupForm" ng-submit="signupForm.$valid && ctrl.updateSettings()" class="page page--settings">
 
-    <h1>{{ 'SETTINGS' | translate }}</h1>
+    <h3>{{ 'SETTINGS' | translate }}</h3>
 
 
     <div layout-gt-sm="row">
@@ -41,7 +41,7 @@
         </md-radio-group>
     </div>
 
-    <h1>{{ 'PREFERENCES' | translate }}</h1>
+    <h3>{{ 'PREFERENCES' | translate }}</h3>
     <div layout-gt-sm="row">
       <md-radio-group layout="row" ng-model="ctrl.language">
           <span>{{ 'LANGUAGE' | translate }} </span>
