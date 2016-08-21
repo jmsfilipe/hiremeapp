@@ -71,16 +71,16 @@ var question = angular.module('hiremeapp.question', [
         var _techs = [], _areas = [], _companies = [], _general = [];
         for(var i = 0; i < filter.length; i++){
             switch(filter[i].type){
-                case 'company':
+                case 'Company':
                     _companies.push(filter[i].name);
                     break;
-                case 'tech':
+                case 'Technology':
                     _techs.push(filter[i].name);
                     break;
-                case 'area':
+                case 'Area':
                     _areas.push(filter[i].name);
                     break;
-                case 'general':
+                case 'General':
                     _general.push(filter[i].name);
                     break;
             }

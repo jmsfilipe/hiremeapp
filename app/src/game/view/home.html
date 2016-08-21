@@ -8,7 +8,7 @@
         Single 
         <md-icon ng-if='ctrl.mode == "single"' >done</md-icon>
     </md-button>
-    <md-button class="md-raised" ng-click="ctrl.selectMultiplayer($event)" >
+    <md-button class="md-raised" ng-class=" {'disabled':  !ctrl.hasFriends}"ng-click="ctrl.selectMultiplayer($event)" >
         Multiplayer 
         <md-icon ng-if='ctrl.mode == "multi"' >done</md-icon>
     </md-button>

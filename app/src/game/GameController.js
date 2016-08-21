@@ -9,12 +9,24 @@ var game = angular.module('hiremeapp.game', [
     self.filters = [];
     self.fabIsOpen = false;
     self.mode = 'single'; //0 single, 1 multi
+    self.hasFriends = false;
 
     console.log(self.user);
 
+
+    userServices.listFriends({user_id: AuthenticationService.user._id}).then(function successCallback(response) {
+
+        if(response.data.friends.length > 0){
+            self.hasFriends = true;
+        } 
+
+    }, function errorCallback(response) {
+        //TODO
+    });
+
     self.showTabDialog = function(ev) {
         $mdDialog.show({
-            controller: 'DialogController as dialog',
+            controller: 'RefineDialogController as dialog',
             templateUrl: "app/src/game/refineDialog.html",
             parent: angular.element(document.body),
             targetEvent: ev,
@@ -117,7 +129,7 @@ var game = angular.module('hiremeapp.game', [
     };
 
 })
-.controller('DialogController', function($scope, $mdDialog, refineServices, items){
+.controller('RefineDialogController', function($scope, $mdDialog, refineServices, items){
     var self = this;
     self.selectedItems = items.slice();
 
@@ -147,28 +159,8 @@ var game = angular.module('hiremeapp.game', [
     });
 
     self.addToSelectedItems = function(type, item){
-        switch(type){
-            case 'company':
-                item.type = 'company';
-                if(self.selectedItems.indexOf(item) === -1)
-                    self.selectedItems.push(item);
-                break;
-            case 'tech':
-                item.type = 'tech';
-                if(self.selectedItems.indexOf(item) === -1)
-                    self.selectedItems.push(item);
-                break;
-            case 'area':
-                item.type = 'area';
-                if(self.selectedItems.indexOf(item) === -1)
-                    self.selectedItems.push(item);
-                break;
-            case 'general':
-                item.type = 'general';
-                if(self.selectedItems.indexOf(item) === -1)
-                    self.selectedItems.push(item);
-                break;
-        }
+        if(self.selectedItems.indexOf(item) === -1)
+            self.selectedItems.push(item);
     }
 
     self.cancel = function() {

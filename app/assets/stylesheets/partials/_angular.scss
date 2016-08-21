@@ -165,13 +165,21 @@ md-dialog{
 
 
 .friend-status{
-  border-radius: 100%;
-  width: 15px;
-  height: 15px;
-  &.online{
-    background-color: #00C853;
-  }
-  &.offline{
-    background-color:rgb(255,82,82);
-  }
+    border-radius: 100%;
+    width: 15px;
+    height: 15px;
+    &.online{
+        background-color: #00C853;
+    }
+    &.offline{
+        background-color:rgb(255,82,82);
+    }
+}
+
+@media (max-width: 375px){
+    md-toolbar h1 {
+        font-size: 1.25em;
+        margin: 0.5em;
+
+    }
 }

@@ -6,7 +6,7 @@ module.exports = function(apiRoutes){
     var Question = require(__dirname+"/../models/Question.js").Question;
     var User = require(__dirname+"/../models/User.js").User;
     var General = require(__dirname+"/../models/General.js").General;
-    var WhoseOnline = require(__dirname+"/../models/WhoseOnline.js").WhoseOnline;
+    var Session = require(__dirname+"/../models/Session.js").Session;
 
     // USER : API ROUTES -------------------
 
@@ -26,7 +26,7 @@ module.exports = function(apiRoutes){
             .exec(function(err, model) {
                 if(err) throw err;
                 var friends = model.friends;
-                WhoseOnline.find({'user': { $in: friends }})
+                Session.find({'user': { $in: friends }})
                     .populate( 'user' )
                     .exec(function(err, _res){
                       var onlineFriends = _res;
@@ -46,7 +46,7 @@ module.exports = function(apiRoutes){
     apiRoutes.post('/user/register_as_online', function(req, res) {
         var user_id = req.body.user_id;
 
-        WhoseOnline.findOne({'user': user_id})
+        Session.findOne({'user': user_id})
             .exec(function (err, online) {
             if(online){
               online.timestamp = Date.now();
@@ -56,7 +56,7 @@ module.exports = function(apiRoutes){
                   }
               });
             } else{
-              var entry = new WhoseOnline({user: user_id});
+              var entry = new Session({user: user_id});
 
               entry.save(function (err) {
                 if (err) {

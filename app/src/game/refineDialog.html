@@ -4,10 +4,6 @@
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2>{{ 'CHOOSE_YOUR_TOPICS' | translate }}</h2>
-                <span flex></span>
-                <md-button class="md-icon-button" ng-click="cancel()">
-                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-                </md-button>
             </div>
         </md-toolbar>
         <md-dialog-content style="max-width:800px;max-height:810px;">
@@ -23,7 +19,7 @@
                     <md-content class="md-padding">
                         <h3>{{ 'PICK_ONE_OR_MORE_COMPANIES' | translate }}</h3>
                         <md-grid-list md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
-                            <md-grid-tile class="green" ng-repeat="company in dialog.companies track by company._id" ng-click="dialog.addToSelectedItems('company', company)">
+                            <md-grid-tile class="green" ng-class='{"selected" : dialog.selectedItems.indexOf(company) > -1}' ng-repeat="company in dialog.companies track by company._id" ng-click="dialog.addToSelectedItems('company', company)">
                                 <h3>{{company.name}}</h3>
                             </md-grid-tile>
 
@@ -34,7 +30,7 @@
                     <md-content class="md-padding">
                         <h3 >{{ 'PICK_ONE_OR_MORE_AREAS' | translate }}</h3>
                         <md-grid-list md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
-                            <md-grid-tile class="green" ng-repeat="area in dialog.areas track by area._id" ng-click="dialog.addToSelectedItems('area', area)">
+                            <md-grid-tile class="green" ng-class='{"selected" : dialog.selectedItems.indexOf(area) > -1}' ng-repeat="area in dialog.areas track by area._id" ng-click="dialog.addToSelectedItems('area', area)">
                                 <h3>{{area.name}}</h3>
                             </md-grid-tile>
                         </md-grid-list>
@@ -45,7 +41,7 @@
                         <h3>{{ 'PICK_ONE_OR_MORE_TECHNOLOGIES' | translate }}</h3>
 
                         <md-grid-list md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
-                            <md-grid-tile class="green" ng-repeat="tech in dialog.technologies track by tech._id" ng-click="dialog.addToSelectedItems('tech', tech)">
+                            <md-grid-tile class="green" ng-class='{"selected" : dialog.selectedItems.indexOf(tech) > -1}' ng-repeat="tech in dialog.technologies track by tech._id" ng-click="dialog.addToSelectedItems('tech', tech)">
                                 <h3>{{tech.name}}</h3>
                             </md-grid-tile>
                         </md-grid-list>
@@ -54,8 +50,8 @@
                 <md-tab label="general">
                     <md-content class="md-padding">
                         <h3>{{ 'PICK_ONE_OR_MORE_AREAS' | translate }}</h3>
-                        <md-grid-list md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
-                            <md-grid-tile class="green" ng-repeat="area in dialog.general track by area._id" ng-click="dialog.addToSelectedItems('general', area)">
+                        <md-grid-list md-cols-xs="4" md-cols-sm="4" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="8px" md-gutter-gt-sm="8px">
+                            <md-grid-tile class="green" ng-class='{"selected" : dialog.selectedItems.indexOf(area) > -1}' ng-repeat="area in dialog.general track by area._id" ng-click="dialog.addToSelectedItems('general', area)">
                                 <h3>{{area.name}}</h3>
                             </md-grid-tile>
                         </md-grid-list>

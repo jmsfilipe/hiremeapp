@@ -43,18 +43,6 @@
             min-width: 250px; 
             right: 0px; 
 
-            .md-button.md-primary.md-raised{
-                background-color: #ffa500;
-                color: black;
-
-                &:hover{
-                    background-color: #ffa500;
-                }
-            }
-
-            .md-button.md-primary {
-                color: #ffa500;
-            }
 
             md-input-container label{
                 color: white;
@@ -64,22 +52,7 @@
             }
 
 
-            md-input-container:not(.md-input-invalid).md-input-focused label {
-                color:  #ffa500;
-            }
 
-            md-input-container:not(.md-input-invalid).md-input-focused .md-input{
-                border-color:  #ffa500
-            }
-
-
-            md-input-container.md-input-invalid label {
-                color: rgb(221,44,0);
-            }
-
-            md-input-container.md-input-invalid .md-input {
-                border-color: rgb(221,44,0);
-            }
 
             div:last-child {
                text-align: center;

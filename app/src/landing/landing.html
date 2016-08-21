@@ -5,7 +5,7 @@
      <form novalidate  name="loginForm" ng-submit="loginForm.$valid && ctrl.signIn(loginForm, ctrl.user)">
         <div layout-gt-sm="row">
 
-            <md-input-container class="md-block md-primary" flex-gt-sm>
+            <md-input-container class="md-block md-accent" flex-gt-sm>
                 <label >Email</label>
                 <input account-check name="email" id="email" ng-model="ctrl.user.email" required ng-change-validate="password"/>
                 <div ng-messages="loginForm.email.$error">
@@ -15,7 +15,7 @@
             </md-input-container>
         </div>
         <div layout-gt-sm="row">
-            <md-input-container class="md-block md-primary" flex-gt-sm>
+            <md-input-container class="md-block md-accent" flex-gt-sm>
                 <label>Password</label>
                 <input ng-change-validate="password" type="password" id="password" name="password" ng-model="ctrl.user.password" required />
                 <div ng-messages="loginForm.password.$error" >
@@ -25,8 +25,8 @@
             </md-input-container>
         </div>
         <div layout-gt-sm="row">
-            <md-button class="md-raised md-primary" type="submit" id="submit" value="Submit">{{ 'SIGN_IN' | translate }}</md-button>
-            <md-button class=" md-primary" ui-sref="signup">{{ 'JOIN_US' | translate }}</md-button>
+            <md-button class="md-raised md-accent" type="submit" id="submit" value="Submit">{{ 'SIGN_IN' | translate }}</md-button>
+            <md-button class="md-accent" ui-sref="signup">{{ 'JOIN_US' | translate }}</md-button>
         </div>
     </form>
     

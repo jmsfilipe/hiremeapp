@@ -771,3 +771,5 @@ general_powerpoint.save();
 general_gmail.save();
 general_chrome.save();
 general_android.save();
+
+console.log('runall ---- DONE TASK');

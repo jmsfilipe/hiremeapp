@@ -1,9 +1,8 @@
 var mongoose = require("mongoose");
 
 var GeneralSchema = new mongoose.Schema({
-    name: {
-        type: String
-    },
+    name: {  type: String   },
+    type: {  type: String, default: 'General' },
     questions: [
         {
             type: mongoose.Schema.Types.ObjectId,

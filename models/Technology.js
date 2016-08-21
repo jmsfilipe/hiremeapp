@@ -1,9 +1,8 @@
 var mongoose = require("mongoose");
 
 var TechnologySchema = new mongoose.Schema({
-    name: {
-        type: String
-    },
+    name: {  type: String   },
+    type: {  type: String, default: 'Technology' },
     questions: [
         {
             type: mongoose.Schema.Types.ObjectId,
