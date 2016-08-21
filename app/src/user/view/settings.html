@@ -1,14 +1,13 @@
 <form name="signupForm" ng-submit="signupForm.$valid && ctrl.updateSettings()" class="page page--settings">
 
     <h1>{{ 'SETTINGS' | translate }}</h1>
-    <div layout-gt-sm="row" >
+
+
+    <div layout-gt-sm="row">
         <md-input-container class="md-block md-accent" flex-gt-sm>
             <label>Email</label>
             <input ng-model="ctrl.user.email">
         </md-input-container>
-    </div>
-
-    <div layout-gt-sm="row">
         <md-input-container class="md-block md-accent" flex-gt-sm>
             <label>Password</label>
             <input ng-disable-paste type="password" id="password" name="password" ng-model="ctrl.user.password"

@@ -3,6 +3,8 @@
 
         > div{
             margin: 18px;
+            background-color: rgba(0, 0, 0, 0.05);
+            padding: 1em;
         }
 
         md-radio-group md-radio-button{
@@ -15,7 +17,7 @@
         }
 
         md-input-container{
-            margin: 0;
+            margin-left: 0;
         }
     }
 }
