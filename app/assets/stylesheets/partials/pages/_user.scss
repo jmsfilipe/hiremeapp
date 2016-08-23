@@ -1,9 +1,8 @@
 .page--user{
-
     margin-bottom: 2em;
 
     .friends-list{
-        background-color: rgba(0, 0, 0, 0.05);
+        background-color: $color-shadow;
 
         &__item{
             margin: 12px;
@@ -60,7 +59,7 @@
     }
 
     .score-list{
-        background-color: rgba(0, 0, 0, 0.05);
+        background-color: $color-shadow;
         md-card{
             text-align: center;
             background-color: rgba(0,0,0,0.05);
@@ -93,7 +92,7 @@
 
     .md-toolbar-tools{
         margin-top: 1em;
-        background-color: rgba(0, 0, 0, 0.05);
+        background-color: $color-shadow;
         position: relative;
 
         h3{

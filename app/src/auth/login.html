@@ -3,7 +3,7 @@
     <form novalidate  name="loginForm" ng-submit="loginForm.$valid && ctrl.signIn(loginForm, ctrl.user)">
         <div layout-gt-xs="row" layout-align-gt-xs="center center" layout="column" >
 
-            <md-input-container class="md-block md-accent" >
+            <md-input-container class="md-block md-accent" flex-gt-xs >
                 <label >Email</label>
                 <input account-check name="email" id="email" ng-model="ctrl.user.email" required ng-change-validate="password"/>
                 <div ng-messages="loginForm.email.$error">
@@ -13,7 +13,7 @@
             </md-input-container>
         </div>
         <div layout-gt-xs="row" layout-align-gt-xs="center center" layout="column" >
-            <md-input-container class="md-block md-accent" >
+            <md-input-container class="md-block md-accent" flex-gt-xs>
                 <label>Password</label>
                 <input ng-change-validate="password" type="password" id="password" name="password" ng-model="ctrl.user.password" required />
                 <div ng-messages="loginForm.password.$error" >

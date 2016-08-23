@@ -101,16 +101,7 @@ md-button.menuBtn > md-icon {
     position: relative;
 }
 
-/* Typography support coming in 0.8.0 */
 
-md-toolbar h1 {
-    font-size: 1.50em;
-    font-weight: 400;
-    margin: 0.2em 1.5em;
-    font-family: 'Galada', cursive;
-    color: white;
-    text-shadow: 2px 2px 2px gray;
-}
 
 .avatar {
     position: relative;
@@ -176,10 +167,4 @@ md-dialog{
     }
 }
 
-@media (max-width: 375px){
-    md-toolbar h1 {
-        font-size: 1.25em;
-        margin: 0.5em;
 
-    }
-}

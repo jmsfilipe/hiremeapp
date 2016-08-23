@@ -11,11 +11,25 @@ md-toolbar{
         cursor: pointer;
     }
 
+    h1 {
+        font-size: 1.50em;
+        font-weight: 400;
+        margin: 0.2em 1.5em;
+        font-family: $font-logo;
+        color: white;
+        text-shadow: 2px 2px 2px gray;
+        padding: 0 8px;
+    }
+
     .logo:hover{
-        background-color: rgba(158,158,158,0.2);
+        background-color: $color-white-alpha-1;
     }
 
     .md-button{
+        &:not([disabled]):hover {
+            background-color: $color-white-alpha-1;
+        }
+
         span{
             position: absolute;
             bottom: 5px;
@@ -28,43 +42,47 @@ md-toolbar{
     }
 }
 
-.notifications{
-    > *{
-        border-bottom: 1px solid gainsboro;
-        margin: 0;
-        padding: .5em 1em;
+md-menu-content{
+    md-menu-item {
+        border-bottom: 1px solid $color-primary-alpha-2;
+        color: $color-primary;
     }
 
-    .md-button{
-        min-width: 36px;
-        width: 36px;
-        text-align: center;
-        padding: 0;
-        margin: 0 8px;
-
-        md-icon{
-            margin: auto;
+    &.container-friends{
+        > *{
+            border-bottom: 1px solid $color-primary-alpha-2;
+            margin: 0;
+            padding: .5em 1em;
         }
-    }
 
-    md-menu-item{
-        max-width: 300px;
+        .md-button{
+            min-width: 36px;
+            width: 36px;
+            text-align: center;
+            padding: 0;
+            margin: 0 8px;
 
-        md-icon{
-
-            width: 24px;
-            padding-left: 0;
-        }
-    }
-}
-
-.md-open-menu-container{
-    &.md-active {
-        > md-menu-content {
-            > * {
-                border-bottom: 1px solid gainsboro;
-                color: $color-primary;
+            md-icon{
+                margin: auto;
             }
         }
+
+        md-menu-item{
+            max-width: 300px;
+            md-icon{
+                width: 24px;
+                padding-left: 0;
+            }
+        }
+    }
+
+
+}
+
+@media (max-width: 375px){
+    md-toolbar h1 {
+        font-size: 1.2em;
+        margin: 0.5em;
+
     }
 }

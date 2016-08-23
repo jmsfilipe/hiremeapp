@@ -1,13 +1,10 @@
 .page{
-
-
     &--game{
         background: #63a69f url("/app/assets/images/clouds.png") center/cover no-repeat;
-        padding: 40px;
         min-height: 100%;
+        
         h1{
-
-            font-family: 'Bangers', cursive;
+            font-family: $font-game;
             text-transform: none;
             font-size: 3em;
             margin: 0;
@@ -17,14 +14,12 @@
         }
 
         md-fab-speed-dial{
-
             md-fab-trigger{
                 button{
                     margin-left: 0;
                     margin-right: 0;
                 }
             }
-
         }
 
 
@@ -33,18 +28,11 @@
             background-repeat: no-repeat;
             background-size: 30px;
             background-position: center 60%;
-
             background-image: url("/app/assets/images/filter.png");
 
-
             &.filter-on{
-
                 background-image: url("/app/assets/images/filter-on.png");
-
-
-
             }
-
         }
 
         .md-button.disabled{
@@ -53,13 +41,11 @@
             cursor: default;
         }
 
-
         .md-button:not(.md-fab){
             min-width: 200px;
         }
 
         md-card{
-
             width: 100%;
 
             &:not(.card-question){

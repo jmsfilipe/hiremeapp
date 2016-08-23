@@ -9,7 +9,7 @@
             <span ng-if="header.friendRequestNumber > 0">{{header.friendRequestNumber}}</span>
             <md-icon md-svg-icon="person" ></md-icon>
         </md-button>
-        <md-menu-content class="notifications" width="2">
+        <md-menu-content class="container-friends" width="2">
             <h4>Pending requests</h4>
             <md-menu-item ng-repeat="friend in header.friendRequestList">
               <md-icon md-svg-icon="svg-{{friend.gender}}" class="md-avatar"></md-icon>
