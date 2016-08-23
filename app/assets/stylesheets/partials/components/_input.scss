@@ -8,11 +8,7 @@
     line-height: 14px;
     transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
     color: $color-white-alpha-4;
-
 }
-
-
-
 
 .hint.ng-hide,
 .hint.ng-enter,
@@ -23,7 +19,6 @@
 .hint.ng-enter.ng-enter-active {
     bottom: 7px;
     opacity: 1; }
-
 
 md-input-container{
     margin: 18px;
@@ -39,5 +34,37 @@ md-input-container {
             border-color: $color-white-alpha-7;
         }
     }
+}
 
+
+//md-blend
+md-input-container:not(.md-input-invalid) {
+
+    &.md-blend{
+
+        .hint{
+            color: $color-blend;
+        }
+
+        label{
+            color: $color-black-alpha-8;
+        }
+
+        input{
+            border-color: $color-black-alpha-8; 
+        }
+
+
+        &.md-input-focused,
+        &.md-input-has-value{
+
+            label{
+                color: $color-blend;
+            }
+
+            input{
+                border-color: $color-blend; 
+            }
+        }
+    }
 }

@@ -9,7 +9,7 @@ md-toolbar{
     }
 
     &:not(.md-menu-toolbar){
-        background-color: $color-landing;
+        background-color: $color-primary;
     }
 
     > *{
@@ -70,7 +70,7 @@ md-toolbar{
         > md-menu-content {
             > * {
                 border-bottom: 1px solid gainsboro;
-                color: $color-landing;
+                color: $color-primary;
             }
         }
     }

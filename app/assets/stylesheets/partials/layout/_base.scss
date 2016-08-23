@@ -1,5 +1,5 @@
 md-content{
-    background-color: $color-landing;
+    background-color: $color-primary;
 }
 
 
@@ -27,3 +27,11 @@ body{
 .page{
     padding: 40px;
 }
+
+
+@media (max-width: 375px){
+    .page{
+        padding: 18px;
+    }
+}
+

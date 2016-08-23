@@ -2,7 +2,7 @@
     &--landing{
 
 
-        background: $color-landing url("/app/assets/images/clouds.png") center/cover no-repeat;
+        background: $color-primary url("/app/assets/images/clouds.png") center/cover no-repeat;
         height: 100%;
         animation: fadeIn 2s linear;
         overflow: hidden;

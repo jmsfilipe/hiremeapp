@@ -21,3 +21,14 @@
         }
     }
 }
+
+@media (max-width: 375px){
+    .page{
+        &--settings{
+
+            > div{
+                margin: 18px 0;
+            }
+        }
+    }
+}

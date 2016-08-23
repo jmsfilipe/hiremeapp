@@ -4,11 +4,11 @@
 
 
     <div layout-gt-sm="row">
-        <md-input-container class="md-block md-accent" flex-gt-sm>
+        <md-input-container class="md-block md-blend" flex-gt-sm>
             <label>Email</label>
             <input ng-model="ctrl.user.email">
         </md-input-container>
-        <md-input-container class="md-block md-accent" flex-gt-sm>
+        <md-input-container class="md-block md-blend" flex-gt-sm>
             <label>Password</label>
             <input ng-disable-paste type="password" id="password" name="password" ng-model="ctrl.user.password"
                    minlength="5" maxlength="30" ng-pattern="/^(?=.*?[[a-zA-Z])(?=.*?[0-9])(?=.*?[^\w\s]|.*?[_]).{5,}$/" />
@@ -19,7 +19,7 @@
                 </div>
             </div>
         </md-input-container>
-        <md-input-container class="md-block md-accent" flex-gt-sm>
+        <md-input-container class="md-block md-blend" flex-gt-sm>
             <label>{{ 'CONFIRM_PASSWORD' | translate }}</label>
             <input ng-disable-paste type="password" name="passwordRepeat" ng-model="ctrl.user.passwordRepeat"
                    pw-check="password"  />
