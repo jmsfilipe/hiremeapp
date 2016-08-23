@@ -1,70 +1,48 @@
-.hint {
-    white-space: nowrap;
-    position: absolute;
-    left: 2px;
-    right: auto;
-    bottom: 7px;
-    font-size: 12px;
-    line-height: 14px;
-    transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
-    color: $color-white-alpha-4;
-}
-
-.hint.ng-hide,
-.hint.ng-enter,
-.hint.ng-leave.ng-leave-active {
-    bottom: 26px;
-    opacity: 0; }
-.hint.ng-leave,
-.hint.ng-enter.ng-enter-active {
-    bottom: 7px;
-    opacity: 1; }
-
 md-input-container{
     margin: 18px;
-}
-
-md-input-container {
-    &.md-accent{
-        label{
-            color: white;
+    
+    &:not(.md-input-invalid) {
+        //md-accent
+        &.md-accent{
+            label       {   color: white;                       }
+            .md-input   {   border-color: $color-white-alpha-7; }
         }
+        //md-blend
+        &.md-blend{
+            .hint       {   color: $color-blend;                }
+            label       {   color: $color-black-alpha-8;        }
+            input       {   border-color: $color-black-alpha-8; }
 
-        .md-input{
-            border-color: $color-white-alpha-7;
+            &.md-input-focused,
+            &.md-input-has-value{
+                label   {   color: $color-blend;                }
+                input   {   border-color: $color-blend;         }
+            }
         }
     }
-}
 
+    .hint {
+        white-space: nowrap;
+        position: absolute;
+        left: 2px;
+        right: auto;
+        bottom: 7px;
+        font-size: 12px;
+        line-height: 14px;
+        transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+        color: $color-white-alpha-4;
 
-//md-blend
-md-input-container:not(.md-input-invalid) {
-
-    &.md-blend{
-
-        .hint{
-            color: $color-blend;
+        &.ng-hide,
+        &.ng-enter,
+        &.ng-leave.ng-leave-active {
+            bottom: 26px;
+            opacity: 0; 
         }
 
-        label{
-            color: $color-black-alpha-8;
-        }
-
-        input{
-            border-color: $color-black-alpha-8; 
-        }
-
-
-        &.md-input-focused,
-        &.md-input-has-value{
-
-            label{
-                color: $color-blend;
-            }
-
-            input{
-                border-color: $color-blend; 
-            }
+        &.ng-leave,
+        &.ng-enter.ng-enter-active {
+            bottom: 7px;
+            opacity: 1; 
         }
     }
 }

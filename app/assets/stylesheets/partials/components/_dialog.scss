@@ -1,0 +1,18 @@
+md-dialog{
+
+    md-input-container:not(.md-input-invalid){
+        margin-bottom: 0;
+
+        label           {  color: white;           }
+        .md-input       {  border-color: white;    }
+
+        &.md-input-focused,
+        &.md-input-has-value{
+            margin: 32px 18px 0px;
+
+            label       {   color: white;           }
+            .md-input   {   border-color: white;    }
+            md-icon     {   color: white;           }
+        }
+    }
+}

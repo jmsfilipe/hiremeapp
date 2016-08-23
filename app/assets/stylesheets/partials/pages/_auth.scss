@@ -2,16 +2,18 @@
     &--auth{
         background: $color-primary url("/app/assets/images/clouds.png") center/cover no-repeat;
         height: 100%;
-
         overflow: hidden;
 
         form{
             animation: fadeIn 1s  linear ;              
             animation-fill-mode: forwards;
             opacity: 0;
-           
         }
-
     }
 }
 
+@media (max-width: 599px){
+    md-input-container{
+        margin: 9px 18px;
+    }
+}

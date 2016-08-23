@@ -2,36 +2,18 @@ md-content{
     background-color: $color-primary;
 }
 
-
-md-input-container.md-white.md-default-theme:not(.md-input-invalid).md-input-focused label, 
-md-input-container:not(.md-input-invalid).md-white.md-input-focused label{
-    color: white;
-}
-
-md-input-container.md-white.md-default-theme:not(.md-input-invalid).md-input-focused md-icon, 
-md-input-container:not(.md-input-invalid).md-white.md-input-focused md-icon{
-    color: white;
-}
-
-md-input-container.md-white.md-default-theme:not(.md-input-invalid).md-input-focused .md-input, 
-md-input-container:not(.md-input-invalid).md-white.md-input-focused .md-input, 
-md-input-container.md-default-theme:not(.md-input-invalid).md-white.md-input-resized .md-input, 
-md-input-container:not(.md-input-invalid).md-white.md-input-resized .md-input {
-    border-color: white;
-}
-
 body{
     overflow: hidden;
 }
 
 .page{
-    padding: 40px;
+    padding: 3em;
 }
 
 
 @media (max-width: 375px){
     .page{
-        padding: 18px;
+        padding: 1.5em;
     }
 }
 
