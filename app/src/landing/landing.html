@@ -1,8 +1,6 @@
 <div class="page page--landing" flex layout-align="center center" layout="row" >
-
-    <div class="laptop">    </div>
-    
-     <form novalidate  name="loginForm" ng-submit="loginForm.$valid && ctrl.signIn(loginForm, ctrl.user)">
+    <div class="laptop"></div>
+    <form novalidate  name="loginForm" ng-submit="loginForm.$valid && ctrl.signIn(loginForm, ctrl.user)">
         <div layout-gt-xs="row" layout-align-gt-xs="center center" layout="column">
 
             <md-input-container class="md-block md-accent" flex-gt-xs>
@@ -29,6 +27,4 @@
             <md-button class="md-accent" ui-sref="signup">{{ 'JOIN_US' | translate }}</md-button>
         </div>
     </form>
-    
-
 </div>

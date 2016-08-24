@@ -1,0 +1,28 @@
+.btn{
+    &--header {
+        background-color: transparent;
+        border: none;
+        height: 38px;
+        width: 36px;
+        min-width: 36px;
+
+        md-icon{
+            color: white;
+            fill: white;
+            font-size: 30px;
+        }
+    }
+}
+
+.md-fab{
+    &--filter{
+        background-repeat: no-repeat;
+        background-size: 30px;
+        background-position: center 60%;
+        background-image: url("/app/assets/images/filter.png");
+
+        &.filter-on{
+            background-image: url("/app/assets/images/filter-on.png");
+        }
+    }
+}

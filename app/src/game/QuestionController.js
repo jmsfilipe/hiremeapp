@@ -8,7 +8,7 @@ var question = angular.module('hiremeapp.question', [
     var userId = AuthenticationService.user._id;
     var questionId;
 
-    console.log($stateParams)
+    console.log(AuthenticationService.user)
 
     self.user = $stateParams.user;
     self.filters = $stateParams.filters;
@@ -43,7 +43,8 @@ var question = angular.module('hiremeapp.question', [
             if (self.counter == 100) {
                 self.resetTimer();
                 self.showNext = true;
-                $('md-card').addClass("active");
+                $('md-card.correct').addClass("active")
+                $('md-card.incorrect').addClass("active time-up");
             }
         }, 200);
 
@@ -108,17 +109,15 @@ var question = angular.module('hiremeapp.question', [
             self.resetTimer();
             self.showNext = true;
             if(answer.correct){
-                $($event.currentTarget).addClass("active");
                 userServices.updateScore({user_id: userId});
                 userServices.correctQuestionScore({user_id: userId, question_id: questionId});
-
                 self.correct = true;
             } else{
                 self.showNext = true;
-                $($event.currentTarget).addClass("active");
                 $('md-card.correct').addClass("active");
                 self.disabledAnswers = true;
             }
+            $($event.currentTarget).addClass("active");
         }
     }
 

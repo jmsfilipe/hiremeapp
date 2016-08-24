@@ -1,9 +1,9 @@
 .page{
     &--game{
         background: #63a69f url("/app/assets/images/clouds.png") center/cover no-repeat;
-        min-height: 100%;
-        
-        h1{
+        min-height: calc(100% - 5px); //timer height
+
+        .title{
             font-family: $font-game;
             text-transform: none;
             font-size: 3em;
@@ -11,42 +11,38 @@
             color: white;
             letter-spacing: .1em;
             text-shadow: 2px 2px 2px black;
+            font-weight: bold;
+
         }
 
-        md-fab-speed-dial{
-            md-fab-trigger{
-                button{
-                    margin-left: 0;
-                    margin-right: 0;
-                }
-            }
-        }
-
-
-        #filter-btn{
+        .md-fab--filter{
             align-self: flex-end;
-            background-repeat: no-repeat;
-            background-size: 30px;
-            background-position: center 60%;
-            background-image: url("/app/assets/images/filter.png");
+        }
 
-            &.filter-on{
-                background-image: url("/app/assets/images/filter-on.png");
+        .md-button{
+
+            &.disabled{
+                background-color: rgba(0,0,0,0.12) !important;
+                color: rgba(0,0,0,0.38);
+                cursor: default;
             }
-        }
 
-        .md-button.disabled{
-            background-color: rgba(0,0,0,0.12) !important;
-            color: rgba(0,0,0,0.38);
-            cursor: default;
-        }
-
-        .md-button:not(.md-fab){
-            min-width: 200px;
+            &:not(.md-fab){
+                min-width: 200px;
+            }
         }
 
         md-card{
             width: 100%;
+
+            &.card-question{
+                background-color:$color-white-alpha-4;
+
+                md-card-content{
+                    text-align: center;
+                    margin: auto;
+                }
+            }
 
             &:not(.card-question){
                 md-card-content{
@@ -54,18 +50,28 @@
                     padding: 8px;
                 }
             }
+
+            &.active{
+                &.correct{
+                    background-color: #54f065;
+                }
+                &.incorrect{
+                    background-color: $color-green;
+                }
+
+                &.time-up{
+                    background-color: $color-black-alpha-2;
+                }
+            }
         }
 
-
         .toast{
-
             &--correct{
-                color: #eff24c;
-                text-shadow: 2px 2px 2px #f0b354;
+                color: $color-yellow;
+                text-shadow: 2px 2px 2px $color-orange-matte;
             }
             &--incorrect{
-                color: #f06554;
-
+                color: $color-coral-matte;
             }
 
             position: fixed;
@@ -79,11 +85,10 @@
             animation-timing-function: cubic-bezier(.18,.65,.27,1.04) ;
             animation-fill-mode: forwards;
         }
-
-
     }
-
 }
+
+
 
 
 @keyframes toast{
@@ -100,13 +105,12 @@
 
 @media screen and (min-width: 960px) {
     .page{
-
-
         &--game{
             .toast{
                 font-size: calc(0.1 * (100vw - 400px));
                 left: calc(.25 * (100vw - 400px)); //sidebar width
 
             }
-        }}
+        }
+    }
 }

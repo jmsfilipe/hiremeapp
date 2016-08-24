@@ -50,5 +50,6 @@
     "SEX": "Sex: ",
     "PREFERENCES": "Preferences",
     "SEARCH_FRIENDS": "Search friends",
-    "ADD_FRIENDS_DIALOG": "Add some friends first!"
+    "ADD_FRIENDS_DIALOG": "Add some friends first!",
+    "TIME_UP": "Time up! "
 }

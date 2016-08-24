@@ -1,9 +1,7 @@
 <section  layout-fill layout="row" layout-sm="column" layout-align="center center" layout-wrap class="page page--auth">
-
     <form novalidate  name="loginForm" ng-submit="loginForm.$valid && ctrl.signIn(loginForm, ctrl.user)">
-        <div layout-gt-xs="row" layout-align-gt-xs="center center" layout="column" >
-
-            <md-input-container class="md-block md-accent" flex-gt-xs >
+        <div layout-gt-xs="row" layout-align-gt-xs="center center" layout="column">
+            <md-input-container class="md-block md-accent" flex-gt-xs>
                 <label >Email</label>
                 <input account-check name="email" id="email" ng-model="ctrl.user.email" required ng-change-validate="password"/>
                 <div ng-messages="loginForm.email.$error">
@@ -12,7 +10,7 @@
                 </div>
             </md-input-container>
         </div>
-        <div layout-gt-xs="row" layout-align-gt-xs="center center" layout="column" >
+        <div layout-gt-xs="row" layout-align-gt-xs="center center" layout="column">
             <md-input-container class="md-block md-accent" flex-gt-xs>
                 <label>Password</label>
                 <input ng-change-validate="password" type="password" id="password" name="password" ng-model="ctrl.user.password" required />
@@ -22,11 +20,9 @@
                 </div>
             </md-input-container>
         </div>
-        <div layout-gt-xs="row" layout-align-gt-xs="center center" layout="column" >
+        <div layout-gt-xs="row" layout-align-gt-xs="center center" layout="column">
             <md-button class="md-raised md-accent" type="submit" id="submit" value="Submit">{{ 'SIGN_IN' | translate }}</md-button>
             <md-button class=" md-accent" ui-sref="signup">{{ 'JOIN_US' | translate }}</md-button>
         </div>
     </form>
-
-
 </section>

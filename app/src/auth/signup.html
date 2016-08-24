@@ -1,8 +1,7 @@
 <section layout-fill layout="row" layout-sm="column" layout-align="center center" layout-wrap class="page page--auth">
     <form novalidate name="signupForm" ng-submit="signupForm.$valid && ctrl.signUp(signupForm, ctrl.user)">
         <div layout-gt-xs="row" layout-align-gt-xs="center center" layout="column" >
-            
-            <md-input-container class="md-block  md-accent" flex="50">
+            <md-input-container class="md-block md-accent" flex="50">
                 <label>{{ 'NAME' | translate }}</label>
                 <input required name="name" ng-model="ctrl.user.name"/>
                 <div class="hint" ng-show="signupForm.name.$untouched  || signupForm.name.$valid">{{'WHAT_WE_SHOULD_CALL_YOU' | translate }}</div>
@@ -11,7 +10,6 @@
                     <div ng-message="md-maxlength">{{ 'NAME_LESS_30_CHARACTERS_LONG' | translate }}</div>
                 </div>
             </md-input-container>
-
             <md-input-container class="md-block md-accent" flex="50">
                 <label >Email</label>
                 <input required name="email" ng-model="ctrl.user.email" required minlength="5" maxlength="100" ng-pattern='/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/' email-check />
@@ -46,7 +44,7 @@
         </div>
         <div layout-gt-xs="row" layout-align-gt-xs="center center" layout="column" >
             <md-button class="md-raised md-accent" type="submit" id="submit" value="Submit">{{ 'JOIN_US' | translate }}</md-button>
-            <md-button class="md-accent" ui-sref="signin"> {{ 'SIGN_IN' | translate }}</md-button>
+            <md-button class="md-accent" ui-sref="signin">{{ 'SIGN_IN' | translate }}</md-button>
         </div>
     </form>
 </section>

@@ -13,7 +13,11 @@
 }
 
 @media (max-width: 599px){
-    md-input-container{
-        margin: 9px 18px;
+    .page{
+        &--auth{
+            md-input-container{
+                margin: 9px 18px;
+            }
+        }
     }
 }

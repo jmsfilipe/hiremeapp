@@ -6,7 +6,13 @@ body{
     overflow: hidden;
 }
 
+.content{
+
+}
 .page{
+    &__wrapper{
+        height: 100%
+    }
     padding: 3em;
 }
 

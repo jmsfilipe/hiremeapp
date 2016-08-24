@@ -1,11 +1,11 @@
 <md-toolbar layout="row">
-    <md-button class="menu" hide-gt-sm ng-click="header.toggleSidebar()"  md-ink-ripple aria-label="Show User List">
+    <md-button class="btn--header" hide-gt-sm ng-click="header.toggleSidebar()"  md-ink-ripple aria-label="Show User List">
         <md-icon >chrome_reader_mode</md-icon>
     </md-button>
-    <h1 class="logo" ui-sref="index.game">Hire.me App</h1>
+    <span class="logo" ui-sref="index.game">Hire.me App</span>
     <span flex></span>
     <md-menu>
-        <md-button class="menu" aria-label="Friend Request"  class="md-icon-button" ng-click="header.openMenu($mdOpenMenu, $event)">
+        <md-button class="btn--header" aria-label="Friend Request"  class="md-icon-button" ng-click="header.openMenu($mdOpenMenu, $event)">
             <span ng-if="header.friendRequestNumber > 0">{{header.friendRequestNumber}}</span>
             <md-icon md-svg-icon="person" ></md-icon>
         </md-button>
@@ -24,7 +24,7 @@
         </md-menu-content>
     </md-menu>
     <md-menu>
-        <md-button class="menu" aria-label="More" class="md-icon-button" ng-click="header.openMenu($mdOpenMenu, $event)">
+        <md-button class="btn--header" aria-label="More" class="md-icon-button" ng-click="header.openMenu($mdOpenMenu, $event)">
             <md-icon md-svg-icon="settings_white" ></md-icon>
         </md-button>
         <md-menu-content width="2">

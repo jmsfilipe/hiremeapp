@@ -3,21 +3,24 @@
 $color-teal: rgba(99, 166, 159, 1);
 $color-teal-alpha-2: rgba(99, 166, 159, 0.2);
 
+$color-yellow: #eff24c;
 $color-orange: rgb(255,171,64);
+$color-orange-matte: #f0b354;
 $color-deep-orange: rgb(255, 87, 34);
-
-$color-coral: rgb(255, 82, 82);
+$color-coral-matte: #f06554;
+$color-coral: rgb(255,82,82);
 
 $color-black-alpha-5: rgba(0,0,0,0.5);
-$color-black-alpha-8: rgba(0,0,0,0.8);
+$color-black-alpha-7: rgba(0,0,0,0.7);
+$color-black-alpha-2: rgba(0,0,0,0.2);
 
 $color-white-alpha-7: rgba(255, 255, 255, 0.7);
 $color-white-alpha-4: rgba(255, 255, 255, 0.4);
 $color-white-alpha-1: rgba(255, 255, 255, 0.1);
 
+$color-green: $color-coral;
+
 //----------------------------------------------------------
-
-
 $color-primary: $color-teal;
 $color-primary-alpha-2: $color-teal-alpha-2;
 
@@ -28,8 +31,9 @@ $color-warn: $color-deep-orange;
 $color-blend: $color-black-alpha-5;
 
 $color-shadow: rgba(0, 0, 0, 0.05);
-//Fonts
 
+
+//Fonts
 
 $font-logo:    'Galada', cursives;
 $font-game:    'Bangers', cursive;

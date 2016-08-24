@@ -1,7 +1,6 @@
 .page{
     &--landing{
 
-
         background: $color-primary url("/app/assets/images/clouds.png") center/cover no-repeat;
         height: 100%;
         animation: fadeIn 2s linear;
@@ -12,7 +11,6 @@
             background:  url("/app/assets/images/laptop.png") center/contain no-repeat;
             animation: zoomIn 1s 4s linear ;
             animation-fill-mode: forwards;
-
 
             &::after { 
                 content: "";
@@ -25,8 +23,7 @@
                 transform: rotate(70deg);
                 position: absolute;
                 margin: 0 auto;
-                animation: rotate 3s 1s ease-in ;
-
+                animation: rocket 3s 1s ease-in ;
                 animation-fill-mode: forwards;
             }
         }
@@ -48,7 +45,7 @@
 }
 
 
-@keyframes rotate{
+@keyframes rocket{
     0% {
         top: 60%;
         left: -20%;
@@ -60,16 +57,7 @@
         transform: rotate(70deg);
         top: 40%;
         left: 100%;
-
     }
-
-    /*  32% {
-    transform: rotate(30deg);
-    top: 35%;
-    left: 150%;
-
-}*/
-
 
     50% {
         transform: rotate(-60deg);
@@ -90,7 +78,6 @@
     0% {
         opacity: 0;
     }
-
 
     100% {
         opacity: 1;

@@ -1,26 +1,29 @@
-<section class="page page--game" layout="column" layout-align="center center" ng-cloak ng-if="ctrl.ready">
+<div class="page__wrapper"> 
+    <md-progress-linear md-mode="determinate" value="{{ctrl.counter}}" class="md-accent"></md-progress-linear>
+    <section class="page page--game" layout="column" layout-align="center center" ng-cloak ng-if="ctrl.ready">
 
 
-    <h1 class="md-primary" >{{ 'NEW_GAME' | translate }}</h1>
-    <span class="flex"></span>
+        <h1 class="md-primary" >{{ 'NEW_GAME' | translate }}</h1>
+        <span class="flex"></span>
 
-    <div layout="row" layout-sm="column" layout-align="space-around">
-        <md-progress-circular md-mode="determinate" value="{{ctrl.counter}}" class="md-warn"></md-progress-circular>
-    </div>
-    <md-card md-theme-watch class="card-question" >
-        <md-card-content layout="row" layout-align="space-between">
-            <span><b>{{ctrl.question[ctrl.lang]}}</b></span>
-        </md-card-content>
-    </md-card>
-    <span class="flex"></span>
-    <md-card md-theme-watch  ng-repeat="answer in ctrl.answers" ng-click="ctrl.evaluateAnswer(answer, $event)" ng-class="answer.correct ? 'correct' : 'incorrect'">
-        <md-card-content layout="row" layout-align="space-between">
-            <span>{{answer.text[ctrl.lang]}}</span>
-        </md-card-content>
-    </md-card>
-    <span class="flex"></span>
-    <md-button class="md-raised " ng-disabled="! ctrl.showNext" ng-click="ctrl.hitNext()">{{ 'NEXT' | translate }}</md-button>
 
-    <h1 class="toast toast--correct" ng-if="ctrl.showNext && ctrl.correct">{{ 'CORRECT' | translate }}</h1>
-    <h1 class="toast toast--incorrect" ng-if="ctrl.showNext && !ctrl.correct">{{ 'INCORRECT' | translate }}</h1>
-</section>
+        <md-card md-theme-watch class="card-question" >
+            <md-card-content layout="row" layout-align="space-between">
+                <span><b>{{ctrl.question[ctrl.lang]}}</b></span>
+            </md-card-content>
+        </md-card>
+        <span class="flex"></span>
+        <md-card md-theme-watch  ng-repeat="answer in ctrl.answers" ng-click="ctrl.evaluateAnswer(answer, $event)" ng-class="answer.correct ? 'correct' : 'incorrect'">
+            <md-card-content layout="row" layout-align="space-between">
+                <span>{{answer.text[ctrl.lang]}}</span>
+            </md-card-content>
+        </md-card>
+        <span class="flex"></span>
+        <md-button class="md-raised " ng-disabled="! ctrl.showNext" ng-click="ctrl.hitNext()">{{ 'NEXT' | translate }}</md-button>
+
+        <h1 class="toast toast--correct" ng-if="ctrl.showNext && ctrl.correct">{{ 'CORRECT' | translate }}</h1>
+        <h1 class="toast toast--incorrect" ng-if="ctrl.showNext && !ctrl.correct && ctrl.counter < 100">{{ 'INCORRECT' | translate }}</h1>
+        <h1 class="toast toast--incorrect" ng-if="ctrl.showNext && !ctrl.correct && ctrl.counter >= 100">{{ 'TIME_UP' | translate }}</h1>
+
+    </section>
+</div>
