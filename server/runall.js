@@ -86,13 +86,17 @@ var article_1 = new Article({
   body: "No caso da Critical Software o alargamento enquadra-se na política de responsabilidade social da empresa. Três por cento dos lucros são dedicados a este fim, explica",
   img: "https://imagens3.publico.pt/imagens.aspx/1035503?tp=UH&db=IMAGENS",
   link: "https://www.publico.pt/sociedade/noticia/empresa-de-informatica-oferece-as-funcionarias-mais-dois-meses-de-licenca-de-maternidade-1725237"
+  source: "Público",
+  date: "06/03/2016"
 });
 
 var article_2 = new Article({
   title: "Salários de profissionais de tecnologias crescem 2% em 2015",
   body: "Em média, os salários dos profissionais de tecnologias registaram um aumento menor em 2015 do que em 2014. Estudo com 12 mil entrevistas revela que quase um terço das empresas de tecnologias portuguesas está em vias de contratar profissionais.",
   img: "http://images-cdn.impresa.pt/exameinformatica/2015-07-27-2ndS-pix1.jpg?v=w620h395",
-  link: "http://exameinformatica.sapo.pt/noticias/mercados/2015-07-27-Salarios-de-profissionais-de-tecnologias-crescem-2-em-2015"
+  link: "http://exameinformatica.sapo.pt/noticias/mercados/2015-07-27-Salarios-de-profissionais-de-tecnologias-crescem-2-em-2015",
+  source: "Exame Informática",
+  date: "27/07/2015"
 });
 
 var article_3 = new Article({
@@ -100,13 +104,17 @@ var article_3 = new Article({
   body: "Todos os cerca de 150 alunos finalistas e recém-licenciados da Universidade do Minho na área da informática e Ciências de Computação vão ser disputados, na próxima semana, por mais de vinte empresas portuguesas e multinacionais.",
   img: "http://www.crup.pt/images/M_images/UMInho.JPG",
   link: "http://www.sabado.pt/ultima_hora/detalhe/empresas_recrutam_todos_os_informaticos_saidos_da_universidade_do_minho.html"
+  source: "Sábado",
+  date: "09/06/2016"
 });
 
 var article_4 = new Article({
   title: "Português recomendado por Bill Gates:\"Os computadores são demasiado estúpidos\"",
   body: "As máquinas não vão \"destruir a humanidade\" mas há perigos. O aviso é de Pedro Domingos, autor do livro que Bill Gates recomenda a quem quer saber mais sobre Inteligência Artificial.",
   img: "http://static.globalnoticias.pt/storage/TSF/2016/sectionbig/ng7055596.jpg",
-  link: "http://www.tsf.pt/sociedade/ciencia-e-tecnologia/interior/pedro-domingos-os-computadores-sao-demasiado-estupidos-5231986.html"
+  link: "http://www.tsf.pt/sociedade/ciencia-e-tecnologia/interior/pedro-domingos-os-computadores-sao-demasiado-estupidos-5231986.html",
+  source: "TSF",
+  date: "16/06/2016"
 });
 
 var article_5 = new Article({
@@ -114,6 +122,8 @@ var article_5 = new Article({
   body: "Portugal, Espanha, Alemanha, França e Itália são os mercados em que a Uniplaces quer expandir a sua presença e, para isso, precisa de pessoas com experiência. Mas, em vez de colocar um anúncio no jornal, a startup portuguesa recorreu a drones para anunciar as 40 vagas que tem disponíveis nas áreas de Customer Service, Marketing, Onboarding, People&Finance, Product, Sales e Technology.",
   img: "http://marketeer.pt/wp-content/uploads/2016/06/uniplaces-drone.jpg",
   link: "http://marketeer.pt/2016/06/20/uniplaces-tem-40-vagas-por-preencher/"
+  source: "Marketeer",
+  date: "20/06/2016"
 });
 
 article_1.save();

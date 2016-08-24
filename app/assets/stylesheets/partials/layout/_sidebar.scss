@@ -10,6 +10,10 @@ md-sidenav{
             background-color: $color-white-alpha-1;
         }
 
+        a{
+          text-decoration: none;
+          color: inherit;
+        }
 
         img{
             width: 100%;
@@ -37,6 +41,10 @@ md-sidenav{
                 font-weight: 400;
                 font-size: .9em;
                 margin-bottom: 0;
+                &.article-source{
+                  color: $color-white-alpha-7;
+                  font-style: italic;
+                }
             }
         }
     }
