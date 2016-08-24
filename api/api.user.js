@@ -54,6 +54,7 @@ module.exports = function(apiRoutes){
                   if(err) {
                       console.error('ERROR!');
                   }
+                  res.sendStatus(200);
               });
             } else{
               var entry = new Session({user: user_id});
@@ -63,6 +64,7 @@ module.exports = function(apiRoutes){
                   return err;
                 }
                 else {
+                  res.sendStatus(200);
                   console.log("Post saved");
                 }
               });
