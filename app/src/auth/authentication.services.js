@@ -14,6 +14,10 @@ angular.module('hiremeapp.auth')
             auth.user = user;
             $state.go('index.game', { "user": user});
         }
+        var updateUser = function(user){
+            auth.user = user;
+        }
+
         var auth = {
             isLogged: false,
             user: null,

@@ -10,64 +10,76 @@ module.exports = function(apiRoutes){
 
     // USER : API ROUTES -------------------
 
+    // route to return user authenticated
+    apiRoutes.get('/user/self', function(req, res) {
+        var user_id = req.decoded.id;
+
+        User.findById(user_id)
+            .select('-password')
+            .populate('friends', '-password')
+            .exec(function (err, user) {
+            res.send({user: user});
+        });
+    });
 
     // route to return all users (GET http://localhost:8080/api/users)
     apiRoutes.get('/users', function(req, res) {
-        User.find({}, function(err, users) {
+        User.find({}, { password:0 } , function(err, users) {
             res.json(users);
         });
     });
 
-    apiRoutes.post('/user/friends_state', function(req, res) {
-        var user_id = req.body.user_id;
+    apiRoutes.get('/user/friends_state', function(req, res) {
+        var user_id = req.decoded.id;
         User.findById(user_id)
-            .populate('friends')
+            .select('-password')
+            .populate('friends', '-password')
             .lean()
             .exec(function(err, model) {
-                if(err) throw err;
-                var friends = model.friends;
-                Session.find({'user': { $in: friends }})
-                    .populate( 'user' )
-                    .exec(function(err, _res){
-                      var onlineFriends = _res;
+            if(err) throw err;
+            var friends = model.friends;
+            Session.find({'user': { $in: friends }})
+                .populate( 'user' )
+                .exec(function(err, _res){
+                var onlineFriends = _res;
 
-                      for(var i = 0; i < friends.length; i++) {
-                        for(var j = 0; j < onlineFriends.length; j++) {
-                          if(onlineFriends[j].user._id.equals(friends[i]._id)){
+                for(var i = 0; i < friends.length; i++) {
+                    for(var j = 0; j < onlineFriends.length; j++) {
+                        if(onlineFriends[j].user._id.equals(friends[i]._id)){
                             friends[i].status = "online";
-                          }
                         }
-                      }
-                      res.json(friends);
-                })
-            });
+                    }
+                }
+                res.json(friends);
+            })
+        });
     });
 
     apiRoutes.post('/user/register_as_online', function(req, res) {
-        var user_id = req.body.user_id;
+        var user_id = req.decoded.id;
 
         Session.findOne({'user': user_id})
             .exec(function (err, online) {
             if(online){
-              online.timestamp = Date.now();
-              online.save(function (err) {
-                  if(err) {
-                      console.error('ERROR!');
-                  }
-                  res.sendStatus(200);
-              });
+                online.timestamp = Date.now();
+                online.save(function (err) {
+                    if(err) {
+                        console.error('ERROR!');
+                    }
+                    res.sendStatus(200);
+                });
             } else{
-              var entry = new Session({user: user_id});
+                var entry = new Session({user: user_id});
 
-              entry.save(function (err) {
-                if (err) {
-                  return err;
-                }
-                else {
-                  res.sendStatus(200);
-                  console.log("Post saved");
-                }
-              });
+                entry.save(function (err) {
+                    if (err) {
+                        return err;
+                    }
+                    else {
+                        res.sendStatus(200);
+                        console.log("Post saved");
+                    }
+                });
 
             }
         });
@@ -77,7 +89,7 @@ module.exports = function(apiRoutes){
     //add friend to friends list
     apiRoutes.post('/user/add_friend', function(req, res) {
 
-        var user_id = req.body.user_id;
+        var user_id = req.decoded.id;
         var user_to_add_id = req.body.user_to_add_id;
 
         User.findByIdAndUpdate(
@@ -95,16 +107,16 @@ module.exports = function(apiRoutes){
                             {$pull: {"friend_requests": user_to_add_id}},
                             function(err, model) {
                                 if(err) throw err;
-                                      res.sendStatus(200);
+                                res.sendStatus(200);
                             });
-                        });
                     });
+            });
     });
 
     //add friend to friends list
     apiRoutes.post('/user/add_friend_request', function(req, res) {
 
-        var user_id = req.body.user_id;
+        var user_id = req.decoded.id;
         var user_to_add_id = req.body.user_to_add_id;
 
         User.findByIdAndUpdate(
@@ -119,7 +131,7 @@ module.exports = function(apiRoutes){
     //add friend to friends list
     apiRoutes.post('/user/remove_friend_request', function(req, res) {
 
-        var user_id = req.body.user_id;
+        var user_id = req.decoded.id;
         var user_to_remove_id = req.body.user_to_remove_id;
 
         User.findByIdAndUpdate(
@@ -132,16 +144,17 @@ module.exports = function(apiRoutes){
     });
 
     //search friend by name or email
-    apiRoutes.post('/user/search', function(req, res) {
+    apiRoutes.get('/user/search', function(req, res) {
 
-        var term = req.body.term;
-        var user_id = req.body.user_id;
+        var term = req.query.term;
+        var user_id = req.query.user_id;
         var ObjectID = require('mongodb').ObjectID;
         var _id = new ObjectID(user_id);
 
         User.findById(user_id)
+            .select('-password')
             .exec(function (err, user) {
-            User.find({$or: [{'email' : new RegExp(term, 'i')}, {'name' : new RegExp(term, 'i')}], "_id": {"$nin": user.friends, "$ne": _id} }, function(err, docs){
+            User.find({$or: [{'email' : new RegExp(term, 'i')}, {'name' : new RegExp(term, 'i')}], "_id": {"$nin": user.friends, "$ne": _id} },  { password:0 },  function(err, docs){
                 res.send(docs);
 
             });
@@ -150,12 +163,13 @@ module.exports = function(apiRoutes){
     });
 
     //list all the friends of a user
-    apiRoutes.post('/user/list_friends', function(req, res) {
+    apiRoutes.get('/user/list_friends', function(req, res) {
 
-        var user_id = req.body.user_id;
+        var user_id = req.query.user_id;
 
         User.findById(user_id)
-            .populate( 'friends')
+            .select('-password')
+            .populate('friends', '-password')
             .exec(function (err, user) {
             res.send({friends: user.friends});
         });
@@ -163,12 +177,13 @@ module.exports = function(apiRoutes){
     });
 
     //list all the friends of a user
-    apiRoutes.post('/user/list_friend_requests', function(req, res) {
+    apiRoutes.get('/user/list_friend_requests', function(req, res) {
 
-        var user_id = req.body.user_id;
+        var user_id = req.decoded.id;
 
         User.findById(user_id)
-            .populate( 'friend_requests')
+            .select('-password')
+            .populate( 'friend_requests', '-password')
             .exec(function (err, user) {
             res.send({friend_requests: user.friend_requests});
         });
@@ -176,23 +191,24 @@ module.exports = function(apiRoutes){
     });
 
     //total number of friends of a user
-    apiRoutes.post('/user/total_friends', function(req, res) {
+    apiRoutes.get('/user/total_friends', function(req, res) {
 
-        var user_id = req.body.user_id;
+        var user_id = req.query.user_id;
 
         User.findById(
             user_id,
+            { password:0 },
             function(err, model) {
-                console.log(model)
-                res.send({total_friends: model.friends.length})
-            });
+            console.log(model)
+            res.send({total_friends: model.friends.length})
+        });
 
     });
 
     //increment the global score of a user
     apiRoutes.post('/user/update_score', function(req, res) {
 
-        var user_id = req.body.user_id;
+        var user_id = req.decoded.id;
 
         User.findByIdAndUpdate(
             user_id,
@@ -205,12 +221,13 @@ module.exports = function(apiRoutes){
     });
 
     //get the global score of a user
-    apiRoutes.post('/user/get_score', function(req, res) {
+    apiRoutes.get('/user/get_score', function(req, res) {
 
-        var user_id = req.body.user_id;
+        var user_id = req.query.user_id;
 
         User.findById(
             user_id,
+            { password:0 },
             function(err, model) {
                 if(err) throw err;
                 res.send({score: model.score});
@@ -221,7 +238,7 @@ module.exports = function(apiRoutes){
     //save the settings panel
     apiRoutes.post('/user/settings', function(req, res) {
 
-        var user_id = req.body.user_id;
+        var user_id = req.decoded.id;
         var _pwd = req.body.password;
         var _email = req.body.email;
         var _gender = req.body.gender;
@@ -240,7 +257,7 @@ module.exports = function(apiRoutes){
     //add correct question score
     apiRoutes.post('/user/correct_question', function(req, res) {
 
-        var user_id = req.body.user_id;
+        var user_id = req.decoded.id;
         var question_id = req.body.question_id;
 
         var techName = "";
@@ -249,96 +266,97 @@ module.exports = function(apiRoutes){
         var generalName = "";
 
         Technology.find({ questions: question_id})
-        .exec(function(err, _resTechnology){
+            .exec(function(err, _resTechnology){
 
-          if(_resTechnology.length > 0){
-            techName = _resTechnology[0].name;
+            if(_resTechnology.length > 0){
+                techName = _resTechnology[0].name;
 
-          Area.find({ technologies: _resTechnology[0]._id})
-          .exec(function(err, _resArea){
+                Area.find({ technologies: _resTechnology[0]._id})
+                    .exec(function(err, _resArea){
 
-              if(_resArea.length > 0)
-                areaName = _resArea[0].name;
+                    if(_resArea.length > 0)
+                        areaName = _resArea[0].name;
 
-              if(areaName){
-                var area = {};
-                area["area."+areaName] = 1;
-                User.findOneAndUpdate({_id: user_id}, {$inc: area}, function(err, doc){
-                  if(err){
-                    console.log("Something wrong when updating data!");
-                  }
-                  var tech = {};
-                  tech["tech."+techName] = 1;
-                  User.findOneAndUpdate({_id: user_id}, {$inc: tech}, function(err, doc){
-                    if(err){
-                      console.log("Something wrong when updating data!");
+                    if(areaName){
+                        var area = {};
+                        area["area."+areaName] = 1;
+                        User.findOneAndUpdate({_id: user_id}, {$inc: area}, function(err, doc){
+                            if(err){
+                                console.log("Something wrong when updating data!");
+                            }
+                            var tech = {};
+                            tech["tech."+techName] = 1;
+                            User.findOneAndUpdate({_id: user_id}, {$inc: tech}, function(err, doc){
+                                if(err){
+                                    console.log("Something wrong when updating data!");
+                                }
+                                res.sendStatus(200);
+                            });
+                        });
+                    } else{
+                        getCompany();
                     }
-                    res.sendStatus(200);
-                  });
                 });
-              } else{
+            } else{
                 getCompany();
-              }
-            });
-          } else{
-            getCompany();
-          }
+            }
         });
 
         var getCompany = function(){
-          Company.find({ questions: question_id})
-          .exec(function(err, _resCompany){
+            Company.find({ questions: question_id})
+                .exec(function(err, _resCompany){
 
-            if(_resCompany.length > 0)
-              companyName = _resCompany[0].name;
+                if(_resCompany.length > 0)
+                    companyName = _resCompany[0].name;
 
-            if(companyName){
-              var company = {};
-              company["company."+companyName.toLowerCase()] = 1;
-              User.findOneAndUpdate({_id: user_id}, {$inc: company}, function(err, doc){
-                console.log(companyName)
-                if(err){
-                  console.log("Something wrong when updating data!");
+                if(companyName){
+                    var company = {};
+                    company["company."+companyName.toLowerCase()] = 1;
+                    User.findOneAndUpdate({_id: user_id}, {$inc: company}, function(err, doc){
+                        console.log(companyName)
+                        if(err){
+                            console.log("Something wrong when updating data!");
+                        }
+                        res.sendStatus(200);
+                    });
+                } else{
+                    getGeneral();
                 }
-                res.sendStatus(200);
-              });
-            } else{
-              getGeneral();
-            }
 
-          });
-      }
-
-      var getGeneral = function(){
-        General.find({ questions: question_id})
-        .exec(function(err, _resGeneral){
-          if(_resGeneral.length > 0)
-            generalName = _resGeneral[0].name;
-
-          if(generalName){
-            var general = {};
-            general["general."+generalName.toLowerCase()] = 1;
-            User.findOneAndUpdate({_id: user_id}, {$inc: general}, function(err, doc){
-              if(err){
-                console.log("Something wrong when updating data!");
-              }
-              res.sendStatus(200);
             });
-          }
+        }
+
+        var getGeneral = function(){
+            General.find({ questions: question_id})
+                .exec(function(err, _resGeneral){
+                if(_resGeneral.length > 0)
+                    generalName = _resGeneral[0].name;
+
+                if(generalName){
+                    var general = {};
+                    general["general."+generalName.toLowerCase()] = 1;
+                    User.findOneAndUpdate({_id: user_id}, {$inc: general}, function(err, doc){
+                        if(err){
+                            console.log("Something wrong when updating data!");
+                        }
+                        res.sendStatus(200);
+                    });
+                }
+            });
+        }
+
+
         });
-      }
-
-
-    });
 
     //get a user score, grouped by technologies
-    apiRoutes.post('/user/list_scores/', function(req, res) {
+    apiRoutes.get('/user/list_scores/', function(req, res) {
 
-        var user_id = req.body.user_id;
+        var user_id = req.query.user_id;
 
         User.findOne({ _id: user_id})
+            .select('-password')
             .exec(function(error, user) {
-              res.send({
+            res.send({
                 total_score: user.score,
                 company_scores: user.company,
                 general_scores: user.general,

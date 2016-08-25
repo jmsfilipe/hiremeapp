@@ -1,16 +1,16 @@
 <div layout="column" class="page page--user">
     <div layout="row" layout-fill class="user-info">
         <section layout="column" layout-align="center center" class="user-info__detail">
-            <p class="user-info__detail__heading"> {{ctrl.scores.total_score}}</p>
+            <p class="user-info__detail__heading"> {{ctrl.user.score}}</p>
             <p class="user-info__detail__subheading">{{ 'SCORE' | translate | uppercase}}</p>
         </section>
         <section layout="column" layout-align="center center" class="user-info__detail">
-            <p class="user-info__detail__heading">{{ctrl.totalFriends}}</p>
+            <p class="user-info__detail__heading">{{ctrl.user.friends.length}}</p>
             <p class="user-info__detail__subheading">{{ 'FRIENDS' | translate | uppercase}}</p>
         </section>
         <span class="flex"></span>
         <section layout="column" layout-align="center center" class="user-info__detail">
-            <md-icon md-svg-icon="svg-{{ctrl.user.gender}}" class="avatar md-whiteframe-z2" ng-mouseenter="hover = true" ng-mouseleave="hover = false" ui-sref="index.user"></md-icon>
+            <md-icon md-svg-icon="svg-{{ctrl.user.gender}}" class="avatar md-whiteframe-z2" ng-mouseenter="hover = true" ng-mouseleave="hover = false" ></md-icon>
             <p class="user-info__detail__desc">{{ctrl.user.name}}</p>
         </section>
 
@@ -23,7 +23,7 @@
     </div>
     <md-content flex layout-padding class="list list--scores">
         <div flex-xs flex-gt-xs="50" layout="row" >
-            <md-card ng-repeat="(techName, techScore) in ctrl.scores.tech_scores" ng-if="techScore != 0" class="list__item" layout-align="center center">
+            <md-card ng-repeat="(techName, techScore) in ctrl.user.tech" ng-if="techScore != 0" class="list__item" layout-align="center center">
                 <md-card-title ng-class="ctrl.getColorClass(techScore)">
                     <md-card-title-text>
                         <span class="md-headline">{{techScore}}</span>
@@ -34,7 +34,7 @@
                     <span>Technology</span>
                 </md-card-content>
             </md-card>
-            <md-card ng-repeat="(areaName, areaScore) in ctrl.scores.area_scores" ng-if="areaScore != 0" class="list__item" layout-align="center center">
+            <md-card ng-repeat="(areaName, areaScore) in ctrl.user.area" ng-if="areaScore != 0" class="list__item" layout-align="center center">
                 <md-card-title ng-class="ctrl.getColorClass(areaScore)">
                     <md-card-title-text>
                         <span class="md-headline">{{areaScore}}</span>
@@ -45,7 +45,7 @@
                     <span>Area</span>
                 </md-card-content>
             </md-card>
-            <md-card ng-repeat="(generalName, generalScore) in ctrl.scores.general_scores" ng-if="generalScore != 0" class="list__item" layout-align="center center">
+            <md-card ng-repeat="(generalName, generalScore) in ctrl.user.general" ng-if="generalScore != 0" class="list__item" layout-align="center center">
                 <md-card-title ng-class="ctrl.getColorClass(generalScore)">
                     <md-card-title-text>
                         <span class="md-headline">{{generalScore}}</span>
@@ -56,7 +56,7 @@
                     <span>General</span>
                 </md-card-content>
             </md-card>
-            <md-card ng-repeat="(companyName, companyScore) in ctrl.scores.company_scores" ng-if="companyScore != 0" class="list__item" layout-align="center center">
+            <md-card ng-repeat="(companyName, companyScore) in ctrl.user.company" ng-if="companyScore != 0" class="list__item" layout-align="center center">
                 <md-card-title ng-class="ctrl.getColorClass(companyScore)">
                     <md-card-title-text>
                         <span class="md-headline">{{companyScore}}</span>
@@ -72,14 +72,14 @@
 
     <div class="md-toolbar-tools">
         <h3>{{ 'FRIENDS' | translate }}</h3>
-        <md-button class="btn--header" aria-label="Add friend" ng-click="ctrl.showFriendsDialog($event)">
+        <md-button ng-if='ctrl.allowEdit' class="btn--header" aria-label="Add friend" ng-click="ctrl.showFriendsDialog($event)">
             <md-icon >group_add</md-icon>
         </md-button>
     </div>
     <md-content class="list list--friends" flex layout-padding>
         <div flex-xs flex-gt-xs="50" layout="row">
-            <md-card ng-repeat="friend in ctrl.friendsList" class="list__item list__item--blend" layout-align="center center">
-                <md-icon md-svg-icon="svg-{{friend.gender}}" class="avatar" ng-class="{'md-whiteframe-z2': hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" ui-sref="index.user"></md-icon>
+            <md-card ng-repeat="friend in ctrl.user.friends" class="list__item list__item--blend" layout-align="center center" ng-click="ctrl.goToFriendPage(friend)">
+                <md-icon md-svg-icon="svg-{{friend.gender}}" class="avatar" ng-class="{'md-whiteframe-z2': hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" s></md-icon>
                 <md-card-content>
                     <span class="md-headline">{{friend.name}}</span>
                     <span>{{friend.email}}</span>

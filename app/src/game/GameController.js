@@ -45,7 +45,7 @@ var game = angular.module('hiremeapp.game', [
 
     self.start = function(){
 
-        $state.go('index.question', {filters: self.filters});
+        $state.go('index.question', {filters: self.filters}, {reload: true});
     }
 
 
@@ -114,7 +114,7 @@ var game = angular.module('hiremeapp.game', [
 
     self.selected = selectedFriend;
 
-    userServices.friendsState({user_id: userId}).then(function successCallback(response) {
+    userServices.friendsState().then(function successCallback(response) {
         self.friendsList = response.data;
     }, function errorCallback(response) {
         //TODO

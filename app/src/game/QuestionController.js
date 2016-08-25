@@ -109,8 +109,8 @@ var question = angular.module('hiremeapp.question', [
             self.resetTimer();
             self.showNext = true;
             if(answer.correct){
-                userServices.updateScore({user_id: userId});
-                userServices.correctQuestionScore({user_id: userId, question_id: questionId});
+                userServices.updateScore();
+                userServices.correctQuestionScore({question_id: questionId});
                 self.correct = true;
             } else{
                 self.showNext = true;

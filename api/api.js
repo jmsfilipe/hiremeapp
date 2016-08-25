@@ -27,30 +27,40 @@ module.exports = function(app, express, mongoose, jwt){
 
 
             if (!user) {
-                res.json({ success: false, code: 'InvalidUser', message: 'Authentication failed. User not found.' });
+                res.json({ success: false, 
+                          code: 'InvalidUser', 
+                          message: 'Authentication failed. User not found.' });
+
             } else if (user) {
 
                 // check if password matches
-                if (user.password != req.body.password) {
-                    res.json({ success: false, code: 'AuthenticationFailed', message: 'Authentication failed. Wrong password.' });
-                } else {
+                User.findOne({
+                    email: { $regex: new RegExp("^" + req.body.email.toLowerCase() + '$', "i") },
+                    password: req.body.password,
+                    blocked: false,
+                }, { password:0 },function(err, user) {
+                    if (!user) {
+                        res.json({ success: false, 
+                                  code: 'AuthenticationFailed', 
+                                  message: 'Authentication failed. Wrong password.' });
 
-                    // if user is found and password is right
-                    // create a token
-                    var token = jwt.sign({ name: user.name, email: user.email }, app.get('superSecret'), {
-                        expiresIn : '1440m'// expires in 24 hours
-                    });
+                    }else {
 
-                    // return the information including token as JSON
-                    res.json({
-                        success: true,
-                        jwt: token,
-                        user: user
-                    });
-                }
+                        // if user is found and password is right
+                        // create a token
+                        var token = jwt.sign({ name: user.name, email: user.email, id: user._id }, app.get('superSecret'), {
+                            expiresIn : '1440m'// expires in 24 hours
+                        });
 
+                        // return the information including token as JSON
+                        res.json({
+                            success: true,
+                            jwt: token,
+                            user: user
+                        });
+                    }
+                });
             }
-
         });
     });
 
@@ -73,6 +83,7 @@ module.exports = function(app, express, mongoose, jwt){
                 } else {
                     // if everything is good, save to request for use in other routes
                     req.decoded = decoded;
+                    console.log(decoded);
                     next();
                 }
             });

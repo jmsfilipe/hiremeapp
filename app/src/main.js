@@ -62,6 +62,16 @@ var main = angular.module('hiremeapp.main', [
         templateUrl: "app/src/user/view/user.html",
         controller: "UserController as ctrl",
         access: { requiredLogin: true }
+    })   
+        .state('index.friend', {
+        url: "/friend/:userId",
+        templateUrl: "app/src/user/view/user.html",
+        controller: "UserController as ctrl",
+        params: {user: null},
+        access: { requiredLogin: true },
+        onEnter: function($state, $stateParams){
+            //  if(!$stateParams.user) $state.go('index.game');
+        }
     })
         .state('index.settings', {
         url: "/user/settings",
@@ -89,7 +99,16 @@ var main = angular.module('hiremeapp.main', [
             event.preventDefault();
             self.auth.logOut();
         } else if(self.auth.isLogged){
-          userServices.registerAsOnline({user_id: self.auth.user._id});
+            userServices.registerAsOnline();
+
+            userServices.getSelf().then(function successCallback(response) {
+
+                self.auth.updateUser(response.user);
+
+            }, function errorCallback(response) {
+                //TODO
+            });
+            
         }
     });
 }]);

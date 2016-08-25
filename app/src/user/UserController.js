@@ -2,36 +2,29 @@
 var game = angular.module('hiremeapp.user', [
     'ngMaterial'
 ])
-.controller('UserController', function($mdDialog, $state, userServices, AuthenticationService){
+.controller('UserController', function($mdDialog, $state, $stateParams, userServices, AuthenticationService){
     var self = this;
 
+console.log($state.$current.name);
+    self.user = $stateParams.user? $stateParams.user : AuthenticationService.user;
+    self.allowEdit = !$stateParams.user || $stateParams.user._id == AuthenticationService.user._id ;
     self.totalFriends = 0;
-    self.friendsList = [];
+    self.user.friends = [];
     self.score = 0;
-    self.user = AuthenticationService.user;
 
-    var userId = AuthenticationService.user._id;
-    self.userName = AuthenticationService.user.name;
 
+    self.goToFriendPage = function(friend){
+        $state.go('index.friend', {user: friend, userId: friend.email});
+    }
+
+    var userId = self.user._id;
     userServices.listFriends({user_id: userId}).then(function successCallback(response) {
-        self.friendsList = response.data.friends;
-        self.totalFriends = response.data.friends.length;
+        self.user.friends = response.data.friends;
         console.log(response.data.friends.length);
     }, function errorCallback(response) {
         //TODO
     });
 
-    userServices.getScore({user_id: userId}).then(function successCallback(response) {
-        self.score = response.data.score;
-    }, function errorCallback(response) {
-        //TODO
-    });
-
-    userServices.listScores({user_id: userId}).then(function successCallback(response) {
-        self.scores = response.data;
-    }, function errorCallback(response) {
-        //TODO
-    });
 
     self.getColorClass = function(score){
         if(score < 6){
@@ -46,7 +39,7 @@ var game = angular.module('hiremeapp.user', [
     self.showFriendsDialog = function(ev){
 
         userServices.listFriends({user_id: userId}).then(function successCallback(response) {
-            self.friendsList = response.data.friends;
+            self.user.friends = response.data.friends;
 
             $mdDialog.show({
                 controller: 'FriendsDialogController as dialog',
@@ -55,12 +48,12 @@ var game = angular.module('hiremeapp.user', [
                 targetEvent: ev,
                 clickOutsideToClose:true,
                 locals: {
-                    friends: self.friendsList
+                    friends: self.user.friends
                 }
             })
                 .then(function() {
                 userServices.listFriends({user_id: userId}).then(function successCallback(response) {
-                    self.friendsList = response.data.friends;
+                    self.user.friends = response.data.friends;
                     self.totalFriends = response.data.friends.length;
                 }, function errorCallback(response) {
                     //TODO
@@ -81,8 +74,8 @@ var game = angular.module('hiremeapp.user', [
     var self = this;
 
     var pusher = new Pusher('5ae72eeb02c097ac4523', {
-      cluster: 'eu',
-      encrypted: true
+        cluster: 'eu',
+        encrypted: true
     });
 
     $scope.searchInput = "";
@@ -101,17 +94,17 @@ var game = angular.module('hiremeapp.user', [
 
     self.askFriend = function(friend, ev){
 
-      if(!friend.pending){
-        userServices.addFriendRequest({user_id: userId, user_to_add_id: friend._id});
+        if(!friend.pending){
+            userServices.addFriendRequest({user_to_add_id: friend._id});
 
-      friend.pending = true;
+            friend.pending = true;
 
-      var channel = pusher.subscribe("private-"+friend._id);
-      channel.bind('pusher:subscription_succeeded', function() {
-        var triggered = channel.trigger("client-friend-request", { "name": userName, "_id": userId });
-      });
+            var channel = pusher.subscribe("private-"+friend._id);
+            channel.bind('pusher:subscription_succeeded', function() {
+                var triggered = channel.trigger("client-friend-request", { "name": userName, "_id": userId });
+            });
 
-      }
+        }
 
     }
 
@@ -148,7 +141,7 @@ var game = angular.module('hiremeapp.user', [
         } else{
             pwd = self.user.password;
         }
-        userServices.setSettings({user_id: userId, password: pwd, email: self.user.email, gender: self.user.gender}).then(function successCallback(response) {
+        userServices.setSettings({password: pwd, email: self.user.email, gender: self.user.gender}).then(function successCallback(response) {
             $state.go("index.game");
         }, function errorCallback(response) {
             //TODO

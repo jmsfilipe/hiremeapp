@@ -19,7 +19,7 @@ var game = angular.module('hiremeapp.header', [
         AuthenticationService.logOut();
     }
 
-    userServices.listFriendRequests({user_id: userId}).then(function successCallback(response) {
+    userServices.listFriendRequests().then(function successCallback(response) {
         self.friendRequestNumber = response.data.friend_requests.length;
         self.friendRequestList = response.data.friend_requests;
     }, function errorCallback(response) {
@@ -28,7 +28,7 @@ var game = angular.module('hiremeapp.header', [
 
 
     self.addFriend = function(friend, ev){
-        userServices.addFriend({user_id: userId, user_to_add_id: friend._id}).then(function successCallback(response) {
+        userServices.addFriend({user_to_add_id: friend._id}).then(function successCallback(response) {
           self.friendRequestList = self.friendRequestList.filter(function(el) { //remove from interface
               return el._id !== friend._id;
           });
@@ -39,7 +39,7 @@ var game = angular.module('hiremeapp.header', [
     }
 
     self.removeFriendRequest = function(friend, ev){
-        userServices.removeFriendRequest({user_id: userId, user_to_remove_id: friend._id}).then(function successCallback(response) {
+        userServices.removeFriendRequest({user_to_remove_id: friend._id}).then(function successCallback(response) {
           self.friendRequestList = self.friendRequestList.filter(function(el) { //remove from interface
               return el._id !== friend._id;
           });
