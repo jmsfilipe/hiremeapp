@@ -5,10 +5,10 @@ var NotificationSchema = new mongoose.Schema({
         type: String
     },
     link: {
-      type: String
+        type: String
     },
     isRead: {
-      type: Boolean
+        type: Boolean
     }
 });
 

@@ -45,10 +45,10 @@ var Pusher = require('pusher');
 var pusher = new Pusher({ appId: '239636', key: '5ae72eeb02c097ac4523', secret:  '403d31c095a66e576107' });
 
 app.post('/pusher/auth', function(req, res) {
-  var socketId = req.body.socket_id;
-  var channel = req.body.channel_name;
-  var auth = pusher.authenticate(socketId, channel);
-  res.send(auth);
+    var socketId = req.body.socket_id;
+    var channel = req.body.channel_name;
+    var auth = pusher.authenticate(socketId, channel);
+    res.send(auth);
 });
 
 // set the static files location /app/img will be /img for users

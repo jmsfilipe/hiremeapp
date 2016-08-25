@@ -82,7 +82,6 @@ var main = angular.module('hiremeapp.main', [
         .state('index.about-us', {
         url: "/about-us",
         templateUrl: "app/src/about/about-us.html",
-        controller: "SettingsController as ctrl",
         access: { requiredLogin: true }
     })
 

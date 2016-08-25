@@ -11,28 +11,28 @@ var UserSchema = new mongoose.Schema({
 
     score: { type: Number, default: 0 },
     area: {
-      web: { type: Number, default: 0 },
-      database: { type: Number, default: 0 }
+        web: { type: Number, default: 0 },
+        database: { type: Number, default: 0 }
     },
     tech: {
-      javascript: { type: Number, default: 0 },
-      postgres: { type: Number, default: 0 }
+        javascript: { type: Number, default: 0 },
+        postgres: { type: Number, default: 0 }
     },
     general: {
-      windows: { type: Number, default: 0 },
-      word: { type: Number, default: 0 },
-      excel: { type: Number, default: 0 },
-      powerpoint: { type: Number, default: 0 },
-      gmail: { type: Number, default: 0 },
-      chrome: { type: Number, default: 0 },
-      android: { type: Number, default: 0 }
+        windows: { type: Number, default: 0 },
+        word: { type: Number, default: 0 },
+        excel: { type: Number, default: 0 },
+        powerpoint: { type: Number, default: 0 },
+        gmail: { type: Number, default: 0 },
+        chrome: { type: Number, default: 0 },
+        android: { type: Number, default: 0 }
     },
     company: {
-      google: { type: Number, default: 0 },
-      yahoo: { type: Number, default: 0 },
-      microsoft: { type: Number, default: 0 },
-      outsystems: { type: Number, default: 0 },
-      adobe: { type: Number, default: 0 }
+        google: { type: Number, default: 0 },
+        yahoo: { type: Number, default: 0 },
+        microsoft: { type: Number, default: 0 },
+        outsystems: { type: Number, default: 0 },
+        adobe: { type: Number, default: 0 }
     }
 
 });
