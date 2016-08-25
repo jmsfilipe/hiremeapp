@@ -53,10 +53,10 @@
 
             &.active{
                 &.correct{
-                    background-color: #54f065;
+                    background-color: $color-green;
                 }
                 &.incorrect{
-                    background-color: $color-green;
+                    background-color: $color-coral;
                 }
 
                 &.time-up{

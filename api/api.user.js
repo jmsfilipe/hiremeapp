@@ -199,9 +199,9 @@ module.exports = function(apiRoutes){
             user_id,
             { password:0 },
             function(err, model) {
-            console.log(model)
-            res.send({total_friends: model.friends.length})
-        });
+                console.log(model)
+                res.send({total_friends: model.friends.length})
+            });
 
     });
 
@@ -239,18 +239,26 @@ module.exports = function(apiRoutes){
     apiRoutes.post('/user/settings', function(req, res) {
 
         var user_id = req.decoded.id;
-        var _pwd = req.body.password;
         var _email = req.body.email;
         var _gender = req.body.gender;
 
+        if(req.body.password)
+            User.findByIdAndUpdate(
+                user_id,
+                {password: req.body.password},
+                function(err, model) {
+                    if(err) throw err;
+                });
+
         User.findByIdAndUpdate(
             user_id,
-            {password: _pwd, email: _email, gender: _gender},
+            {email: _email, gender: _gender},
             function(err, model) {
                 console.log(model)
                 if(err) throw err;
                 res.sendStatus(200);
-            });
+            })
+
 
     });
 

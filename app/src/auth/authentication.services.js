@@ -22,7 +22,8 @@ angular.module('hiremeapp.auth')
             isLogged: false,
             user: null,
             logOut: logOut,
-            logIn: logIn
+            logIn: logIn,
+            updateUser : updateUser
         }
 
         return auth;

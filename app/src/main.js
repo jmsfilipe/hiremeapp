@@ -28,7 +28,7 @@ var main = angular.module('hiremeapp.main', [
         abstract: true,
         views: {
             '@' : {
-                templateUrl: "app/src/home/view/main.html"
+                templateUrl: "app/src/home/main.html"
             },
             'top@index' : { templateUrl: 'app/src/header/header.html',
                            controller: 'HeaderController as header'
@@ -43,13 +43,13 @@ var main = angular.module('hiremeapp.main', [
         url: '/home',
         controller: "GameController as ctrl",
         params: {user: null},
-        templateUrl: 'app/src/game/view/home.html'
+        templateUrl: 'app/src/game/view/game.html'
 
     })
 
         .state('index.question', {
         url: "/play",
-        templateUrl: "app/src/game/view/chooseQuestion.html",
+        templateUrl: "app/src/game/view/gameQuestion.html",
         controller: "QuestionController as ctrl",
         params: {user: null, filters: null},
         access: { requiredLogin: true },
@@ -81,7 +81,7 @@ var main = angular.module('hiremeapp.main', [
     })
         .state('index.about-us', {
         url: "/about-us",
-        templateUrl: "app/src/home/view/about-us.html",
+        templateUrl: "app/src/about/about-us.html",
         controller: "SettingsController as ctrl",
         access: { requiredLogin: true }
     })
@@ -103,7 +103,7 @@ var main = angular.module('hiremeapp.main', [
 
             userServices.getSelf().then(function successCallback(response) {
 
-                self.auth.updateUser(response.user);
+                AuthenticationService.updateUser(response.data.user);
 
             }, function errorCallback(response) {
                 //TODO

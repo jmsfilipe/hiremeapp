@@ -27,7 +27,7 @@ var game = angular.module('hiremeapp.game', [
     self.showTabDialog = function(ev) {
         $mdDialog.show({
             controller: 'RefineDialogController as dialog',
-            templateUrl: "app/src/game/refineDialog.html",
+            templateUrl: "app/src/game/view/refineDialog.html",
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose:true,
@@ -68,7 +68,7 @@ var game = angular.module('hiremeapp.game', [
     self.showDialogChooseFriend = function(ev){
         $mdDialog.show({
             controller: 'MultiplayerDialogController as dialog',
-            templateUrl: "app/src/game/multiplayerDialog.html",
+            templateUrl: "app/src/game/view/multiplayerDialog.html",
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose:true,

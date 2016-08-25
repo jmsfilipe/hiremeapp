@@ -1,23 +1,21 @@
 <aside layout="row" >
     <md-sidenav ng-click="HeaderController.toggleList()" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left" class="news md-whiteframe-z2" >
         <md-list>
-
             <md-button ng-repeat="it in sidebar.articles">
-              <a ng-href="{{it.link}}" target="_blank">
-                <img ng-src="{{it.img}}" class="md-avatar"/>
-                <div class="md-list-item-text">
-                  <h2>{{it.title}}</h2>
-                  <p>
-                    {{it.body}}
-                  </p>
-                  <p class="article-source">
-                    {{it.source}},
-                    {{it.date}}
-                  </p>
-                </div>
-              </a>
+                <a ng-href="{{it.link}}" target="_blank">
+                    <img ng-src="{{it.img}}" class="md-avatar"/>
+                    <div class="md-list-item-text">
+                        <h2>{{it.title}}</h2>
+                        <p>
+                            {{it.body}}
+                        </p>
+                        <p class="article-source">
+                            {{it.source}},
+                            {{it.date}}
+                        </p>
+                    </div>
+                </a>
             </md-button>
-
         </md-list>
     </md-sidenav>
 </aside>
