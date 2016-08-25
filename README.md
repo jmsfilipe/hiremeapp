@@ -1,9 +1,9 @@
 # hiremeapp
 
 ## Setup
-    git clone git@github.com:jmsfilipe/hiremeapp.git
-    cd src
     npm install
+    cd server
+    node runall.js
     node server.js
     open http://localhost:8080
 
@@ -12,16 +12,15 @@
     username: hiremeapp
     database: hiremeapp
     
-    node runall.js
     
 ## Deploy
     hiremeapp.herokuapp.com
     
 ## TO-DO
 - [ ] Landing testing IE, Safari, Mozilla
-- [ ] Notifications Area CSS
+- [X] Notifications Area CSS
 - [ ] Multiplayer
-- [ ] Content++
+- [X] Content++
 - [ ] No repeated questions
 - [ ] Email Confirmation
 - [ ] Email Reset
