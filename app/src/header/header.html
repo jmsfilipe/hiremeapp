@@ -1,8 +1,8 @@
-<md-toolbar layout="row">
+<md-toolbar layout="row" class="header">
     <md-button class="btn--header" hide-gt-sm ng-click="header.toggleSidebar()"  md-ink-ripple aria-label="Show User List">
         <md-icon >chrome_reader_mode</md-icon>
     </md-button>
-    <span class="logo" ui-sref="index.game">Hire.me App</span>
+    <span class="header__logo" ui-sref="index.game">Hire.me App</span>
     <span flex></span>
     <md-menu>
         <md-button class="btn--header" aria-label="Friend Request"  class="md-icon-button" ng-click="header.openMenu($mdOpenMenu, $event)">

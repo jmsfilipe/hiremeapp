@@ -3,7 +3,7 @@
     <section class="page page--game" layout="column" layout-align="center center" ng-cloak ng-if="ctrl.ready">
 
 
-        <h1 class="md-primary" >{{ 'NEW_GAME' | translate }}</h1>
+        <p class="md-primary page--game__heading" >{{ 'NEW_GAME' | translate }}</p>
         <span class="flex"></span>
 
 
@@ -21,9 +21,9 @@
         <span class="flex"></span>
         <md-button class="md-raised " ng-disabled="! ctrl.showNext" ng-click="ctrl.hitNext()">{{ 'NEXT' | translate }}</md-button>
 
-        <h1 class="toast toast--correct" ng-if="ctrl.showNext && ctrl.correct">{{ 'CORRECT' | translate }}</h1>
-        <h1 class="toast toast--incorrect" ng-if="ctrl.showNext && !ctrl.correct && ctrl.counter < 100">{{ 'INCORRECT' | translate }}</h1>
-        <h1 class="toast toast--incorrect" ng-if="ctrl.showNext && !ctrl.correct && ctrl.counter >= 100">{{ 'TIME_UP' | translate }}</h1>
+        <p class="page--game__heading toast toast--correct" ng-if="ctrl.showNext && ctrl.correct">{{ 'CORRECT' | translate }}</p>
+        <p class="page--game__heading toast toast--incorrect" ng-if="ctrl.showNext && !ctrl.correct && ctrl.counter < 100">{{ 'INCORRECT' | translate }}</p>
+        <p class="page--game__heading toast toast--incorrect" ng-if="ctrl.showNext && !ctrl.correct && ctrl.counter >= 100">{{ 'TIME_UP' | translate }}</p>
 
     </section>
 </div>

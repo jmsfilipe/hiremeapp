@@ -1,3 +1,18 @@
+.header{
+    &__logo {
+        cursor: pointer;
+        font-size: 1.50em;
+        font-weight: 400;
+        margin: 0.2em 1.5em;
+        font-family: $font-logo;
+        color: white;
+        padding: 0 8px;
+        &:hover{
+            background-color: $color-white-alpha-1;
+        }
+    }
+}
+
 md-toolbar{
 
     border-bottom: 1px dotted white;
@@ -6,25 +21,6 @@ md-toolbar{
     &:not(.md-menu-toolbar){
         background-color: $color-primary;
     }
-
-    > *{
-        cursor: pointer;
-    }
-
-    .logo {
-        font-size: 1.50em;
-        font-weight: 400;
-        margin: 0.2em 1.5em;
-        font-family: $font-logo;
-        color: white;
-        text-shadow: 2px 2px 2px gray;
-        padding: 0 8px;
-        &:hover{
-            background-color: $color-white-alpha-1;
-        }
-    }
-
-
 
     .md-button{
         &:not([disabled]):hover {
@@ -42,6 +38,8 @@ md-toolbar{
         }
     }
 }
+
+
 
 md-menu-content{
     md-menu-item {
@@ -81,9 +79,11 @@ md-menu-content{
 }
 
 @media (max-width: 375px){
-    md-toolbar .logo {
-        font-size: 1.2em;
-        margin: 0.5em;
+    .header{
+        &__logo {
+            font-size: 1.2em;
+            margin: 0.5em;
 
+        }
     }
 }

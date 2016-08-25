@@ -3,6 +3,18 @@
         background: $color-primary url("/app/assets/images/clouds.png") center/cover no-repeat;
         height: 100%;
         overflow: hidden;
+        .header__logo{
+            position: absolute;
+            top: 5vh;
+            font-size: 7vh;
+            text-align: center;
+            margin: 0 auto;
+            cursor: default;
+
+            &:hover{
+                background-color: transparent;
+            }
+        }
 
         form{
             animation: fadeIn 1s  linear ;              

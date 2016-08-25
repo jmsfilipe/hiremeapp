@@ -1,14 +1,15 @@
+// Third-party
+@import "vendor/angular";
+
 // Modules and Variables
-@import "partials/angular";
-
-//modules
 @import "modules/variables";
+@import "modules/mixins";
 
+// Partials
 //layout
 @import "partials/layout/base";
 @import "partials/layout/sidebar";
 @import "partials/layout/header";
-//@import "partials/layout/colors";
 
 //components
 @import "partials/components/buttons";
@@ -25,3 +26,5 @@
 @import "partials/pages/game";
 @import "partials/pages/user";
 @import "partials/pages/settings";
+
+
