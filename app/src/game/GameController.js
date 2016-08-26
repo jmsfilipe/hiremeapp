@@ -11,8 +11,17 @@ var game = angular.module('hiremeapp.game', [
     self.mode = 'single'; //0 single, 1 multi
     self.hasFriends = false;
 
-    console.log(self.user);
+    var pusher = new Pusher('5ae72eeb02c097ac4523', {
+      cluster: 'eu',
+      encrypted: true
+    });
 
+    var channel = pusher.subscribe("private-"+AuthenticationService.user._id);
+
+    channel.bind('client-game-request', function(data) {
+        console.log("###############")
+      console.log(data)
+    });
 
     userServices.listFriends({user_id: AuthenticationService.user._id}).then(function successCallback(response) {
 
@@ -45,7 +54,7 @@ var game = angular.module('hiremeapp.game', [
 
     self.start = function(mode){
 
-        $state.go('index.question', {filters: self.filters, mode: mode}, {reload: true});
+        $state.go('index.question', {filters: self.filters, mode: mode, selectedFriend: self.selectedFriend}, {reload: true});
     }
 
 

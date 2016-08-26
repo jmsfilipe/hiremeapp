@@ -11,6 +11,7 @@ var question = angular.module('hiremeapp.question', [
     self.user = $stateParams.user;
     self.filters = $stateParams.filters;
     self.mode = $stateParams.mode;
+    self.selectedFriend = $stateParams.selectedFriend;
     self.question = null;
     self.answers = null;
     self.explanation = null;
@@ -42,8 +43,6 @@ var question = angular.module('hiremeapp.question', [
                 $('md-card.incorrect').addClass("active time-up");
             }
         }, 200);
-
-
     }
 
     self.hitNext = function(){
@@ -181,6 +180,17 @@ var question = angular.module('hiremeapp.question', [
             self.ready = true;
         } else{
             self.showMultiplayerQuestion(self.filters);
+
+            var pusher = new Pusher('5ae72eeb02c097ac4523', {
+                cluster: 'eu',
+                encrypted: true
+            });
+
+            var channel = pusher.subscribe("private-"+self.selectedFriend._id);
+            channel.bind('pusher:subscription_succeeded', function() {
+                var triggered = channel.trigger("client-game-request", { "questions": self.questions, "user": self.selectedFriend });
+            });
+
         }
     }
 

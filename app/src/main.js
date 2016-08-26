@@ -51,7 +51,7 @@ var main = angular.module('hiremeapp.main', [
         url: "/play",
         templateUrl: "app/src/game/view/gameQuestion.html",
         controller: "QuestionController as ctrl",
-        params: {user: null, filters: null, mode: null, questions: null, questionNr: null},
+        params: {user: null, filters: null, mode: null, questions: null, questionNr: null, selectedFriend: null},
         access: { requiredLogin: true },
         onEnter: function($state, $stateParams){
             if(!$stateParams.filters) $state.go('index.game');
