@@ -51,7 +51,7 @@ var main = angular.module('hiremeapp.main', [
         url: "/play",
         templateUrl: "app/src/game/view/gameQuestion.html",
         controller: "QuestionController as ctrl",
-        params: {user: null, filters: null},
+        params: {user: null, filters: null, mode: null, questions: null, questionNr: null},
         access: { requiredLogin: true },
         onEnter: function($state, $stateParams){
             if(!$stateParams.filters) $state.go('index.game');
@@ -62,7 +62,7 @@ var main = angular.module('hiremeapp.main', [
         templateUrl: "app/src/user/view/user.html",
         controller: "UserController as ctrl",
         access: { requiredLogin: true }
-    })   
+    })
         .state('index.friend', {
         url: "/friend/:userId",
         templateUrl: "app/src/user/view/user.html",
@@ -107,7 +107,7 @@ var main = angular.module('hiremeapp.main', [
             }, function errorCallback(response) {
                 //TODO
             });
-            
+
         }
     });
 }]);

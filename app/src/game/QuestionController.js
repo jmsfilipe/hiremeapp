@@ -8,14 +8,12 @@ var question = angular.module('hiremeapp.question', [
     var userId = AuthenticationService.user._id;
     var questionId;
 
-    console.log(AuthenticationService.user)
-
     self.user = $stateParams.user;
     self.filters = $stateParams.filters;
+    self.mode = $stateParams.mode;
     self.question = null;
     self.answers = null;
     self.explanation = null;
-
     self.showNext = false;
     self.disabledAnswers = false;
 
@@ -29,9 +27,7 @@ var question = angular.module('hiremeapp.question', [
     self.ready = false;
 
 
-
-
-    var createTimer = function(){
+    self.createTimer = function(){
 
         self.counter = 1;
 
@@ -39,7 +35,6 @@ var question = angular.module('hiremeapp.question', [
         // the Determinate loader.
         self.timer = $interval(function() {
             self.counter += 1;
-            console.log(self.counter);
             if (self.counter == 100) {
                 self.resetTimer();
                 self.showNext = true;
@@ -52,13 +47,19 @@ var question = angular.module('hiremeapp.question', [
     }
 
     self.hitNext = function(){
-        $state.reload();
+        if(self.mode == "single"){
+            $state.reload();
+        } else{
+            self.questionNr++;
+            $state.go('index.question', {questions: self.questions,
+                                         mode: "multi",
+                                         questionNr: self.questionNr}, { reload: true });
+        }
     }
 
     self.resetTimer = function(){
 
         $interval.cancel(self.timer)
-
         self.timer = undefined;
     }
 
@@ -67,7 +68,7 @@ var question = angular.module('hiremeapp.question', [
         self.showNext = false;
         self.disabledAnswers = false;
 
-        createTimer();
+        self.createTimer();
 
         var _techs = [], _areas = [], _companies = [], _general = [];
         for(var i = 0; i < filter.length; i++){
@@ -102,9 +103,57 @@ var question = angular.module('hiremeapp.question', [
         });
     };
 
+    self.showMultiplayerQuestion = function(filter){
+        var MAX_QUESTIONS = 5;
+        var _techs = [], _areas = [], _companies = [], _general = [];
+        for(var i = 0; i < filter.length; i++){
+            switch(filter[i].type){
+                case 'Company':
+                    _companies.push(filter[i].name);
+                    break;
+                case 'Technology':
+                    _techs.push(filter[i].name);
+                    break;
+                case 'Area':
+                    _areas.push(filter[i].name);
+                    break;
+                case 'General':
+                    _general.push(filter[i].name);
+                    break;
+            }
+        }
+
+        self.questions = [];
+        for(var i = 0; i < MAX_QUESTIONS; i++){
+            questionServices.question({
+                technologies: _techs,
+                areas: _areas,
+                companies: _companies,
+                general: _general,
+                level: 1}).then(function successCallback(response) {
+                    self.questionNr = 0;
+                    self.questions.push({
+                        question: response.data.question,
+                        answers: response.data.answers,
+                        explanation: response.data.explanation,
+                        id: response.data._id
+                    })
+
+                    self.question = self.questions[self.questionNr].question;
+                    self.answers = self.questions[self.questionNr].answers;
+                    self.explanation = self.questions[self.questionNr].explanation;
+                }, function errorCallback(response) {
+                    //TODO
+                });
+        }
+
+        self.createTimer();
+        self.ready = true;
+    }
+
+
     self.evaluateAnswer = function(answer, $event){
 
-        console.log(answer)
         if(!self.disabledAnswers){
             self.resetTimer();
             self.showNext = true;
@@ -121,8 +170,19 @@ var question = angular.module('hiremeapp.question', [
         }
     }
 
-    self.showQuestion(self.filters);
-
+    if(self.mode == "single"){
+        self.showQuestion(self.filters);
+    } else{
+        if($stateParams.questions){
+            self.question = $stateParams.questions[$stateParams.questionNr].question;
+            self.answers = $stateParams.questions[$stateParams.questionNr].answers;
+            self.explanation = $stateParams.questions[$stateParams.questionNr].explanation;
+            self.createTimer();
+            self.ready = true;
+        } else{
+            self.showMultiplayerQuestion(self.filters);
+        }
+    }
 
     $scope.$on("$destroy", function(){
         self.resetTimer();

@@ -18,7 +18,7 @@ var game = angular.module('hiremeapp.game', [
 
         if(response.data.friends.length > 0){
             self.hasFriends = true;
-        } 
+        }
 
     }, function errorCallback(response) {
         //TODO
@@ -43,9 +43,9 @@ var game = angular.module('hiremeapp.game', [
         });
     };
 
-    self.start = function(){
+    self.start = function(mode){
 
-        $state.go('index.question', {filters: self.filters}, {reload: true});
+        $state.go('index.question', {filters: self.filters, mode: mode}, {reload: true});
     }
 
 

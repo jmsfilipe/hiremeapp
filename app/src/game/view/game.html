@@ -5,16 +5,16 @@
     <span class="flex"></span>
 
     <md-button class="md-raised" ng-click="ctrl.selectSingleplayer($event)">
-        Single 
+        Single
         <md-icon ng-if='ctrl.mode == "single"' >done</md-icon>
     </md-button>
     <md-button class="md-raised" ng-class=" {'disabled':  !ctrl.user.friends.length}"ng-click="ctrl.selectMultiplayer($event)" >
-        Multiplayer 
+        Multiplayer
         <md-icon ng-if='ctrl.mode == "multi"' >done</md-icon>
     </md-button>
 
     <span class="flex"></span>
-    <md-button class="md-raised md-accent" ng-click="ctrl.start()">{{ 'PLAY_NOW' | translate }}</md-button>
+    <md-button class="md-raised md-accent" ng-click="ctrl.start(ctrl.mode)">{{ 'PLAY_NOW' | translate }}</md-button>
     <span class="flex"></span>
     <md-button id="filter-btn" ng-class="{'filter-on' : ctrl.filters.length > 0}" aria-label="menu" class="md-fab md-fab--filter md-accent" ng-click="ctrl.showTabDialog($event)"></md-button>
 
