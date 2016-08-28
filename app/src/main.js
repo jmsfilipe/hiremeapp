@@ -52,10 +52,10 @@ var main = angular.module('hiremeapp.main', [
         templateUrl: "app/src/game/view/gameQuestion.html",
         controller: "QuestionController as ctrl",
         params: {user: null, filters: null, mode: null, questions: null, questionNr: null, selectedFriend: null},
-        access: { requiredLogin: true },
-        onEnter: function($state, $stateParams){
-            if(!$stateParams.filters) $state.go('index.game');
-        }
+        access: { requiredLogin: true }
+        //onEnter: function($state, $stateParams){
+        //    if(!$stateParams.filters) $state.go('index.game');
+        //}
     })
         .state('index.user', {
         url: "/user",

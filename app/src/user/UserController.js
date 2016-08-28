@@ -30,6 +30,7 @@ var game = angular.module('hiremeapp.user', [
         }
     }
 
+
     self.showFriendsDialog = function(ev){
 
         userServices.listFriends({user_id: userId}).then(function successCallback(response) {

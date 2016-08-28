@@ -188,7 +188,7 @@ var question = angular.module('hiremeapp.question', [
 
             var channel = pusher.subscribe("private-"+self.selectedFriend._id);
             channel.bind('pusher:subscription_succeeded', function() {
-                var triggered = channel.trigger("client-game-request", { "questions": self.questions, "user": self.selectedFriend });
+                var triggered = channel.trigger("client-game-request", { "questions": self.questions, "user": AuthenticationService.user });
             });
 
         }

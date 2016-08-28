@@ -17,10 +17,9 @@ var game = angular.module('hiremeapp.game', [
     });
 
     var channel = pusher.subscribe("private-"+AuthenticationService.user._id);
-
     channel.bind('client-game-request', function(data) {
-        console.log("###############")
-      console.log(data)
+        console.log(data)
+        self.showGameRequestDialog(data.user, data.questions);
     });
 
     userServices.listFriends({user_id: AuthenticationService.user._id}).then(function successCallback(response) {
@@ -32,6 +31,31 @@ var game = angular.module('hiremeapp.game', [
     }, function errorCallback(response) {
         //TODO
     });
+
+    self.showGameRequestDialog = function(user, questions){
+
+        $mdDialog.show({
+            controller: 'GameRequestDialogController as dialog',
+            templateUrl: "app/src/game/view/gameRequestDialog.html",
+            parent: angular.element(document.body),
+            clickOutsideToClose:true,
+            locals: {
+                user: user,
+                questions: questions
+            }
+        })
+            .then(function(response) {
+
+                $state.go('index.question', {questions: response.questions,
+                                             mode: "multi",
+                                             questionNr: 0}, { reload: true });
+
+            }, function errorCallback(response) {
+                //TODO
+            });
+
+
+    }
 
     self.showTabDialog = function(ev) {
         $mdDialog.show({
@@ -115,6 +139,19 @@ var game = angular.module('hiremeapp.game', [
         self.mode = 'single';
 
     };
+})
+.controller('GameRequestDialogController', function($scope, $mdDialog, userServices, AuthenticationService, user, questions){
+    var self = this;
+
+    var userId = AuthenticationService.user._id;
+
+    self.cancel = function() {
+        $mdDialog.cancel();
+    };
+    self.play = function() {
+        $mdDialog.hide({user: user, questions: questions});
+    };
+
 })
 .controller('MultiplayerDialogController', function($scope, $mdDialog, refineServices, userServices, AuthenticationService, selectedFriend){
     var self = this;
