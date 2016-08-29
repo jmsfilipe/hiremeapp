@@ -17,6 +17,7 @@ var question = angular.module('hiremeapp.question', [
     self.explanation = null;
     self.showNext = false;
     self.disabledAnswers = false;
+    var MAX_QUESTIONS = 5;
 
     if($translate.use() === "en"){
         self.lang = 0;
@@ -49,10 +50,11 @@ var question = angular.module('hiremeapp.question', [
         if(self.mode == "single"){
             $state.reload();
         } else{
-            self.questionNr++;
-            $state.go('index.question', {questions: self.questions,
+            $stateParams.questionNr++;
+            $state.go('index.question', {score: $stateParams.score,
+                                         questions: $stateParams.questions,
                                          mode: "multi",
-                                         questionNr: self.questionNr}, { reload: true });
+                                         questionNr: $stateParams.questionNr}, { reload: true });
         }
     }
 
@@ -103,7 +105,6 @@ var question = angular.module('hiremeapp.question', [
     };
 
     self.showMultiplayerQuestion = function(filter){
-        var MAX_QUESTIONS = 5;
         var _techs = [], _areas = [], _companies = [], _general = [];
         for(var i = 0; i < filter.length; i++){
             switch(filter[i].type){
@@ -122,7 +123,7 @@ var question = angular.module('hiremeapp.question', [
             }
         }
 
-        self.questions = [];
+        $stateParams.questions = [];
         for(var i = 0; i < MAX_QUESTIONS; i++){
             questionServices.question({
                 technologies: _techs,
@@ -130,17 +131,16 @@ var question = angular.module('hiremeapp.question', [
                 companies: _companies,
                 general: _general,
                 level: 1}).then(function successCallback(response) {
-                    self.questionNr = 0;
-                    self.questions.push({
+                    $stateParams.questions.push({
                         question: response.data.question,
                         answers: response.data.answers,
                         explanation: response.data.explanation,
                         id: response.data._id
                     })
 
-                    self.question = self.questions[self.questionNr].question;
-                    self.answers = self.questions[self.questionNr].answers;
-                    self.explanation = self.questions[self.questionNr].explanation;
+                    self.question = $stateParams.questions[0].question;
+                    self.answers = $stateParams.questions[0].answers;
+                    self.explanation = $stateParams.questions[0].explanation;
                 }, function errorCallback(response) {
                     //TODO
                 });
@@ -150,6 +150,27 @@ var question = angular.module('hiremeapp.question', [
         self.ready = true;
     }
 
+    self.showTheEndDialog = function(score){
+
+        $mdDialog.show({
+            controller: 'TheEndDialogController as dialog',
+            templateUrl: "app/src/game/view/theEndDialog.html",
+            parent: angular.element(document.body),
+            clickOutsideToClose:true,
+            locals: {
+                score: score
+            }
+        })
+        .then(function(response) {
+
+            $state.go('index.game');
+
+        }, function errorCallback(response) {
+            $state.go('index.game');
+        });
+
+
+    }
 
     self.evaluateAnswer = function(answer, $event){
 
@@ -160,6 +181,8 @@ var question = angular.module('hiremeapp.question', [
                 userServices.updateScore();
                 userServices.correctQuestionScore({question_id: questionId});
                 self.correct = true;
+                $stateParams.score++;
+                console.log($stateParams.score)
             } else{
                 self.showNext = true;
                 $('md-card.correct').addClass("active");
@@ -173,28 +196,51 @@ var question = angular.module('hiremeapp.question', [
         self.showQuestion(self.filters);
     } else{
         if($stateParams.questions){
-            self.question = $stateParams.questions[$stateParams.questionNr].question;
-            self.answers = $stateParams.questions[$stateParams.questionNr].answers;
-            self.explanation = $stateParams.questions[$stateParams.questionNr].explanation;
-            self.createTimer();
-            self.ready = true;
+
+            if($stateParams.questionNr == (MAX_QUESTIONS)){ //the end
+                self.showTheEndDialog($stateParams.score);
+                var pusher = new Pusher('5ae72eeb02c097ac4523', {
+                    cluster: 'eu',
+                    encrypted: true
+                });
+
+                var channel = pusher.subscribe("private-"+self.selectedFriend._id);
+                channel.bind('pusher:subscription_succeeded', function() {
+                    var triggered = channel.trigger("client-game-request", { "score": $stateParams.score, "questions": $stateParams.questions, "user": AuthenticationService.user });
+                });
+            } else{
+
+                self.question = $stateParams.questions[$stateParams.questionNr].question;
+                self.answers = $stateParams.questions[$stateParams.questionNr].answers;
+                self.explanation = $stateParams.questions[$stateParams.questionNr].explanation;
+                self.createTimer();
+                self.ready = true;
+            }
+
         } else{
             self.showMultiplayerQuestion(self.filters);
-
-            var pusher = new Pusher('5ae72eeb02c097ac4523', {
-                cluster: 'eu',
-                encrypted: true
-            });
-
-            var channel = pusher.subscribe("private-"+self.selectedFriend._id);
-            channel.bind('pusher:subscription_succeeded', function() {
-                var triggered = channel.trigger("client-game-request", { "questions": self.questions, "user": AuthenticationService.user });
-            });
-
         }
     }
+
+
+
 
     $scope.$on("$destroy", function(){
         self.resetTimer();
     });
+})
+.controller('TheEndDialogController', function($scope, $mdDialog, userServices, AuthenticationService, score){
+    var self = this;
+
+    var userId = AuthenticationService.user._id;
+
+    self.score = score;
+
+    self.cancel = function() {
+        $mdDialog.cancel();
+    };
+    self.save = function() {
+        $mdDialog.hide(score);
+    };
+
 });

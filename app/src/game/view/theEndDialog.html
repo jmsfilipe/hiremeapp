@@ -3,14 +3,14 @@
     <form>
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>{{ 'NEW_GAME_REQUEST' | translate }}</h2>
+                <h2>{{ 'SCORE' | translate }}</h2>
             </div>
         </md-toolbar>
         <md-dialog-content style="max-width:800px;max-height:810px;">
 
 
 
-            {{dialog.user.name}} invited you to play. If you cancel this request, you lose the game.
+            You finished with {{dialog.score}} points. When your friend finishes the game, you'll get a notification.
 
 
 
@@ -21,8 +21,8 @@
             <md-button ng-click="dialog.cancel()" >
                 {{ 'CANCEL' | translate }}
             </md-button>
-            <md-button ng-click="dialog.play()" style="margin-right:20px;" >
-                {{ 'PLAY' | translate }}
+            <md-button ng-click="dialog.save()" style="margin-right:20px;" >
+                OK
             </md-button>
         </md-dialog-actions>
     </form>

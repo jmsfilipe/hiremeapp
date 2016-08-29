@@ -145,6 +145,8 @@ var game = angular.module('hiremeapp.game', [
 
     var userId = AuthenticationService.user._id;
 
+    self.user = user;
+
     self.cancel = function() {
         $mdDialog.cancel();
     };
