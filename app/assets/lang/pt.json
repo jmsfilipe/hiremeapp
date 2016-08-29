@@ -50,5 +50,7 @@
     "SEX": "Sexo: ",
     "PREFERENCES": "Preferências",
     "SEARCH_FRIENDS": "Busca amigos",
-    "TIME_UP": "Tempo ! "
+    "TIME_UP": "Tempo ! ",
+    "PLAY": "Jogar",
+    "NEW_GAME_REQUEST": "Novo pedido de jogo"
 }

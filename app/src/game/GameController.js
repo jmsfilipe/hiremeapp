@@ -11,18 +11,53 @@ var game = angular.module('hiremeapp.game', [
     self.mode = 'single'; //0 single, 1 multi
     self.hasFriends = false;
 
-    console.log(self.user);
+    var pusher = new Pusher('5ae72eeb02c097ac4523', {
+      cluster: 'eu',
+      encrypted: true
+    });
 
+    var channel = pusher.subscribe("private-"+AuthenticationService.user._id);
+    channel.bind('client-game-request', function(data) {
+        console.log(data)
+        self.showGameRequestDialog(data.user, data.questions, data.enemyScore);
+    });
 
     userServices.listFriends({user_id: AuthenticationService.user._id}).then(function successCallback(response) {
 
         if(response.data.friends.length > 0){
             self.hasFriends = true;
-        } 
+        }
 
     }, function errorCallback(response) {
         //TODO
     });
+
+    self.showGameRequestDialog = function(user, questions, enemyScore){
+
+        $mdDialog.show({
+            controller: 'GameRequestDialogController as dialog',
+            templateUrl: "app/src/game/view/gameRequestDialog.html",
+            parent: angular.element(document.body),
+            clickOutsideToClose:true,
+            locals: {
+                user: user,
+                questions: questions,
+                enemyScore: enemyScore
+            }
+        })
+            .then(function(response) {
+
+                $state.go('index.question', {questions: response.questions,
+                                             mode: "multi",
+                                             questionNr: 0,
+                                             enemyScore: response.enemyScore}, { reload: true });
+
+            }, function errorCallback(response) {
+                //TODO
+            });
+
+
+    }
 
     self.showTabDialog = function(ev) {
         $mdDialog.show({
@@ -43,9 +78,9 @@ var game = angular.module('hiremeapp.game', [
         });
     };
 
-    self.start = function(){
+    self.start = function(mode){
 
-        $state.go('index.question', {filters: self.filters}, {reload: true});
+        $state.go('index.question', {filters: self.filters, mode: mode, selectedFriend: self.selectedFriend}, {reload: true});
     }
 
 
@@ -106,6 +141,21 @@ var game = angular.module('hiremeapp.game', [
         self.mode = 'single';
 
     };
+})
+.controller('GameRequestDialogController', function($scope, $mdDialog, userServices, AuthenticationService, user, questions, enemyScore){
+    var self = this;
+
+    var userId = AuthenticationService.user._id;
+
+    self.user = user;
+
+    self.cancel = function() {
+        $mdDialog.cancel();
+    };
+    self.play = function() {
+        $mdDialog.hide({user: user, questions: questions, enemyScore: enemyScore});
+    };
+
 })
 .controller('MultiplayerDialogController', function($scope, $mdDialog, refineServices, userServices, AuthenticationService, selectedFriend){
     var self = this;

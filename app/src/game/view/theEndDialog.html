@@ -1,0 +1,29 @@
+
+<md-dialog aria-label="Choose your topics" class="grid-dialog">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{ 'SCORE' | translate }}</h2>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="max-width:800px;max-height:810px;">
+
+
+
+            You finished with {{dialog.score}} points. When your friend finishes the game, you'll get a notification.
+
+
+
+        </md-dialog-content>
+
+        <md-dialog-actions>
+            <span flex></span>
+            <md-button ng-click="dialog.cancel()" >
+                {{ 'CANCEL' | translate }}
+            </md-button>
+            <md-button ng-click="dialog.save()" style="margin-right:20px;" >
+                OK
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
