@@ -19,7 +19,7 @@ var game = angular.module('hiremeapp.game', [
     var channel = pusher.subscribe("private-"+AuthenticationService.user._id);
     channel.bind('client-game-request', function(data) {
         console.log(data)
-        self.showGameRequestDialog(data.user, data.questions);
+        self.showGameRequestDialog(data.user, data.questions, data.enemyScore);
     });
 
     userServices.listFriends({user_id: AuthenticationService.user._id}).then(function successCallback(response) {
@@ -32,7 +32,7 @@ var game = angular.module('hiremeapp.game', [
         //TODO
     });
 
-    self.showGameRequestDialog = function(user, questions){
+    self.showGameRequestDialog = function(user, questions, enemyScore){
 
         $mdDialog.show({
             controller: 'GameRequestDialogController as dialog',
@@ -41,14 +41,16 @@ var game = angular.module('hiremeapp.game', [
             clickOutsideToClose:true,
             locals: {
                 user: user,
-                questions: questions
+                questions: questions,
+                enemyScore: enemyScore
             }
         })
             .then(function(response) {
 
                 $state.go('index.question', {questions: response.questions,
                                              mode: "multi",
-                                             questionNr: 0}, { reload: true });
+                                             questionNr: 0,
+                                             enemyScore: response.enemyScore}, { reload: true });
 
             }, function errorCallback(response) {
                 //TODO
@@ -140,7 +142,7 @@ var game = angular.module('hiremeapp.game', [
 
     };
 })
-.controller('GameRequestDialogController', function($scope, $mdDialog, userServices, AuthenticationService, user, questions){
+.controller('GameRequestDialogController', function($scope, $mdDialog, userServices, AuthenticationService, user, questions, enemyScore){
     var self = this;
 
     var userId = AuthenticationService.user._id;
@@ -151,7 +153,7 @@ var game = angular.module('hiremeapp.game', [
         $mdDialog.cancel();
     };
     self.play = function() {
-        $mdDialog.hide({user: user, questions: questions});
+        $mdDialog.hide({user: user, questions: questions, enemyScore: enemyScore});
     };
 
 })

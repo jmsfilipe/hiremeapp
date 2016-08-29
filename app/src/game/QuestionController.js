@@ -172,6 +172,29 @@ var question = angular.module('hiremeapp.question', [
 
     }
 
+    self.showWinnerLoserDialog = function(score){
+
+        $mdDialog.show({
+            controller: 'WinnerLoserDialogController as dialog',
+            templateUrl: "app/src/game/view/winnerLoserDialog.html",
+            parent: angular.element(document.body),
+            clickOutsideToClose:true,
+            locals: {
+                score: score.score,
+                enemyScore: score.enemyScore
+            }
+        })
+        .then(function(response) {
+
+            $state.go('index.game');
+
+        }, function errorCallback(response) {
+            $state.go('index.game');
+        });
+
+
+    }
+
     self.evaluateAnswer = function(answer, $event){
 
         if(!self.disabledAnswers){
@@ -199,15 +222,19 @@ var question = angular.module('hiremeapp.question', [
 
             if($stateParams.questionNr == (MAX_QUESTIONS)){ //the end
                 self.showTheEndDialog($stateParams.score);
-                var pusher = new Pusher('5ae72eeb02c097ac4523', {
-                    cluster: 'eu',
-                    encrypted: true
-                });
+                if(!$stateParams.enemyScore){
+                    var pusher = new Pusher('5ae72eeb02c097ac4523', {
+                        cluster: 'eu',
+                        encrypted: true
+                    });
 
-                var channel = pusher.subscribe("private-"+self.selectedFriend._id);
-                channel.bind('pusher:subscription_succeeded', function() {
-                    var triggered = channel.trigger("client-game-request", { "score": $stateParams.score, "questions": $stateParams.questions, "user": AuthenticationService.user });
-                });
+                    var channel = pusher.subscribe("private-"+self.selectedFriend._id);
+                    channel.bind('pusher:subscription_succeeded', function() {
+                        var triggered = channel.trigger("client-game-request", { "enemyScore": $stateParams.score, "questions": $stateParams.questions, "user": AuthenticationService.user });
+                    });
+                } else{
+                    self.showWinnerLoserDialog({enemyScore:$stateParams.enemyScore, score: $stateParams.score});
+                }
             } else{
 
                 self.question = $stateParams.questions[$stateParams.questionNr].question;
@@ -235,6 +262,22 @@ var question = angular.module('hiremeapp.question', [
     var userId = AuthenticationService.user._id;
 
     self.score = score;
+
+    self.cancel = function() {
+        $mdDialog.cancel();
+    };
+    self.save = function() {
+        $mdDialog.hide(score);
+    };
+
+})
+.controller('WinnerLoserDialogController', function($scope, $mdDialog, userServices, AuthenticationService, score, enemyScore){
+    var self = this;
+
+    var userId = AuthenticationService.user._id;
+
+    self.score = score;
+    self.enemyScore = enemyScore;
 
     self.cancel = function() {
         $mdDialog.cancel();
