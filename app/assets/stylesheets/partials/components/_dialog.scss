@@ -18,6 +18,29 @@ md-dialog{
     }
 }
 
+.dialog{
+    &--game{
+
+        &__icon{
+            font-size: 5em !important;
+            line-height: 1em;
+            height: 1em;
+            width: 80px;
+            margin: 20px 0 20px 20px;
+            color: $color-orange;
+        }
+
+        &__content{
+            h2{
+                color:$color-orange;
+            }
+            display: inline-block;
+            width: calc(100% - 160px);
+            vertical-align: middle;
+        }
+    }
+}
+
 @media (max-width: 599px){
     md-dialog{
         width: 80% !important; //angular material fix

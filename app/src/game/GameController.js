@@ -5,21 +5,23 @@ var game = angular.module('hiremeapp.game', [
 ])
 .controller('GameController', function($timeout, $scope, $state, $stateParams, $mdDialog, questionServices, userServices, AuthenticationService){
     var self = this;
-    self.user = $stateParams.user;
+    self.user = AuthenticationService.user;
     self.filters = [];
     self.fabIsOpen = false;
     self.mode = 'single'; //0 single, 1 multi
     self.hasFriends = false;
 
     var pusher = new Pusher('5ae72eeb02c097ac4523', {
-      cluster: 'eu',
-      encrypted: true
+        cluster: 'eu',
+        encrypted: true
     });
 
     var channel = pusher.subscribe("private-"+AuthenticationService.user._id);
     channel.bind('client-game-request', function(data) {
-        console.log(data)
-        self.showGameRequestDialog(data.user, data.questions, data.enemyScore);
+        $scope.$applyAsync(function() {
+            console.log(data)
+            self.showGameRequestDialog(data.user, data.questions, data.enemyScore);
+        });
     });
 
     userServices.listFriends({user_id: AuthenticationService.user._id}).then(function successCallback(response) {
@@ -47,14 +49,14 @@ var game = angular.module('hiremeapp.game', [
         })
             .then(function(response) {
 
-                $state.go('index.question', {questions: response.questions,
-                                             mode: "multi",
-                                             questionNr: 0,
-                                             enemyScore: response.enemyScore}, { reload: true });
+            $state.go('index.question', {questions: response.questions,
+                                         mode: "multi",
+                                         questionNr: 0,
+                                         enemyScore: response.enemyScore}, { reload: true });
 
-            }, function errorCallback(response) {
-                //TODO
-            });
+        }, function errorCallback(response) {
+            //TODO
+        });
 
 
     }

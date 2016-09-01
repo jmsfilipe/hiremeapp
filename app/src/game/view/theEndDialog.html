@@ -1,16 +1,23 @@
 
-<md-dialog aria-label="Choose your topics" class="grid-dialog">
+<md-dialog aria-label="Choose your topics" class="grid-dialog dialog--game">
     <form>
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2>{{ 'SCORE' | translate }}</h2>
             </div>
         </md-toolbar>
-        <md-dialog-content style="max-width:800px;max-height:810px;">
+        <md-dialog-content layout-padding layout-margin style="max-width:800px;max-height:810px;">
 
+            <md-icon class="dialog--game__icon ng-scope material-icons">watch_later</md-icon>
 
-
-            You finished with {{dialog.score}} points. When your friend finishes the game, you'll get a notification.
+            <div class="dialog--game__content">
+                <h3>Score:  </h3>
+                <p>
+                    <md-icon ng-repeat="n in dialog.stars track by $index" class=" ng-scope material-icons">star</md-icon>
+                    <md-icon ng-repeat="n in dialog.empty track by $index" class=" ng-scope material-icons">star_border</md-icon>
+                </p>
+                ( Ps. When your friend finishes the game, we'll tell you. )
+            </div>
 
 
 

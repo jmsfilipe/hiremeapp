@@ -1,19 +1,22 @@
 
-<md-dialog aria-label="Choose your topics" class="grid-dialog">
+<md-dialog aria-label="Choose your topics" class="grid-dialog dialog--game">
     <form>
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2>{{ 'SCORE' | translate }}</h2>
             </div>
         </md-toolbar>
-        <md-dialog-content style="max-width:800px;max-height:810px;">
+        <md-dialog-content  layout-padding layout-margin style="max-width:800px;max-height:810px;">
 
+            <md-icon ng-if='dialog.score != dialog.enemyScore' class="dialog--game__icon ng-scope material-icons">{{ dialog.score > dialog.enemyScore ? 'mood' : 'sentiment_very_dissatisfied'}}</md-icon>
+            <md-icon ng-if='dialog.score == dialog.enemyScore' class="dialog--game__icon ng-scope material-icons">sentiment_neutral</md-icon>
 
-
-            You finished with {{dialog.score}} points.
-            Your friend finished with {{dialog.enemyScore}} points.
-
-
+            <div class="dialog--game__content">
+                <h2 ng-if='dialog.score == dialog.enemyScore'> Empate!</h2>
+                <h2 ng-if='dialog.score != dialog.enemyScore'> {{ dialog.score > dialog.enemyScore ? 'You win!' : 'You lose!'}}</h2>
+                You: {{dialog.score}} points.
+                 {{dialog.friend}}: {{dialog.enemyScore}} points.
+            </div>
 
         </md-dialog-content>
 

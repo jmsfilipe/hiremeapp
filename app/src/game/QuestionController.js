@@ -131,19 +131,19 @@ var question = angular.module('hiremeapp.question', [
                 companies: _companies,
                 general: _general,
                 level: 1}).then(function successCallback(response) {
-                    $stateParams.questions.push({
-                        question: response.data.question,
-                        answers: response.data.answers,
-                        explanation: response.data.explanation,
-                        id: response.data._id
-                    })
+                $stateParams.questions.push({
+                    question: response.data.question,
+                    answers: response.data.answers,
+                    explanation: response.data.explanation,
+                    id: response.data._id
+                })
 
-                    self.question = $stateParams.questions[0].question;
-                    self.answers = $stateParams.questions[0].answers;
-                    self.explanation = $stateParams.questions[0].explanation;
-                }, function errorCallback(response) {
-                    //TODO
-                });
+                self.question = $stateParams.questions[0].question;
+                self.answers = $stateParams.questions[0].answers;
+                self.explanation = $stateParams.questions[0].explanation;
+            }, function errorCallback(response) {
+                //TODO
+            });
         }
 
         self.createTimer();
@@ -161,7 +161,7 @@ var question = angular.module('hiremeapp.question', [
                 score: score
             }
         })
-        .then(function(response) {
+            .then(function(response) {
 
             $state.go('index.game');
 
@@ -172,7 +172,7 @@ var question = angular.module('hiremeapp.question', [
 
     }
 
-    self.showWinnerLoserDialog = function(score){
+    self.showWinnerLoserDialog = function(score, friend){
 
         $mdDialog.show({
             controller: 'WinnerLoserDialogController as dialog',
@@ -181,10 +181,11 @@ var question = angular.module('hiremeapp.question', [
             clickOutsideToClose:true,
             locals: {
                 score: score.score,
-                enemyScore: score.enemyScore
+                enemyScore: score.enemyScore,
+                friend : friend
             }
         })
-        .then(function(response) {
+            .then(function(response) {
 
             $state.go('index.game');
 
@@ -233,7 +234,7 @@ var question = angular.module('hiremeapp.question', [
                         var triggered = channel.trigger("client-game-request", { "enemyScore": $stateParams.score, "questions": $stateParams.questions, "user": AuthenticationService.user });
                     });
                 } else{
-                    self.showWinnerLoserDialog({enemyScore:$stateParams.enemyScore, score: $stateParams.score});
+                    self.showWinnerLoserDialog({enemyScore:$stateParams.enemyScore, score: $stateParams.score}, self.selectedFriend.name);
                 }
             } else{
 
@@ -262,7 +263,8 @@ var question = angular.module('hiremeapp.question', [
     var userId = AuthenticationService.user._id;
 
     self.score = score;
-
+    self.stars = new Array(score);
+    self.empty = new Array(5 - score);
     self.cancel = function() {
         $mdDialog.cancel();
     };
@@ -271,13 +273,14 @@ var question = angular.module('hiremeapp.question', [
     };
 
 })
-.controller('WinnerLoserDialogController', function($scope, $mdDialog, userServices, AuthenticationService, score, enemyScore){
+.controller('WinnerLoserDialogController', function($scope, $mdDialog, userServices, AuthenticationService, score, enemyScore, friend){
     var self = this;
 
     var userId = AuthenticationService.user._id;
 
     self.score = score;
     self.enemyScore = enemyScore;
+    self.friend = friend;
 
     self.cancel = function() {
         $mdDialog.cancel();
