@@ -93,7 +93,7 @@ var main = angular.module('hiremeapp.main', [
             templateUrl: 'app/src/common/browserSupportAlert.html',
             parent: angular.element(document.body),
             targetEvent: ev,
-            clickOutsideToClose:true
+            clickOutsideToClose:false
         })
             .then(function(answer) {
         }, function() {
