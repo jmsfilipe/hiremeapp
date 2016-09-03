@@ -6,16 +6,18 @@
                 <h2>{{ 'SCORE' | translate }}</h2>
             </div>
         </md-toolbar>
-        <md-dialog-content  layout-padding layout-margin style="max-width:800px;max-height:810px;">
+        <md-dialog-content  layout-padding layout-gt-xs="row" layout="column" layout-align-xs="center center" layout-margin style="max-width:800px;max-height:810px;">
 
             <md-icon ng-if='dialog.score != dialog.enemyScore' class="dialog--game__icon ng-scope material-icons">{{ dialog.score > dialog.enemyScore ? 'mood' : 'sentiment_very_dissatisfied'}}</md-icon>
             <md-icon ng-if='dialog.score == dialog.enemyScore' class="dialog--game__icon ng-scope material-icons">sentiment_neutral</md-icon>
 
             <div class="dialog--game__content">
-                <h2 ng-if='dialog.score == dialog.enemyScore'> Empate!</h2>
-                <h2 ng-if='dialog.score != dialog.enemyScore'> {{ dialog.score > dialog.enemyScore ? 'You win!' : 'You lose!'}}</h2>
-                You: {{dialog.score}} points.
-                 {{dialog.friend}}: {{dialog.enemyScore}} points.
+                <h2 ng-if='dialog.score == dialog.enemyScore'>{{ 'GAME_TIE' | translate }}</h2>
+                <h2 ng-if='dialog.score > dialog.enemyScore'>{{ 'GAME_WIN' | translate }}</h2>
+                <h2 ng-if='dialog.score < dialog.enemyScore'>{{ 'GAME_LOSE' | translate }}</h2>
+
+                {{ 'YOU' | translate }} : {{dialog.score}} {{ 'POINTS' | translate }}.
+                {{dialog.friend}}: {{dialog.enemyScore}} {{ 'POINTS' | translate }}.
             </div>
 
         </md-dialog-content>

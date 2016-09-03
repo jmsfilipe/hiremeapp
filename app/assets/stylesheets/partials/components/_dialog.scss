@@ -46,4 +46,13 @@ md-dialog{
         width: 80% !important; //angular material fix
 
     }
+
+    .dialog{
+        &--game{
+
+            &__content{
+                width: 100%;
+            }
+        }
+    }
 }

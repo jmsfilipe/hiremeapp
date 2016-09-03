@@ -52,5 +52,14 @@
     "SEARCH_FRIENDS": "Busca amigos",
     "TIME_UP": "Tempo ! ",
     "PLAY": "Jogar",
-    "NEW_GAME_REQUEST": "Novo pedido de jogo"
+    "NEW_GAME_REQUEST": "Novo pedido de jogo",
+    "BROWSER_SUPPORT": "Browser não suportado",
+    "BROWSER_SUPPORT_TEXT" : "Este browser ainda não é suportado por este protótipo. Porque não usas uma das versões mais recentes dos browsers suportados - Edge, Mozilla ou Chrome?",
+    "GAME_END" : "( Ps. Quando o teu amigo acabar o jogo avisamos-te. )",
+    "GAME_WIN": "Ganhaste!",
+    "GAME_LOSE": "Perdeste!",
+    "GAME_TIE": "Empate!",
+    "YOU": "Tu",
+    "POINTS": "pontos"
+
 }

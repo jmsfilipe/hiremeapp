@@ -53,5 +53,13 @@
     "ADD_FRIENDS_DIALOG": "Add some friends first!",
     "TIME_UP": "Time up! ",
     "PLAY": "Play",
-    "NEW_GAME_REQUEST": "New game request"
+    "NEW_GAME_REQUEST": "New game request",
+    "BROWSER_SUPPORT": "Unsupported browser",
+    "BROWSER_SUPPORT_TEXT" : "This browser is not yet supported by this prototype. Why don't you try one of the latest versions of the supported browsers - Edge, Mozilla or Chrome?",
+    "GAME_END" : "( Ps. When your friend finishes the game, we'll tell you. )",
+    "GAME_WIN": "You win!",
+    "GAME_LOSE": "You lose!",
+    "GAME_TIE": "It's a tie!",
+    "YOU": "You",
+    "POINTS": "points"
 }
