@@ -1,6 +1,6 @@
 "use strict";
 var main = angular.module('hiremeapp.main', [
-    'ui.router', 'angular-jwt'
+    'ui.router', 'angular-jwt',  'ngMaterial'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
@@ -85,8 +85,21 @@ var main = angular.module('hiremeapp.main', [
         access: { requiredLogin: true }
     })
 
-}).controller('RootController', ['userServices', 'AuthenticationService', '$scope', function(userServices, AuthenticationService, $scope){
+}).controller('RootController', ['userServices', 'AuthenticationService', '$scope', '$mdDialog', function(userServices, AuthenticationService, $scope, $mdDialog){
     var self = this;
+    self.showUnsupportedBrowserAlert = function(ev) {
+        $mdDialog.show({
+            controller: AlertController,
+            templateUrl: 'app/src/common/browserSupportAlert.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true
+        })
+            .then(function(answer) {
+        }, function() {
+        });
+    };
+
     self.auth = AuthenticationService;
 
     $scope.$on('unauthenticated', function() {
@@ -109,5 +122,23 @@ var main = angular.module('hiremeapp.main', [
             });
 
         }
+
+
+        var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+        // Internet Explorer 6-11
+        var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+        if(isSafari || isIE){
+            self.showUnsupportedBrowserAlert();
+        }
+
+
     });
+
+    function AlertController($scope, $mdDialog) {
+        var alert = this;
+        $scope.hide = function() {
+            $mdDialog.hide();
+        };
+    }
 }]);
