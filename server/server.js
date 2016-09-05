@@ -8,7 +8,7 @@ var express  = require('express'),
     sassMiddleware = require('node-sass-middleware'),
     stylesheetSrcPath = __dirname +'/../app/assets/stylesheets',
     bodyParser = require('body-parser'),    // pull information from HTML POST (express4)
-    mongoose = require('mongoose'),
+    pg = require('pg'),
     config = require('./config'),
     jwt    = require('jsonwebtoken');
 
@@ -17,7 +17,8 @@ var express  = require('express'),
 // configuration =================
 // used to create, sign, and verify tokens
 // connect to mongoDB database on modulus.io
-mongoose.connect(config.database);
+var psql = new pg.Pool(config.database);
+
 // secret variable
 app.set('superSecret', config.secret);
 
@@ -30,7 +31,7 @@ app.use(bodyParser.urlencoded({'extended':'true'}));            // parse applica
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 
-require('../api/api.js')(app, express, mongoose, jwt);
+require('../api/api.js')(app, express, psql, jwt);
 
 
 //sass configuration

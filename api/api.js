@@ -1,4 +1,4 @@
-module.exports = function(app, express, mongoose, jwt){
+module.exports = function(app, express, psql, jwt){
 
     var User = require(__dirname+"/../models/User.js").User;
 
@@ -27,8 +27,8 @@ module.exports = function(app, express, mongoose, jwt){
 
 
             if (!user) {
-                res.json({ success: false, 
-                          code: 'InvalidUser', 
+                res.json({ success: false,
+                          code: 'InvalidUser',
                           message: 'Authentication failed. User not found.' });
 
             } else if (user) {
@@ -40,8 +40,8 @@ module.exports = function(app, express, mongoose, jwt){
                     blocked: false,
                 }, { password:0 },function(err, user) {
                     if (!user) {
-                        res.json({ success: false, 
-                                  code: 'AuthenticationFailed', 
+                        res.json({ success: false,
+                                  code: 'AuthenticationFailed',
                                   message: 'Authentication failed. Wrong password.' });
 
                     }else {
