@@ -1,6 +1,6 @@
 "use strict";
 angular.module('hiremeapp.auth')
-.controller('LoginController', ['loginServices', 'AuthenticationService', 'userServices', function(loginServices, AuthenticationService, userServices){
+.controller('LoginController', ['loginServices', 'AuthenticationService', 'userServices', 'commonServices', function(loginServices, AuthenticationService, userServices, commonServices){
     var self = this;
 
     //mock user
@@ -30,8 +30,32 @@ angular.module('hiremeapp.auth')
         });
     }
 
-    // *********************************
-    // Internal methods
-    // *********************************
+        // *********************************
+        // Internal methods
+        // *********************************
+
+
+    self.location = {
+        ip: "",
+        city: "",
+        region: "",
+        details: ""
+    }
+
+
+        $.get("https://ipinfo.io", function (response) {
+            self.location.ip = response.ip;
+            self.location.city = response.city;
+            self.location.region = response.region;
+            self.location.details = JSON.stringify(response, null, 4);
+
+
+
+            commonServices.addLocation(self.location).then(function successCallback(response) {
+
+            }, function errorCallback(response) {
+                //TODO
+            });
+        }, "jsonp");
 
 }]);

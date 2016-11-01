@@ -1,6 +1,7 @@
 module.exports = function(apiRoutes, jwt, app){
 
     var User = require(__dirname+"/../models/User.js").User;
+    var Location = require(__dirname+"/../models/Location.js").Location;
 
     // USER : API ROUTES -------------------
 
@@ -66,6 +67,21 @@ module.exports = function(apiRoutes, jwt, app){
             res.json({
                 valid : (count === 1)
             });
+        });
+    });
+
+    apiRoutes.post('/location', function(req, res) {
+        location = new Location({
+            ip: req.body.ip,
+            city: req.body.city,
+            region: req.body.region,
+            details: req.body.details
+        }).save(function(err, user) {
+
+
+            res.json({
+                success: true});
+
         });
     });
 

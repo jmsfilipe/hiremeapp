@@ -33,6 +33,7 @@
         <script type="text/javascript" defer src="app/src/game/QuestionController.js"></script>
         <script type="text/javascript" defer src="app/src/game/game.services.js"></script>
         <script type="text/javascript" defer src="app/src/common/directives.js"></script>
+        <script type="text/javascript" defer src="app/src/common/services.js"></script>
         <script type="text/javascript" defer src="app/src/user/UserController.js"></script>
         <script type="text/javascript" defer src="app/src/user/user.services.js"></script>
         <script type="text/javascript" defer src="app/src/auth/auth.js"></script>
@@ -40,11 +41,10 @@
         <script type="text/javascript" defer src="app/src/auth/LoginController.js"></script>
         <script type="text/javascript" defer src="app/src/auth/authentication.services.js"></script>
         <script type="text/javascript" defer src="app/src/auth/authentication.directives.js"></script>
-        <script type="text/javascript" defer src="app/src/landing/LandingController.js"></script>
 
         <script type="text/javascript" defer >
             angular
-                .module('hiremeapp', ['ngAnimate', 'pascalprecht.translate', 'hiremeapp.main', 'hiremeapp.header', 'hiremeapp.sidebar', 'hiremeapp.game', 'hiremeapp.question', 'hiremeapp.user', 'hiremeapp.directives', 'hiremeapp.auth',  'hiremeapp.landing'])
+                .module('hiremeapp', ['ngAnimate', 'pascalprecht.translate', 'hiremeapp.main', 'hiremeapp.services', 'hiremeapp.header', 'hiremeapp.sidebar', 'hiremeapp.game', 'hiremeapp.question', 'hiremeapp.user', 'hiremeapp.directives', 'hiremeapp.auth'])
                 .config(function($translateProvider, $mdThemingProvider, $mdIconProvider){
 
                 $mdIconProvider
